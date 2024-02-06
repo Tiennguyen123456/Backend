@@ -5,6 +5,13 @@ const config = {
     content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
     prefix: "",
     theme: {
+        screens: {
+            sm: "480px",
+            md: "768px",
+            lg: "976px",
+            xl: "1024px",
+            "2xl": "1440px",
+        },
         container: {
             center: true,
             padding: "2rem",
@@ -66,6 +73,10 @@ const config = {
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
+            },
+            spacing: {
+                "topbar-desktop": "calc(100% - 64px)",
+                topbar: "calc(100% - 48px)",
             },
         },
     },

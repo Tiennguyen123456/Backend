@@ -1,53 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { Sidebar, Menu, MenuItem, SubMenu, menuClasses, MenuItemStyles } from "react-pro-sidebar";
-import {
-    BarChart,
-    Building2,
-    CalendarClock,
-    LayoutDashboard,
-    LockKeyhole,
-    Megaphone,
-    UserRoundCog,
-    Users,
-} from "lucide-react";
+import { Sidebar } from "react-pro-sidebar";
 import sideBarConfig from "@/configs/SideBarConfig";
-import { cn } from "@/lib/utils";
-import { usePathname, useRouter } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
 import { SideBarItemType } from "@/models/SideBar";
 import { getAppRoutesBaseOnPermission } from "@/helpers/funcs";
 import { SidebarHeader } from "./sidebar-header";
 import { SideBarGroup } from "./sidebar-group";
-
-const menuItemStyles: MenuItemStyles = {
-    root: {
-        color: sideBarConfig.root.color,
-        fontSize: sideBarConfig.root.fontSize,
-        fontWeight: sideBarConfig.root.fontWeight,
-    },
-    icon: {
-        color: sideBarConfig.icon.color,
-        [`&.${menuClasses.disabled}`]: {
-            color: sideBarConfig.icon.disabled,
-        },
-    },
-    SubMenuExpandIcon: {
-        color: sideBarConfig.SubMenuExpandIcon.color,
-    },
-    subMenuContent: ({ level }) => ({
-        backgroundColor: level === 0 ? sideBarConfig.subMenuContent.backgroundColor : "transparent",
-    }),
-    button: {
-        [`&.${menuClasses.disabled}`]: {
-            color: sideBarConfig.button.disabled,
-        },
-        "&:hover": {
-            backgroundColor: sideBarConfig.button.hover.backgroundColor,
-            color: sideBarConfig.button.hover.color,
-        },
-    },
-};
 
 export const MainSidebar: React.FC = () => {
     // State
@@ -56,6 +14,25 @@ export const MainSidebar: React.FC = () => {
 
     // ** State
     const [userPermissions, SetUserPermissions] = useState<string[]>([
+        "user_role:view",
+        "user_role:create",
+        "user_role:assign-to-user",
+        "user_permission:view",
+        "user_permission:assign-to-role",
+        "user_permission:revoke-from-role",
+        "user:view",
+        "user:create",
+        "user:create-admin",
+        "user:update",
+        "user:update-admin",
+        "user:delete",
+        "system:view-history",
+        "system:restore-default",
+        "company:view",
+        "company:create",
+        "company:update",
+        "company:assign-company",
+        "company:delete",
         "event:view",
         "event:create",
         "event:update",
@@ -66,6 +43,49 @@ export const MainSidebar: React.FC = () => {
         "event_asset:create",
         "event_asset:update",
         "event_asset:delete",
+        "organizer:view",
+        "organizer:create",
+        "organizer:update",
+        "organizer:import",
+        "organizer:export",
+        "client:view",
+        "client:create",
+        "client:update",
+        "client:check-in",
+        "client:import",
+        "client:delete",
+        "client:reset",
+        "client:export",
+        "checkin:view",
+        "checkin:reset",
+        "checkin:export",
+        "export_log:view",
+        "language:view",
+        "language:create",
+        "language:update",
+        "language:define",
+        "language:import-definition",
+        "country:view",
+        "country:update",
+        "country:export",
+        "campaign:view",
+        "campaign:create",
+        "campaign:update",
+        "campaign:delete",
+        "campaign:export",
+        "email:view",
+        "email:create",
+        "email:update",
+        "email:send",
+        "email:delete",
+        "label:view",
+        "label:create",
+        "label:update",
+        "label:delete",
+        "card:view",
+        "card:create",
+        "card:update",
+        "card:delete",
     ]);
     const [appRoutes, setAppRoutes] = useState<SideBarItemType[]>(getAppRoutesBaseOnPermission(userPermissions));
     console.log(appRoutes);
