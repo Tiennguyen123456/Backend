@@ -1,0 +1,285 @@
+{
+    "loginPage": {
+        "title": "Đăng nhập",
+        "description": "Đăng nhập để truy cập Check-in",
+        "rememberMe": "Ghi nhớ đăng nhập"
+    },
+    "homePage": {
+        "title": "hello"
+    },
+    "rolesPage": {
+        "title": "Vai trò",
+        "table": {
+            "name": "Tên",
+            "code": "Code",
+            "status": "Trạng thái",
+            "guardName": "Thiết bị"
+        },
+        "action": {
+            "CREATE_ROLE_FAILED": "Tạo mới vai trò thất bại.",
+            "UPDATE_ROLE_FAILED": "Chỉnh sửa vai trò thất bại.",
+            "DELETE_ROLE_FAILED": "Xoá thất vai trò bại."
+        },
+        "roleModal": {
+            "active": "Hoạt động",
+            "label": {
+                "name": "Tên",
+                "guardName": "Thiết bị"
+            },
+            "placeholder": {
+                "name": "Tên",
+                "guardName": "Thiết bị"
+            }
+        }
+    },
+    "accountPage": {
+        "title": "Tài khoản",
+        "table": {
+            "name": "Tên tài khoản",
+            "email": "Email",
+            "role": "Tên vai trò",
+            "createdAt": "Ngày tạo",
+            "status": "Trạng thái"
+        }
+    },
+    "eventsPage": {
+        "title": "Sự kiện",
+        "table": {
+            "name": "Tên sự kiện",
+            "code": "Mã sự kiện",
+            "startDate": "Ngày bắt đầu",
+            "endDate": "Ngày kết thúc",
+            "numberOfGuest": "Số lượng khách",
+            "status": "Trạng thái"
+        }
+    },
+    "clientsPage": {
+        "title": "Danh sách khách mời",
+        "table": {
+            "scanTime": "Giờ checkin",
+            "name": "Họ tên",
+            "qrCode": "QR code",
+            "email": "Email",
+            "phone": "Số điện thoại",
+            "type": "Loại",
+            "status": "Trạng thái"
+        }
+    },
+    "eventDetailsPage": {
+        "title": "Chi tiết sự kiện"
+    },
+    "companyDetailsPage": {
+        "title": "Chi tiết công ty"
+    },
+    "createEventPage": {
+        "title": "Tạo mới sự kiện"
+    },
+    "companyEventPage": {
+        "title": "Tạo mới công ty"
+    },
+    "companyPage": {
+        "title": "Công ty",
+        "table": {
+            "name": "Tên công ty",
+            "email": "Email",
+            "phone": "Số điện thoại",
+            "address": "Địa chỉ",
+            "website": "Website",
+            "city": "Thành phố",
+            "status": "Trạng thái",
+            "updateAt": "Ngày cập nhật"
+        }
+    },
+    "configEventPage": {
+        "title": "Cấu hình sự kiện",
+        "configTabs": {
+            "configFields": "Cấu hình trường",
+            "configPrintTemplates": "Cấu hình mẫu in",
+            "configBackground": "Cấu hình background",
+            "configLanguage": "Cấu hình ngôn ngữ",
+            "configEvent": "Cấu hình sự kiện"
+        }
+    },
+    "permissionsPage": {
+        "title": "Phân quyền"
+    },
+    "action": {
+        "login": "Đăng nhập",
+        "delete": "Xóa",
+        "cancel": "Hủy",
+        "create": "Tạo mới",
+        "save": "Lưu",
+        "edit": "Cập nhật",
+        "approve": "Xác nhận",
+        "landingPage": "Landing page",
+        "listCard": "Danh sách thiệp mời",
+        "importExcel": "Tải lên dữ liệu excel",
+        "exportExcel": "Tải xuống dữ liệu excel",
+        "appendField": "Thêm trường"
+    },
+    "label": {
+        "search": "Tìm kiếm",
+        "email": "Email",
+        "password": "Mật khẩu",
+        "active": "Kích hoạt",
+        "notAvailable": "Không tồn tại",
+        "role": "Vai trò",
+        "status": "Trạng thái",
+        "name": "Tên",
+        "username": "Tên đăng nhập",
+        "eventCode": "Mã sự kiện",
+        "startDate": "Ngày bắt đầu",
+        "endDate": "Ngày kết thúc",
+        "company": "Công ty",
+        "address": "Địa điểm",
+        "eventDescription": "Mô tả sự kiện",
+        "website": "Trang web công ty",
+        "phone": "Số điện thoại",
+        "limitEvent": "Giới hạn sự kiện",
+        "limitUser": " Giới hạn tài khoản",
+        "limitCampaign": "Giới hạn chiến dịch",
+        "eventName": "Tên sự kiện",
+        "allClients": "Tổng số khách mời",
+        "checkInAvailable": "Đã checkin",
+        "notCheckIn": "Chưa checkin",
+        "ordinalNumber": "STT",
+        "fieldName": "Tên trường",
+        "description": "Mô tả",
+        "showConfig": "Hiện cấu hình",
+        "configField": "Cấu hình trường",
+        "pc": "PC",
+        "tablet": "Tablet",
+        "mobile": "Mobile",
+        "pda": "PDA",
+        "display": "Hiển thị",
+        "bold": "Bold",
+        "italic": "Italic",
+        "font": "Font",
+        "setting": "Cấu hình"
+    },
+    "placeholder": {
+        "email": "example@example.com",
+        "password": "••••••••••••",
+        "role": "Chọn vai trò",
+        "status": "Trạng thái",
+        "name": "Tên",
+        "username": "Tên đăng nhập",
+        "eventCode": "Mã sự kiện",
+        "company": "Chọn công ty",
+        "address": "Địa điểm",
+        "eventDescription": "Nhập mô tả sự kiện ở đây...",
+        "website": "Trang web công ty",
+        "phone": "Số điện thoại",
+        "limitEvent": "Giới hạn sự kiện",
+        "limitUser": " Giới hạn tài khoản",
+        "limitCampaign": "Giới hạn chiến dịch",
+        "eventName": "Tên sự kiện",
+        "fieldName": "Tên trường",
+        "description": "Mô tả"
+    },
+    "error": {
+        "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
+        "invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ.",
+        "requiredPassword": "Vui lòng nhập mật khẩu của bạn.",
+        "invalidPassword": "Mật khẩu phải có ít nhất 8 ký tự.",
+        "requiredRoleName": "Vui lòng nhập tên vai trò.",
+        "requiredGuardName": "Vui lòng nhập tên thiết bị.",
+        "requiredEventCode": "Vui lòng nhập mã sự kiện",
+        "requiredStartDate": "Vui lòng nhập ngày bắt đầu.",
+        "requiredEndDate": "Vui lòng nhập ngày kết thúc.",
+        "requiredCompany": "Vui lòng chọn công ty.",
+        "invalidDate": "Vui lòng nhập ngày hợp lệ.",
+        "requiredName": "Vui lòng nhập tên.",
+        "requiredUserName": "Vui lòng nhập tên đăng nhập.",
+        "requiredStatus": "Vui lòng chọn trạng thái.",
+        "invalidEvent": "Vui lòng nhập số sự kiện hợp lệ.",
+        "invalidUser": "Vui lòng nhập số tài khoản hợp lệ.",
+        "invalidCampaign": "Vui lòng nhập số chiến dịch hợp lệ.",
+        "requiredEventName": "Vui lòng nhập tên sự kiện.",
+        "invalidNumber": "Vui lòng nhập số hợp lệ",
+        "requiredFieldName": "Vui lòng nhập tên trường",
+        "requiredDescription": "Vui lòng nhập mô tả",
+        "duplicateFieldName": "Field name is duplicated"
+    },
+    "errorApi": {
+        "LOGIN_FAILED": "Đăng nhập thất bại.",
+        "USER_NAME_OR_PASSWORD_INCORRECT": "Email hoặc mật khẩu không đúng.",
+        "GET_USER_PROFILE_FAILED": "Lấy thông tin người dùng thất bại.",
+        "CREATE_ACCOUNT_FAILED": "Tạo mới tài khoản thất bại.",
+        "UPDATE_ACCOUNT_FAILED": "Chỉnh sửa tài khoản thất bại.",
+        "DELETE_ACCOUNT_FAILED": "Xoá tài khoản thất bại.",
+        "GET_LIST_ROLE_FAILED": "Lấy danh sách vai trò thất bại.",
+        "GET_LIST_PERMISSIONS_FAILED": "Lấy danh sách phân quyền thất bại.",
+        "GET_LIST_PERMISSIONS_FROM_ROLE_FAILED": "Lấy danh sách phân quyền thất bại.",
+        "CREATE_COMPANY_FAILED": "Tạo mới công ty thất bại.",
+        "UPDATE_COMPANY_FAILED": "Chỉnh sửa thông tin công ty thất bại.",
+        "DELETE_COMPANY_FAILED": "Xoá công ty thất bại.",
+        "CREATE_EVENT_FAILED": "Tạo mới sự kiện thất bại.",
+        "UPDATE_EVENT_FAILED": "Chỉnh sửa sự kiện thất bại.",
+        "DELETE_EVENT_FAILED": "Xoá sự kiện thật bại.",
+        "GET_EVENT_CONFIG_FIELDS_FAILED": "Lấy cấu hình trường sự kiện thất bại.",
+        "UPDATE_EVENT_CONFIG_FAILED": "Chỉnh sửa cấu hình sự kiện thất bại.",
+        "DELETE_EVENT_CONFIG_FIELD_FAILED": "Xóa cấu hình trường sự kiện thất bại."
+    },
+    "successApi": {
+        "CREATE_ACCOUNT_SUCCESS": "Tạo mới tài khoản thành công.",
+        "UPDATE_ACCOUNT_SUCCESS": "Chỉnh sửa tài khoản thành công.",
+        "DELETE_ACCOUNT_SUCCESS": "Xoá tài khoản thành công.",
+        "SAVE_PERMISSIONS_FOR_ROLE_SUCCESS": "Lưu quyền cho vai trò thành công.",
+        "CREATE_ROLE_SUCCESS": "Tạo mới vai trò thành công.",
+        "UPDATE_ROLE_SUCCESS": "Chỉnh sửa vai trò thành công.",
+        "DELETE_ROLE_SUCCESS": "Xoá vai trò thành công.",
+        "CREATE_COMPANY_SUCCESS": "Tạo công ty thành công.",
+        "UPDATE_COMPANY_SUCCESS": "Chỉnh sửa thông tin công ty thành công.",
+        "DELETE_COMPANY_SUCCESS": "Xoá công ty thành công.",
+        "CREATE_EVENT_SUCCESS": "Tạo mới sự kiện thành công.",
+        "UPDATE_EVENT_SUCCESS": "Chỉnh sửa sự kiện thành công.",
+        "DELETE_EVENT_SUCCESS": "Xoá sự kiện thành công.",
+        "UPDATE_EVENT_CONFIG_SUCCESS": "Chỉnh sửa cấu hình sự kiện thành công.",
+        "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Xóa cấu hình trường sự kiện thành công."
+    },
+    "localeSwitcher": {
+        "en": "Tiếng Anh",
+        "vi": "Tiếng Việt"
+    },
+    "sidebar": {
+        "groups": {
+            "activity": "Hoạt động",
+            "administration": "Quản trị hệ thống",
+            "setting": "Cài đặt"
+        },
+        "items": {
+            "dashboard": "Bảng điều khiển",
+            "events": "Sự kiện",
+            "campaigns": "Chiến dịch",
+            "data": "Dữ liệu",
+            "tempDataPage1": "Data tạm 1",
+            "tempDataPage2": "Data tạm 2",
+            "reports": "Báo cáo",
+            "tempReportPage": "Báo cáo tạm",
+            "companies": "Công ty",
+            "accounts": "Tài khoản",
+            "roles": "Vai trò",
+            "permissions": "Phân quyền",
+            "languages": "Ngôn ngữ",
+            "configurations": "Cấu hình"
+        }
+    },
+    "deletePopover": {
+        "title": "Xóa Vai Trò",
+        "description": "Bạn có chắc chắn là bạn muốn xóa nó không?",
+        "titleCompany": "Xoá thông tin công ty",
+        "titleEvent": "Xoá sự kiện",
+        "titleEventConfigField": "Xóa cấu hình trường"
+    },
+    "checkInPopover": {
+        "title": "Check in",
+        "description": "Bạn có chắc checkin cho khách mời "
+    },
+    "callOut": {
+        "totalEvent": "Tổng sự kiện",
+        "eventTakingPlace": "Sự kiện đang diễn ra",
+        "upcomingEvent": "Sự kiện sắp diễn ra",
+        "subtitle": "Chọn bánh răng để cấu hình"
+    }
+}

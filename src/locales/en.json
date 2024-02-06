@@ -1,0 +1,286 @@
+{
+    "loginPage": {
+        "title": "Login",
+        "description": "Login below to access Check-in Dashboard",
+        "rememberMe": "Remember me"
+    },
+    "homePage": {
+        "title": "hello"
+    },
+    "rolesPage": {
+        "title": "Roles",
+        "table": {
+            "name": "Name",
+            "code": "Code",
+            "status": "Status",
+            "guardName": "Guard name"
+        },
+        "action": {
+            "CREATE_ROLE_FAILED": "Create role failed.",
+            "UPDATE_ROLE_FAILED": "Update role failed.",
+            "DELETE_ROLE_FAILED": "Delete role failed."
+        },
+        "roleModal": {
+            "active": "Active",
+            "label": {
+                "name": "Name",
+                "guardName": "Guard name"
+            },
+            "placeholder": {
+                "name": "Name",
+                "guardName": "Guard name"
+            }
+        }
+    },
+    "accountPage": {
+        "title": "Account",
+        "table": {
+            "name": "Name",
+            "email": "Email",
+            "role": "Role",
+            "createdAt": "Created at",
+            "status": "Status"
+        }
+    },
+    "eventsPage": {
+        "title": "Events",
+        "table": {
+            "name": "Event Name",
+            "code": "Event Code",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "numberOfGuest": "Number Of Guest",
+            "status": "Status"
+        }
+    },
+    "clientsPage": {
+        "title": "Clients",
+        "table": {
+            "checkIn": "Check in",
+            "scanTime": "Scan time",
+            "name": "Full name",
+            "qrCode": "QR code",
+            "email": "Email",
+            "phone": "Phone",
+            "type": "Type",
+            "status": "Status"
+        }
+    },
+    "eventDetailsPage": {
+        "title": "Event Details"
+    },
+    "companyDetailsPage": {
+        "title": "Company Details"
+    },
+    "createEventPage": {
+        "title": "Create New Event"
+    },
+    "companyEventPage": {
+        "title": "Create New Company"
+    },
+    "companyPage": {
+        "title": "Company",
+        "table": {
+            "name": "Name",
+            "email": "Email",
+            "phone": "Phone",
+            "address": "Address",
+            "website": "Website",
+            "city": "City",
+            "status": "Status",
+            "updateAt": "Update at"
+        }
+    },
+    "configEventPage": {
+        "title": "Config Event",
+        "configTabs": {
+            "configFields": "Configure Fields",
+            "configPrintTemplates": "Configure Print Templates",
+            "configBackground": "Configure Background",
+            "configLanguage": "Configure Language",
+            "configEvent": "Configure Event"
+        }
+    },
+    "permissionsPage": {
+        "title": "Permissions",
+        "messageCode": {}
+    },
+    "action": {
+        "login": "Login",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "create": "Create",
+        "save": "Save",
+        "edit": "Edit",
+        "approve": "Approve",
+        "landingPage": "Landing page",
+        "listCard": "List card",
+        "importExcel": "Import excel",
+        "exportExcel": "Export excel",
+        "appendField": "Append Field"
+    },
+    "label": {
+        "search": "Search",
+        "email": "Email Address",
+        "password": "Password",
+        "active": "Active",
+        "notAvailable": "Not Available",
+        "role": "Role",
+        "status": "Status",
+        "name": "Name",
+        "username": "Username",
+        "eventCode": "Event Code",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "company": "Company",
+        "address": "Address",
+        "eventDescription": "Event description",
+        "website": "Website",
+        "phone": "Phone",
+        "limitEvent": "Limit Event",
+        "limitUser": "Limit User",
+        "limitCampaign": "Limit Campaign",
+        "eventName": "Event Name",
+        "allClients": "All clients",
+        "checkInAvailable": "Checkin available",
+        "notCheckIn": "Not checkin",
+        "ordinalNumber": "No.",
+        "fieldName": "Field Name",
+        "description": "Description",
+        "show": "Show",
+        "configField": "Config Field",
+        "pc": "PC",
+        "tablet": "Tablet",
+        "mobile": "Mobile",
+        "display": "Display",
+        "bold": "Bold",
+        "italic": "Italic",
+        "font": "Font",
+        "setting": "Setting"
+    },
+    "placeholder": {
+        "email": "example@example.com",
+        "password": "••••••••••••",
+        "role": "Select role",
+        "status": "Status",
+        "name": "Name",
+        "username": "Username",
+        "eventCode": "Event Code",
+        "company": "Select Company",
+        "address": "Address",
+        "eventDescription": "Write your event description here...",
+        "website": "Website",
+        "phone": "Phone",
+        "limitEvent": "Limit Event",
+        "limitUser": "Limit User",
+        "limitCampaign": "Limit Campaign",
+        "eventName": "Event Name",
+        "fieldName": "Field Name",
+        "description": "Description"
+    },
+    "error": {
+        "requiredEmail": "Please enter your email address.",
+        "invalidEmail": "Please enter valid email address.",
+        "requiredPassword": "Please enter your password.",
+        "invalidPassword": "Password must be at least 8 characters.",
+        "requiredRoleName": "Please enter role name.",
+        "requiredGuardName": "Please enter guard name.",
+        "requiredEventCode": "Please enter event code.",
+        "requiredStartDate": "Please enter start date.",
+        "requiredEndDate": "Please enter end date.",
+        "requiredCompany": "Please select company.",
+        "invalidDate": "Please enter valid date.",
+        "requiredName": "Please enter your name.",
+        "requiredUserName": "Please enter your username.",
+        "requiredStatus": "Please choose your status.",
+        "invalidEvent": "Please enter valid number of event.",
+        "invalidUser": "Please enter valid number of user.",
+        "invalidCampaign": "Please enter valid number of campaign.",
+        "requiredEventName": "Please enter your event name.",
+        "invalidNumber": "Please enter valid number",
+        "requiredFieldName": "Please enter field name",
+        "requiredDescription": "Please enter description",
+        "duplicateFieldName": "Field name is duplicated"
+    },
+    "errorApi": {
+        "LOGIN_FAILED": "Login failed.",
+        "USER_NAME_OR_PASSWORD_INCORRECT": "Email or password is incorrect.",
+        "GET_USER_PROFILE_FAILED": "Get user profile failed.",
+        "CREATE_ACCOUNT_FAILED": "Create account failed.",
+        "UPDATE_ACCOUNT_FAILED": "Update account failed.",
+        "DELETE_ACCOUNT_FAILED": "Delete account failed.",
+        "GET_LIST_ROLE_FAILED": "Get list role failed.",
+        "GET_LIST_PERMISSIONS_FAILED": "Get list permissions failed.",
+        "GET_LIST_PERMISSIONS_FROM_ROLE_FAILED": "Get list permissions from role failed.",
+        "CREATE_COMPANY_FAILED": "Create company failed.",
+        "UPDATE_COMPANY_FAILED": "Update company failed.",
+        "DELETE_COMPANY_FAILED": "Delete company failed.",
+        "CREATE_EVENT_FAILED": "Create event failed.",
+        "UPDATE_EVENT_FAILED": "Update event failed.",
+        "DELETE_EVENT_FAILED": "Delete event failed.",
+        "GET_EVENT_CONFIG_FIELDS_FAILED": "Get event config fields failed.",
+        "UPDATE_EVENT_CONFIG_FAILED": "Update event configuration failed.",
+        "DELETE_EVENT_CONFIG_FIELD_FAILED": "Delete event config field failed."
+    },
+    "successApi": {
+        "CREATE_ACCOUNT_SUCCESS": "Create account successfully.",
+        "UPDATE_ACCOUNT_SUCCESS": "Update account successfully.",
+        "DELETE_ACCOUNT_SUCCESS": "Delete account successfully.",
+        "SAVE_PERMISSIONS_FOR_ROLE_SUCCESS": "Save permissions for the role successfully.",
+        "CREATE_ROLE_SUCCESS": "Create role successfully.",
+        "UPDATE_ROLE_SUCCESS": "Update role successfully.",
+        "DELETE_ROLE_SUCCESS": "Delete role successfully.",
+        "CREATE_COMPANY_SUCCESS": "Create company successfully.",
+        "UPDATE_COMPANY_SUCCESS": "Update company successfully.",
+        "DELETE_COMPANY_SUCCESS": "Delete company successfully.",
+        "CREATE_EVENT_SUCCESS": "Create event successfully.",
+        "UPDATE_EVENT_SUCCESS": "Update event successfully.",
+        "DELETE_EVENT_SUCCESS": "Delete event successfully.",
+        "UPDATE_EVENT_CONFIG_SUCCESS": "Update event configuration successfully.",
+        "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Delete event config field successfully."
+    },
+    "localeSwitcher": {
+        "en": "English",
+        "vi": "Vietnamese"
+    },
+    "sidebar": {
+        "groups": {
+            "activity": "Activity",
+            "administration": "Administration",
+            "setting": "Setting"
+        },
+        "items": {
+            "dashboard": "Dashboard",
+            "events": "Events",
+            "campaigns": "Campaigns",
+            "data": "Data",
+            "tempDataPage1": "Temp Data Page 1",
+            "tempDataPage2": "Temp Data Page 2",
+            "reports": "Reports",
+            "tempReportPage": "Temp Report Page",
+            "companies": "Companies",
+            "accounts": "Accounts",
+            "roles": "Roles",
+            "permissions": "Permissions",
+            "languages": "Languages",
+            "configurations": "Configurations"
+        }
+    },
+    "deletePopover": {
+        "title": "Delete Role",
+        "description": "Are you sure you want to delete it?",
+        "titleCompany": "Delete Company",
+        "titleEvent": "Delete Event",
+        "titleEventConfigField": "Delete Configuration Field"
+    },
+    "checkInPopover": {
+        "title": "Check in",
+        "description": "Are you sure to checkin for "
+    },
+    "callOut": {
+        "totalEvent": "Total Event",
+        "eventTakingPlace": "Event taking place",
+        "upcomingEvent": "Upcoming Event",
+        "subtitle": "Select gear to configure"
+    }
+}
