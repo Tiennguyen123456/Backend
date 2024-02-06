@@ -277,10 +277,12 @@
         "title": "Check in",
         "description": "Are you sure to checkin for "
     },
-    "callOut": {
-        "totalEvent": "Total Event",
-        "eventTakingPlace": "Event taking place",
-        "upcomingEvent": "Upcoming Event",
-        "subtitle": "Select gear to configure"
+    "dashboardPage": {
+        "card": {
+            "totalEvent": "Total Event",
+            "upcomingEvent": "Upcoming Event",
+            "eventTakingPlace": "Event Taking Place",
+            "pausedEvent": "Paused Event"
+        }
     }
 }

@@ -276,10 +276,12 @@
         "title": "Check in",
         "description": "Bạn có chắc checkin cho khách mời "
     },
-    "callOut": {
-        "totalEvent": "Tổng sự kiện",
-        "eventTakingPlace": "Sự kiện đang diễn ra",
-        "upcomingEvent": "Sự kiện sắp diễn ra",
-        "subtitle": "Chọn bánh răng để cấu hình"
+    "dashboardPage": {
+        "card": {
+            "totalEvent": "Tổng sự kiện",
+            "upcomingEvent": "Sự kiện sắp diễn ra",
+            "eventTakingPlace": "Sự kiện đang diễn ra",
+            "pausedEvent": "Sự kiện tạm dừng"
+        }
     }
 }
