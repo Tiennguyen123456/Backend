@@ -1,3 +1,5 @@
+'use client'
+
 import { Check, ChevronsUpDown, Globe, Languages, Store } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
