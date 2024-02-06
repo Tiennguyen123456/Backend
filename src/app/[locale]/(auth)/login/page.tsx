@@ -1,5 +1,5 @@
-import { LoginForm } from "./components/login-fom";
 import LocaleSwitcherSelect from "@/components/LocaleSwitcherSelect";
+import LoginForm from "./components/login-fom";
 
 export default function LoginPage() {
     return (
@@ -8,7 +8,7 @@ export default function LoginPage() {
                 <LocaleSwitcherSelect />
             </div>
             <div className="lg:p-8">
-                <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[380px]">
+                <div className="mx-auto flex w-full flex-col justify-center items-center space-y-6 sm:w-[380px]">
                     <LoginForm />
                 </div>
             </div>

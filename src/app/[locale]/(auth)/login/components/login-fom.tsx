@@ -14,12 +14,11 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { Checkbox } from "@/components/ui/checkbox";
 import toast from "react-hot-toast";
 
-export const LoginForm = () => {
+export default function LoginForm () {
     // ** I18n
     const translation = useTranslations();
 
     // useState
-    const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
     // useForm
@@ -50,7 +49,6 @@ export const LoginForm = () => {
     };
 
     return (
-        <>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                     <Card>
@@ -130,7 +128,6 @@ export const LoginForm = () => {
                                             >
                                                 {translation("loginPage.rememberMe")}
                                             </FormLabel>
-                                            <FormMessage />
                                         </FormItem>
                                     )}
                                 />
@@ -148,6 +145,5 @@ export const LoginForm = () => {
                     </Card>
                 </form>
             </Form>
-        </>
     );
 };
