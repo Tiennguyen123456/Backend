@@ -4,6 +4,7 @@ import * as React from "react";
 import { Clock } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { TimePickerInput } from "./time-picker-input";
+import { useTranslations } from "next-intl";
 
 interface TimePickerDemoProps {
     date: Date | undefined;
@@ -11,6 +12,10 @@ interface TimePickerDemoProps {
 }
 
 export function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
+    // ** I18n
+    const translation = useTranslations();
+
+    // Use state
     const minuteRef = React.useRef<HTMLInputElement>(null);
     const hourRef = React.useRef<HTMLInputElement>(null);
     const secondRef = React.useRef<HTMLInputElement>(null);
@@ -22,7 +27,7 @@ export function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
                     htmlFor="hours"
                     className="text-xs"
                 >
-                    Hours
+                    {translation("label.hours")}
                 </Label>
                 <TimePickerInput
                     picker="hours"
@@ -37,7 +42,7 @@ export function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
                     htmlFor="minutes"
                     className="text-xs"
                 >
-                    Minutes
+                    {translation("label.minutes")}
                 </Label>
                 <TimePickerInput
                     picker="minutes"
@@ -53,7 +58,7 @@ export function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
                     htmlFor="seconds"
                     className="text-xs"
                 >
-                    Seconds
+                    {translation("label.seconds")}
                 </Label>
                 <TimePickerInput
                     picker="seconds"

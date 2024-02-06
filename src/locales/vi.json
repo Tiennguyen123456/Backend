@@ -155,7 +155,10 @@
         "bold": "Bold",
         "italic": "Italic",
         "font": "Font",
-        "setting": "Cấu hình"
+        "setting": "Cấu hình",
+        "hours": "Giờ",
+        "minutes": "Phút",
+        "seconds": "Giây"
     },
     "placeholder": {
         "email": "example@example.com",

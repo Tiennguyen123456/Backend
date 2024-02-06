@@ -156,7 +156,10 @@
         "bold": "Bold",
         "italic": "Italic",
         "font": "Font",
-        "setting": "Setting"
+        "setting": "Setting",
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds"
     },
     "placeholder": {
         "email": "example@example.com",
