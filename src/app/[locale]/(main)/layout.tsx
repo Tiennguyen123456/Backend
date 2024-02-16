@@ -5,9 +5,9 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     return (
         <div className="flex h-dvh overflow-hidden">
             <MainSidebar />
-            <div className="flex-1">
+            <div className="flex-col w-full">
                 <TopBar />
-                <div className="h-topbar-desktop overflow-y-auto">{children}</div>
+                <div className="w-full h-topbar-desktop overflow-y-auto">{children}</div>
             </div>
         </div>
     );
