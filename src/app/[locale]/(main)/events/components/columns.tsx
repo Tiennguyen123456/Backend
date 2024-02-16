@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export type EventsColumn = {
-    id: string;
+    id: number;
     name: string;
     code: string;
     startDate: string;

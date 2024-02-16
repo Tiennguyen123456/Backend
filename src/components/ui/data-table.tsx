@@ -13,7 +13,7 @@ type PaginationState = {
 
 type RowSelectionState = Record<string, boolean>;
 
-interface DataTableProps<TData extends { id: string }, TValue> {
+interface DataTableProps<TData extends { id: number }, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
     pagination: PaginationState;
@@ -23,7 +23,7 @@ interface DataTableProps<TData extends { id: string }, TValue> {
     onRowSelectionChange: OnChangeFn<RowSelectionState>;
 }
 
-export function DataTable<TData extends { id: string }, TValue>({
+export function DataTable<TData extends { id: number }, TValue>({
     columns,
     data,
     pagination,
@@ -44,7 +44,7 @@ export function DataTable<TData extends { id: string }, TValue>({
         onRowSelectionChange,
         enableRowSelection: true,
         enableMultiRowSelection: true,
-        getRowId: (row) => row.id,
+        getRowId: (row) => row.id.toString(),
         // Custom state
         state: { pagination, rowSelection },
     });

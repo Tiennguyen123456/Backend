@@ -18,10 +18,11 @@ export default function DashboardPage() {
 
     // Use Row Selection
     const { rowSelection, onRowSelection } = useRowSelection();
+    console.log(Object.keys(rowSelection).map(Number));
 
     const data: EventsColumn[] = [
         {
-            id: "1",
+            id: 1,
             name: "Event 1",
             code: "EVENT1",
             startDate: "2023-12-31 18:00:00",
@@ -30,7 +31,7 @@ export default function DashboardPage() {
             status: "NEW",
         },
         {
-            id: "2",
+            id: 2,
             name: "Event 2",
             code: "EVENT2",
             startDate: "2023-12-31 18:00:00",
@@ -39,7 +40,7 @@ export default function DashboardPage() {
             status: "ACTIVE",
         },
         {
-            id: "3",
+            id: 3,
             name: "Event 3",
             code: "EVENT3",
             startDate: "2023-12-31 18:00:00",
