@@ -27,7 +27,10 @@ export function DateyTimePicker({ title = "Pick a date", date, setDate }: DateyT
             <PopoverTrigger asChild>
                 <Button
                     variant={"outline"}
-                    className={cn("w-[250px] justify-start text-left font-normal", !date && "text-muted-foreground")}
+                    className={cn(
+                        "w-full sm:w-[250px] justify-start text-left font-normal",
+                        !date && "text-muted-foreground",
+                    )}
                 >
                     <CalendarIcon className="mr-2 h-4 w-4" />
                     {date ? format(date, "P HH:mm:ss") : <span>{title}</span>}

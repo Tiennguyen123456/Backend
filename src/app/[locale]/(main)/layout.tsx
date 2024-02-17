@@ -1,7 +1,35 @@
+"use client";
 import { MainSidebar } from "@/components/layout/sidebar/main-sidebar";
 import TopBar from "@/components/layout/topbar";
+import { DeviceType } from "@/constants/enum";
+import { ScreenWidth } from "@/constants/variables";
+import { useCommon } from "@/hooks/use-common";
+import useWindowSize from "@/hooks/use-window-size";
+import { useEffect } from "react";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
+    // ** Custom Hook
+    let screenWidth = useWindowSize();
+
+    const common = useCommon();
+    console.log(screenWidth);
+    const handleChangeDeviceType = () => {
+        if (screenWidth) {
+            if (screenWidth < ScreenWidth.sm) {
+                common.handleChangeDeviceType(DeviceType.Mobile);
+            } else if (screenWidth >= ScreenWidth.sm && screenWidth < ScreenWidth.lg) {
+                common.handleChangeDeviceType(DeviceType.Tablet);
+            } else {
+                common.handleChangeDeviceType(DeviceType.Desktop);
+            }
+        }
+    };
+
+    useEffect(() => {
+        handleChangeDeviceType();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [screenWidth]);
+
     return (
         <div className="flex h-dvh overflow-hidden">
             <MainSidebar />

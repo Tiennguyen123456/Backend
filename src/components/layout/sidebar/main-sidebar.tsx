@@ -6,11 +6,11 @@ import { SideBarItemType } from "@/models/SideBar";
 import { getAppRoutesBaseOnPermission } from "@/helpers/funcs";
 import { SidebarHeader } from "./sidebar-header";
 import { SideBarGroup } from "./sidebar-group";
+import { useCommon } from "@/hooks/use-common";
 
 export const MainSidebar: React.FC = () => {
     // State
-    const [collapsed, setCollapsed] = useState(false);
-    const [toggled, setToggled] = useState(false);
+    const common = useCommon();
 
     // ** State
     const [userPermissions, SetUserPermissions] = useState<string[]>([
@@ -88,17 +88,13 @@ export const MainSidebar: React.FC = () => {
         "card:delete",
     ]);
     const [appRoutes, setAppRoutes] = useState<SideBarItemType[]>(getAppRoutesBaseOnPermission(userPermissions));
-    console.log(appRoutes);
 
     return (
-        <div
-            className="flex h-full"
-            style={{ direction: "ltr" }}
-        >
+        <div className="flex h-full">
             <Sidebar
-                collapsed={collapsed}
-                toggled={toggled}
-                onBackdropClick={() => setToggled(false)}
+                collapsed={common.isSideBarCollapse}
+                toggled={common.isSideBarToggle}
+                onBackdropClick={common.toggleSideBar}
                 breakPoint="md"
                 backgroundColor={sideBarConfig.mainBg}
             >
@@ -111,7 +107,7 @@ export const MainSidebar: React.FC = () => {
                             <SideBarGroup
                                 key={route.key}
                                 item={route}
-                                collapsed={collapsed}
+                                collapsed={common.isSideBarCollapse}
                             />
                         ))}
                         {/* <Menu menuItemStyles={menuItemStyles}>
