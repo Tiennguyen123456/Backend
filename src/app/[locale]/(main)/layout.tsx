@@ -12,12 +12,12 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     let screenWidth = useWindowSize();
 
     const common = useCommon();
-    console.log(screenWidth);
+
     const handleChangeDeviceType = () => {
         if (screenWidth) {
             if (screenWidth < ScreenWidth.sm) {
                 common.handleChangeDeviceType(DeviceType.Mobile);
-            } else if (screenWidth >= ScreenWidth.sm && screenWidth < ScreenWidth.lg) {
+            } else if (screenWidth >= ScreenWidth.sm && screenWidth < ScreenWidth.xl) {
                 common.handleChangeDeviceType(DeviceType.Tablet);
             } else {
                 common.handleChangeDeviceType(DeviceType.Desktop);
@@ -35,7 +35,9 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <MainSidebar />
             <div className="flex-col w-full">
                 <TopBar />
-                <div className="w-full h-topbar-desktop overflow-y-auto">{children}</div>
+                <div className="w-full h-topbar-desktop overflow-y-auto">
+                    <div className="flex-1 space-y-4 p-4 md:p-6 md:pt-8">{children}</div>
+                </div>
             </div>
         </div>
     );

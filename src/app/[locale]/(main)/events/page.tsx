@@ -18,7 +18,6 @@ export default function DashboardPage() {
 
     // Use Row Selection
     const { rowSelection, onRowSelection } = useRowSelection();
-    console.log(Object.keys(rowSelection).map(Number));
 
     const data: EventsColumn[] = [
         {
@@ -51,7 +50,7 @@ export default function DashboardPage() {
     ];
 
     return (
-        <div className="flex-1 space-y-4 p-6 pt-8">
+        <>
             <div className="w-full flex flex-wrap items-center justify-between space-y-2">
                 <h2 className="text-3xl font-bold tracking-tight">{translation("sidebar.items.events")}</h2>
                 <div className="flex justify-end flex-wrap items-center gap-2">
@@ -76,6 +75,6 @@ export default function DashboardPage() {
                 onRowSelectionChange={onRowSelection}
                 rowSelection={rowSelection}
             />
-        </div>
+        </>
     );
 }

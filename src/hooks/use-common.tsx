@@ -1,6 +1,5 @@
 ﻿import { DeviceType } from "@/constants/enum";
 import { create } from "zustand";
-import useWindowSize from "./use-window-size";
 
 interface useCommonProps {
     isSideBarCollapse: boolean;
@@ -8,6 +7,7 @@ interface useCommonProps {
     deviceType: string;
     toggleCollapseSideBar: () => void;
     toggleSideBar: () => void;
+    closeSideBar: () => void;
     handleChangeDeviceType: (type: string) => void;
 }
 
@@ -17,6 +17,7 @@ export const useCommon = create<useCommonProps>((set) => ({
     deviceType: DeviceType.Desktop,
     toggleCollapseSideBar: () => set((state) => ({ isSideBarCollapse: !state.isSideBarCollapse })),
     toggleSideBar: () => set((state) => ({ isSideBarToggle: !state.isSideBarToggle, isSideBarCollapse: false })),
+    closeSideBar: () => set(() => ({ isSideBarToggle: false })),
     handleChangeDeviceType: (type) =>
         set(() => ({
             deviceType: type,

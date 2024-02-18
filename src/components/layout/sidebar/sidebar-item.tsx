@@ -6,6 +6,7 @@ import { Menu, MenuItem, MenuItemStyles, menuClasses } from "react-pro-sidebar";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { checkCurrentPath } from "@/helpers/funcs";
+import { useCommon } from "@/hooks/use-common";
 
 type Props = {
     item: SideBarItemType;
@@ -57,9 +58,13 @@ export const SideBarItem: React.FC<Props> = ({ item }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname]);
 
+    // Common state
+    const common = useCommon();
+
     // ** Functions
     const handleClick = () => {
         if (item.path) {
+            common.closeSideBar();
             router.push(locale ? `/${locale}/${item.path}` : item.path);
         }
     };

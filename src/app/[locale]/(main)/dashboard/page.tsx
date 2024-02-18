@@ -17,7 +17,7 @@ export default function DashboardPage() {
     // console.log("dateFrom: ", dateFrom ? format(dateFrom, "yyyy-MM-dd HH:mm:ss") : "");
 
     return (
-        <div className="flex-1 space-y-4 p-6 pt-8">
+        <>
             <div className="flex flex-wrap items-center justify-between space-y-2">
                 <h2 className="text-3xl font-bold tracking-tight">{translation("sidebar.items.dashboard")}</h2>
                 <div className="flex justify-end flex-wrap items-center gap-2">
@@ -73,6 +73,6 @@ export default function DashboardPage() {
                     </CardContent>
                 </Card>
             </div>
-        </div>
+        </>
     );
 }
