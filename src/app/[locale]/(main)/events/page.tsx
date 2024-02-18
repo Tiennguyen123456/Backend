@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import { PlusCircle, Trash2 } from "lucide-react";
 import { EventsColumn, columns } from "./components/columns";
@@ -8,10 +8,16 @@ import { DataTable } from "@/components/ui/data-table";
 import { usePagination } from "@/hooks/use-pagination";
 import { useRowSelection } from "@/hooks/use-row-selection";
 import { useSorting } from "@/hooks/use-sorting";
+import { DateyTimePicker } from "@/components/ui/date-time-picker";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function DashboardPage() {
     // ** I18n
     const translation = useTranslations();
+
+    // Use state
+    const [dateFrom, setDateFrom] = useState<Date>();
+    const [dateTo, setDateTo] = useState<Date>();
 
     // Use Pagination
     const { limit, onPaginationChange, skip, pagination, page } = usePagination();
@@ -68,6 +74,33 @@ export default function DashboardPage() {
                         <p className="hidden md:block">{translation("action.delete")}</p>
                     </Button>
                 </div>
+            </div>
+            <div className="flex flex-col md:flex-row gap-2 justify-end items-end w-full md:w-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full md:w-auto">
+                    <Select>
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select a status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                <SelectItem value="NEW">New</SelectItem>
+                                <SelectItem value="ACTIVE">Active</SelectItem>
+                                <SelectItem value="DEACTIVE">DeActive</SelectItem>
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+                    <DateyTimePicker
+                        title={"Pick a date from"}
+                        date={dateFrom}
+                        setDate={setDateFrom}
+                    />
+                    <DateyTimePicker
+                        title={"Pick a date to"}
+                        date={dateTo}
+                        setDate={setDateTo}
+                    />
+                </div>
+                <Button>Search</Button>
             </div>
             <DataTable
                 columns={columns}

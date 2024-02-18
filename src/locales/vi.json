@@ -1,7 +1,7 @@
 {
     "loginPage": {
         "title": "Đăng nhập",
-        "description": "Đăng nhập để truy cập Check-in",
+        "description": "Đăng nhập để truy cập quản trị Check-in",
         "rememberMe": "Ghi nhớ đăng nhập"
     },
     "homePage": {

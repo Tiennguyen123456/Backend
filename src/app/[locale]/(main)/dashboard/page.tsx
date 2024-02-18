@@ -18,9 +18,24 @@ export default function DashboardPage() {
 
     return (
         <>
-            <div className="flex flex-wrap items-center justify-between space-y-2">
+            <div className="flex flex-col flex-wrap md:flex-row items-start md:items-center justify-between space-y-2">
                 <h2 className="text-3xl font-bold tracking-tight">{translation("sidebar.items.dashboard")}</h2>
-                <div className="flex justify-end flex-wrap items-center gap-2">
+                <div className="flex flex-col md:flex-row gap-2 items-end w-full md:w-auto">
+                    <div className="grid grid-cols-2 gap-2 w-full md:w-auto">
+                        <DateyTimePicker
+                            title={"Pick a date from"}
+                            date={dateFrom}
+                            setDate={setDateFrom}
+                        />
+                        <DateyTimePicker
+                            title={"Pick a date to"}
+                            date={dateTo}
+                            setDate={setDateTo}
+                        />
+                    </div>
+                    <Button>Search</Button>
+                </div>
+                {/* <div className="flex flex-col md:flex-row justify-end items-end gap-2 w-full">
                     <DateyTimePicker
                         title={"Pick a date from"}
                         date={dateFrom}
@@ -32,7 +47,7 @@ export default function DashboardPage() {
                         setDate={setDateTo}
                     />
                     <Button>Search</Button>
-                </div>
+                </div> */}
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <CardTotal

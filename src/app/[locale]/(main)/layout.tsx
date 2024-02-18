@@ -17,7 +17,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         if (screenWidth) {
             if (screenWidth < ScreenWidth.sm) {
                 common.handleChangeDeviceType(DeviceType.Mobile);
-            } else if (screenWidth >= ScreenWidth.sm && screenWidth < ScreenWidth.xl) {
+            } else if (screenWidth >= ScreenWidth.sm && screenWidth <= ScreenWidth.xl) {
                 common.handleChangeDeviceType(DeviceType.Tablet);
             } else {
                 common.handleChangeDeviceType(DeviceType.Desktop);
