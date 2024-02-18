@@ -287,5 +287,13 @@
             "eventTakingPlace": "Event Taking Place",
             "pausedEvent": "Paused Event"
         }
+    },
+    "datatable": {
+        "pagination": {
+            "page": "page",
+            "of": "of",
+            "rowSelected": " row(s) selected.",
+            "perPage": "Rows per page"
+        }
     }
 }

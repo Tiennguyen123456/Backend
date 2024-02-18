@@ -5,3 +5,5 @@ export const ScreenWidth = {
     xl: 1024,
     xxl: 1440,
 };
+
+export const arrNumberRowInPage = [10, 20, 30, 40, 50];

@@ -13,6 +13,13 @@ type PaginationState = {
 
 type RowSelectionState = Record<string, boolean>;
 
+type ColumnSort = {
+    id: string;
+    desc: boolean;
+};
+
+type SortingState = ColumnSort[];
+
 interface DataTableProps<TData extends { id: number }, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
@@ -21,6 +28,8 @@ interface DataTableProps<TData extends { id: number }, TValue> {
     pageCount: number;
     rowSelection: RowSelectionState;
     onRowSelectionChange: OnChangeFn<RowSelectionState>;
+    sorting: SortingState;
+    onSortingChange?: OnChangeFn<SortingState>;
 }
 
 export function DataTable<TData extends { id: number }, TValue>({
@@ -31,6 +40,8 @@ export function DataTable<TData extends { id: number }, TValue>({
     pageCount,
     onRowSelectionChange,
     rowSelection,
+    sorting,
+    onSortingChange,
 }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
         data,
@@ -45,8 +56,11 @@ export function DataTable<TData extends { id: number }, TValue>({
         enableRowSelection: true,
         enableMultiRowSelection: true,
         getRowId: (row) => row.id.toString(),
+        // Custom Sorting
+        manualSorting: true,
+        onSortingChange,
         // Custom state
-        state: { pagination, rowSelection },
+        state: { pagination, rowSelection, sorting },
     });
     return (
         <div className="space-y-4">

@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
 import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox";
+import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
 
 export type EventsColumn = {
     id: number;
@@ -45,14 +46,24 @@ export const columns: ColumnDef<EventsColumn>[] = [
     },
     {
         accessorKey: "startDate",
-        header: "Start Date",
+        header: ({ column }) => (
+            <DataTableColumnHeader
+                column={column}
+                title="Start Date"
+            />
+        ),
         cell: ({ row }) => {
             return format(row.original.startDate, "yyyy-MM-dd HH:mm:ss");
         },
     },
     {
         accessorKey: "endDate",
-        header: "End Date",
+        header: ({ column }) => (
+            <DataTableColumnHeader
+                column={column}
+                title="End Date"
+            />
+        ),
         cell: ({ row }) => {
             return format(row.original.endDate, "yyyy-MM-dd HH:mm:ss");
         },
@@ -63,7 +74,12 @@ export const columns: ColumnDef<EventsColumn>[] = [
     },
     {
         accessorKey: "status",
-        header: "Status",
+        header: ({ column }) => (
+            <DataTableColumnHeader
+                column={column}
+                title="Status"
+            />
+        ),
     },
     {
         id: "actions",

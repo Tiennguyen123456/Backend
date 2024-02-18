@@ -7,14 +7,19 @@ import { EventsColumn, columns } from "./components/columns";
 import { DataTable } from "@/components/ui/data-table";
 import { usePagination } from "@/hooks/use-pagination";
 import { useRowSelection } from "@/hooks/use-row-selection";
+import { useSorting } from "@/hooks/use-sorting";
 
 export default function DashboardPage() {
     // ** I18n
     const translation = useTranslations();
 
     // Use Pagination
-    const { limit, onPaginationChange, skip, pagination } = usePagination();
-    const pageCount = Math.round(5 / limit);
+    const { limit, onPaginationChange, skip, pagination, page } = usePagination();
+    const totalRecord = 50;
+    const pageCount = Math.round(totalRecord / limit);
+
+    // Use Sorting
+    const { sorting, onSortingChange, field, order } = useSorting();
 
     // Use Row Selection
     const { rowSelection, onRowSelection } = useRowSelection();
@@ -74,6 +79,9 @@ export default function DashboardPage() {
                 // Row selected
                 onRowSelectionChange={onRowSelection}
                 rowSelection={rowSelection}
+                // Sorting
+                onSortingChange={onSortingChange}
+                sorting={sorting}
             />
         </>
     );

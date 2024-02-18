@@ -36,7 +36,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <div className="flex-col w-full">
                 <TopBar />
                 <div className="w-full h-topbar-desktop overflow-y-auto">
-                    <div className="flex-1 space-y-4 p-4 md:p-6 md:pt-8">{children}</div>
+                    <div className="flex-1 space-y-6 p-4 md:p-6 md:pt-8">{children}</div>
                 </div>
             </div>
         </div>

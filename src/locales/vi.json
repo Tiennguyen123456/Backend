@@ -248,7 +248,7 @@
     "sidebar": {
         "groups": {
             "activity": "Hoạt động",
-            "administration": "Quản trị hệ thống",
+            "administration": "Quản trị",
             "setting": "Cài đặt"
         },
         "items": {
@@ -285,6 +285,14 @@
             "upcomingEvent": "Sự kiện sắp diễn ra",
             "eventTakingPlace": "Sự kiện đang diễn ra",
             "pausedEvent": "Sự kiện tạm dừng"
+        }
+    },
+    "datatable": {
+        "pagination": {
+            "page": "Trang",
+            "of": "/",
+            "rowSelected": "dòng được chọn.",
+            "perPage": "Số dòng mỗi trang"
         }
     }
 }

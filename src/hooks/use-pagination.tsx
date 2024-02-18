@@ -13,5 +13,6 @@ export function usePagination() {
         onPaginationChange: setPagination,
         pagination,
         skip: pageSize * pageIndex,
+        page: pageIndex + 1,
     };
 }
