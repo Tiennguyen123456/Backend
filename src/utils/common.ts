@@ -41,3 +41,22 @@ export function checkPermissionForAccessSpecificPage(userPermissions: string[], 
     }
     return true;
 }
+
+export function mergePermissionFromRoles(roles: { [x: string]: string[] }) {
+    let tempPermissionsList: string[] = [];
+
+    for (const [key, value] of Object.entries(roles)) {
+        tempPermissionsList = [...tempPermissionsList, ...value];
+    }
+
+    let permissionsList: string[] = [];
+
+    for (let i = 0; i < tempPermissionsList.length; i++) {
+        const permission = tempPermissionsList[i];
+        if (!permissionsList.includes(permission)) {
+            permissionsList.push(permission);
+        }
+    }
+
+    return permissionsList;
+}

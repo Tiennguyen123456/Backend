@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Sidebar } from "react-pro-sidebar";
 import sideBarConfig from "@/configs/SideBarConfig";
 import { SideBarItemType } from "@/models/SideBar";
@@ -7,86 +7,15 @@ import { getAppRoutesBaseOnPermission } from "@/helpers/funcs";
 import { SidebarHeader } from "./sidebar-header";
 import { SideBarGroup } from "./sidebar-group";
 import { useCommon } from "@/hooks/use-common";
+import { useAppSelector } from "@/redux/root/hooks";
+import { selectUser } from "@/redux/user/slice";
 
 export const MainSidebar: React.FC = () => {
-    // State
+    // ** Common State
     const common = useCommon();
 
     // ** State
-    const [userPermissions, SetUserPermissions] = useState<string[]>([
-        "user_role:view",
-        "user_role:create",
-        "user_role:assign-to-user",
-        "user_permission:view",
-        "user_permission:assign-to-role",
-        "user_permission:revoke-from-role",
-        "user:view",
-        "user:create",
-        "user:create-admin",
-        "user:update",
-        "user:update-admin",
-        "user:delete",
-        "system:view-history",
-        "system:restore-default",
-        "company:view",
-        "company:create",
-        "company:update",
-        "company:assign-company",
-        "company:delete",
-        "event:view",
-        "event:create",
-        "event:update",
-        "event:assign-company",
-        "event:config",
-        "event:delete",
-        "event_asset:view",
-        "event_asset:create",
-        "event_asset:update",
-        "event_asset:delete",
-        "organizer:view",
-        "organizer:create",
-        "organizer:update",
-        "organizer:import",
-        "organizer:export",
-        "client:view",
-        "client:create",
-        "client:update",
-        "client:check-in",
-        "client:import",
-        "client:delete",
-        "client:reset",
-        "client:export",
-        "checkin:view",
-        "checkin:reset",
-        "checkin:export",
-        "export_log:view",
-        "language:view",
-        "language:create",
-        "language:update",
-        "language:define",
-        "language:import-definition",
-        "country:view",
-        "country:update",
-        "country:export",
-        "campaign:view",
-        "campaign:create",
-        "campaign:update",
-        "campaign:delete",
-        "campaign:export",
-        "email:view",
-        "email:create",
-        "email:update",
-        "email:send",
-        "email:delete",
-        "label:view",
-        "label:create",
-        "label:update",
-        "label:delete",
-        "card:view",
-        "card:create",
-        "card:update",
-        "card:delete",
-    ]);
+    const { userPermissions } = useAppSelector(selectUser);
     const [appRoutes, setAppRoutes] = useState<SideBarItemType[]>(getAppRoutesBaseOnPermission(userPermissions));
 
     return (

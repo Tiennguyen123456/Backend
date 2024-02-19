@@ -37,7 +37,7 @@ export default function LoginForm() {
             .string()
             .min(1, { message: translation("error.requiredEmail") })
             .email({ message: translation("error.invalidEmail") }),
-        password: z.string().min(8, { message: translation("error.invalidPassword") }),
+        password: z.string().min(6, { message: translation("error.invalidPassword") }),
         rememberMe: z.boolean(),
     });
 
@@ -67,8 +67,6 @@ export default function LoginForm() {
                 setAxiosAuthorization(response.data.data.access_token);
             }
             router.push(ROUTES.DASHBOARD);
-
-            toast.success("Login Success!");
         } catch (error: any) {
             const data = error?.response?.data;
             if (data?.message_code) {

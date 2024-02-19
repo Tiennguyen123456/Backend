@@ -1,6 +1,7 @@
 import { NextIntlClientProvider, useLocale, useMessages } from "next-intl";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import Providers from "@/redux/root/provider";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["300", "400", "500", "700", "900"] });
 
@@ -28,7 +29,9 @@ export default function RootLayout({
                     <title>Check-in Dashboard</title>
                 </head>
 
-                <body className={roboto.className}>{children}</body>
+                <body className={roboto.className}>
+                    <Providers>{children}</Providers>
+                </body>
             </html>
         </NextIntlClientProvider>
     );
