@@ -10,7 +10,7 @@ export default function TopBar() {
     const common = useCommon();
 
     const handleToggleSideBar = () => {
-        common.deviceType === DeviceType.Mobile ? common.toggleSideBar() : common.toggleCollapseSideBar();
+        common.deviceType === DeviceType.Desktop ? common.toggleCollapseSideBar() : common.toggleSideBar();
     };
 
     return (
@@ -20,7 +20,7 @@ export default function TopBar() {
                     className="cursor-pointer w-6 h-6 opacity-75"
                     onClick={handleToggleSideBar}
                 />
-                <div className="ml-auto flex items-center space-x-2 md:space-x-4">
+                <div className="ml-auto flex items-center space-x-4 md:space-x-6">
                     <LocaleSwitcherSelect />
                     <NotificationNav />
                     <UserNav />

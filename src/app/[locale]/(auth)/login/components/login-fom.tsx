@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -13,10 +13,20 @@ import { useState } from "react";
 import { PasswordInput } from "@/components/ui/password-input";
 import { Checkbox } from "@/components/ui/checkbox";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+import authApi from "@/services/auth-api";
+import { APIStatus } from "@/constants/enum";
+import { setAxiosAuthorization } from "@/configs/axios.config";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/constants/routes";
+import { toastError } from "@/utils/toast";
 
-export default function LoginForm () {
+export default function LoginForm() {
     // ** I18n
     const translation = useTranslations();
+
+    // ** Router
+    const router = useRouter();
 
     // useState
     const [loading, setLoading] = useState(false);
@@ -44,106 +54,133 @@ export default function LoginForm () {
 
     // Func
     const onSubmit = async (data: LoginFormValues) => {
-        toast.success("Login Success!");
-        console.log(data);
+        try {
+            setLoading(true);
+
+            const response = await authApi.login({
+                email: data.email,
+                password: data.password,
+            });
+
+            if (response.data.status == APIStatus.SUCCESS) {
+                Cookies.set("authorization", response.data.data.access_token);
+                setAxiosAuthorization(response.data.data.access_token);
+            }
+            router.push(ROUTES.DASHBOARD);
+
+            toast.success("Login Success!");
+        } catch (error: any) {
+            const data = error?.response?.data;
+            if (data?.message_code) {
+                toastError(translation(`errorApi.${data?.message_code}`));
+            } else {
+                toastError(translation("errorApi.LOGIN_FAILED"));
+            }
+            console.log("error: ", error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <Card>
-                        <CardHeader className="space-y-1 text-center px-6 pt-6 pb-4">
-                            <div className="flex justify-center mb-3">
-                                <Image
-                                    width={150}
-                                    height={100}
-                                    className="object-cover"
-                                    alt="Image"
-                                    src={require("@/assets/images/Delfi_Logo.png")}
-                                />
+        <Form {...form}>
+            <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="w-full"
+            >
+                <Card>
+                    <CardHeader className="space-y-1 text-center px-6 pt-6 pb-4">
+                        <div className="flex justify-center mb-3">
+                            <Image
+                                width={150}
+                                height={100}
+                                className="object-cover"
+                                alt="Image"
+                                src={require("@/assets/images/Delfi_Logo.png")}
+                            />
+                        </div>
+                        <p>{translation("loginPage.description")}</p>
+                    </CardHeader>
+                    <CardContent className="grid gap-6">
+                        <div className="relative">
+                            <div className="absolute inset-0 flex items-center">
+                                <span className="w-full border-t" />
                             </div>
-                            <p>{translation("loginPage.description")}</p>
-                        </CardHeader>
-                        <CardContent className="grid gap-6">
-                            <div className="relative">
-                                <div className="absolute inset-0 flex items-center">
-                                    <span className="w-full border-t" />
-                                </div>
-                            </div>
-                            <div className="grid gap-2">
-                                <FormField
-                                    control={form.control}
-                                    name="email"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel className="text-base">{translation("label.email")}</FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                    disabled={loading}
-                                                    placeholder="example@emaple.com"
-                                                    {...field}
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
-                            <div className="grid gap-2">
-                                <FormField
-                                    control={form.control}
-                                    name="password"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel className="text-base">{translation("label.password")}</FormLabel>
-                                            <FormControl>
-                                                <PasswordInput
-                                                    disabled={loading}
-                                                    placeholder=""
-                                                    {...field}
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
-                            <div className="grid gap-2">
-                                <FormField
-                                    control={form.control}
-                                    name="rememberMe"
-                                    render={({ field }) => (
-                                        <FormItem className="flex items-center">
-                                            <FormControl>
-                                                <Checkbox
-                                                    disabled={loading}
-                                                    checked={field.value}
-                                                    onCheckedChange={field.onChange}
-                                                    id="rememberMe"
-                                                />
-                                            </FormControl>
-                                            <FormLabel
-                                                htmlFor="rememberMe"
-                                                className="text-base !m-0 !ml-2"
-                                            >
-                                                {translation("loginPage.rememberMe")}
-                                            </FormLabel>
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
-                        </CardContent>
-                        <CardFooter>
-                            <Button
-                                type="submit"
-                                className="w-full uppercase mt-1"
-                                disabled={loading}
-                            >
-                                {translation("loginPage.title")}
-                            </Button>
-                        </CardFooter>
-                    </Card>
-                </form>
-            </Form>
+                        </div>
+                        <div className="grid gap-2">
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className="text-base">{translation("label.email")}</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                disabled={loading}
+                                                placeholder="example@emaple.com"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+                        <div className="grid gap-2">
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className="text-base">{translation("label.password")}</FormLabel>
+                                        <FormControl>
+                                            <PasswordInput
+                                                disabled={loading}
+                                                placeholder=""
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+                        <div className="grid gap-2">
+                            <FormField
+                                control={form.control}
+                                name="rememberMe"
+                                render={({ field }) => (
+                                    <FormItem className="flex items-center">
+                                        <FormControl>
+                                            <Checkbox
+                                                disabled={loading}
+                                                checked={field.value}
+                                                onCheckedChange={field.onChange}
+                                                id="rememberMe"
+                                            />
+                                        </FormControl>
+                                        <FormLabel
+                                            htmlFor="rememberMe"
+                                            className="text-base !m-0 !ml-2"
+                                        >
+                                            {translation("loginPage.rememberMe")}
+                                        </FormLabel>
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+                    </CardContent>
+                    <CardFooter>
+                        <Button
+                            type="submit"
+                            className="w-full uppercase mt-1"
+                            disabled={loading}
+                        >
+                            {translation("loginPage.title")}
+                        </Button>
+                    </CardFooter>
+                </Card>
+            </form>
+        </Form>
     );
-};
+}

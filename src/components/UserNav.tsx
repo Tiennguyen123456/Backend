@@ -7,17 +7,29 @@ import {
     DropdownMenuContent,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { BellIcon, EyeIcon, PersonStandingIcon } from "lucide-react";
+import { Avatar, AvatarImage } from "./ui/avatar";
+import { ROUTES } from "@/constants/routes";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function UserNav() {
+    // ** I18n
+    const translation = useTranslations("topbar");
+
+    // Router
+    const router = useRouter();
+
+    // Function
+    const handleLogout = () => {
+        Cookies.remove("authorization");
+        Cookies.remove("userPermissions");
+        router.push(ROUTES.LOGIN);
+    };
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -49,11 +61,20 @@ export default function UserNav() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem className="text-base cursor-pointer">Profile</DropdownMenuItem>
-                    <DropdownMenuItem className="text-base cursor-pointer">Settings</DropdownMenuItem>
+                    <DropdownMenuItem className="text-base cursor-pointer">
+                        {translation("userNav.profile")}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="text-base cursor-pointer">
+                        {translation("userNav.settings")}
+                    </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-base cursor-pointer">Log out</DropdownMenuItem>
+                <DropdownMenuItem
+                    className="text-base cursor-pointer"
+                    onClick={handleLogout}
+                >
+                    {translation("userNav.logout")}
+                </DropdownMenuItem>
             </DropdownMenuContent>
             {/* <DropdownMenuContent
                 className="w-80"

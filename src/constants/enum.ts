@@ -8,3 +8,8 @@ export enum DeviceType {
     Tablet = "tablet",
     Desktop = "desktop",
 }
+
+export enum APIStatus {
+    SUCCESS = "success",
+    ERROR = "error",
+}

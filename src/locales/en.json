@@ -269,6 +269,13 @@
             "configurations": "Configurations"
         }
     },
+    "topbar": {
+        "userNav": {
+            "profile": "Profile",
+            "settings": "Settings",
+            "logout": "Logout"
+        }
+    },
     "deletePopover": {
         "title": "Delete Role",
         "description": "Are you sure you want to delete it?",

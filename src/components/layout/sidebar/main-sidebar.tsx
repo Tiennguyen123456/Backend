@@ -95,7 +95,7 @@ export const MainSidebar: React.FC = () => {
                 collapsed={common.isSideBarCollapse}
                 toggled={common.isSideBarToggle}
                 onBackdropClick={common.toggleSideBar}
-                breakPoint="md"
+                customBreakPoint="920px"
                 backgroundColor={sideBarConfig.mainBg}
             >
                 <div className="flex flex-col h-full">

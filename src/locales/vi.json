@@ -268,6 +268,13 @@
             "configurations": "Cấu hình"
         }
     },
+    "topbar": {
+        "userNav": {
+            "profile": "Hồ sơ",
+            "settings": "Cài đặt",
+            "logout": "Đăng xuất"
+        }
+    },
     "deletePopover": {
         "title": "Xóa Vai Trò",
         "description": "Bạn có chắc chắn là bạn muốn xóa nó không?",
