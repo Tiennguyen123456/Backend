@@ -15,15 +15,20 @@ import { ROUTES } from "@/constants/routes";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useAppSelector } from "@/redux/root/hooks";
+import { selectUser } from "@/redux/user/slice";
 
 export default function UserNav() {
     // ** I18n
     const translation = useTranslations("topbar");
 
-    // Router
+    // ** Router
     const router = useRouter();
 
-    // Function
+    // ** Redux user
+    const { userProfile } = useAppSelector(selectUser);
+
+    // ** Function
     const handleLogout = () => {
         Cookies.remove("authorization");
         Cookies.remove("userPermissions");
@@ -45,7 +50,7 @@ export default function UserNav() {
                             />
                         </Avatar>
                     </Button>
-                    <span className="hidden md:block">sysadmin</span>
+                    <span className="hidden md:block">{userProfile?.name}</span>
                 </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -55,8 +60,8 @@ export default function UserNav() {
             >
                 <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
-                        <p className="text-base font-medium leading-none">sysadmin</p>
-                        <p className="text-sm leading-none text-muted-foreground">m@example.com</p>
+                        <p className="text-base font-medium leading-none">{userProfile?.username}</p>
+                        <p className="text-sm leading-none text-muted-foreground">{userProfile?.email}</p>
                     </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
