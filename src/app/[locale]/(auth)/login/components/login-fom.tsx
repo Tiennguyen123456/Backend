@@ -20,6 +20,7 @@ import { setAxiosAuthorization } from "@/configs/axios.config";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
 import { toastError } from "@/utils/toast";
+import { Loader2 } from "lucide-react";
 
 export default function LoginForm() {
     // ** I18n
@@ -115,7 +116,7 @@ export default function LoginForm() {
                                         <FormControl>
                                             <Input
                                                 disabled={loading}
-                                                placeholder="example@emaple.com"
+                                                placeholder={translation("placeholder.email")}
                                                 {...field}
                                             />
                                         </FormControl>
@@ -134,7 +135,7 @@ export default function LoginForm() {
                                         <FormControl>
                                             <PasswordInput
                                                 disabled={loading}
-                                                placeholder=""
+                                                placeholder={translation("placeholder.password")}
                                                 {...field}
                                             />
                                         </FormControl>
@@ -174,7 +175,11 @@ export default function LoginForm() {
                             className="w-full uppercase mt-1"
                             disabled={loading}
                         >
-                            {translation("loginPage.title")}
+                            {loading ? (
+                                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            ) : (
+                                translation("loginPage.title")
+                            )}
                         </Button>
                     </CardFooter>
                 </Card>
