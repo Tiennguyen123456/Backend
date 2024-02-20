@@ -5,6 +5,8 @@ import { ColumnDef, OnChangeFn, flexRender, getCoreRowModel, useReactTable } fro
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DataTablePagination } from "./data-table-pagination";
 import React from "react";
+import { Loader } from "./loader";
+import { useTranslations } from "next-intl";
 
 type PaginationState = {
     pageIndex: number;
@@ -30,9 +32,11 @@ interface DataTableProps<TData extends { id: number }, TValue> {
     onRowSelectionChange: OnChangeFn<RowSelectionState>;
     sorting: SortingState;
     onSortingChange?: OnChangeFn<SortingState>;
+    loading: Boolean;
 }
 
 export function DataTable<TData extends { id: number }, TValue>({
+    loading,
     columns,
     data,
     pagination,
@@ -43,6 +47,9 @@ export function DataTable<TData extends { id: number }, TValue>({
     sorting,
     onSortingChange,
 }: DataTableProps<TData, TValue>) {
+    // ** I18n
+    const translation = useTranslations("datatable");
+
     const table = useReactTable({
         data,
         columns,
@@ -82,7 +89,16 @@ export function DataTable<TData extends { id: number }, TValue>({
                         ))}
                     </TableHeader>
                     <TableBody>
-                        {table.getRowModel().rows?.length ? (
+                        {loading ? (
+                            <TableRow>
+                                <TableCell
+                                    colSpan={columns.length}
+                                    className="h-48 text-center"
+                                >
+                                    <Loader />
+                                </TableCell>
+                            </TableRow>
+                        ) : table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
                                 <TableRow
                                     key={row.id}
@@ -99,9 +115,9 @@ export function DataTable<TData extends { id: number }, TValue>({
                             <TableRow>
                                 <TableCell
                                     colSpan={columns.length}
-                                    className="h-24 text-center"
+                                    className="h-48 text-center"
                                 >
-                                    No results.
+                                    {translation("noResults")}
                                 </TableCell>
                             </TableRow>
                         )}

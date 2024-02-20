@@ -25,7 +25,7 @@ export const userSlice = createSlice({
             .addCase(getProfile.fulfilled, (state, action: PayloadAction<IUserProfile>) => {
                 state.userProfile = action.payload;
 
-                const userPermissions = mergePermissionFromRoles(action.payload.roles);
+                const userPermissions = action.payload.permissions;
                 state.userPermissions = userPermissions;
                 Cookies.set("userPermissions", JSON.stringify(userPermissions));
             })

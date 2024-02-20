@@ -1,4 +1,5 @@
 "use client";
+import Cookies from "js-cookie";
 import LoadingPage from "@/components/layout/loading-page";
 import { MainSidebar } from "@/components/layout/sidebar/main-sidebar";
 import TopBar from "@/components/layout/topbar";
@@ -10,11 +11,16 @@ import { useAppDispatch } from "@/redux/root/hooks";
 import { getProfile } from "@/redux/user/action";
 import { toastError } from "@/utils/toast";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ROUTES } from "@/constants/routes";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
     // ** State
     const [loading, setLoading] = useState(true);
+
+    // ** Router
+    const router = useRouter();
 
     // ** Custom Hook
     let screenWidth = useWindowSize();
@@ -44,7 +50,6 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     const handleGetUserProfile = async () => {
         try {
             await dispatch(getProfile()).unwrap();
-            setLoading(false);
         } catch (error: any) {
             console.log("error: ", error);
             const data = error?.response?.data;
@@ -53,6 +58,12 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             } else {
                 toastError(translation("errorApi.GET_USER_PROFILE_FAILED"));
             }
+            // logout when get profile error
+            Cookies.remove("authorization");
+            Cookies.remove("userPermissions");
+            router.push(ROUTES.LOGIN);
+        } finally {
+            setLoading(false);
         }
     };
 

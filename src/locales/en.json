@@ -301,7 +301,8 @@
             "of": "of",
             "rowSelected": " row(s) selected.",
             "perPage": "Rows per page"
-        }
+        },
+        "noResults": "No results."
     },
     "403page": {
         "title": "403",

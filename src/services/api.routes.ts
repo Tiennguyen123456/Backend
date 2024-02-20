@@ -6,6 +6,9 @@ const ApiRoutes = {
 
     // ** Profile Routes
     getProfile: baseURL + "/self",
+
+    // ** Company Routes
+    getCompanies: baseURL + "/companies",
 };
 
 export default ApiRoutes;

@@ -300,7 +300,8 @@
             "of": "/",
             "rowSelected": "dòng được chọn.",
             "perPage": "Số dòng mỗi trang"
-        }
+        },
+        "noResults": "Không có kết quả."
     },
     "403page": {
         "title": "403",

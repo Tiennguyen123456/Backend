@@ -17,6 +17,7 @@ export interface IUserProfile {
     last_login_at: string;
     created_at: string;
     updated_at: string;
+    permissions: string[];
     roles: {
         [x: string]: string[];
     };
