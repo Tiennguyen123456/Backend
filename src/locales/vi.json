@@ -301,5 +301,17 @@
             "rowSelected": "dòng được chọn.",
             "perPage": "Số dòng mỗi trang"
         }
+    },
+    "403page": {
+        "title": "403",
+        "subtitle": "Truy cập bị từ chối",
+        "description": "Bạn không có quyền truy cập trang này!",
+        "gohome": "Chuyển tới trang chủ"
+    },
+    "404page": {
+        "title": "404",
+        "subtitle": "Không tìm thấy trang",
+        "description": "Trang bạn đang tìm kiếm không tồn tại!",
+        "gohome": "Chuyển tới trang chủ"
     }
 }

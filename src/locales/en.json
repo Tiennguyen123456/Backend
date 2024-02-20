@@ -302,5 +302,17 @@
             "rowSelected": " row(s) selected.",
             "perPage": "Rows per page"
         }
+    },
+    "403page": {
+        "title": "403",
+        "subtitle": "Access denied",
+        "description": "You do not have permission to access this page !",
+        "gohome": "Go home"
+    },
+    "404page": {
+        "title": "404",
+        "subtitle": "Page not found",
+        "description": "The page you're looking for doesn't exist !",
+        "gohome": "Go home"
     }
 }

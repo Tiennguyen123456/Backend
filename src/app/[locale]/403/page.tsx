@@ -1,19 +1,29 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 export default function ForbiddenPage() {
+    // ** I18n
+    const translation = useTranslations("403page");
+
+    // ** Router
     const router = useRouter();
 
     return (
-        <div className="flex flex-col h-full w-full items-center justify-center space-y-6">
-            <p className="text-9xl font-black">403</p>
-            <div className="flex flex-col items-center space-y-3">
-                <p className="text-5xl font-semibold">Access Denied</p>
-                <p className="text-2xl text-muted-foreground">You do not have permission to access this page !</p>
+        <div className="p-4 flex flex-col h-full w-full items-center justify-center space-y-4 md:space-y-8">
+            <p className="text-8xl md:text-9xl font-black">{translation("title")}</p>
+            <div className="flex flex-col items-center space-y-4 text-center">
+                <p className="text-3xl md:text-5xl font-semibold capitalize">{translation("subtitle")}</p>
+                <p className="text-xl md:text-2xl text-muted-foreground up">{translation("description")}</p>
             </div>
-            <Button onClick={() => router.push(ROUTES.DASHBOARD)}>Back Dashboar</Button>
+            <Button
+                variant={"destructive"}
+                onClick={() => router.replace(ROUTES.DASHBOARD)}
+            >
+                {translation("gohome")}
+            </Button>
         </div>
     );
 }
