@@ -12,6 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { CellAction } from "./components/cell-action";
 import { useFetchDataCompany } from "@/data/fetch-data-company";
 import { CompanyColumn } from "./components/column";
+import FooterContainer from "@/components/layout/footer-container";
 
 export default function CompanyPage() {
     // ** I18n
@@ -140,6 +141,7 @@ export default function CompanyPage() {
                 onSortingChange={onSortingChange}
                 sorting={sorting}
             />
+            <FooterContainer />
         </>
     );
 }
