@@ -9,9 +9,9 @@ import { useRowSelection } from "@/hooks/use-row-selection";
 import { useSorting } from "@/hooks/use-sorting";
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ICompanyRes } from "@/models/api/company-api";
 import { CellAction } from "./components/cell-action";
 import { useFetchDataCompany } from "@/data/fetch-data-company";
+import { CompanyColumn } from "./components/column";
 
 export default function CompanyPage() {
     // ** I18n
@@ -33,7 +33,7 @@ export default function CompanyPage() {
     // Use fetch data
     const { data, loading, pageCount } = useFetchDataCompany({ pagination: { page, perPage: limit } });
 
-    const columns: ColumnDef<ICompanyRes>[] = [
+    const columns: ColumnDef<CompanyColumn>[] = [
         {
             id: "select",
             header: ({ table }) => (

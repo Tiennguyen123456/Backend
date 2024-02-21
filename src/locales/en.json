@@ -302,7 +302,8 @@
             "rowSelected": " row(s) selected.",
             "perPage": "Rows per page"
         },
-        "noResults": "No results."
+        "noResults": "No results.",
+        "action": "Actions"
     },
     "403page": {
         "title": "403",

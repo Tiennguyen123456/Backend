@@ -301,7 +301,8 @@
             "rowSelected": "dòng được chọn.",
             "perPage": "Số dòng mỗi trang"
         },
-        "noResults": "Không có kết quả."
+        "noResults": "Không có kết quả.",
+        "action": "Thao tác"
     },
     "403page": {
         "title": "403",
