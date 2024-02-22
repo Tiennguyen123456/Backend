@@ -119,15 +119,15 @@ export const AppRoutes: SideBarItemType[] = [
                 //         icon: <Users />,
                 //     },
                 // },
-                // {
-                //     key: "administration.roles",
-                //     permissions: ["user_role:view"],
-                //     path: ROUTES.ROLES,
-                //     sideBarProps: {
-                //         displayText: "sidebar.items.roles",
-                //         icon: <UserRoundCog />,
-                //     },
-                // },
+                {
+                    key: "administration.roles",
+                    permissions: ["user_role:view"],
+                    path: ROUTES.ROLES,
+                    sideBarProps: {
+                        displayText: "sidebar.items.roles",
+                        icon: <UserRoundCog />,
+                    },
+                },
                 // {
                 //     key: "administration.permissions",
                 //     permissions: ["user_permission:view"],

@@ -10,6 +10,9 @@ const ApiRoutes = {
 
     // ** Company Routes
     getCompanies: baseURL + "/companies",
+
+    // Get role
+    getRoles: baseURL + "/roles",
 };
 
 export default ApiRoutes;
