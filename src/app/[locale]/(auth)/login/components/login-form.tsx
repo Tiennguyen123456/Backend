@@ -11,15 +11,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useState } from "react";
 import { PasswordInput } from "@/components/ui/password-input";
-import { Checkbox } from "@/components/ui/checkbox";
-import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import authApi from "@/services/auth-api";
 import { APIStatus } from "@/constants/enum";
 import { setAxiosAuthorization } from "@/configs/axios.config";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
-import { toastError } from "@/utils/toast";
+import { toastError, toastSuccess } from "@/utils/toast";
 import { Loader2 } from "lucide-react";
 
 interface LoginFormProps {
@@ -70,6 +68,8 @@ export default function LoginForm(props: LoginFormProps) {
             });
 
             if (response.data.status == APIStatus.SUCCESS) {
+                toastSuccess(translation("successApi.LOGIN_SUCCESS"));
+
                 Cookies.set("authorization", response.data.data.access_token);
                 setAxiosAuthorization(response.data.data.access_token);
             }
@@ -101,7 +101,7 @@ export default function LoginForm(props: LoginFormProps) {
                                 height={100}
                                 className="object-cover"
                                 alt="Image"
-                                src={require("@/assets/images/Delfi_Logo.png")}
+                                src={require("@/assets/images/AIcheck_logo.jpg")}
                             />
                         </div>
                         <p>{translation("loginPage.description")}</p>

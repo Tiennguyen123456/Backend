@@ -101,7 +101,7 @@ export default function ResetPasswordForm() {
                                 height={100}
                                 className="object-cover"
                                 alt="Image"
-                                src={require("@/assets/images/Delfi_Logo.png")}
+                                src={require("@/assets/images/AIcheck_logo.jpg")}
                             />
                         </div>
                         <p>{translation("resetPassword.description")}</p>

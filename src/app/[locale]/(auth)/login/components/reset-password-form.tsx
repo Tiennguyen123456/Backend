@@ -88,7 +88,7 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
                                 height={100}
                                 className="object-cover"
                                 alt="Image"
-                                src={require("@/assets/images/Delfi_Logo.png")}
+                                src={require("@/assets/images/AIcheck_logo.jpg")}
                             />
                         </div>
                         <p>{translation("loginPage.descriptionResetPassword")}</p>
@@ -136,7 +136,7 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
                             {loading ? (
                                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                             ) : (
-                                translation("button.submit")
+                                translation("action.submit")
                             )}
                         </Button>
                     </CardFooter>

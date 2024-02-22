@@ -10,7 +10,7 @@ const hexToRgba = (hex: string, alpha: number) => {
 const sideBarConfig = {
     width: "300px",
     images: {
-        logo: require("@/assets/images/Delfi_Logo.png"),
+        logo: require("@/assets/images/AIcheck_logo.jpg"),
         width: 150,
         height: 100,
     },
