@@ -16,3 +16,7 @@ export interface ILoginRes {
 export interface IResetPasswordReq {
     email: string;
 }
+
+export interface IUpdatePasswordReq {
+    password: string;
+}

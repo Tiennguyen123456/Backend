@@ -1,11 +1,4 @@
 {
-    "button": {
-        "submit":"Xác nhận",
-        "cancel":"Hủy",
-        "delete":"Xóa",
-        "edit":"Chỉnh sửa",
-        "save":"Lưu"
-    },
     "loginPage": {
         "title": "Đăng nhập",
         "description": "Đăng nhập để truy cập quản trị Check-in",
@@ -16,6 +9,13 @@
         "submit": "Xác nhận",
         "descriptionResetPassword": "Vui lòng nhập email thực hiện đặt lại mật khẩu",
         "checkYourEmail": "Đặt lại mật khẩu thành công, vui lòng kiểm tra email của bạn"
+    },
+    "resetPassword": {
+        "title": "Đặt lại mật khẩu",
+        "description": "Vui longf nhập mật khẩu mới của bạn",
+        "newPassword": "Mật khẩu mới",
+        "confirmPassword": "Xác nhận mật khẩu",
+        "passwordNotMatch": "Mật khẩu không khớp"
     },
     "homePage": {
         "title": "hello"
@@ -125,6 +125,7 @@
         "cancel": "Hủy",
         "create": "Tạo mới",
         "save": "Lưu",
+        "submit": "Xác nhận",
         "edit": "Cập nhật",
         "approve": "Xác nhận",
         "landingPage": "Landing page",
@@ -240,9 +241,12 @@
         "UPDATE_EVENT_CONFIG_FAILED": "Chỉnh sửa cấu hình sự kiện thất bại.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Xóa cấu hình trường sự kiện thất bại.",
         "USER_NOT_FOUND": "Người dùng không tồn tại.",
-        "TOO_MANY_ATTEMPTS": "Quá nhiều lần thử. Vui lòng thử lại sau 1 phút."
+        "TOO_MANY_ATTEMPTS": "Quá nhiều lần thử. Vui lòng thử lại sau 1 phút.",
+        "TOKEN_NOT_FOUND": "Mã xác thực không hợp lệ."
     },
     "successApi": {
+        "SUCCESS": "Thành công",
+        "LOGIN_SUCCESS": "Đăng nhập thành công.",
         "CREATE_ACCOUNT_SUCCESS": "Tạo mới tài khoản thành công.",
         "UPDATE_ACCOUNT_SUCCESS": "Chỉnh sửa tài khoản thành công.",
         "DELETE_ACCOUNT_SUCCESS": "Xoá tài khoản thành công.",

@@ -1,11 +1,4 @@
 {
-    "button": {
-        "submit": "Submit",
-        "cancel": "Cancel",
-        "delete": "Delete",
-        "edit": "Edit",
-        "save": "Save"
-    },
     "loginPage": {
         "title": "Login",
         "description": "Login below to access Check-in Dashboard",
@@ -16,6 +9,13 @@
         "submit": "Submit",
         "descriptionResetPassword": "Please enter email to reset password",
         "checkYourEmail": "Reset password successfully. Please check your email to reset your password."
+    },
+    "resetPassword": {
+        "title": "Reset Password",
+        "description": "Please enter your new password",
+        "newPassword": "New password",
+        "confirmPassword": "Confirm password",
+        "passwordNotMatch": "Password not match"
     },
     "homePage": {
         "title": "hello"
@@ -127,6 +127,7 @@
         "cancel": "Cancel",
         "create": "Create",
         "save": "Save",
+        "submit": "Submit",
         "edit": "Edit",
         "approve": "Approve",
         "landingPage": "Landing page",
@@ -241,9 +242,12 @@
         "UPDATE_EVENT_CONFIG_FAILED": "Update event configuration failed.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Delete event config field failed.",
         "USER_NOT_FOUND": "User not found.",
-        "TOO_MANY_ATTEMPTS": "Too many attempts. Please try again later."
+        "TOO_MANY_ATTEMPTS": "Too many attempts. Please try again later.",
+        "TOKEN_NOT_FOUND": "Token not found"
     },
     "successApi": {
+        "SUCCESS": "Success",
+        "LOGIN_SUCCESS": "Login successfully.",
         "CREATE_ACCOUNT_SUCCESS": "Create account successfully.",
         "UPDATE_ACCOUNT_SUCCESS": "Update account successfully.",
         "DELETE_ACCOUNT_SUCCESS": "Delete account successfully.",
