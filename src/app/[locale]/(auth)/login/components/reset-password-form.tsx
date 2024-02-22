@@ -40,9 +40,9 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
             .email({ message: translation("error.invalidEmail") })
     });
 
-    type LoginFormValues = z.infer<typeof formSchema>;
+    type FormValues = z.infer<typeof formSchema>;
 
-    const form = useForm<LoginFormValues>({
+    const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: ""
@@ -50,7 +50,7 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
     });
 
     // Func
-    const onSubmit = async (data: LoginFormValues) => {
+    const onSubmit = async (data: FormValues) => {
         try {
             setLoading(true);
 
