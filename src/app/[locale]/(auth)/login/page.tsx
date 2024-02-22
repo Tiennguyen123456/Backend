@@ -1,5 +1,5 @@
 import LocaleSwitcherSelect from "@/components/LocaleSwitcherSelect";
-import LoginForm from "./components/login-fom";
+import LoginForm from "./components/login-form";
 
 export default function LoginPage() {
     return (
