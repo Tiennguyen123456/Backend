@@ -2,7 +2,7 @@ import { ICompanyRes } from "./../models/api/company-api";
 import companyApi from "@/services/company-api";
 import { useEffect, useState } from "react";
 
-export function useFetchDataCompany({ pagination: { page = 1, perPage = 10 } = {} } = {}) {
+export function useFetchDataCompany({ pagination: { page = 1, pageSize = 10 } = {} } = {}) {
     const [data, setData] = useState<ICompanyRes[]>([]);
     const [pageCount, setPageCount] = useState<Number>(1);
     const [loading, setLoading] = useState<Boolean>(false);
@@ -12,27 +12,27 @@ export function useFetchDataCompany({ pagination: { page = 1, perPage = 10 } = {
         companyApi
             .getCompanies({
                 page,
-                perPage,
+                pageSize,
             })
             .then(function (response) {
                 setData(response.data.collection);
                 setPageCount(
-                    Math.round(
-                        response.data.pagination.meta.total / perPage == 0
+                    Math.ceil(
+                        response.data.pagination.meta.total / pageSize == 0
                             ? 1
-                            : response.data.pagination.meta.total / perPage,
+                            : response.data.pagination.meta.total / pageSize,
                     ),
                 );
             })
             .catch(function (error) {
                 console.log(error);
                 setData([]);
-                setPageCount(1);
+                setPageCount(0);
             })
             .finally(function () {
                 setLoading(false);
             });
-    }, [perPage, page, setData, setLoading]);
+    }, [pageSize, page, setData, setLoading]);
 
     return { data, loading, pageCount };
 }

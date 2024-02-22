@@ -26,7 +26,9 @@
             "name": "Name",
             "code": "Code",
             "status": "Status",
-            "guardName": "Guard name"
+            "guardName": "Guard",
+            "enable": "Enable",
+            "action": "Action"
         },
         "action": {
             "CREATE_ROLE_FAILED": "Create role failed.",
@@ -322,7 +324,7 @@
             "page": "page",
             "of": "of",
             "rowSelected": " row(s) selected.",
-            "perPage": "Rows per page"
+            "pageSize": "Rows per page"
         },
         "noResults": "No results.",
         "action": "Actions"
@@ -342,6 +344,7 @@
     "breadcrumb": {
         "home": "Dasboard",
         "company": "Company",
-        "createCompany": "Create company"
+        "createCompany": "Create company",
+        "roles" : "Roles"
     }
 }

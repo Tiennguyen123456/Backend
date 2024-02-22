@@ -19,7 +19,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
             </div>
             <div className="flex w-full sm:w-auto justify-between items-center space-x-6 lg:space-x-8">
                 <div className="flex items-center space-x-2">
-                    <p className="hidden md:block text-sm font-medium">{translation("pagination.perPage")}</p>
+                    <p className="hidden md:block text-sm font-medium">{translation("pagination.pageSize")}</p>
                     <Select
                         value={`${table.getState().pagination.pageSize}`}
                         onValueChange={(value) => {

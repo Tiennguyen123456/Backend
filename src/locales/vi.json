@@ -26,7 +26,9 @@
             "name": "Tên",
             "code": "Code",
             "status": "Trạng thái",
-            "guardName": "Thiết bị"
+            "guardName": "Guard",
+            "enable": "Enable",
+            "action": "Action"
         },
         "action": {
             "CREATE_ROLE_FAILED": "Tạo mới vai trò thất bại.",
@@ -37,11 +39,11 @@
             "active": "Hoạt động",
             "label": {
                 "name": "Tên",
-                "guardName": "Thiết bị"
+                "guardName": "Guard"
             },
             "placeholder": {
                 "name": "Tên",
-                "guardName": "Thiết bị"
+                "guardName": "Guard"
             }
         }
     },
@@ -321,7 +323,7 @@
             "page": "Trang",
             "of": "/",
             "rowSelected": "dòng được chọn.",
-            "perPage": "Số dòng mỗi trang"
+            "pageSize": "Số dòng mỗi trang"
         },
         "noResults": "Không có kết quả.",
         "action": "Thao tác"
@@ -341,6 +343,7 @@
     "breadcrumb": {
         "home": "Bảng điều khiển",
         "company": "Công ty",
-        "createCompany": "Tạo công ty"
+        "createCompany": "Tạo công ty",
+        "roles": "Vai trò"
     }
 }

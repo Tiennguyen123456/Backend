@@ -35,7 +35,7 @@ export default function CompaniesPage() {
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
     // Use fetch data
-    const { data, loading, pageCount } = useFetchDataCompany({ pagination: { page, perPage: limit } });
+    const { data, loading, pageCount } = useFetchDataCompany({ pagination: { page, pageSize: limit } });
 
     const columns: ColumnDef<CompanyColumn>[] = [
         {
