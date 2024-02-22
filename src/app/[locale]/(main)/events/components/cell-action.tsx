@@ -26,7 +26,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
     const onConfirm = async () => {};
 
-    const onCopy = (id: string) => {};
+    const onCopy = (id: number) => {};
 
     return (
         <>

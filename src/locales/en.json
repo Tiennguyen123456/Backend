@@ -95,6 +95,9 @@
             "city": "City",
             "status": "Status",
             "updateAt": "Update at"
+        },
+        "create": {
+            "title": "Create New Company"
         }
     },
     "configEventPage": {
@@ -323,5 +326,10 @@
         "subtitle": "Page not found",
         "description": "The page you're looking for doesn't exist !",
         "gohome": "Go home"
+    },
+    "breadcrumb": {
+        "home": "Dasboard",
+        "company": "Company",
+        "createCompany": "Create company"
     }
 }

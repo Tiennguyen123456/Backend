@@ -1,4 +1,4 @@
-import { ROUTES } from "@/constants/routes";
+import { ROUTERS_BREADCRUMBS, ROUTES } from "@/constants/routes";
 import { AppRoutes } from "../constants/sidebar";
 import { SideBarItemType } from "../models/SideBar";
 import { checkPermission } from "../utils/common";
@@ -94,4 +94,31 @@ export function checkCurrentPath(pathname: string) {
               )
             : undefined;
     return currentPage;
+}
+
+export function generateBreadcrumbs() {
+    if (typeof window !== "undefined") {
+        console.log("pathnames 1: ", window.location.pathname.split("/"));
+        const arrayStrExcept = ["", "vi"];
+        const pathnames = window.location.pathname.split("/").filter((path: string) => !arrayStrExcept.includes(path));
+
+        const breadcrumbsURLs = [];
+
+        for (let i = 0; i < pathnames.length; i++) {
+            const href = `/${pathnames.slice(0, i + 1).join("/")}`;
+
+            const route = ROUTERS_BREADCRUMBS.find(
+                // (item) => href !== ROUTES.DATA && href !== ROUTES.REPORT && href === item.slug,
+                (item) => href === item.slug,
+            );
+
+            if (route) {
+                breadcrumbsURLs.push(route);
+            }
+        }
+
+        return breadcrumbsURLs;
+    }
+
+    return [];
 }

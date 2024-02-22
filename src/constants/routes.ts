@@ -15,7 +15,7 @@ export const ROUTES = {
     // REPORT: "/reports",
     // TEMP_REPORT_PAGE: "/reports/temp-report-page",
     COMPANIES: "/companies",
-    // COMPANY_CREATE: "/companies/create",
+    COMPANY_CREATE: "/companies/create",
     // COMPANY_DETAILS: "/companies/details",
     // ACCOUNTS: "/accounts",
     // ROLES: "/roles",
@@ -26,84 +26,87 @@ export const ROUTES = {
     403: "/403",
 };
 
-// export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [
-//     {
-//         name: "Home",
-//         slug: ROUTES.DASHBOARD,
-//     },
-//     {
-//         name: "Events",
-//         slug: ROUTES.EVENTS,
-//     },
-//     {
-//         name: "Events Details",
-//         slug: ROUTES.EVENTS_DETAILS,
-//     },
-//     {
-//         name: "Create Event",
-//         slug: ROUTES.EVENTS_CREATE,
-//     },
-//     {
-//         name: "Config Event",
-//         slug: ROUTES.EVENTS_CONFIG,
-//     },
-//     {
-//         name: "Campaigns",
-//         slug: ROUTES.CAMPAIGNS,
-//     },
-//     {
-//         name: "Campaigns Details",
-//         slug: ROUTES.CAMPAIGNS_DETAILS,
-//     },
-//     {
-//         name: "Temp Data Page 1",
-//         slug: ROUTES.TEMP_DATA_PAGE_1,
-//     },
-//     {
-//         name: "Temp Data Page 2",
-//         slug: ROUTES.TEMP_DATA_PAGE_2,
-//     },
-//     {
-//         name: "Temp Report Page",
-//         slug: ROUTES.TEMP_REPORT_PAGE,
-//     },
-//     {
-//         name: "Company",
-//         slug: ROUTES.COMPANIES,
-//     },
-//     {
-//         name: "Create Company",
-//         slug: ROUTES.COMPANY_CREATE,
-//     },
-//     {
-//         name: "Company Details",
-//         slug: ROUTES.COMPANY_DETAILS,
-//     },
-//     {
-//         name: "Accounts",
-//         slug: ROUTES.ACCOUNTS,
-//     },
-//     {
-//         name: "Roles",
-//         slug: ROUTES.ROLES,
-//     },
-//     {
-//         name: "Permissions",
-//         slug: ROUTES.PERMISSIONS,
-//     },
-//     {
-//         name: "Languages",
-//         slug: ROUTES.LANGUAGES,
-//     },
-//     {
-//         name: "Configurations",
-//         slug: ROUTES.CONFIGURATIONS,
-//     },
-//     {
-//         name: "Clients",
-//         slug: ROUTES.CLIENTS,
-//     },
-// ];
+export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [
+    {
+        code: "home",
+        name: "Home",
+        slug: ROUTES.DASHBOARD,
+    },
+    // {
+    //     name: "Events",
+    //     slug: ROUTES.EVENTS,
+    // },
+    // {
+    //     name: "Events Details",
+    //     slug: ROUTES.EVENTS_DETAILS,
+    // },
+    // {
+    //     name: "Create Event",
+    //     slug: ROUTES.EVENTS_CREATE,
+    // },
+    // {
+    //     name: "Config Event",
+    //     slug: ROUTES.EVENTS_CONFIG,
+    // },
+    // {
+    //     name: "Campaigns",
+    //     slug: ROUTES.CAMPAIGNS,
+    // },
+    // {
+    //     name: "Campaigns Details",
+    //     slug: ROUTES.CAMPAIGNS_DETAILS,
+    // },
+    // {
+    //     name: "Temp Data Page 1",
+    //     slug: ROUTES.TEMP_DATA_PAGE_1,
+    // },
+    // {
+    //     name: "Temp Data Page 2",
+    //     slug: ROUTES.TEMP_DATA_PAGE_2,
+    // },
+    // {
+    //     name: "Temp Report Page",
+    //     slug: ROUTES.TEMP_REPORT_PAGE,
+    // },
+    {
+        code: "company",
+        name: "Company",
+        slug: ROUTES.COMPANIES,
+    },
+    {
+        code: "createCompany",
+        name: "Create Company",
+        slug: ROUTES.COMPANY_CREATE,
+    },
+    // {
+    //     name: "Company Details",
+    //     slug: ROUTES.COMPANY_DETAILS,
+    // },
+    // {
+    //     name: "Accounts",
+    //     slug: ROUTES.ACCOUNTS,
+    // },
+    // {
+    //     name: "Roles",
+    //     slug: ROUTES.ROLES,
+    // },
+    // {
+    //     name: "Permissions",
+    //     slug: ROUTES.PERMISSIONS,
+    // },
+    // {
+    //     name: "Languages",
+    //     slug: ROUTES.LANGUAGES,
+    // },
+    // {
+    //     name: "Configurations",
+    //     slug: ROUTES.CONFIGURATIONS,
+    // },
+    // {
+    //     name: "Clients",
+    //     slug: ROUTES.CLIENTS,
+    // },
+];
 
 export const PRIVATE_ROUTES = [
     ROUTES.DASHBOARD,
@@ -119,6 +122,7 @@ export const PRIVATE_ROUTES = [
     // ROUTES.REPORT,
     // ROUTES.TEMP_REPORT_PAGE,
     ROUTES.COMPANIES,
+    ROUTES.COMPANY_CREATE,
     // ROUTES.ACCOUNTS,
     // ROUTES.ROLES,
     // ROUTES.PERMISSIONS,
@@ -143,6 +147,7 @@ export const AppRoutesPermissions = [
     // { path: ROUTES.REPORT, permissions: [] },
     // { path: ROUTES.TEMP_REPORT_PAGE, permissions: [] },
     { path: ROUTES.COMPANIES, permissions: ["company:view"] },
+    { path: ROUTES.COMPANY_CREATE, permissions: ["company:create"] },
     // { path: ROUTES.ACCOUNTS, permissions: ["user:view"] },
     // { path: ROUTES.ROLES, permissions: ["user_role:view"] },
     // { path: ROUTES.PERMISSIONS, permissions: ["user_permission:view"] },

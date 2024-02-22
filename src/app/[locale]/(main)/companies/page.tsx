@@ -13,10 +13,16 @@ import { CellAction } from "./components/cell-action";
 import { useFetchDataCompany } from "@/data/fetch-data-company";
 import { CompanyColumn } from "./components/column";
 import FooterContainer from "@/components/layout/footer-container";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/constants/routes";
+import Breadcrumbs from "@/components/ui/breadcrumb";
 
-export default function CompanyPage() {
+export default function CompaniesPage() {
     // ** I18n
     const translation = useTranslations("");
+
+    // ** Use Router
+    const router = useRouter();
 
     // Use Date From To
     const [dateFrom, setDateFrom] = useState<Date>();
@@ -24,13 +30,10 @@ export default function CompanyPage() {
 
     // Use Row Selection
     const { rowSelection, onRowSelection } = useRowSelection();
-
     // Use Pagination
     const { limit, onPaginationChange, skip, pagination, page } = usePagination();
-
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
-
     // Use fetch data
     const { data, loading, pageCount } = useFetchDataCompany({ pagination: { page, perPage: limit } });
 
@@ -86,17 +89,23 @@ export default function CompanyPage() {
 
     return (
         <>
-            <div className="w-full flex flex-wrap items-center justify-between space-y-2">
-                <h2 className="text-3xl font-bold tracking-tight">{translation("companyPage.title")}</h2>
-                <div className="flex justify-end flex-wrap items-center gap-2">
-                    <Button variant={"secondary"}>
-                        <PlusCircle className="w-5 h-5 md:mr-2" />
-                        <p className="hidden md:block">{translation("action.create")}</p>
-                    </Button>
-                    {/* <Button variant={"destructive"}>
+            <div className="w-full space-y-4">
+                <Breadcrumbs />
+                <div className="flex flex-wrap items-center justify-between space-y-2">
+                    <h2 className="text-3xl font-bold tracking-tight">{translation("companyPage.title")}</h2>
+                    <div className="flex justify-end flex-wrap items-center gap-2 !mt-0">
+                        <Button
+                            variant={"secondary"}
+                            onClick={() => router.push(ROUTES.COMPANY_CREATE)}
+                        >
+                            <PlusCircle className="w-5 h-5 md:mr-2" />
+                            <p className="hidden md:block">{translation("action.create")}</p>
+                        </Button>
+                        {/* <Button variant={"destructive"}>
                         <Trash2 className="w-5 h-5 md:mr-2" />
                         <p className="hidden md:block">{translation("action.delete")}</p>
                     </Button> */}
+                    </div>
                 </div>
             </div>
             {/* <div className="flex flex-col md:flex-row gap-2 justify-end items-end w-full md:w-auto">
