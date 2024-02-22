@@ -12,7 +12,7 @@ This is a starter project for React that uses Next.js v14.
 
 Before you proceed with the setup, ensure your system meets the following requirements:
 
-- Nodejs >= 18
+- Nodejs >= v18.17.0
 - Npm / Yarn
 - Nextjs 14
 - TypeScript
