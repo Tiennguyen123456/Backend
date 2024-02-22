@@ -10,23 +10,17 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useState } from "react";
-import { PasswordInput } from "@/components/ui/password-input";
-import { Checkbox } from "@/components/ui/checkbox";
-import toast from "react-hot-toast";
-import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { toastError, toastSuccess } from "@/utils/toast";
+import { Loader2 } from "lucide-react";
 import authApi from "@/services/auth-api";
 import { APIStatus } from "@/constants/enum";
-import { setAxiosAuthorization } from "@/configs/axios.config";
-import { useRouter } from "next/navigation";
-import { ROUTES } from "@/constants/routes";
-import { toastError } from "@/utils/toast";
-import { Loader2 } from "lucide-react";
 
-interface LoginFormProps {
+interface ResetPasswordFormProps {
     onChangeForm: any;
 }
 
-export default function LoginForm(props: LoginFormProps) {
+export default function ResetPasswordForm(props: ResetPasswordFormProps) {
     const { onChangeForm } = props;
 
     // ** I18n
@@ -43,9 +37,7 @@ export default function LoginForm(props: LoginFormProps) {
         email: z
             .string()
             .min(1, { message: translation("error.requiredEmail") })
-            .email({ message: translation("error.invalidEmail") }),
-        password: z.string().min(6, { message: translation("error.invalidPassword") }),
-        rememberMe: z.boolean(),
+            .email({ message: translation("error.invalidEmail") })
     });
 
     type LoginFormValues = z.infer<typeof formSchema>;
@@ -53,9 +45,7 @@ export default function LoginForm(props: LoginFormProps) {
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email: "",
-            password: "",
-            rememberMe: false,
+            email: ""
         },
     });
 
@@ -64,16 +54,13 @@ export default function LoginForm(props: LoginFormProps) {
         try {
             setLoading(true);
 
-            const response = await authApi.login({
-                email: data.email,
-                password: data.password,
+            const response = await authApi.resetPassword({
+                email: data.email
             });
 
             if (response.data.status == APIStatus.SUCCESS) {
-                Cookies.set("authorization", response.data.data.access_token);
-                setAxiosAuthorization(response.data.data.access_token);
+                toastSuccess(translation("loginPage.checkYourEmail"));
             }
-            router.push(ROUTES.DASHBOARD);
         } catch (error: any) {
             const data = error?.response?.data;
             if (data?.message_code) {
@@ -104,7 +91,7 @@ export default function LoginForm(props: LoginFormProps) {
                                 src={require("@/assets/images/Delfi_Logo.png")}
                             />
                         </div>
-                        <p>{translation("loginPage.description")}</p>
+                        <p>{translation("loginPage.titleResetPassword")}</p>
                     </CardHeader>
                     <CardContent className="grid gap-6">
                         <div className="relative">
@@ -131,31 +118,12 @@ export default function LoginForm(props: LoginFormProps) {
                                 )}
                             />
                         </div>
-                        <div className="grid gap-2">
-                            <FormField
-                                control={form.control}
-                                name="password"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-base">{translation("label.password")}</FormLabel>
-                                        <FormControl>
-                                            <PasswordInput
-                                                disabled={loading}
-                                                placeholder={translation("placeholder.password")}
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
                         <div className="grid text-right">
-                            <p
-                                onClick={() => onChangeForm()}
+                            <p 
+                                onClick={() => onChangeForm()} 
                                 className="cursor-pointer hover:text-blue-700 hover:underline"
                             >
-                                {translation("loginPage.forgotPassword")}
+                                {translation("loginPage.goToLogin")}
                             </p>
                         </div>
                     </CardContent>
@@ -168,7 +136,7 @@ export default function LoginForm(props: LoginFormProps) {
                             {loading ? (
                                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                             ) : (
-                                translation("loginPage.title")
+                                translation("loginPage.submit")
                             )}
                         </Button>
                     </CardFooter>

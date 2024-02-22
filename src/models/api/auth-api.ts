@@ -12,3 +12,7 @@ export interface ILoginRes {
     access_token: string;
     token_type: string;
 }
+
+export interface IResetPasswordReq {
+    email: string;
+}

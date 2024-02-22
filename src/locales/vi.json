@@ -2,7 +2,13 @@
     "loginPage": {
         "title": "Đăng nhập",
         "description": "Đăng nhập để truy cập quản trị Check-in",
-        "rememberMe": "Ghi nhớ đăng nhập"
+        "rememberMe": "Ghi nhớ đăng nhập",
+        "forgotPassword": "Quên mật khẩu?",
+        "goToLogin": "Đến trang đăng nhập",
+        "inputEmail": "Nhập email",
+        "submit": "Xác nhận",
+        "titleResetPassword": "Nhập email để đặt lại mật khẩu",
+        "checkYourEmail": "Đặt lại mật khẩu thành công, vui lòng kiểm tra email của bạn"
     },
     "homePage": {
         "title": "hello"
@@ -222,7 +228,8 @@
         "DELETE_EVENT_FAILED": "Xoá sự kiện thật bại.",
         "GET_EVENT_CONFIG_FIELDS_FAILED": "Lấy cấu hình trường sự kiện thất bại.",
         "UPDATE_EVENT_CONFIG_FAILED": "Chỉnh sửa cấu hình sự kiện thất bại.",
-        "DELETE_EVENT_CONFIG_FIELD_FAILED": "Xóa cấu hình trường sự kiện thất bại."
+        "DELETE_EVENT_CONFIG_FIELD_FAILED": "Xóa cấu hình trường sự kiện thất bại.",
+        "USER_NOT_FOUND": "Người dùng không tồn tại."
     },
     "successApi": {
         "CREATE_ACCOUNT_SUCCESS": "Tạo mới tài khoản thành công.",

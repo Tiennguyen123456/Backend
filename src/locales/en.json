@@ -2,7 +2,13 @@
     "loginPage": {
         "title": "Login",
         "description": "Login below to access Check-in Dashboard",
-        "rememberMe": "Remember me"
+        "rememberMe": "Remember me",
+        "forgotPassword": "Forgot password?",
+        "goToLogin": "Go to login",
+        "inputEmail": "Input your email",
+        "submit": "Submit",
+        "titleResetPassword": "Input your email to reset your password",
+        "checkYourEmail": "Reset password successfully. Please check your email to reset your password."
     },
     "homePage": {
         "title": "hello"
@@ -223,7 +229,8 @@
         "DELETE_EVENT_FAILED": "Delete event failed.",
         "GET_EVENT_CONFIG_FIELDS_FAILED": "Get event config fields failed.",
         "UPDATE_EVENT_CONFIG_FAILED": "Update event configuration failed.",
-        "DELETE_EVENT_CONFIG_FIELD_FAILED": "Delete event config field failed."
+        "DELETE_EVENT_CONFIG_FIELD_FAILED": "Delete event config field failed.",
+        "USER_NOT_FOUND": "User not found."
     },
     "successApi": {
         "CREATE_ACCOUNT_SUCCESS": "Create account successfully.",
