@@ -91,7 +91,7 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
                                 src={require("@/assets/images/Delfi_Logo.png")}
                             />
                         </div>
-                        <p>{translation("loginPage.titleResetPassword")}</p>
+                        <p>{translation("loginPage.descriptionResetPassword")}</p>
                     </CardHeader>
                     <CardContent className="grid gap-6">
                         <div className="relative">
@@ -119,8 +119,8 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
                             />
                         </div>
                         <div className="grid text-right">
-                            <p 
-                                onClick={() => onChangeForm()} 
+                            <p
+                                onClick={() => onChangeForm()}
                                 className="cursor-pointer hover:text-blue-700 hover:underline"
                             >
                                 {translation("loginPage.goToLogin")}
@@ -136,7 +136,7 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
                             {loading ? (
                                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                             ) : (
-                                translation("loginPage.submit")
+                                translation("button.submit")
                             )}
                         </Button>
                     </CardFooter>

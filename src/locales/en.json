@@ -1,4 +1,11 @@
 {
+    "button": {
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "save": "Save"
+    },
     "loginPage": {
         "title": "Login",
         "description": "Login below to access Check-in Dashboard",
@@ -7,7 +14,7 @@
         "goToLogin": "Go to login",
         "inputEmail": "Input your email",
         "submit": "Submit",
-        "titleResetPassword": "Input your email to reset your password",
+        "descriptionResetPassword": "Please enter email to reset password",
         "checkYourEmail": "Reset password successfully. Please check your email to reset your password."
     },
     "homePage": {
@@ -233,7 +240,8 @@
         "GET_EVENT_CONFIG_FIELDS_FAILED": "Get event config fields failed.",
         "UPDATE_EVENT_CONFIG_FAILED": "Update event configuration failed.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Delete event config field failed.",
-        "USER_NOT_FOUND": "User not found."
+        "USER_NOT_FOUND": "User not found.",
+        "TOO_MANY_ATTEMPTS": "Too many attempts. Please try again later."
     },
     "successApi": {
         "CREATE_ACCOUNT_SUCCESS": "Create account successfully.",
