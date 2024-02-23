@@ -1,6 +1,6 @@
 import qs from "qs";
 import { api } from "@/configs/axios.config";
-import { IListRes } from "@/models/DataTabel";
+import { IListRes } from "@/models/DataTable";
 import ApiRoutes from "./api.routes";
 import { IRoleRes } from "@/models/api/role-api";
 
