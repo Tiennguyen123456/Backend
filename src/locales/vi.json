@@ -243,6 +243,7 @@
         "UPDATE_EVENT_CONFIG_FAILED": "Chỉnh sửa cấu hình sự kiện thất bại.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Xóa cấu hình trường sự kiện thất bại.",
         "USER_NOT_FOUND": "Người dùng không tồn tại.",
+        "EMAIL_NOT_FOUND": "Email không tồn tại.",
         "TOO_MANY_ATTEMPTS": "Quá nhiều lần thử. Vui lòng thử lại sau 1 phút.",
         "TOKEN_NOT_FOUND": "Mã xác thực không hợp lệ."
     },

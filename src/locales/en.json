@@ -244,6 +244,7 @@
         "UPDATE_EVENT_CONFIG_FAILED": "Update event configuration failed.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Delete event config field failed.",
         "USER_NOT_FOUND": "User not found.",
+        "EMAIL_NOT_FOUND": "Email not found.",
         "TOO_MANY_ATTEMPTS": "Too many attempts. Please try again later.",
         "TOKEN_NOT_FOUND": "Token not found"
     },

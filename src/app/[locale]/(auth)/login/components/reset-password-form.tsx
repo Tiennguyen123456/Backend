@@ -118,7 +118,7 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
                                 )}
                             />
                         </div>
-                        <div className="grid text-right">
+                        <div className="flex justify-end">
                             <p
                                 onClick={() => onChangeForm()}
                                 className="cursor-pointer hover:text-blue-700 hover:underline"
