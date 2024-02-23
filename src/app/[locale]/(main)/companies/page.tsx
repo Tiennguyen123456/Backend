@@ -16,6 +16,7 @@ import FooterContainer from "@/components/layout/footer-container";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
 import Breadcrumbs from "@/components/ui/breadcrumb";
+import { CompanyModal } from "./components/company-modal";
 
 export default function CompaniesPage() {
     // ** I18n
@@ -23,6 +24,8 @@ export default function CompaniesPage() {
 
     // ** Use Router
     const router = useRouter();
+    // ** State
+    const [openModal, setOpenModal] = useState(false);
 
     // Use Date From To
     const [dateFrom, setDateFrom] = useState<Date>();
@@ -35,7 +38,9 @@ export default function CompaniesPage() {
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
     // Use fetch data
-    const { data, loading, pageCount } = useFetchDataCompany({ pagination: { page, pageSize: limit } });
+    const { data, loading, pageCount, reCall, setReCall } = useFetchDataCompany({
+        pagination: { page, pageSize: limit },
+    });
 
     const columns: ColumnDef<CompanyColumn>[] = [
         {
@@ -87,6 +92,11 @@ export default function CompaniesPage() {
         },
     ];
 
+    // Function
+    const handleAfterCreate = () => {
+        setReCall(!reCall);
+    };
+
     return (
         <>
             <div className="w-full space-y-4">
@@ -94,9 +104,16 @@ export default function CompaniesPage() {
                 <div className="flex flex-wrap items-center justify-between space-y-2">
                     <h2 className="text-3xl font-bold tracking-tight">{translation("companyPage.title")}</h2>
                     <div className="flex justify-end flex-wrap items-center gap-2 !mt-0">
+                        <CompanyModal
+                            className="sm:max-w-[765px] overflow-y-auto max-h-svh sm:max-h-[800px]"
+                            isOpen={openModal}
+                            onClose={() => setOpenModal(false)}
+                            defaultCompany={undefined}
+                            onConfirm={handleAfterCreate}
+                        />
                         <Button
                             variant={"secondary"}
-                            onClick={() => router.push(ROUTES.COMPANY_CREATE)}
+                            onClick={() => setOpenModal(true)}
                         >
                             <PlusCircle className="w-5 h-5 md:mr-2" />
                             <p className="hidden md:block">{translation("action.create")}</p>

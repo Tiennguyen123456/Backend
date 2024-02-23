@@ -105,7 +105,10 @@
             "updateAt": "Ngày cập nhật"
         },
         "create": {
-            "title": "Tạo công ty"
+            "title": "Tạo mới công ty"
+        },
+        "edit": {
+            "title": "Chỉnh sửa công ty"
         }
     },
     "configEventPage": {
@@ -221,7 +224,14 @@
         "invalidNumber": "Vui lòng nhập số hợp lệ",
         "requiredFieldName": "Vui lòng nhập tên trường",
         "requiredDescription": "Vui lòng nhập mô tả",
-        "duplicateFieldName": "Field name is duplicated"
+        "duplicateFieldName": "Field name is duplicated",
+        "requiredTaxCode": "Vui lòng nhập mã số thuế.",
+        "requiredCodeCompany": "Vui lòng nhập mã từ 4 - 20 ký tự.",
+        "invalidCodeCompany": "Vui lòng nhập mã không chưa khoảng trắng.",
+        "invalidPhone": "Vui lòng nhập số điện thoại hợp lệ.",
+        "invalidLimitUsers": "Giới hạn tài khoản phải ít nhất là 1.",
+        "invalidLimitEvents": "Giới hạn sự kiện phải ít nhất là 1.",
+        "invalidLimitCampaigns": "Giới hạn chiến dịch phải ít nhất là 1."
     },
     "errorApi": {
         "LOGIN_FAILED": "Đăng nhập thất bại.",
@@ -245,7 +255,8 @@
         "USER_NOT_FOUND": "Người dùng không tồn tại.",
         "EMAIL_NOT_FOUND": "Email không tồn tại.",
         "TOO_MANY_ATTEMPTS": "Quá nhiều lần thử. Vui lòng thử lại sau 1 phút.",
-        "TOKEN_NOT_FOUND": "Mã xác thực không hợp lệ."
+        "TOKEN_NOT_FOUND": "Mã xác thực không hợp lệ.",
+        "VALIDATION_ERROR": "Dữ liệu không đúng."
     },
     "successApi": {
         "SUCCESS": "Thành công",

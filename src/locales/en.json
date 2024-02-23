@@ -107,6 +107,9 @@
         },
         "create": {
             "title": "Create New Company"
+        },
+        "edit": {
+            "title": "Edit Company"
         }
     },
     "configEventPage": {
@@ -222,7 +225,14 @@
         "invalidNumber": "Please enter valid number",
         "requiredFieldName": "Please enter field name",
         "requiredDescription": "Please enter description",
-        "duplicateFieldName": "Field name is duplicated"
+        "duplicateFieldName": "Field name is duplicated",
+        "requiredTaxCode": "Please enter your tax code.",
+        "requiredCodeCompany": "Please enter code from 4 - 20 characters.",
+        "invalidCodeCompany": "Please enter code have not space.",
+        "invalidPhone": "Please enter valid phone numbers.",
+        "invalidLimitUsers": "The limited users field must be at least 1.",
+        "invalidLimitEvents": "The limited events field must be at least 1.",
+        "invalidLimitCampaigns": "The limited campaigns field must be at least 1."
     },
     "errorApi": {
         "LOGIN_FAILED": "Login failed.",
@@ -246,7 +256,8 @@
         "USER_NOT_FOUND": "User not found.",
         "EMAIL_NOT_FOUND": "Email not found.",
         "TOO_MANY_ATTEMPTS": "Too many attempts. Please try again later.",
-        "TOKEN_NOT_FOUND": "Token not found"
+        "TOKEN_NOT_FOUND": "Token not found",
+        "VALIDATION_ERROR": "Validate request failed."
     },
     "successApi": {
         "SUCCESS": "Success",
@@ -346,7 +357,7 @@
         "home": "Dasboard",
         "company": "Company",
         "createCompany": "Create company",
-        "roles" : "Roles",
+        "roles": "Roles",
         "permissions": "Permissions"
     }
 }

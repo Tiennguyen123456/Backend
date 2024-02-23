@@ -14,5 +14,8 @@ const companyApi = {
         });
         return response.data;
     },
+    storeCompany: async (body: any) => {
+        return await api.post<IResponse<ICompanyRes>>(ApiRoutes.storeCompany, body);
+    },
 };
 export default companyApi;

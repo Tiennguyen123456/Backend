@@ -10,6 +10,7 @@ const ApiRoutes = {
 
     // ** Company Routes
     getCompanies: baseURL + "/companies",
+    storeCompany: baseURL + "/company/store",
 
     // Get role
     getRoles: baseURL + "/roles",

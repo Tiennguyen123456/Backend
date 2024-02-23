@@ -98,7 +98,6 @@ export function checkCurrentPath(pathname: string) {
 
 export function generateBreadcrumbs() {
     if (typeof window !== "undefined") {
-        console.log("pathnames 1: ", window.location.pathname.split("/"));
         const arrayStrExcept = ["", "vi"];
         const pathnames = window.location.pathname.split("/").filter((path: string) => !arrayStrExcept.includes(path));
 

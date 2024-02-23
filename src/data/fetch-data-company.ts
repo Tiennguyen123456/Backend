@@ -6,6 +6,7 @@ export function useFetchDataCompany({ pagination: { page = 1, pageSize = 10 } = 
     const [data, setData] = useState<ICompanyRes[]>([]);
     const [pageCount, setPageCount] = useState<Number>(1);
     const [loading, setLoading] = useState<Boolean>(false);
+    const [reCall, setReCall] = useState<Boolean>(false);
 
     useEffect(() => {
         setLoading(true);
@@ -32,7 +33,7 @@ export function useFetchDataCompany({ pagination: { page = 1, pageSize = 10 } = 
             .finally(function () {
                 setLoading(false);
             });
-    }, [pageSize, page, setData, setLoading]);
+    }, [reCall, pageSize, page, setData, setLoading]);
 
-    return { data, loading, pageCount };
+    return { data, loading, pageCount, reCall, setReCall };
 }
