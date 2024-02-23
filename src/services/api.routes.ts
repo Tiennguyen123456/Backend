@@ -13,6 +13,8 @@ const ApiRoutes = {
 
     // Get role
     getRoles: baseURL + "/roles",
+
+    getPermissions: baseURL + "/permissions",
 };
 
 export default ApiRoutes;

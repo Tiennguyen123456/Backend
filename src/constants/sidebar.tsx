@@ -128,15 +128,15 @@ export const AppRoutes: SideBarItemType[] = [
                         icon: <UserRoundCog />,
                     },
                 },
-                // {
-                //     key: "administration.permissions",
-                //     permissions: ["user_permission:view"],
-                //     path: ROUTES.PERMISSIONS,
-                //     sideBarProps: {
-                //         displayText: "sidebar.items.permissions",
-                //         icon: <LockKeyhole />,
-                //     },
-                // },
+                {
+                    key: "administration.permissions",
+                    permissions: ["user_permission:view"],
+                    path: ROUTES.PERMISSIONS,
+                    sideBarProps: {
+                        displayText: "sidebar.items.permissions",
+                        icon: <LockKeyhole />,
+                    },
+                },
             ],
         },
     },

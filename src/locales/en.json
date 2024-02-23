@@ -346,6 +346,7 @@
         "home": "Dasboard",
         "company": "Company",
         "createCompany": "Create company",
-        "roles" : "Roles"
+        "roles" : "Roles",
+        "permissions": "Permissions"
     }
 }
