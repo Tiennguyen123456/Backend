@@ -97,27 +97,27 @@ export default function CompaniesPage() {
         },
         {
             accessorKey: "name",
-            header: translation("companyPage.table.name"),
+            header: () => <div className="text-black font-bold">{translation("companyPage.table.name")}</div>,
         },
         {
             accessorKey: "website",
-            header: translation("companyPage.table.website"),
+            header: () => <div className="text-black font-bold">{translation("companyPage.table.website")}</div>,
         },
         {
             accessorKey: "contact_email",
-            header: translation("companyPage.table.email"),
+            header: () => <div className="text-black font-bold">{translation("companyPage.table.email")}</div>,
         },
         {
             accessorKey: "address",
-            header: translation("companyPage.table.address"),
+            header: () => <div className="text-black font-bold">{translation("companyPage.table.address")}</div>,
         },
         {
             accessorKey: "contact_phone",
-            header: translation("companyPage.table.phone"),
+            header: () => <div className="text-black font-bold">{translation("companyPage.table.phone")}</div>,
         },
         {
             accessorKey: "status",
-            header: translation("companyPage.table.status"),
+            header: () => <div className="text-black font-bold">{translation("companyPage.table.status")}</div>,
         },
         {
             id: "actions",
