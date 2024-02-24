@@ -139,7 +139,7 @@ export default function CompaniesPage() {
                     <h2 className="text-3xl font-bold tracking-tight">{translation("companyPage.title")}</h2>
                     <div className="flex justify-end flex-wrap items-center gap-2 !mt-0">
                         <CompanyModal
-                            className="sm:max-w-[765px] overflow-y-auto max-h-svh sm:max-h-[800px]"
+                            className="sm:max-w-[765px] overflow-y-auto max-h-svh md:max-h-[550px] 2xl:max-h-[800px]"
                             isOpen={openModal}
                             onClose={handleCloseModal}
                             defaultCompany={rowSelected}
