@@ -163,7 +163,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="w-full"
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 md:gap-4 py-1 md:py-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 py-1 md:py-4">
                         <FormField
                             control={form.control}
                             name="name"
@@ -175,6 +175,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                     </FormLabel>
                                     <FormControl>
                                         <Input
+                                            className="h-10"
                                             disabled={loading}
                                             placeholder={translation("placeholder.name")}
                                             {...field}
@@ -195,6 +196,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                     </FormLabel>
                                     <FormControl>
                                         <Input
+                                            className="h-10"
                                             disabled={loading}
                                             placeholder={translation("placeholder.companyCode")}
                                             {...field}
@@ -212,6 +214,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                     <FormLabel className="text-base">{translation("label.taxCode")}</FormLabel>
                                     <FormControl>
                                         <Input
+                                            className="h-10"
                                             disabled={loading}
                                             placeholder={translation("placeholder.taxCode")}
                                             {...field}
@@ -229,6 +232,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                     <FormLabel className="text-base">{translation("label.website")}</FormLabel>
                                     <FormControl>
                                         <Input
+                                            className="h-10"
                                             disabled={loading}
                                             placeholder={translation("placeholder.website")}
                                             {...field}
@@ -246,6 +250,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                     <FormLabel className="text-base">{translation("label.email")}</FormLabel>
                                     <FormControl>
                                         <Input
+                                            className="h-10"
                                             disabled={loading}
                                             placeholder={translation("placeholder.email")}
                                             {...field}
@@ -263,6 +268,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                     <FormLabel className="text-base">{translation("label.phone")}</FormLabel>
                                     <FormControl>
                                         <Input
+                                            className="h-10"
                                             disabled={loading}
                                             placeholder={translation("placeholder.phone")}
                                             {...field}
@@ -280,6 +286,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                     <FormLabel className="text-base">{translation("label.address")}</FormLabel>
                                     <FormControl>
                                         <Input
+                                            className="h-10"
                                             disabled={loading}
                                             placeholder={translation("placeholder.address")}
                                             {...field}
@@ -302,7 +309,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                         defaultValue={field.value}
                                     >
                                         <FormControl>
-                                            <SelectTrigger className="h-12">
+                                            <SelectTrigger className="h-10">
                                                 <SelectValue
                                                     defaultValue={field.value}
                                                     placeholder={translation("placeholder.status")}
@@ -336,6 +343,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                     <FormLabel className="text-base">{translation("label.limitEvent")}</FormLabel>
                                     <FormControl>
                                         <Input
+                                            className="h-10"
                                             type="number"
                                             disabled={loading}
                                             placeholder={translation("placeholder.limitEvent")}
@@ -354,6 +362,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                     <FormLabel className="text-base">{translation("label.limitUser")}</FormLabel>
                                     <FormControl>
                                         <Input
+                                            className="h-10"
                                             type="number"
                                             disabled={loading}
                                             placeholder={translation("placeholder.limitUser")}
@@ -372,6 +381,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                     <FormLabel className="text-base">{translation("label.limitCampaign")}</FormLabel>
                                     <FormControl>
                                         <Input
+                                            className="h-10"
                                             type="number"
                                             disabled={loading}
                                             placeholder={translation("placeholder.limitCampaign")}
@@ -383,7 +393,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             )}
                         />
                     </div>
-                    <div className="space-x-2 flex items-center justify-end w-full mt-2">
+                    <div className="space-x-2 flex items-center justify-end w-full mt-2 sm:mt-0">
                         <Button
                             disabled={loading}
                             variant="default"
