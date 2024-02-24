@@ -2,22 +2,20 @@
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { PlusCircle } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import FooterContainer from "@/components/layout/footer-container";
 import { useRouter } from "next/navigation";
-import { ROUTES } from "@/constants/routes";
 import Breadcrumbs from "@/components/ui/breadcrumb";
 import { IOption } from "@/models/Select";
-import { IPermissionRes } from "@/models/api/authority-api";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { toastError } from "@/utils/toast";
+import { toastError, toastSuccess } from "@/utils/toast";
 import { Label } from "@/components/ui/label";
 import { useFetchDataPermission } from "@/data/fetch-permission";
 import { useFetchDataRole } from "@/data/fetch-data-role";
-import { useFetchPermisisonByRoleId } from "@/data/fetch-permission-by-role";
 import { Loader } from "@/components/ui/loader";
 import { Checkbox } from "@/components/ui/checkbox";
+import permissionApi from "@/services/permisison-api";
 
 export default function CompaniesPage() {
     // ** I18n
@@ -29,8 +27,7 @@ export default function CompaniesPage() {
     const [roles, setRoles] = useState<IOption[]>([]);
     const [roleId, setRoleId] = useState<number>(0);
     const [groupPermission, setGroupPermission] = useState<any[]>([]);
-
-    // const [permissions, setPermissions] = useState<IPermissionRes[]>([]);
+    const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
     const refactorPermission = (collection: any) => {
         return collection.reduce((acc: any, permission: any) => {
@@ -60,7 +57,7 @@ export default function CompaniesPage() {
     };
 
     // Use fetch data
-    const { data: dataRole, loading: roleLoading } = useFetchDataRole();
+    const { data: dataRole, loading: roleLoading } = useFetchDataRole({ pagination: { pageSize: 50 } });
 
     useEffect(() => {
         const roles = dataRole.map((role) => ({
@@ -71,7 +68,7 @@ export default function CompaniesPage() {
     }, [dataRole]);
 
     // Use fetch all permission
-    const { data: dataPermission, loading } = useFetchDataPermission({ pagination: { pageSize: 200 } });
+    const { data: dataPermission, loading, setLoading } = useFetchDataPermission({ pagination: { pageSize: 200 } });
 
     useEffect(() => {
         setGroupPermission(refactorPermission(dataPermission));
@@ -85,9 +82,9 @@ export default function CompaniesPage() {
         setGroupPermission([...groupPermission]);
     };
 
-    const handleCheckPermission = (index: number, permissionid: number) => {
+    const handleCheckPermission = (index: number, permissionId: number) => {
         groupPermission[index].permission.map((permission: any) => {
-            if (permission.id === permissionid) {
+            if (permission.id === permissionId) {
                 permission.check = !permission.check;
             }
         });
@@ -95,7 +92,79 @@ export default function CompaniesPage() {
         setGroupPermission([...groupPermission]);
     };
 
-    console.log(groupPermission);
+    const handleChangeRoleId = (roleId: number) => {
+        setRoleId(roleId);
+
+        if (roleId === 0) {
+            return;
+        }
+
+        setLoading(true);
+
+        // Use fetch permission by role
+        permissionApi
+            .getPermissionByRoleId(roleId)
+            .then(function (response) {
+                const permissionIds = response.data.collection.map((permission: any) => permission.id);
+
+                handlePermissionByRoleId(permissionIds);
+            })
+            .catch(function (error) {
+                console.log(error);
+                handlePermissionByRoleId([]);
+            })
+            .finally(function () {
+                setLoading(false);
+            });
+    }
+
+    const handlePermissionByRoleId = (permissionIds: any) => {
+        groupPermission.map((group: any) => {
+            group.permission.map((permission: any) => {
+                if (permissionIds.includes(permission.id)) {
+                    permission.check = true;
+                } else {
+                    permission.check = false;
+                }
+            });
+        });
+
+        setGroupPermission([...groupPermission]);
+    }
+
+    const handleUpdatePermission = async () => {
+        if (roleId === 0) {
+            return toastError(translation("error.requiredRoleForUpdatePermission"));
+        }
+
+        const permissionIds = groupPermission.reduce((acc: any, group: any) => {
+            group.permission.map((permission: any) => {
+                if (permission.check) {
+                    acc.push(permission.id);
+                }
+            });
+            return acc;
+        }, []);
+
+        setSubmitLoading(true);
+        // Post api
+        permissionApi
+            .assignPermission({
+                permission_ids: permissionIds,
+                role_id: roleId,
+            })
+            .then(function (response) {
+                if (response.status === 'success') {
+                    toastSuccess(translation("successApi.UPDATE_PERMISSION_SUCCESS"));
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .finally(function () {
+                setSubmitLoading(false);
+            });
+    };
 
     return (
         <>
@@ -103,12 +172,6 @@ export default function CompaniesPage() {
                 <Breadcrumbs />
                 <div className="flex flex-wrap items-center justify-between space-y-2">
                     <h2 className="text-3xl font-bold tracking-tight">{translation("permissionsPage.title")}</h2>
-                    <div className="flex justify-end flex-wrap items-center gap-2 !mt-0">
-                        <Button variant={"secondary"}>
-                            <PlusCircle className="w-5 h-5 md:mr-2" />
-                            <p className="hidden md:block">{translation("action.create")}</p>
-                        </Button>
-                    </div>
                 </div>
             </div>
 
@@ -122,9 +185,9 @@ export default function CompaniesPage() {
                 <div className="grid grid-cols-4 gap-4">
                     <div>
                         <Label className="block py-3">{translation("permissionsPage.label.selectRole")}</Label>
-                        <Select onValueChange={(value: string) => setRoleId(parseInt(value))}>
+                        <Select onValueChange={(value: string) => handleChangeRoleId(parseInt(value))}>
                             <SelectTrigger>
-                                <SelectValue placeholder="Select a role to display" />
+                                <SelectValue placeholder={translation("permissionsPage.selectRoleToViewPermissions")} />
                             </SelectTrigger>
                             <SelectContent>
                                 {roles.map((role) => (
@@ -139,7 +202,18 @@ export default function CompaniesPage() {
                         </Select>
                     </div>
                     <div className="flex flex-col justify-end">
-                        <Button type="submit">{translation("action.save")}</Button>
+                        <Button
+                            type="submit"
+                            onClick={handleUpdatePermission}
+                            disabled={submitLoading || roleId === 0 }
+                            className={roleId === 0 ? "hidden" : ""}
+                        >
+                            {submitLoading ? (
+                                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            ) : (
+                                translation("action.update")
+                            )}
+                        </Button>
                     </div>
                 </div>
             )}

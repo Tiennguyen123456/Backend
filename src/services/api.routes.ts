@@ -18,6 +18,7 @@ const ApiRoutes = {
 
     getPermissions: baseURL + "/permissions",
     getPermissionByRole: baseURL + "/permission/role",
+    assignPermission: baseURL + "/permission/assign",
 };
 
 export default ApiRoutes;

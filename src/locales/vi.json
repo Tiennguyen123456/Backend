@@ -122,7 +122,12 @@
         }
     },
     "permissionsPage": {
-        "title": "Phân quyền"
+        "title": "Phân quyền",
+        "label": {
+            "selectRole": "Chọn vai trò",
+            "guardName": "Guard name"
+        },
+        "selectRoleToViewPermissions": "Chọn vai trò để xem phân quyền"
     },
     "action": {
         "login": "Đăng nhập",
@@ -131,6 +136,7 @@
         "create": "Tạo mới",
         "save": "Lưu",
         "submit": "Xác nhận",
+        "update": "Cập nhật",
         "edit": "Cập nhật",
         "approve": "Xác nhận",
         "landingPage": "Landing page",
@@ -237,7 +243,8 @@
         "invalidPhone": "Vui lòng nhập số điện thoại hợp lệ.",
         "invalidLimitUsers": "Giới hạn tài khoản phải ít nhất là 1.",
         "invalidLimitEvents": "Giới hạn sự kiện phải ít nhất là 1.",
-        "invalidLimitCampaigns": "Giới hạn chiến dịch phải ít nhất là 1."
+        "invalidLimitCampaigns": "Giới hạn chiến dịch phải ít nhất là 1.",
+        "requiredRoleForUpdatePermission": "Vui lòng chọn vai trò để cập nhật phân quyền."
     },
     "errorApi": {
         "LOGIN_FAILED": "Đăng nhập thất bại.",
@@ -281,7 +288,8 @@
         "UPDATE_EVENT_SUCCESS": "Chỉnh sửa sự kiện thành công.",
         "DELETE_EVENT_SUCCESS": "Xoá sự kiện thành công.",
         "UPDATE_EVENT_CONFIG_SUCCESS": "Chỉnh sửa cấu hình sự kiện thành công.",
-        "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Xóa cấu hình trường sự kiện thành công."
+        "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Xóa cấu hình trường sự kiện thành công.",
+        "UPDATE_PERMISSION_SUCCESS": "Cập nhật quyền thành công."
     },
     "localeSwitcher": {
         "en": "Tiếng Anh",
@@ -362,6 +370,7 @@
         "home": "Bảng điều khiển",
         "company": "Công ty",
         "createCompany": "Tạo công ty",
-        "roles": "Vai trò"
+        "roles": "Vai trò",
+        "permissions":"Phân quyền"
     }
 }

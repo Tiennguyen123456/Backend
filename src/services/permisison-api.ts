@@ -21,6 +21,10 @@ const permissionApi = {
         const response = await api.get<IResponse<IPermissionRoleRes<ICollectionRoleRes>>>(url);
 
         return response.data;
-    }
+    },
+    assignPermission: async (body: any) => {
+        const response = await api.post<IResponse<null>>(ApiRoutes.assignPermission, body);
+        return response.data;
+    },
 };
 export default permissionApi;

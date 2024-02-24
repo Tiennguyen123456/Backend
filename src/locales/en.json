@@ -128,7 +128,7 @@
             "selectRole": "Select Role",
             "guardName": "Guard name"
         },
-        "messageCode": {}
+        "selectRoleToViewPermissions": "Select role to view permissions"
     },
     "action": {
         "login": "Login",
@@ -137,6 +137,7 @@
         "create": "Create",
         "save": "Save",
         "submit": "Submit",
+        "update": "Update",
         "edit": "Edit",
         "approve": "Approve",
         "landingPage": "Landing page",
@@ -241,7 +242,8 @@
         "invalidPhone": "Please enter valid phone numbers.",
         "invalidLimitUsers": "The limited users field must be at least 1.",
         "invalidLimitEvents": "The limited events field must be at least 1.",
-        "invalidLimitCampaigns": "The limited campaigns field must be at least 1."
+        "invalidLimitCampaigns": "The limited campaigns field must be at least 1.",
+        "requiredRoleForUpdatePermission": "Please select role for update permission."
     },
     "errorApi": {
         "LOGIN_FAILED": "Login failed.",
@@ -285,7 +287,8 @@
         "UPDATE_EVENT_SUCCESS": "Update event successfully.",
         "DELETE_EVENT_SUCCESS": "Delete event successfully.",
         "UPDATE_EVENT_CONFIG_SUCCESS": "Update event configuration successfully.",
-        "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Delete event config field successfully."
+        "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Delete event config field successfully.",
+        "UPDATE_PERMISSION_SUCCESS": "Update permission successfully."
     },
     "localeSwitcher": {
         "en": "English",
