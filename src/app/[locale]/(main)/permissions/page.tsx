@@ -156,10 +156,13 @@ export default function CompaniesPage() {
             .then(function (response) {
                 if (response.status === 'success') {
                     toastSuccess(translation("successApi.UPDATE_PERMISSION_SUCCESS"));
+                } else {
+                    toastError(translation(`errorApi.${response.message_code}`));
                 }
             })
             .catch(function (error) {
                 console.log(error);
+                toastError(translation("errorApi.UPDATE_PERMISSION_FAILED"));
             })
             .finally(function () {
                 setSubmitLoading(false);
