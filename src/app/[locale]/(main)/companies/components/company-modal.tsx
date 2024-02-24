@@ -163,7 +163,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="w-full"
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 py-1 md:py-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 md:gap-4 py-1 md:py-4">
                         <FormField
                             control={form.control}
                             name="name"
