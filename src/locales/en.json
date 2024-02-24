@@ -124,6 +124,10 @@
     },
     "permissionsPage": {
         "title": "Permissions",
+        "label": {
+            "selectRole": "Select Role",
+            "guardName": "Guard name"
+        },
         "messageCode": {}
     },
     "action": {
