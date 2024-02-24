@@ -24,7 +24,7 @@ export function useFetchDataTable<IDataTableRes>({
     const [data, setData] = useState<IDataTableRes[]>([]);
     const [pageCount, setPageCount] = useState<Number>(1);
     const [loading, setLoading] = useState<Boolean>(false);
-    const [reCall, setReCall] = useState<Boolean>(false);
+    const [refresh, setRefresh] = useState<Boolean>(false);
 
     useEffect(() => {
         setLoading(true);
@@ -57,7 +57,7 @@ export function useFetchDataTable<IDataTableRes>({
             .finally(function () {
                 setLoading(false);
             });
-    }, [reCall, limit, page, setData, setLoading]);
+    }, [refresh, limit, page, setData, setLoading]);
 
-    return { data, loading, pageCount, reCall, setReCall };
+    return { data, loading, pageCount, refresh, setRefresh };
 }

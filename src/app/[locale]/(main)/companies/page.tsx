@@ -39,7 +39,7 @@ export default function CompaniesPage() {
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
     // Use fetch data
-    const { data, loading, pageCount, reCall, setReCall } = useFetchDataTable<ICompanyRes>({
+    const { data, loading, pageCount, refresh, setRefresh } = useFetchDataTable<ICompanyRes>({
         url: ApiRoutes.getCompanies,
         params: {
             pagination: { page, limit },
@@ -92,13 +92,18 @@ export default function CompaniesPage() {
         },
         {
             id: "actions",
-            cell: ({ row }) => <CellAction data={row.original} />,
+            cell: ({ row }) => (
+                <CellAction
+                    onRefetch={handleAfterCreate}
+                    data={row.original}
+                />
+            ),
         },
     ];
 
     // Function
     const handleAfterCreate = () => {
-        setReCall(!reCall);
+        setRefresh(!refresh);
     };
 
     return (

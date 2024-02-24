@@ -17,5 +17,8 @@ const companyApi = {
     storeCompany: async (body: any) => {
         return await api.post<IResponse<ICompanyRes>>(ApiRoutes.storeCompany, body);
     },
+    deleteCompany: async (id: number) => {
+        return await api.delete<IResponse<null>>(ApiRoutes.deleteCompany + id);
+    },
 };
 export default companyApi;

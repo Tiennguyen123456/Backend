@@ -16,12 +16,14 @@ import { CompanyColumn } from "./column";
 import { useTranslations } from "next-intl";
 import { AlertModal } from "@/components/modals/alert-modal";
 import toast from "react-hot-toast";
+import companyApi from "@/services/company-api";
 
 interface CellActionProps {
     data: CompanyColumn;
+    onRefetch: () => void;
 }
 
-export const CellAction: React.FC<CellActionProps> = ({ data }) => {
+export const CellAction: React.FC<CellActionProps> = ({ data, onRefetch }) => {
     // ** I18n
     const translation = useTranslations("");
 
@@ -37,8 +39,9 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     const onConfirm = async () => {
         try {
             setLoading(true);
+            // const response = await companyApi.deleteCompany(data.id);
+            onRefetch();
             toast.success("Company deleted.");
-            router.refresh();
         } catch (error) {
             toast.error("Make sure you removed all categories using this billboard first.");
         } finally {
@@ -46,8 +49,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             setLoading(false);
         }
     };
-
-    const onCopy = (id: string) => {};
 
     return (
         <>
