@@ -4,6 +4,7 @@ export interface ICompanyRes {
     is_default: boolean;
     name: string;
     code: string;
+    tax_code: string;
     contact_email: string;
     contact_phone: string;
     website: string;

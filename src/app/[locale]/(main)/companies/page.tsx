@@ -12,7 +12,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { CellAction } from "./components/cell-action";
 import { CompanyColumn } from "./components/column";
 import FooterContainer from "@/components/layout/footer-container";
-import { useRouter } from "next/navigation";
 import Breadcrumbs from "@/components/ui/breadcrumb";
 import { CompanyModal } from "./components/company-modal";
 import { useFetchDataTable } from "@/data/fetch-data-table";
@@ -23,14 +22,13 @@ export default function CompaniesPage() {
     // ** I18n
     const translation = useTranslations("");
 
-    // ** Use Router
-    const router = useRouter();
     // ** State
     const [openModal, setOpenModal] = useState(false);
+    const [rowSelected, setRowSelected] = useState<CompanyColumn | null>(null);
 
     // Use Date From To
-    const [dateFrom, setDateFrom] = useState<Date>();
-    const [dateTo, setDateTo] = useState<Date>();
+    // const [dateFrom, setDateFrom] = useState<Date>();
+    // const [dateTo, setDateTo] = useState<Date>();
 
     // Use Row Selection
     const { rowSelection, onRowSelection } = useRowSelection();
@@ -45,6 +43,37 @@ export default function CompaniesPage() {
             pagination: { page, limit },
         },
     });
+
+    // Function
+    const handleAfterCreate = () => {
+        setRefresh(!refresh);
+    };
+
+    const handleEditCompany = (data: CompanyColumn) => {
+        setRowSelected({
+            ...data,
+            code: data.code ?? "",
+            name: data.name ?? "",
+            tax_code: data.tax_code ?? "",
+            website: data.website ?? "",
+            contact_email: data.contact_email ?? "",
+            contact_phone: data.contact_phone ?? "",
+            address: data.address ?? "",
+            limited_users: data.limited_users ?? 0,
+            limited_events: data.limited_events ?? 0,
+            limited_campaigns: data.limited_campaigns ?? 0,
+        });
+        setOpenModal(true);
+    };
+    const handleCreateCompany = () => {
+        setRowSelected(null);
+        setOpenModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setRowSelected(null);
+        setOpenModal(false);
+    };
 
     const columns: ColumnDef<CompanyColumn>[] = [
         {
@@ -75,7 +104,7 @@ export default function CompaniesPage() {
             header: translation("companyPage.table.website"),
         },
         {
-            accessorKey: "email",
+            accessorKey: "contact_email",
             header: translation("companyPage.table.email"),
         },
         {
@@ -83,7 +112,7 @@ export default function CompaniesPage() {
             header: translation("companyPage.table.address"),
         },
         {
-            accessorKey: "phone",
+            accessorKey: "contact_phone",
             header: translation("companyPage.table.phone"),
         },
         {
@@ -94,17 +123,13 @@ export default function CompaniesPage() {
             id: "actions",
             cell: ({ row }) => (
                 <CellAction
+                    onRowSelected={() => handleEditCompany(row.original)}
                     onRefetch={handleAfterCreate}
                     data={row.original}
                 />
             ),
         },
     ];
-
-    // Function
-    const handleAfterCreate = () => {
-        setRefresh(!refresh);
-    };
 
     return (
         <>
@@ -116,13 +141,13 @@ export default function CompaniesPage() {
                         <CompanyModal
                             className="sm:max-w-[765px] overflow-y-auto max-h-svh sm:max-h-[800px]"
                             isOpen={openModal}
-                            onClose={() => setOpenModal(false)}
-                            defaultCompany={undefined}
+                            onClose={handleCloseModal}
+                            defaultCompany={rowSelected}
                             onConfirm={handleAfterCreate}
                         />
                         <Button
                             variant={"secondary"}
-                            onClick={() => setOpenModal(true)}
+                            onClick={handleCreateCompany}
                         >
                             <PlusCircle className="w-5 h-5 md:mr-2" />
                             <p className="hidden md:block">{translation("action.create")}</p>
