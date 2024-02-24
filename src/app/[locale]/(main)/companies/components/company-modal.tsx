@@ -383,7 +383,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             )}
                         />
                     </div>
-                    <div className="space-x-2 flex items-center justify-end w-full">
+                    <div className="space-x-2 flex items-center justify-end w-full mt-2">
                         <Button
                             disabled={loading}
                             variant="default"
