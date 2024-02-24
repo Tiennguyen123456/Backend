@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import SpanRequired from "@/components/ui/span-required";
-import { phoneRegExp } from "@/constants/variables";
+import { CompanyStatus, phoneRegExp } from "@/constants/variables";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { APIStatus } from "@/constants/enum";
 import { toastError, toastSuccess } from "@/utils/toast";
@@ -20,17 +20,11 @@ import companyApi from "@/services/company-api";
 
 interface CompanyModalProps extends IModal {
     className?: string;
-    defaultCompany: ICompanyRes | null;
+    defaultData: ICompanyRes | null;
     onConfirm: () => void;
 }
 
-export const CompanyModal: React.FC<CompanyModalProps> = ({
-    isOpen,
-    onClose,
-    defaultCompany,
-    className,
-    onConfirm,
-}) => {
+export const CompanyModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, defaultData, className, onConfirm }) => {
     // ** I18n
     const translation = useTranslations("");
 
@@ -38,14 +32,14 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
     const [isMounted, setIsMounted] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const title = defaultCompany ? translation("companyPage.edit.title") : translation("companyPage.create.title");
-    const messageSuccess = defaultCompany
+    const title = defaultData ? translation("companyPage.edit.title") : translation("companyPage.create.title");
+    const messageSuccess = defaultData
         ? translation("successApi.UPDATE_COMPANY_SUCCESS")
         : translation("successApi.CREATE_COMPANY_SUCCESS");
-    const messageError = defaultCompany
+    const messageError = defaultData
         ? translation("errorApi.UPDATE_COMPANY_FAILED")
         : translation("errorApi.CREATE_COMPANY_FAILED");
-    const action = defaultCompany ? translation("action.save") : translation("action.create");
+    const action = defaultData ? translation("action.save") : translation("action.create");
 
     // useForm
     const formSchema = z.object({
@@ -99,7 +93,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
     };
     const form = useForm<CompanyFormValues>({
         resolver: zodResolver(formSchema),
-        defaultValues: defaultCompany || resetDataForm,
+        defaultValues: defaultData || resetDataForm,
     });
 
     const onSubmit = async (data: CompanyFormValues) => {
@@ -115,11 +109,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
             handleCloseModal();
         } catch (error: any) {
             const data = error?.response?.data;
-            if (data?.message_code) {
-                toastError(translation(`errorApi.${data?.message_code}`));
-            } else {
-                toastError(messageError);
-            }
+            toastError(data?.data?.name[0] ?? messageError);
             console.log("error: ", error);
         } finally {
             setLoading(false);
@@ -132,15 +122,15 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
     };
 
     useEffect(() => {
-        if (defaultCompany != undefined) {
-            form.reset(defaultCompany);
+        if (defaultData != undefined) {
+            form.reset(defaultData);
         } else {
             form.reset({
                 ...resetDataForm,
             });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [defaultCompany]);
+    }, [defaultData]);
 
     useEffect(() => {
         setIsMounted(true);
@@ -317,11 +307,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            {[
-                                                { label: "New", value: "NEW" },
-                                                { label: "Active", value: "ACTIVE" },
-                                                { label: "Inactive", value: "INACTIVE" },
-                                            ].map((status) => (
+                                            {CompanyStatus.map((status) => (
                                                 <SelectItem
                                                     key={status.value}
                                                     value={status.value}

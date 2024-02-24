@@ -30,6 +30,12 @@
             "enable": "Enable",
             "action": "Action"
         },
+        "create": {
+            "title": "Create New Role"
+        },
+        "edit": {
+            "title": "Update Role"
+        },
         "action": {
             "CREATE_ROLE_FAILED": "Create role failed.",
             "UPDATE_ROLE_FAILED": "Update role failed.",
@@ -188,7 +194,9 @@
         "minutes": "Minutes",
         "seconds": "Seconds",
         "companyCode": "Company code",
-        "taxCode": "Tax code"
+        "taxCode": "Tax code",
+        "guard": "Guard",
+        "enable": "Enable"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -211,7 +219,8 @@
         "description": "Description",
         "code": "Code",
         "companyCode": "Company code",
-        "taxCode": "Tax code"
+        "taxCode": "Tax code",
+        "guard": "Guard name"
     },
     "error": {
         "requiredEmail": "Please enter your email address.",
@@ -261,6 +270,9 @@
         "CREATE_EVENT_FAILED": "Create event failed.",
         "UPDATE_EVENT_FAILED": "Update event failed.",
         "DELETE_EVENT_FAILED": "Delete event failed.",
+        "CREATE_ROLE_FAILED": "Create role failed.",
+        "UPDATE_ROLE_FAILED": "Update role failed.",
+        "DELETE_ROLE_FAILED": "Delete role failed.",
         "GET_EVENT_CONFIG_FIELDS_FAILED": "Get event config fields failed.",
         "UPDATE_EVENT_CONFIG_FAILED": "Update event configuration failed.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Delete event config field failed.",

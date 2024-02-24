@@ -1,6 +1,3 @@
-﻿export type RoleColumn = {
-    id: number;
-    name: string;
-    guard_name: string;
-    enable: number;
-};
+﻿import { IRoleRes } from "@/models/api/role-api";
+
+export interface RoleColumn extends IRoleRes {}

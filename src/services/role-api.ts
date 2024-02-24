@@ -14,5 +14,11 @@ const roleApi = {
         });
         return response.data;
     },
+    storeRole: async (body: any) => {
+        return await api.post<IResponse<IRoleRes>>(ApiRoutes.storeRole, body);
+    },
+    deleteRole: async (id: number) => {
+        return await api.delete<IResponse<null>>(ApiRoutes.deleteRole + id);
+    },
 };
 export default roleApi;

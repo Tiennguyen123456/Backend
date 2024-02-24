@@ -27,8 +27,14 @@
             "code": "Code",
             "status": "Trạng thái",
             "guardName": "Guard",
-            "enable": "Enable",
+            "enable": "Kích hoạt",
             "action": "Action"
+        },
+        "create": {
+            "title": "Tạo Mới Vai Trò"
+        },
+        "edit": {
+            "title": "Cập Nhật Vai Trò"
         },
         "action": {
             "CREATE_ROLE_FAILED": "Tạo mới vai trò thất bại.",
@@ -105,10 +111,10 @@
             "updateAt": "Ngày cập nhật"
         },
         "create": {
-            "title": "Tạo mới công ty"
+            "title": "Tạo Mới Công Ty"
         },
         "edit": {
-            "title": "Chỉnh sửa công ty"
+            "title": "Cập Nhật Công Ty"
         }
     },
     "configEventPage": {
@@ -189,7 +195,9 @@
         "seconds": "Giây",
         "code": "Mã code",
         "companyCode": "Mã công ty",
-        "taxCode": "Mã số thuế"
+        "taxCode": "Mã số thuế",
+        "guard": "Guard",
+        "enable": "Kích hoạt"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -212,7 +220,8 @@
         "description": "Mô tả",
         "code": "Mã code",
         "companyCode": "Mã công ty",
-        "taxCode": "Mã số thuế"
+        "taxCode": "Mã số thuế",
+        "guard": "Guard name"
     },
     "error": {
         "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
@@ -371,6 +380,6 @@
         "company": "Công ty",
         "createCompany": "Tạo công ty",
         "roles": "Vai trò",
-        "permissions":"Phân quyền"
+        "permissions": "Phân quyền"
     }
 }

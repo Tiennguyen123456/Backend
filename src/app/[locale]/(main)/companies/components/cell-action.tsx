@@ -84,7 +84,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data, onRefetch, onRowSe
                     align="end"
                     className="w-40"
                 >
-                    <DropdownMenuLabel>{translation("datatable.action")}</DropdownMenuLabel>
+                    {/* <DropdownMenuLabel>{translation("datatable.action")}</DropdownMenuLabel> */}
                     <DropdownMenuItem onClick={onRowSelected}>
                         <Edit className="mr-3 h-4 w-4" /> {translation("action.edit")}
                     </DropdownMenuItem>

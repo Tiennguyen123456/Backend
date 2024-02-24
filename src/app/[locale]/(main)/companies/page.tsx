@@ -121,6 +121,7 @@ export default function CompaniesPage() {
         },
         {
             id: "actions",
+            header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
             cell: ({ row }) => (
                 <CellAction
                     onRowSelected={() => handleEditCompany(row.original)}
@@ -142,7 +143,7 @@ export default function CompaniesPage() {
                             className="sm:max-w-[976px] overflow-y-auto max-h-svh md:max-h-[550px] 2xl:max-h-[780px]"
                             isOpen={openModal}
                             onClose={handleCloseModal}
-                            defaultCompany={rowSelected}
+                            defaultData={rowSelected}
                             onConfirm={handleAfterCreate}
                         />
                         <Button

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
+import { Edit, MoreHorizontal } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -9,25 +9,24 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { RoleColumn } from "./column";
 import { useTranslations } from "next-intl";
 import { AlertModal } from "@/components/modals/alert-modal";
-import toast from "react-hot-toast";
+import roleApi from "@/services/role-api";
+import { APIStatus } from "@/constants/enum";
+import { toastError, toastSuccess } from "@/utils/toast";
 
 interface CellActionProps {
     data: RoleColumn;
+    onRefetch: () => void;
+    onRowSelected: () => void;
 }
 
-export const CellAction: React.FC<CellActionProps> = ({ data }) => {
+export const CellAction: React.FC<CellActionProps> = ({ data, onRefetch, onRowSelected }) => {
     // ** I18n
     const translation = useTranslations("");
-
-    // ** Router
-    const router = useRouter();
-    const params = useParams();
 
     // ** State
     const [open, setOpen] = useState(false);
@@ -37,17 +36,26 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     const onConfirm = async () => {
         try {
             setLoading(true);
-            toast.success("Company deleted.");
-            router.refresh();
-        } catch (error) {
-            toast.error("Make sure you removed all categories using this billboard first.");
+
+            const response = await roleApi.deleteRole(data.id);
+
+            if (response.data.status == APIStatus.SUCCESS) {
+                toastSuccess(translation("successApi.DELETE_COMPANY_SUCCESS"));
+            }
+            onRefetch();
+        } catch (error: any) {
+            const data = error?.response?.data;
+            if (data?.message_code) {
+                toastError(translation(`errorApi.${data?.message_code}`));
+            } else {
+                toastError(translation("errorApi.DELETE_COMPANY_FAILED"));
+            }
+            console.log("error: ", error);
         } finally {
             setOpen(false);
             setLoading(false);
         }
     };
-
-    const onCopy = (id: string) => {};
 
     return (
         <>
@@ -71,12 +79,8 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
                     align="end"
                     className="w-40"
                 >
-                    <DropdownMenuLabel>{translation("datatable.action")}</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/categories/${data.id}`)}>
+                    <DropdownMenuItem onClick={onRowSelected}>
                         <Edit className="mr-3 h-4 w-4" /> {translation("action.edit")}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setOpen(true)}>
-                        <Trash className="mr-3 h-4 w-4" /> {translation("action.delete")}
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>

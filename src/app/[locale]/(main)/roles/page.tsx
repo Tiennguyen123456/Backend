@@ -2,31 +2,29 @@
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { PlusCircle, Trash2 } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import { DataTable } from "@/components/ui/data-table";
 import { usePagination } from "@/hooks/use-pagination";
 import { useRowSelection } from "@/hooks/use-row-selection";
 import { useSorting } from "@/hooks/use-sorting";
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
 import { CellAction } from "./components/cell-action";
 import { RoleColumn } from "./components/column";
 import FooterContainer from "@/components/layout/footer-container";
-import { useRouter } from "next/navigation";
-import { ROUTES } from "@/constants/routes";
 import Breadcrumbs from "@/components/ui/breadcrumb";
-import { useFetchDataRole } from "@/data/fetch-data-role";
+import { RoleModal } from "./components/role-modal";
+import { useFetchDataTable } from "@/data/fetch-data-table";
+import { IRoleRes } from "@/models/api/role-api";
+import ApiRoutes from "@/services/api.routes";
+import { RoleEnable } from "@/constants/enum";
 
 export default function CompaniesPage() {
     // ** I18n
     const translation = useTranslations("");
 
-    // ** Use Router
-    const router = useRouter();
-
-    // Use Date From To
-    const [dateFrom, setDateFrom] = useState<Date>();
-    const [dateTo, setDateTo] = useState<Date>();
+    // ** State
+    const [openModal, setOpenModal] = useState(false);
+    const [rowSelected, setRowSelected] = useState<RoleColumn | null>(null);
 
     // Use Row Selection
     const { rowSelection, onRowSelection } = useRowSelection();
@@ -35,27 +33,62 @@ export default function CompaniesPage() {
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
     // Use fetch data
-    const { data, loading, pageCount } = useFetchDataRole({ pagination: { page, pageSize: limit } });
+    const { data, loading, pageCount, refresh, setRefresh } = useFetchDataTable<IRoleRes>({
+        url: ApiRoutes.getRoles,
+        params: {
+            pagination: { page, limit },
+        },
+    });
 
+    // Func
+    const handleAfterCreate = () => {
+        setRefresh(!refresh);
+    };
+
+    const handleEditRole = (data: RoleColumn) => {
+        setRowSelected({
+            ...data,
+            name: data.name ?? "",
+            guard_name: data.guard_name,
+            enable: data.enable,
+        });
+        setOpenModal(true);
+    };
+
+    const handleCreateRole = () => {
+        setRowSelected(null);
+        setOpenModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setRowSelected(null);
+        setOpenModal(false);
+    };
 
     const columns: ColumnDef<RoleColumn>[] = [
         {
             accessorKey: "name",
-            header: translation("rolesPage.table.name"),
+            header: () => <div className="text-black font-bold">{translation("rolesPage.table.name")}</div>,
         },
         {
             accessorKey: "guard_name",
-            header: translation("rolesPage.table.guardName"),
+            header: () => <div className="text-black font-bold">{translation("rolesPage.table.guardName")}</div>,
         },
         {
             accessorKey: "enable",
-            accessorFn: row => row.enable === 1 ? 'true' : 'false',
-            header: translation("rolesPage.table.enable"),
+            accessorFn: (row) => (row.enable === RoleEnable.Active ? "true" : "false"),
+            header: () => <div className="text-black font-bold">{translation("rolesPage.table.enable")}</div>,
         },
         {
             id: "actions",
-            header: translation("rolesPage.table.action"),
-            cell: ({ row }) => <CellAction data={row.original} />,
+            header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
+            cell: ({ row }) => (
+                <CellAction
+                    onRowSelected={() => handleEditRole(row.original)}
+                    onRefetch={handleAfterCreate}
+                    data={row.original}
+                />
+            ),
         },
     ];
 
@@ -66,8 +99,16 @@ export default function CompaniesPage() {
                 <div className="flex flex-wrap items-center justify-between space-y-2">
                     <h2 className="text-3xl font-bold tracking-tight">{translation("rolesPage.title")}</h2>
                     <div className="flex justify-end flex-wrap items-center gap-2 !mt-0">
+                        <RoleModal
+                            className="sm:max-w-[460px] overflow-y-auto"
+                            isOpen={openModal}
+                            onClose={handleCloseModal}
+                            defaultData={rowSelected}
+                            onConfirm={handleAfterCreate}
+                        />
                         <Button
                             variant={"secondary"}
+                            onClick={handleCreateRole}
                         >
                             <PlusCircle className="w-5 h-5 md:mr-2" />
                             <p className="hidden md:block">{translation("action.create")}</p>
