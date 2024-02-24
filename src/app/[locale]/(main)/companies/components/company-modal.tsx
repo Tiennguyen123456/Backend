@@ -66,16 +66,16 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
         status: z.string(),
         limited_users: z.coerce
             .number()
-            .min(1, { message: translation("error.invalidLimitUsers") })
-            .default(1),
+            .min(0, { message: translation("error.invalidLimitUsers") })
+            .default(0),
         limited_events: z.coerce
             .number()
-            .min(1, { message: translation("error.invalidLimitEvents") })
-            .default(1),
+            .min(0, { message: translation("error.invalidLimitEvents") })
+            .default(0),
         limited_campaigns: z.coerce
             .number()
-            .min(1, { message: translation("error.invalidLimitCampaigns") })
-            .default(1),
+            .min(0, { message: translation("error.invalidLimitCampaigns") })
+            .default(0),
     });
     type CompanyFormValues = z.infer<typeof formSchema>;
     const resetDataForm: CompanyFormValues = {
@@ -87,9 +87,9 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
         website: "",
         address: "",
         status: "NEW",
-        limited_users: 1,
-        limited_events: 1,
-        limited_campaigns: 1,
+        limited_users: 0,
+        limited_events: 0,
+        limited_campaigns: 0,
     };
     const form = useForm<CompanyFormValues>({
         resolver: zodResolver(formSchema),
@@ -109,7 +109,13 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
             handleCloseModal();
         } catch (error: any) {
             const data = error?.response?.data;
-            toastError(data?.data?.name[0] ?? messageError);
+            if (data.data && data?.message_code) {
+                const [value] = Object.values(data.data);
+                const message = Array(value).toString() ?? messageError;
+                toastError(message);
+            } else {
+                toastError(messageError);
+            }
             console.log("error: ", error);
         } finally {
             setLoading(false);

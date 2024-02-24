@@ -70,7 +70,13 @@ export const RoleModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, defaul
             handleCloseModal();
         } catch (error: any) {
             const data = error?.response?.data;
-            toastError(data?.data?.name[0] ?? messageError);
+            if (data.data && data?.message_code) {
+                const [value] = Object.values(data.data);
+                const message = Array(value).toString() ?? messageError;
+                toastError(message);
+            } else {
+                toastError(messageError);
+            }
             console.log("error: ", error);
         } finally {
             setLoading(false);

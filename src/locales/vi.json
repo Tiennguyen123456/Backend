@@ -250,9 +250,9 @@
         "requiredCodeCompany": "Vui lòng nhập mã từ 4 - 20 ký tự.",
         "invalidCodeCompany": "Vui lòng nhập mã không chưa khoảng trắng.",
         "invalidPhone": "Vui lòng nhập số điện thoại hợp lệ.",
-        "invalidLimitUsers": "Giới hạn tài khoản phải ít nhất là 1.",
-        "invalidLimitEvents": "Giới hạn sự kiện phải ít nhất là 1.",
-        "invalidLimitCampaigns": "Giới hạn chiến dịch phải ít nhất là 1.",
+        "invalidLimitUsers": "Giới hạn tài khoản phải ít nhất là 0.",
+        "invalidLimitEvents": "Giới hạn sự kiện phải ít nhất là 0.",
+        "invalidLimitCampaigns": "Giới hạn chiến dịch phải ít nhất là 0.",
         "requiredRoleForUpdatePermission": "Vui lòng chọn vai trò để cập nhật phân quyền."
     },
     "errorApi": {

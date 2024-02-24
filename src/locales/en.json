@@ -249,9 +249,9 @@
         "requiredCodeCompany": "Please enter code from 4 - 20 characters.",
         "invalidCodeCompany": "Please enter code have not space.",
         "invalidPhone": "Please enter valid phone numbers.",
-        "invalidLimitUsers": "The limited users field must be at least 1.",
-        "invalidLimitEvents": "The limited events field must be at least 1.",
-        "invalidLimitCampaigns": "The limited campaigns field must be at least 1.",
+        "invalidLimitUsers": "The limited users field must be at least 0.",
+        "invalidLimitEvents": "The limited events field must be at least 0.",
+        "invalidLimitCampaigns": "The limited campaigns field must be at least 0.",
         "requiredRoleForUpdatePermission": "Please select role for update permission."
     },
     "errorApi": {
