@@ -154,13 +154,13 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel className="text-base">
-                                        Name
+                                        {translation("label.name")}
                                         <SpanRequired />
                                     </FormLabel>
                                     <FormControl>
                                         <Input
                                             disabled={loading}
-                                            placeholder="Enter name"
+                                            placeholder={translation('placeholder.name')}
                                             {...field}
                                         />
                                     </FormControl>
@@ -174,13 +174,13 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel className="text-base">
-                                        Code
+                                        {translation("label.companyCode")}
                                         <SpanRequired />
                                     </FormLabel>
                                     <FormControl>
                                         <Input
                                             disabled={loading}
-                                            placeholder="Enter code"
+                                            placeholder={translation('placeholder.companyCode')}
                                             {...field}
                                         />
                                     </FormControl>
@@ -193,11 +193,11 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             name="tax_code"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base">Tax Code</FormLabel>
+                                    <FormLabel className="text-base">{translation("label.taxCode")}</FormLabel>
                                     <FormControl>
                                         <Input
                                             disabled={loading}
-                                            placeholder="Enter tax code"
+                                            placeholder={translation('placeholder.taxCode')}
                                             {...field}
                                         />
                                     </FormControl>
@@ -210,11 +210,11 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             name="website"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base">Website</FormLabel>
+                                    <FormLabel className="text-base">{translation("label.website")}</FormLabel>
                                     <FormControl>
                                         <Input
                                             disabled={loading}
-                                            placeholder="Enter website"
+                                            placeholder={translation('placeholder.website')}
                                             {...field}
                                         />
                                     </FormControl>
@@ -227,11 +227,11 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             name="contact_email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base">Email</FormLabel>
+                                    <FormLabel className="text-base">{translation("label.email")}</FormLabel>
                                     <FormControl>
                                         <Input
                                             disabled={loading}
-                                            placeholder="Enter email"
+                                            placeholder={translation('placeholder.email')}
                                             {...field}
                                         />
                                     </FormControl>
@@ -244,11 +244,11 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             name="contact_phone"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base">Phone</FormLabel>
+                                    <FormLabel className="text-base">{translation("label.phone")}</FormLabel>
                                     <FormControl>
                                         <Input
                                             disabled={loading}
-                                            placeholder="Enter phone"
+                                            placeholder={translation('placeholder.phone')}
                                             {...field}
                                         />
                                     </FormControl>
@@ -261,11 +261,11 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             name="address"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base">Address</FormLabel>
+                                    <FormLabel className="text-base">{translation("label.address")}</FormLabel>
                                     <FormControl>
                                         <Input
                                             disabled={loading}
-                                            placeholder="Enter address"
+                                            placeholder={translation('placeholder.address')}
                                             {...field}
                                         />
                                     </FormControl>
@@ -278,7 +278,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             name="status"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base">Status</FormLabel>
+                                    <FormLabel className="text-base">{translation("label.status")}</FormLabel>
                                     <Select
                                         disabled={loading}
                                         onValueChange={field.onChange}
@@ -289,7 +289,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                                             <SelectTrigger className="h-12">
                                                 <SelectValue
                                                     defaultValue={field.value}
-                                                    placeholder="Select a status"
+                                                    placeholder={translation('placeholder.status')}
                                                 />
                                             </SelectTrigger>
                                         </FormControl>
@@ -317,12 +317,12 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             name="limited_events"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base">Limited Events</FormLabel>
+                                    <FormLabel className="text-base">{translation("label.limitEvent")}</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
                                             disabled={loading}
-                                            placeholder="Enter limited events"
+                                            placeholder={translation('placeholder.limitEvent')}
                                             {...field}
                                         />
                                     </FormControl>
@@ -335,12 +335,12 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             name="limited_users"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base">Limited User</FormLabel>
+                                    <FormLabel className="text-base">{translation("label.limitUser")}</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
                                             disabled={loading}
-                                            placeholder="Enter limited user"
+                                            placeholder={translation('placeholder.limitUser')}
                                             {...field}
                                         />
                                     </FormControl>
@@ -353,12 +353,12 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
                             name="limited_campaigns"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base">Limited Campaigns</FormLabel>
+                                    <FormLabel className="text-base">{translation("label.limitCampaign")}</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
                                             disabled={loading}
-                                            placeholder="Enter limited user"
+                                            placeholder={translation('placeholder.limitCampaign')}
                                             {...field}
                                         />
                                     </FormControl>

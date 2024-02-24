@@ -180,7 +180,10 @@
         "setting": "Cấu hình",
         "hours": "Giờ",
         "minutes": "Phút",
-        "seconds": "Giây"
+        "seconds": "Giây",
+        "code": "Mã code",
+        "companyCode": "Mã công ty",
+        "taxCode": "Mã số thuế"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -200,7 +203,10 @@
         "limitCampaign": "Giới hạn chiến dịch",
         "eventName": "Tên sự kiện",
         "fieldName": "Tên trường",
-        "description": "Mô tả"
+        "description": "Mô tả",
+        "code": "Mã code",
+        "companyCode": "Mã công ty",
+        "taxCode": "Mã số thuế"
     },
     "error": {
         "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",

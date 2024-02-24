@@ -181,7 +181,9 @@
         "setting": "Setting",
         "hours": "Hours",
         "minutes": "Minutes",
-        "seconds": "Seconds"
+        "seconds": "Seconds",
+        "companyCode": "Company code",
+        "taxCode": "Tax code"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -201,7 +203,10 @@
         "limitCampaign": "Limit Campaign",
         "eventName": "Event Name",
         "fieldName": "Field Name",
-        "description": "Description"
+        "description": "Description",
+        "code": "Code",
+        "companyCode": "Company code",
+        "taxCode": "Tax code"
     },
     "error": {
         "requiredEmail": "Please enter your email address.",

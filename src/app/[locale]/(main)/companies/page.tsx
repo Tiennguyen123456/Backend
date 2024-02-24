@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { PlusCircle, Trash2 } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import { DataTable } from "@/components/ui/data-table";
 import { usePagination } from "@/hooks/use-pagination";
 import { useRowSelection } from "@/hooks/use-row-selection";
@@ -10,13 +10,14 @@ import { useSorting } from "@/hooks/use-sorting";
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CellAction } from "./components/cell-action";
-import { useFetchDataCompany } from "@/data/fetch-data-company";
 import { CompanyColumn } from "./components/column";
 import FooterContainer from "@/components/layout/footer-container";
 import { useRouter } from "next/navigation";
-import { ROUTES } from "@/constants/routes";
 import Breadcrumbs from "@/components/ui/breadcrumb";
 import { CompanyModal } from "./components/company-modal";
+import { useFetchDataTable } from "@/data/fetch-data-table";
+import ApiRoutes from "@/services/api.routes";
+import { ICompanyRes } from "@/models/api/company-api";
 
 export default function CompaniesPage() {
     // ** I18n
@@ -38,8 +39,11 @@ export default function CompaniesPage() {
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
     // Use fetch data
-    const { data, loading, pageCount, reCall, setReCall } = useFetchDataCompany({
-        pagination: { page, pageSize: limit },
+    const { data, loading, pageCount, reCall, setReCall } = useFetchDataTable<ICompanyRes>({
+        url: ApiRoutes.getCompanies,
+        params: {
+            pagination: { page, limit },
+        },
     });
 
     const columns: ColumnDef<CompanyColumn>[] = [
