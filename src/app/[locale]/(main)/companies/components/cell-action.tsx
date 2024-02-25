@@ -2,14 +2,12 @@
 
 import { useState } from "react";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { CompanyColumn } from "./column";
@@ -29,10 +27,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data, onRefetch, onRowSe
     // ** I18n
     const translation = useTranslations("");
 
-    // ** Router
-    const router = useRouter();
-    const params = useParams();
-
     // ** State
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -50,8 +44,10 @@ export const CellAction: React.FC<CellActionProps> = ({ data, onRefetch, onRowSe
             onRefetch();
         } catch (error: any) {
             const data = error?.response?.data;
-            if (data?.message_code) {
-                toastError(translation(`errorApi.${data?.message_code}`));
+            if (data?.data && data?.message_code) {
+                const [value] = Object.values(data.data);
+                const message = Array(value).toString() ?? translation("errorApi.DELETE_COMPANY_FAILED");
+                toastError(message);
             } else {
                 toastError(translation("errorApi.DELETE_COMPANY_FAILED"));
             }

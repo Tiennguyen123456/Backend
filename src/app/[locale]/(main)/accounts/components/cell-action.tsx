@@ -10,12 +10,12 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { RoleColumn } from "./column";
+import { AccountColumn } from "./column";
 import { useTranslations } from "next-intl";
 import { AlertModal } from "@/components/modals/alert-modal";
 
 interface CellActionProps {
-    data: RoleColumn;
+    data: AccountColumn;
     onRefetch: () => void;
     onRowSelected: () => void;
 }

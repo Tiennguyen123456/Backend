@@ -61,6 +61,12 @@
             "role": "Role",
             "createdAt": "Created at",
             "status": "Status"
+        },
+        "create": {
+            "title": "Create New Account"
+        },
+        "edit": {
+            "title": "Edit Account"
         }
     },
     "eventsPage": {
@@ -202,7 +208,7 @@
         "email": "example@example.com",
         "password": "••••••••••••",
         "role": "Select role",
-        "status": "Status",
+        "status": "Select status",
         "name": "Name",
         "username": "Username",
         "eventCode": "Event Code",
@@ -228,6 +234,7 @@
         "requiredPassword": "Please enter your password.",
         "invalidPassword": "Password must be at least 8 characters.",
         "requiredRoleName": "Please enter role name.",
+        "requiredRole": "Please select role.",
         "requiredGuardName": "Please enter guard name.",
         "requiredEventCode": "Please enter event code.",
         "requiredStartDate": "Please enter start date.",
@@ -236,6 +243,7 @@
         "invalidDate": "Please enter valid date.",
         "requiredName": "Please enter your name.",
         "requiredUserName": "Please enter your username.",
+        "invalidUserName": "Username must be at least 4 characters.",
         "requiredStatus": "Please choose your status.",
         "invalidEvent": "Please enter valid number of event.",
         "invalidUser": "Please enter valid number of user.",
@@ -383,6 +391,7 @@
         "company": "Company",
         "createCompany": "Create company",
         "roles": "Roles",
-        "permissions": "Permissions"
+        "permissions": "Permissions",
+        "accounts": "Accounts"
     }
 }

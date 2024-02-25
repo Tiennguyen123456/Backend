@@ -110,15 +110,15 @@ export const AppRoutes: SideBarItemType[] = [
                         icon: <Building2 />,
                     },
                 },
-                // {
-                //     key: "administration.accounts",
-                //     permissions: ["user:view"],
-                //     path: ROUTES.ACCOUNTS,
-                //     sideBarProps: {
-                //         displayText: "sidebar.items.accounts",
-                //         icon: <Users />,
-                //     },
-                // },
+                {
+                    key: "administration.accounts",
+                    permissions: ["user:view"],
+                    path: ROUTES.ACCOUNTS,
+                    sideBarProps: {
+                        displayText: "sidebar.items.accounts",
+                        icon: <Users />,
+                    },
+                },
                 {
                     key: "administration.roles",
                     permissions: ["user_role:view"],

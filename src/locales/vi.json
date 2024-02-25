@@ -61,6 +61,12 @@
             "role": "Tên vai trò",
             "createdAt": "Ngày tạo",
             "status": "Trạng thái"
+        },
+        "create": {
+            "title": "Tạo Mới Tài Khoản"
+        },
+        "edit": {
+            "title": "Cập Nhật Tài Khoản"
         }
     },
     "eventsPage": {
@@ -203,7 +209,7 @@
         "email": "example@example.com",
         "password": "••••••••••••",
         "role": "Chọn vai trò",
-        "status": "Trạng thái",
+        "status": "Chọn trạng thái",
         "name": "Tên",
         "username": "Tên đăng nhập",
         "eventCode": "Mã sự kiện",
@@ -229,6 +235,7 @@
         "requiredPassword": "Vui lòng nhập mật khẩu của bạn.",
         "invalidPassword": "Mật khẩu phải có ít nhất 8 ký tự.",
         "requiredRoleName": "Vui lòng nhập tên vai trò.",
+        "requiredRole": "Vui lòng chọn vai trò.",
         "requiredGuardName": "Vui lòng nhập tên thiết bị.",
         "requiredEventCode": "Vui lòng nhập mã sự kiện",
         "requiredStartDate": "Vui lòng nhập ngày bắt đầu.",
@@ -237,6 +244,7 @@
         "invalidDate": "Vui lòng nhập ngày hợp lệ.",
         "requiredName": "Vui lòng nhập tên.",
         "requiredUserName": "Vui lòng nhập tên đăng nhập.",
+        "invalidUserName": "Tên đăng nhập phải có ít nhất 4 ký tự.",
         "requiredStatus": "Vui lòng chọn trạng thái.",
         "invalidEvent": "Vui lòng nhập số sự kiện hợp lệ.",
         "invalidUser": "Vui lòng nhập số tài khoản hợp lệ.",
@@ -381,6 +389,7 @@
         "company": "Công ty",
         "createCompany": "Tạo công ty",
         "roles": "Vai trò",
-        "permissions": "Phân quyền"
+        "permissions": "Phân quyền",
+        "accounts": "Tài khoản"
     }
 }
