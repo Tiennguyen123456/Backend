@@ -12,8 +12,12 @@ export const phoneRegExp = new RegExp(
     /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/,
 );
 
-export const CompanyStatus = [
+export const STATUS_VALID = [
     { label: "New", value: "NEW" },
     { label: "Active", value: "ACTIVE" },
     { label: "Inactive", value: "INACTIVE" },
 ];
+export const STATUS = [...STATUS_VALID, { label: "Deleted", value: "DELETED" }];
+
+//  { label: "Done", value: "DONE" },
+//  { label: "Cancel", value: "CANCEL" },

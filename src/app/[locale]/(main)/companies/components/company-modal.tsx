@@ -12,9 +12,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import SpanRequired from "@/components/ui/span-required";
-import { CompanyStatus, phoneRegExp } from "@/constants/variables";
+import { STATUS_VALID, phoneRegExp } from "@/constants/variables";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { APIStatus } from "@/constants/enum";
+import { APIStatus, EStatus } from "@/constants/enum";
 import { toastError, toastSuccess } from "@/utils/toast";
 import companyApi from "@/services/company-api";
 
@@ -90,7 +90,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
         contact_phone: "",
         website: "",
         address: "",
-        status: "NEW",
+        status: EStatus.ACTIVE,
         limited_users: 0,
         limited_events: 0,
         limited_campaigns: 0,
@@ -317,7 +317,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            {CompanyStatus.map((status) => (
+                                            {STATUS_VALID.map((status) => (
                                                 <SelectItem
                                                     key={status.value}
                                                     value={status.value}

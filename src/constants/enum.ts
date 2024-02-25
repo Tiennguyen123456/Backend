@@ -14,10 +14,13 @@ export enum APIStatus {
     ERROR = "error",
 }
 
-export enum CompanyStatus {
-    New = "NEW",
-    Active = "ACTIVE",
-    Inactive = "INACTIVE",
+export enum EStatus {
+    NEW = "NEW",
+    ACTIVE = "ACTIVE",
+    INACTIVE = "INACTIVE",
+    DELETED = "DELETED",
+    DONE = "DONE",
+    CANCEL = "CANCEL",
 }
 
 export enum RoleEnable {
