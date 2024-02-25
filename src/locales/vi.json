@@ -248,7 +248,7 @@
         "duplicateFieldName": "Field name is duplicated",
         "requiredTaxCode": "Vui lòng nhập mã số thuế.",
         "requiredCodeCompany": "Vui lòng nhập mã từ 4 - 20 ký tự.",
-        "invalidCodeCompany": "Vui lòng nhập mã không chưa khoảng trắng.",
+        "invalidCodeCompany": "Vui lòng nhập mã không khoảng trắng và ký tự đặc biệt.",
         "invalidPhone": "Vui lòng nhập số điện thoại hợp lệ.",
         "invalidLimitUsers": "Giới hạn tài khoản phải ít nhất là 0.",
         "invalidLimitEvents": "Giới hạn sự kiện phải ít nhất là 0.",
