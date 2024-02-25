@@ -246,7 +246,7 @@
         "requiredFieldName": "Vui lòng nhập tên trường",
         "requiredDescription": "Vui lòng nhập mô tả",
         "duplicateFieldName": "Field name is duplicated",
-        "requiredTaxCode": "Vui lòng nhập mã số thuế.",
+        "requiredTaxCode": "Vui lòng nhập mã số thuế không có ký tự chữ.",
         "requiredCodeCompany": "Vui lòng nhập mã từ 4 - 20 ký tự.",
         "invalidCodeCompany": "Vui lòng nhập mã không khoảng trắng và ký tự đặc biệt.",
         "invalidPhone": "Vui lòng nhập số điện thoại hợp lệ.",

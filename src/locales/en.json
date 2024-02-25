@@ -245,7 +245,7 @@
         "requiredFieldName": "Please enter field name",
         "requiredDescription": "Please enter description",
         "duplicateFieldName": "Field name is duplicated",
-        "requiredTaxCode": "Please enter your tax code.",
+        "requiredTaxCode": "Please enter your tax code without letter characters.",
         "requiredCodeCompany": "Please enter code from 4 - 20 characters.",
         "invalidCodeCompany": "Please enter the code without spaces and special characters.",
         "invalidPhone": "Please enter valid phone numbers.",

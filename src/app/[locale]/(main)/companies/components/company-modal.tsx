@@ -50,7 +50,11 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
             .min(4, { message: translation("error.requiredCodeCompany") })
             .max(20, { message: translation("error.requiredCodeCompany") })
             .refine((value) => /^[a-zA-Z0-9]*$/.test(value), { message: translation("error.invalidCodeCompany") }),
-        tax_code: z.string(),
+        tax_code: z
+            .string()
+            .refine((value) => /^[0-9]*$/.test(value), { message: translation("error.requiredTaxCode") })
+            .optional()
+            .or(z.literal("")),
         contact_email: z
             .string()
             .email({ message: translation("error.invalidEmail") })
