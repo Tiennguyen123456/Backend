@@ -99,8 +99,15 @@
     "companyDetailsPage": {
         "title": "Company Details"
     },
-    "createEventPage": {
-        "title": "Create New Event"
+    "eventPage": {
+        "title": "Events",
+        "table": {
+            "name": "Event Name",
+            "code": "Event Code",
+            "startTime": "Start Date",
+            "endTime": "End Date",
+            "status": "Status"
+        }
     },
     "companyEventPage": {
         "title": "Create New Company"
@@ -157,7 +164,8 @@
         "importExcel": "Import excel",
         "exportExcel": "Export excel",
         "appendField": "Append Field",
-        "search": "Search"
+        "search": "Search",
+        "client": "Clients"
     },
     "label": {
         "search": "Search",
@@ -390,11 +398,13 @@
         "gohome": "Go home"
     },
     "breadcrumb": {
-        "home": "Dasboard",
+        "home": "Dashboard",
         "company": "Company",
         "createCompany": "Create company",
         "roles": "Roles",
         "permissions": "Permissions",
-        "accounts": "Accounts"
+        "accounts": "Accounts",
+        "events": "Events",
+        "configEvent": "Event config"
     }
 }

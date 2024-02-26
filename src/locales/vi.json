@@ -98,8 +98,15 @@
     "companyDetailsPage": {
         "title": "Chi tiết công ty"
     },
-    "createEventPage": {
-        "title": "Tạo mới sự kiện"
+    "eventPage": {
+        "title": "Sự kiện",
+        "table": {
+            "name": "Tên sự kiện",
+            "code": "Mã sự kiện",
+            "startTime": "Ngày bắt đầu",
+            "endTime": "Ngày kết thúc",
+            "status": "Trạng thái"
+        }
     },
     "companyEventPage": {
         "title": "Tạo mới công ty"
@@ -156,7 +163,8 @@
         "importExcel": "Tải lên dữ liệu excel",
         "exportExcel": "Tải xuống dữ liệu excel",
         "appendField": "Thêm trường",
-        "search": "Tìm kiếm"
+        "search": "Tìm kiếm",
+        "client": "Khách hàng"
     },
     "label": {
         "search": "Tìm kiếm",
@@ -393,6 +401,7 @@
         "createCompany": "Tạo công ty",
         "roles": "Vai trò",
         "permissions": "Phân quyền",
-        "accounts": "Tài khoản"
+        "accounts": "Tài khoản",
+        "events": "Sự kiện"
     }
 }

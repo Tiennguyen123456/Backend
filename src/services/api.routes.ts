@@ -21,12 +21,17 @@ const ApiRoutes = {
     // ** Accout Routes
     getAccounts: baseURL + "/users",
     storeAccount: baseURL + "/user/store",
-    deleteAccout: baseURL + "/user/",
+    deleteAccount: baseURL + "/user/",
 
     // ** Permission Routes
     getPermissions: baseURL + "/permissions",
     getPermissionByRole: baseURL + "/permission/role",
     assignPermission: baseURL + "/permission/assign",
+
+    // ** Event Routes
+    getEvents: baseURL + "/events",
+    storeEvent: baseURL + "/event/store",
+    deleteEvent: baseURL + "/event/",
 };
 
 export default ApiRoutes;
