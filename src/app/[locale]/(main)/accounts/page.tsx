@@ -19,6 +19,8 @@ import { useAppSelector } from "@/redux/root/hooks";
 import { selectUser } from "@/redux/user/slice";
 import { isActionsPermissions } from "@/helpers/funcs";
 import { ActionPermisons } from "@/constants/routes";
+import { format } from "date-fns";
+import { DateTimeFormat } from "@/constants/variables";
 
 export default function AccountsPage() {
     // ** I18n
@@ -106,6 +108,7 @@ export default function AccountsPage() {
         {
             accessorKey: "created_at",
             header: () => <div className="text-black font-bold">{translation("accountPage.table.createdAt")}</div>,
+            cell: ({ row }) => format(row.original.created_at, DateTimeFormat),
         },
         {
             accessorKey: "status",
