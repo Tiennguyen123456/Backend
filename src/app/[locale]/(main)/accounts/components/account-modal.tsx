@@ -201,7 +201,7 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
                                     <FormControl>
                                         <Input
                                             className="h-10"
-                                            disabled={loading}
+                                            disabled={loading || defaultData != null}
                                             placeholder={translation("placeholder.username")}
                                             {...field}
                                         />
@@ -222,7 +222,7 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
                                     <FormControl>
                                         <Input
                                             className="h-10"
-                                            disabled={loading}
+                                            disabled={loading || defaultData != null}
                                             placeholder={translation("placeholder.email")}
                                             {...field}
                                         />
