@@ -19,12 +19,12 @@ import permissionApi from "@/services/permisison-api";
 import { useAppSelector } from "@/redux/root/hooks";
 import { selectUser } from "@/redux/user/slice";
 import { isActionsPermissions } from "@/helpers/funcs";
-import { ActionPermisons } from "@/constants/routes";
+import { ActionPermissions } from "@/constants/routes";
 
 export default function CompaniesPage() {
     // ** I18n
     const translation = useTranslations("");
-    
+
     // Permission
     const { userPermissions } = useAppSelector(selectUser);
 
@@ -121,7 +121,7 @@ export default function CompaniesPage() {
             .finally(function () {
                 setLoading(false);
             });
-    }
+    };
 
     const handlePermissionByRoleId = (permissionIds: any) => {
         groupPermission.map((group: any) => {
@@ -135,7 +135,7 @@ export default function CompaniesPage() {
         });
 
         setGroupPermission([...groupPermission]);
-    }
+    };
 
     const handleUpdatePermission = async () => {
         if (roleId === 0) {
@@ -159,7 +159,7 @@ export default function CompaniesPage() {
                 role_id: roleId,
             })
             .then(function (response) {
-                if (response.status === 'success') {
+                if (response.status === "success") {
                     toastSuccess(translation("successApi.UPDATE_PERMISSION_SUCCESS"));
                 } else {
                     toastError(translation(`errorApi.${response.message_code}`));
@@ -175,7 +175,7 @@ export default function CompaniesPage() {
     };
 
     const canAssignPermission = () => {
-        return isActionsPermissions(userPermissions, ActionPermisons.ASSIGN_PERMISSION_TO_ROLE);
+        return isActionsPermissions(userPermissions, ActionPermissions.ASSIGN_PERMISSION_TO_ROLE);
     };
 
     return (
@@ -214,23 +214,20 @@ export default function CompaniesPage() {
                         </Select>
                     </div>
                     <div className="flex flex-col justify-end">
-                        {
-                            canAssignPermission() && (
-                                <Button
-                                    type="submit"
-                                    onClick={handleUpdatePermission}
-                                    disabled={submitLoading || roleId === 0 }
-                                    className={roleId === 0 ? "hidden" : ""}
-                                >
-                                    {submitLoading ? (
-                                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                                    ) : (
-                                        translation("action.update")
-                                    )}
-                                </Button>
-                            )
-                        }
-                        
+                        {canAssignPermission() && (
+                            <Button
+                                type="submit"
+                                onClick={handleUpdatePermission}
+                                disabled={submitLoading || roleId === 0}
+                                className={roleId === 0 ? "hidden" : ""}
+                            >
+                                {submitLoading ? (
+                                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                                ) : (
+                                    translation("action.update")
+                                )}
+                            </Button>
+                        )}
                     </div>
                 </div>
             )}

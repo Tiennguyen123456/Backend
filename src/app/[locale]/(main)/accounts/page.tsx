@@ -18,7 +18,7 @@ import ApiRoutes from "@/services/api.routes";
 import { useAppSelector } from "@/redux/root/hooks";
 import { selectUser } from "@/redux/user/slice";
 import { isActionsPermissions } from "@/helpers/funcs";
-import { ActionPermisons } from "@/constants/routes";
+import { ActionPermissions } from "@/constants/routes";
 import { format } from "date-fns";
 import { DateTimeFormat } from "@/constants/variables";
 
@@ -85,10 +85,10 @@ export default function AccountsPage() {
     };
 
     const isCreateAccount = () => {
-        return isActionsPermissions(userPermissions, ActionPermisons.CREATE_ACCOUNT);
+        return isActionsPermissions(userPermissions, ActionPermissions.CREATE_ACCOUNT);
     };
     const isUpdateAccount = () => {
-        return isActionsPermissions(userPermissions, ActionPermisons.UPDATE_ACCOUNT);
+        return isActionsPermissions(userPermissions, ActionPermissions.UPDATE_ACCOUNT);
     };
 
     const columns: ColumnDef<AccountColumn>[] = [

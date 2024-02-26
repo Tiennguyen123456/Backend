@@ -20,8 +20,7 @@ import { ICompanyRes } from "@/models/api/company-api";
 import { isActionsPermissions } from "@/helpers/funcs";
 import { useAppSelector } from "@/redux/root/hooks";
 import { selectUser } from "@/redux/user/slice";
-import { ActionPermisons } from "@/constants/routes";
-import { IParamsDataTable } from "@/models/DataTable";
+import { ActionPermissions } from "@/constants/routes";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -92,13 +91,13 @@ export default function CompaniesPage() {
         setOpenModal(false);
     };
     const isCreateCompany = () => {
-        return isActionsPermissions(userPermissions, ActionPermisons.CREATE_COMPANY);
+        return isActionsPermissions(userPermissions, ActionPermissions.CREATE_COMPANY);
     };
     const isUpdateCompany = () => {
-        return isActionsPermissions(userPermissions, ActionPermisons.UPDATE_COMPANY);
+        return isActionsPermissions(userPermissions, ActionPermissions.UPDATE_COMPANY);
     };
     const isDeleteCompany = () => {
-        return isActionsPermissions(userPermissions, ActionPermisons.DELETE_COMPANY);
+        return isActionsPermissions(userPermissions, ActionPermissions.DELETE_COMPANY);
     };
     const handleSearchTaxcode = (event: any) => {
         setParamsSearch({ ...paramsSearch, filters: { ...paramsSearch.filters, tax_code: event.target.value } });

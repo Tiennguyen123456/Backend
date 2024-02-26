@@ -4,7 +4,7 @@ export const ROUTES = {
     LOGIN: "/login",
     DASHBOARD: "/dashboard",
     EVENTS: "/events",
-    // EVENTS_CREATE: "/events/create",
+    EVENTS_CREATE: "/events/create",
     // EVENTS_DETAILS: "/events/details",
     // EVENTS_CONFIG: "/events/config",
     // CAMPAIGNS: "/campaigns",
@@ -41,10 +41,11 @@ export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [
     //     name: "Events Details",
     //     slug: ROUTES.EVENTS_DETAILS,
     // },
-    // {
-    //     name: "Create Event",
-    //     slug: ROUTES.EVENTS_CREATE,
-    // },
+    {
+        code: "createEvent",
+        name: "Create Event",
+        slug: ROUTES.EVENTS_CREATE,
+    },
     // {
     //     name: "Config Event",
     //     slug: ROUTES.EVENTS_CONFIG,
@@ -140,7 +141,7 @@ export const AppRoutesPermissions = [
     { path: ROUTES.LOGIN, permissions: [] },
     { path: ROUTES.DASHBOARD, permissions: [] },
     { path: ROUTES.EVENTS, permissions: ["event:view"] },
-    // { path: ROUTES.EVENTS_CREATE, permissions: [] },
+    { path: ROUTES.EVENTS_CREATE, permissions: ["event:create"] },
     // { path: ROUTES.EVENTS_DETAILS, permissions: [] },
     // { path: ROUTES.EVENTS_CONFIG, permissions: [] },
     // { path: ROUTES.CAMPAIGNS, permissions: ["campaign:view"] },
@@ -161,7 +162,7 @@ export const AppRoutesPermissions = [
     { path: ROUTES[403], permissions: [] },
 ];
 
-export const ActionPermisons = {
+export const ActionPermissions = {
     CREATE_COMPANY: ["company:create"],
     UPDATE_COMPANY: ["company:update"],
     DELETE_COMPANY: ["company:delete"],
@@ -170,4 +171,7 @@ export const ActionPermisons = {
     CREATE_ROLE: ["user_role:create"],
     UPDATE_ROLE: ["user_role:update"],
     ASSIGN_PERMISSION_TO_ROLE: ["user_permission:assign-to-role"],
+    CREATE_EVENT: ["event:create"],
+    UPDATE_EVENT: ["event:update"],
+    DELETE_EVENT: ["event:delete"],
 };

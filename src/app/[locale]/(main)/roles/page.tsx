@@ -20,8 +20,7 @@ import { RoleEnable } from "@/constants/enum";
 import { selectUser } from "@/redux/user/slice";
 import { useAppSelector } from "@/redux/root/hooks";
 import { isActionsPermissions } from "@/helpers/funcs";
-import { ActionPermisons } from "@/constants/routes";
-import { IParamsDataTable } from "@/models/DataTable";
+import { ActionPermissions } from "@/constants/routes";
 
 export default function CompaniesPage() {
     // ** I18n
@@ -82,10 +81,10 @@ export default function CompaniesPage() {
     };
 
     const isCreateRole = () => {
-        return isActionsPermissions(userPermissions, ActionPermisons.CREATE_ROLE);
+        return isActionsPermissions(userPermissions, ActionPermissions.CREATE_ROLE);
     };
     const isUpdateRole = () => {
-        return isActionsPermissions(userPermissions, ActionPermisons.UPDATE_ROLE);
+        return isActionsPermissions(userPermissions, ActionPermissions.UPDATE_ROLE);
     };
 
     const columns: ColumnDef<RoleColumn>[] = [
