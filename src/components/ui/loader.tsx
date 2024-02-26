@@ -3,7 +3,7 @@
 import { ClipLoader } from "react-spinners";
 
 interface LoaderProps {
-    size: number;
+    size?: number;
 }
 
 export const Loader = ({ size = 50 }: LoaderProps) => {
