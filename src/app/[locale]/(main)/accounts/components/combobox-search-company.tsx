@@ -22,11 +22,12 @@ interface IOptionCompany {
 }
 
 interface ComboboxSearchCompanyProps {
+    defaultName: string;
     disabled: boolean;
     onSelectCompany: (value: number) => void;
 }
 
-export function ComboboxSearchCompany({ disabled, onSelectCompany }: ComboboxSearchCompanyProps) {
+export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }: ComboboxSearchCompanyProps) {
     const [dataSearchCompany, setDataSearchCompany] = React.useState<IOptionCompany[]>([]);
     const [open, setOpen] = React.useState(false);
     const [selectd, setSelectd] = React.useState<IOptionCompany | undefined>();
@@ -92,7 +93,7 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany }: ComboboxSea
                     className="w-full justify-between"
                     disabled={disabled}
                 >
-                    {selectd ? selectd?.label : "Select company..."}
+                    {selectd ? selectd?.label : defaultName ? defaultName : "Select company..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>

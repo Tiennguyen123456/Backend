@@ -30,7 +30,6 @@ interface CompanyModalProps extends IModal {
 }
 
 export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, defaultData, className, onConfirm }) => {
-    console.log(defaultData);
     // ** I18n
     const translation = useTranslations("");
 
@@ -163,6 +162,7 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
                                     <ComboboxSearchCompany
                                         disabled={loading}
                                         onSelectCompany={field.onChange}
+                                        defaultName={defaultData?.company?.name || ""}
                                     />
                                     <FormMessage />
                                 </FormItem>

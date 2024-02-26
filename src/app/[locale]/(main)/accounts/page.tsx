@@ -32,7 +32,7 @@ export default function AccountsPage() {
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
     // Use fetch data
-    const { data, loading, pageCount, refresh, setRefresh } = useFetchDataTable<IAccountRes>({
+    const { data, loading, pageCount, refresh, setRefresh } = useFetchDataTable<AccountColumn>({
         url: ApiRoutes.getAccouts,
         params: {
             pagination: { page, limit },
@@ -50,8 +50,10 @@ export default function AccountsPage() {
             name: data.name ?? "",
             username: data.username ?? "",
             email: data.email ?? "",
-            company_id: data.company_id ?? -1,
-            role_id: data.role_id ?? -1,
+            company_id: data?.company?.id ?? -1,
+            company_name: data?.company?.name ?? "",
+            role_id: data?.role?.id ?? -1,
+            role_name: data?.role?.name ?? "",
         });
         setOpenModal(true);
     };
@@ -76,8 +78,9 @@ export default function AccountsPage() {
             header: () => <div className="text-black font-bold">{translation("accountPage.table.email")}</div>,
         },
         {
-            accessorKey: "role_nam",
+            accessorKey: "role_id",
             header: () => <div className="text-black font-bold">{translation("accountPage.table.role")}</div>,
+            cell: ({ row }) => row.original.role?.name,
         },
         {
             accessorKey: "created_at",

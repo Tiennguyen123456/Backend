@@ -1,6 +1,9 @@
+interface IRelationRes {
+    id: number;
+    name: string;
+}
 export interface IAccountRes {
     id: number;
-    company_id: number;
     event_id: number;
     is_admin: boolean;
     expire_date: string;
@@ -16,7 +19,6 @@ export interface IAccountRes {
     created_at: string;
     updated_at: string;
     last_login_at: string;
-    role_id: number;
-    role_nam: string;
-    roles: string[];
+    company: IRelationRes | null;
+    role: IRelationRes | null;
 }
