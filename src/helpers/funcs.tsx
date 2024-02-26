@@ -129,3 +129,7 @@ export function debounceFunc(fn: Function, ms = 300) {
         timeoutId = setTimeout(() => fn.apply(this, args), ms);
     };
 }
+
+export function isActionsPermissions(userPermissions: string[], arrayPermissionCheck: string[]) {
+    return arrayPermissionCheck.every((check) => userPermissions.includes(check));
+}

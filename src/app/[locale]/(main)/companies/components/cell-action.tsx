@@ -21,9 +21,17 @@ interface CellActionProps {
     data: CompanyColumn;
     onRefetch: () => void;
     onRowSelected: () => void;
+    isUpdate?: boolean;
+    isDelete?: boolean;
 }
 
-export const CellAction: React.FC<CellActionProps> = ({ data, onRefetch, onRowSelected }) => {
+export const CellAction: React.FC<CellActionProps> = ({
+    data,
+    onRefetch,
+    onRowSelected,
+    isUpdate = false,
+    isDelete = false,
+}) => {
     // ** I18n
     const translation = useTranslations("");
 
@@ -80,13 +88,20 @@ export const CellAction: React.FC<CellActionProps> = ({ data, onRefetch, onRowSe
                     align="end"
                     className="w-40"
                 >
-                    {/* <DropdownMenuLabel>{translation("datatable.action")}</DropdownMenuLabel> */}
-                    <DropdownMenuItem onClick={onRowSelected}>
-                        <Edit className="mr-3 h-4 w-4" /> {translation("action.edit")}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setOpen(true)}>
-                        <Trash className="mr-3 h-4 w-4" /> {translation("action.delete")}
-                    </DropdownMenuItem>
+                    {isUpdate ? (
+                        <DropdownMenuItem onClick={onRowSelected}>
+                            <Edit className="mr-3 h-4 w-4" /> {translation("action.edit")}
+                        </DropdownMenuItem>
+                    ) : (
+                        ""
+                    )}
+                    {isDelete ? (
+                        <DropdownMenuItem onClick={() => setOpen(true)}>
+                            <Trash className="mr-3 h-4 w-4" /> {translation("action.delete")}
+                        </DropdownMenuItem>
+                    ) : (
+                        ""
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
         </>

@@ -17,10 +17,17 @@ import { CompanyModal } from "./components/company-modal";
 import { useFetchDataTable } from "@/data/fetch-data-table";
 import ApiRoutes from "@/services/api.routes";
 import { ICompanyRes } from "@/models/api/company-api";
+import { isActionsPermissions } from "@/helpers/funcs";
+import { useAppSelector } from "@/redux/root/hooks";
+import { selectUser } from "@/redux/user/slice";
+import { ActionPermisons } from "@/constants/routes";
 
 export default function CompaniesPage() {
     // ** I18n
     const translation = useTranslations("");
+
+    // ** User Selector
+    const { userPermissions } = useAppSelector(selectUser);
 
     // ** State
     const [openModal, setOpenModal] = useState(false);
@@ -75,6 +82,16 @@ export default function CompaniesPage() {
         setOpenModal(false);
     };
 
+    const isCreateCompany = () => {
+        return isActionsPermissions(userPermissions, ActionPermisons.CREATE_COMPANY);
+    };
+    const isUpdateCompany = () => {
+        return isActionsPermissions(userPermissions, ActionPermisons.UPDATE_COMPANY);
+    };
+    const isDeleteCompany = () => {
+        return isActionsPermissions(userPermissions, ActionPermisons.DELETE_COMPANY);
+    };
+
     const columns: ColumnDef<CompanyColumn>[] = [
         {
             id: "select",
@@ -122,13 +139,18 @@ export default function CompaniesPage() {
         {
             id: "actions",
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
-            cell: ({ row }) => (
-                <CellAction
-                    onRowSelected={() => handleEditCompany(row.original)}
-                    onRefetch={handleAfterCreate}
-                    data={row.original}
-                />
-            ),
+            cell: ({ row }) =>
+                !isUpdateCompany() && !isDeleteCompany() ? (
+                    ""
+                ) : (
+                    <CellAction
+                        onRowSelected={() => handleEditCompany(row.original)}
+                        onRefetch={handleAfterCreate}
+                        data={row.original}
+                        isUpdate={isUpdateCompany()}
+                        isDelete={isDeleteCompany()}
+                    />
+                ),
         },
     ];
 
@@ -146,13 +168,17 @@ export default function CompaniesPage() {
                             defaultData={rowSelected}
                             onConfirm={handleAfterCreate}
                         />
-                        <Button
-                            variant={"secondary"}
-                            onClick={handleCreateCompany}
-                        >
-                            <PlusCircle className="w-5 h-5 md:mr-2" />
-                            <p className="hidden md:block">{translation("action.create")}</p>
-                        </Button>
+                        {isCreateCompany() ? (
+                            <Button
+                                variant={"secondary"}
+                                onClick={handleCreateCompany}
+                            >
+                                <PlusCircle className="w-5 h-5 md:mr-2" />
+                                <p className="hidden md:block">{translation("action.create")}</p>
+                            </Button>
+                        ) : (
+                            ""
+                        )}
                         {/* <Button variant={"destructive"}>
                         <Trash2 className="w-5 h-5 md:mr-2" />
                         <p className="hidden md:block">{translation("action.delete")}</p>

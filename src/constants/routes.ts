@@ -159,3 +159,11 @@ export const AppRoutesPermissions = [
     // { path: ROUTES.CLIENTS, permissions: [] },
     { path: ROUTES[403], permissions: [] },
 ];
+
+export const ActionPermisons = {
+    CREATE_COMPANY: ["company:create"],
+    UPDATE_COMPANY: ["company:update"],
+    DELETE_COMPANY: ["company:delete"],
+    UPDATE_ACCOUNT: ["user:create"],
+    DELETE_ACCOUNT: ["user:update"],
+};
