@@ -78,7 +78,7 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
     const onSubmit = async (data: AccountFormValues) => {
         try {
             setLoading(true);
-            const response = await accountApi.storeAccout(data);
+            const response = await accountApi.storeAccount(data);
 
             if (response.data.status == APIStatus.SUCCESS) {
                 toastSuccess(messageSuccess);

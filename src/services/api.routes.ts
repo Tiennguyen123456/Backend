@@ -20,7 +20,7 @@ const ApiRoutes = {
 
     // ** Accout Routes
     getAccouts: baseURL + "/users",
-    storeAccout: baseURL + "/user/store",
+    storeAccount: baseURL + "/user/store",
     deleteAccout: baseURL + "/user/",
 
     // ** Permission Routes
