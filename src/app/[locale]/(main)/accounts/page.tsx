@@ -76,7 +76,7 @@ export default function AccountsPage() {
             header: () => <div className="text-black font-bold">{translation("accountPage.table.email")}</div>,
         },
         {
-            accessorKey: "role_name",
+            accessorKey: "role_nam",
             header: () => <div className="text-black font-bold">{translation("accountPage.table.role")}</div>,
         },
         {

@@ -64,7 +64,7 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany }: ComboboxSea
     };
 
     const debounceSearchCompany = React.useCallback(
-        debounceFunc((nextValue: string) => fetchDataSearchCompany(nextValue), 1000),
+        debounceFunc((nextValue: string) => fetchDataSearchCompany(nextValue), 800),
         [],
     );
 
@@ -92,9 +92,7 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany }: ComboboxSea
                     className="w-full justify-between"
                     disabled={disabled}
                 >
-                    {selectd
-                        ? dataSearchCompany.find((company) => company.id === selectd.id)?.label
-                        : "Select company..."}
+                    {selectd ? selectd?.label : "Select company..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>

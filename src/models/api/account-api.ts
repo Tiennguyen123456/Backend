@@ -17,5 +17,6 @@ export interface IAccountRes {
     updated_at: string;
     last_login_at: string;
     role_id: number;
+    role_nam: string;
     roles: string[];
 }
