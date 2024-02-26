@@ -15,11 +15,17 @@ import Breadcrumbs from "@/components/ui/breadcrumb";
 import { AccountModal } from "./components/account-modal";
 import { useFetchDataTable } from "@/data/fetch-data-table";
 import ApiRoutes from "@/services/api.routes";
-import { IAccountRes } from "@/models/api/account-api";
+import { useAppSelector } from "@/redux/root/hooks";
+import { selectUser } from "@/redux/user/slice";
+import { isActionsPermissions } from "@/helpers/funcs";
+import { ActionPermisons } from "@/constants/routes";
 
 export default function AccountsPage() {
     // ** I18n
     const translation = useTranslations("");
+
+    // ** User Selector
+    const { userPermissions } = useAppSelector(selectUser);
 
     // ** State
     const [openModal, setOpenModal] = useState(false);
@@ -68,6 +74,13 @@ export default function AccountsPage() {
         setOpenModal(false);
     };
 
+    const isCreateAccount = () => {
+        return isActionsPermissions(userPermissions, ActionPermisons.CREATE_ACCOUNT);
+    };
+    const isUpdateAccount = () => {
+        return isActionsPermissions(userPermissions, ActionPermisons.UPDATE_ACCOUNT);
+    };
+
     const columns: ColumnDef<AccountColumn>[] = [
         {
             accessorKey: "name",
@@ -93,13 +106,16 @@ export default function AccountsPage() {
         {
             id: "actions",
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
-            cell: ({ row }) => (
-                <CellAction
-                    onRowSelected={() => handleEditRole(row.original)}
-                    onRefetch={handleAfterCreate}
-                    data={row.original}
-                />
-            ),
+            cell: ({ row }) =>
+                isUpdateAccount() ? (
+                    <CellAction
+                        onRowSelected={() => handleEditRole(row.original)}
+                        onRefetch={handleAfterCreate}
+                        data={row.original}
+                    />
+                ) : (
+                    ""
+                ),
         },
     ];
 
@@ -117,13 +133,17 @@ export default function AccountsPage() {
                             defaultData={rowSelected}
                             onConfirm={handleAfterCreate}
                         />
-                        <Button
-                            variant={"secondary"}
-                            onClick={handleCreateRole}
-                        >
-                            <PlusCircle className="w-5 h-5 md:mr-2" />
-                            <p className="hidden md:block">{translation("action.create")}</p>
-                        </Button>
+                        {isCreateAccount() ? (
+                            <Button
+                                variant={"secondary"}
+                                onClick={handleCreateRole}
+                            >
+                                <PlusCircle className="w-5 h-5 md:mr-2" />
+                                <p className="hidden md:block">{translation("action.create")}</p>
+                            </Button>
+                        ) : (
+                            ""
+                        )}
                     </div>
                 </div>
             </div>

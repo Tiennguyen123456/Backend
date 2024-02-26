@@ -17,10 +17,17 @@ import { useFetchDataTable } from "@/data/fetch-data-table";
 import { IRoleRes } from "@/models/api/role-api";
 import ApiRoutes from "@/services/api.routes";
 import { RoleEnable } from "@/constants/enum";
+import { selectUser } from "@/redux/user/slice";
+import { useAppSelector } from "@/redux/root/hooks";
+import { isActionsPermissions } from "@/helpers/funcs";
+import { ActionPermisons } from "@/constants/routes";
 
 export default function CompaniesPage() {
     // ** I18n
     const translation = useTranslations("");
+
+    // ** User Selector
+    const { userPermissions } = useAppSelector(selectUser);
 
     // ** State
     const [openModal, setOpenModal] = useState(false);
@@ -65,6 +72,13 @@ export default function CompaniesPage() {
         setOpenModal(false);
     };
 
+    const isCreateRole = () => {
+        return isActionsPermissions(userPermissions, ActionPermisons.CREATE_ROLE);
+    };
+    const isUpdateRole = () => {
+        return isActionsPermissions(userPermissions, ActionPermisons.UPDATE_ROLE);
+    };
+
     const columns: ColumnDef<RoleColumn>[] = [
         {
             accessorKey: "name",
@@ -82,13 +96,16 @@ export default function CompaniesPage() {
         {
             id: "actions",
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
-            cell: ({ row }) => (
-                <CellAction
-                    onRowSelected={() => handleEditRole(row.original)}
-                    onRefetch={handleAfterCreate}
-                    data={row.original}
-                />
-            ),
+            cell: ({ row }) =>
+                isUpdateRole() ? (
+                    <CellAction
+                        onRowSelected={() => handleEditRole(row.original)}
+                        onRefetch={handleAfterCreate}
+                        data={row.original}
+                    />
+                ) : (
+                    ""
+                ),
         },
     ];
 
@@ -106,13 +123,17 @@ export default function CompaniesPage() {
                             defaultData={rowSelected}
                             onConfirm={handleAfterCreate}
                         />
-                        <Button
-                            variant={"secondary"}
-                            onClick={handleCreateRole}
-                        >
-                            <PlusCircle className="w-5 h-5 md:mr-2" />
-                            <p className="hidden md:block">{translation("action.create")}</p>
-                        </Button>
+                        {isCreateRole() ? (
+                            <Button
+                                variant={"secondary"}
+                                onClick={handleCreateRole}
+                            >
+                                <PlusCircle className="w-5 h-5 md:mr-2" />
+                                <p className="hidden md:block">{translation("action.create")}</p>
+                            </Button>
+                        ) : (
+                            ""
+                        )}
                     </div>
                 </div>
             </div>

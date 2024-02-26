@@ -164,6 +164,8 @@ export const ActionPermisons = {
     CREATE_COMPANY: ["company:create"],
     UPDATE_COMPANY: ["company:update"],
     DELETE_COMPANY: ["company:delete"],
-    UPDATE_ACCOUNT: ["user:create"],
-    DELETE_ACCOUNT: ["user:update"],
+    CREATE_ACCOUNT: ["user:create"],
+    UPDATE_ACCOUNT: ["user:update"],
+    CREATE_ROLE: ["user_role:create"],
+    UPDATE_ROLE: ["user_role:update"],
 };
