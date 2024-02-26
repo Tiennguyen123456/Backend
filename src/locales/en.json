@@ -202,7 +202,8 @@
         "companyCode": "Company code",
         "taxCode": "Tax code",
         "guard": "Guard",
-        "enable": "Enable"
+        "enable": "Enable",
+        "notFoundData": "Not found data."
     },
     "placeholder": {
         "email": "example@example.com",
@@ -213,6 +214,7 @@
         "username": "Username",
         "eventCode": "Event Code",
         "company": "Select Company",
+        "companyName": "Enter Company name",
         "address": "Address",
         "eventDescription": "Write your event description here...",
         "website": "Website",

@@ -15,6 +15,7 @@ import { IListRes } from "@/models/DataTable";
 import { ICompanyRes } from "@/models/api/company-api";
 import ApiRoutes from "@/services/api.routes";
 import qs from "qs";
+import { useTranslations } from "next-intl";
 
 interface IOptionCompany {
     id: number;
@@ -28,11 +29,16 @@ interface ComboboxSearchCompanyProps {
 }
 
 export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }: ComboboxSearchCompanyProps) {
+    // ** I18n
+    const translation = useTranslations("");
+
+    // ** State
     const [dataSearchCompany, setDataSearchCompany] = React.useState<IOptionCompany[]>([]);
     const [open, setOpen] = React.useState(false);
     const [selectd, setSelectd] = React.useState<IOptionCompany | undefined>();
     const [loading, setLoading] = React.useState(false);
 
+    // ** FUNC
     const fetchDataSearchCompany = (textSearch: string) => {
         api.get<IResponse<IListRes<ICompanyRes>>>(ApiRoutes.getCompanies, {
             params: {
@@ -93,14 +99,14 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }
                     className="w-full justify-between"
                     disabled={disabled}
                 >
-                    {selectd ? selectd?.label : defaultName ? defaultName : "Select company..."}
+                    {selectd ? selectd?.label : defaultName ? defaultName : translation("placeholder.company")}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="max-w-screen-sm p-0">
                 <Command shouldFilter={false}>
                     <CommandInput
-                        placeholder="Search company..."
+                        placeholder={translation("placeholder.companyName")}
                         className="h-9"
                         onValueChange={handleSearch}
                     />
@@ -111,7 +117,7 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }
                             </CommandLoading>
                         ) : dataSearchCompany.length == 0 ? (
                             <CommandLoading className="flex justify-center items-center h-[80px]">
-                                Not found data.
+                                {translation("label.notFoundData")}
                             </CommandLoading>
                         ) : (
                             dataSearchCompany.map((company) => (

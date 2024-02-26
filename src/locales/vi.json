@@ -203,7 +203,8 @@
         "companyCode": "Mã công ty",
         "taxCode": "Mã số thuế",
         "guard": "Guard",
-        "enable": "Kích hoạt"
+        "enable": "Kích hoạt",
+        "notFoundData": "Không có dữ liệu."
     },
     "placeholder": {
         "email": "example@example.com",
@@ -214,6 +215,7 @@
         "username": "Tên đăng nhập",
         "eventCode": "Mã sự kiện",
         "company": "Chọn công ty",
+        "companyName": "Nhập tên công ty",
         "address": "Địa điểm",
         "eventDescription": "Nhập mô tả sự kiện ở đây...",
         "website": "Trang web công ty",
