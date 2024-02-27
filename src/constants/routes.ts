@@ -168,4 +168,5 @@ export const ActionPermisons = {
     UPDATE_ACCOUNT: ["user:update"],
     CREATE_ROLE: ["user_role:create"],
     UPDATE_ROLE: ["user_role:update"],
+    ASSIGN_PERMISSION_TO_ROLE: ["user_permission:assign-to-role"],
 };

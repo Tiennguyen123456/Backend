@@ -16,12 +16,17 @@ import { useFetchDataRole } from "@/data/fetch-data-role";
 import { Loader } from "@/components/ui/loader";
 import { Checkbox } from "@/components/ui/checkbox";
 import permissionApi from "@/services/permisison-api";
+import { useAppSelector } from "@/redux/root/hooks";
+import { selectUser } from "@/redux/user/slice";
+import { isActionsPermissions } from "@/helpers/funcs";
+import { ActionPermisons } from "@/constants/routes";
 
 export default function CompaniesPage() {
     // ** I18n
     const translation = useTranslations("");
-    // ** Use Router
-    const router = useRouter();
+    
+    // Permission
+    const { userPermissions } = useAppSelector(selectUser);
 
     // State
     const [roles, setRoles] = useState<IOption[]>([]);
@@ -169,6 +174,10 @@ export default function CompaniesPage() {
             });
     };
 
+    const canAssignPermission = () => {
+        return isActionsPermissions(userPermissions, ActionPermisons.ASSIGN_PERMISSION_TO_ROLE);
+    };
+
     return (
         <>
             <div className="w-full space-y-4">
@@ -205,18 +214,23 @@ export default function CompaniesPage() {
                         </Select>
                     </div>
                     <div className="flex flex-col justify-end">
-                        <Button
-                            type="submit"
-                            onClick={handleUpdatePermission}
-                            disabled={submitLoading || roleId === 0 }
-                            className={roleId === 0 ? "hidden" : ""}
-                        >
-                            {submitLoading ? (
-                                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                            ) : (
-                                translation("action.update")
-                            )}
-                        </Button>
+                        {
+                            canAssignPermission() && (
+                                <Button
+                                    type="submit"
+                                    onClick={handleUpdatePermission}
+                                    disabled={submitLoading || roleId === 0 }
+                                    className={roleId === 0 ? "hidden" : ""}
+                                >
+                                    {submitLoading ? (
+                                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                                    ) : (
+                                        translation("action.update")
+                                    )}
+                                </Button>
+                            )
+                        }
+                        
                     </div>
                 </div>
             )}
@@ -239,7 +253,7 @@ export default function CompaniesPage() {
                                 />
                                 <Label
                                     htmlFor={`checkAll_${groupIndex}`}
-                                    className="cursor-pointer font-normal text-lg text-gray-60"
+                                    className="cursor-pointer font-bold text-lg text-blue-600"
                                 >
                                     {group.groupName}
                                 </Label>
