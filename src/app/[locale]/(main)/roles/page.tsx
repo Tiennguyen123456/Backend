@@ -21,6 +21,7 @@ import { selectUser } from "@/redux/user/slice";
 import { useAppSelector } from "@/redux/root/hooks";
 import { isActionsPermissions } from "@/helpers/funcs";
 import { ActionPermisons } from "@/constants/routes";
+import { IParamsDataTable } from "@/models/DataTable";
 
 export default function CompaniesPage() {
     // ** I18n
@@ -28,22 +29,30 @@ export default function CompaniesPage() {
 
     // ** User Selector
     const { userPermissions } = useAppSelector(selectUser);
-
-    // ** State
-    const [openModal, setOpenModal] = useState(false);
-    const [rowSelected, setRowSelected] = useState<RoleColumn | null>(null);
-
     // Use Row Selection
     const { rowSelection, onRowSelection } = useRowSelection();
     // Use Pagination
     const { limit, onPaginationChange, skip, pagination, page } = usePagination();
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
+
+    // ** State
+    const [openModal, setOpenModal] = useState(false);
+    const [rowSelected, setRowSelected] = useState<RoleColumn | null>(null);
+    const [paramsDataTable, setParamsDataTable] = useState<IParamsDataTable>({
+        search: {},
+        filters: {},
+    });
+
     // Use fetch data
     const { data, loading, pageCount, refresh, setRefresh } = useFetchDataTable<IRoleRes>({
         url: ApiRoutes.getRoles,
-        params: {
-            pagination: { page, limit },
+        paramsDataTable: {
+            ...paramsDataTable,
+            pagination: {
+                page: page ?? 1,
+                pageSize: limit ?? 1,
+            },
         },
     });
 
