@@ -49,16 +49,18 @@ export default function CompaniesPage() {
     const [paramsDataTable, setParamsDataTable] = useState<IParamsDataTable>({
         search: {},
         filters: {},
-        pagination: {
-            page: page ?? 1,
-            pageSize: limit ?? 10,
-        },
     });
 
     // Use fetch data
     const { data, loading, pageCount, refresh, setRefresh } = useFetchDataTable<ICompanyRes>({
         url: ApiRoutes.getCompanies,
-        paramsDataTable,
+        paramsDataTable: {
+            ...paramsDataTable,
+            pagination: {
+                page: page ?? 1,
+                pageSize: limit ?? 1,
+            },
+        },
     });
 
     // Function

@@ -1,7 +1,7 @@
 export interface IParamsDataTable {
     search: {};
     filters: {};
-    pagination: {
+    pagination?: {
         page: number;
         pageSize: number;
     };
