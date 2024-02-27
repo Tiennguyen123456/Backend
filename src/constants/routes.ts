@@ -3,7 +3,7 @@ import { IRouterBreadcrumbs } from "@/models/Route";
 export const ROUTES = {
     LOGIN: "/login",
     DASHBOARD: "/dashboard",
-    // EVENTS: "/events",
+    EVENTS: "/events",
     // EVENTS_CREATE: "/events/create",
     // EVENTS_DETAILS: "/events/details",
     // EVENTS_CONFIG: "/events/config",
@@ -32,10 +32,11 @@ export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [
         name: "Home",
         slug: ROUTES.DASHBOARD,
     },
-    // {
-    //     name: "Events",
-    //     slug: ROUTES.EVENTS,
-    // },
+    {
+        code: "events",
+        name: "Events",
+        slug: ROUTES.EVENTS,
+    },
     // {
     //     name: "Events Details",
     //     slug: ROUTES.EVENTS_DETAILS,
@@ -113,7 +114,7 @@ export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [
 
 export const PRIVATE_ROUTES = [
     ROUTES.DASHBOARD,
-    // ROUTES.EVENTS,
+    ROUTES.EVENTS,
     // ROUTES.EVENTS_CREATE,
     // ROUTES.EVENTS_DETAILS,
     // ROUTES.EVENTS_CONFIG,
@@ -138,7 +139,7 @@ export const PRIVATE_ROUTES = [
 export const AppRoutesPermissions = [
     { path: ROUTES.LOGIN, permissions: [] },
     { path: ROUTES.DASHBOARD, permissions: [] },
-    // { path: ROUTES.EVENTS, permissions: ["event:view", "event_asset:view"] },
+    { path: ROUTES.EVENTS, permissions: ["event:view"] },
     // { path: ROUTES.EVENTS_CREATE, permissions: [] },
     // { path: ROUTES.EVENTS_DETAILS, permissions: [] },
     // { path: ROUTES.EVENTS_CONFIG, permissions: [] },

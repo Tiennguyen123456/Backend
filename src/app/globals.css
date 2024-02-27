@@ -106,3 +106,12 @@ body,
 ::-webkit-scrollbar-thumb:hover {
     background-color: var(--tertiary);
 }
+
+.rdp-vhidden {
+    @apply hidden;
+}
+.rdp-caption_dropdowns {
+    display: flex;
+    gap: 5px;
+    /* width: 100%; */
+}

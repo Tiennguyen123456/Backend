@@ -21,80 +21,80 @@ export const AppRoutes: SideBarItemType[] = [
         },
         permissions: [],
     },
-    // {
-    //     key: "activity",
-    //     permissions: [],
-    //     group: {
-    //         name: "sidebar.groups.activity",
-    //         child: [
-    //             {
-    //                 path: ROUTES.EVENTS,
-    //                 key: "activity.events",
-    //                 sideBarProps: {
-    //                     displayText: "sidebar.items.events",
-    //                     icon: <CalendarClock />,
-    //                 },
-    //                 permissions: ["event:view", "event_asset:view"],
-    //             },
-    //             {
-    //                 path: ROUTES.CAMPAIGNS,
-    //                 key: "activity.campaigns",
-    //                 sideBarProps: {
-    //                     displayText: "sidebar.items.campaigns",
-    //                     icon: <Megaphone />,
-    //                 },
-    //                 permissions: ["campaign:view"],
-    //             },
-    //             {
-    //                 path: ROUTES.DATA,
-    //                 key: "activity.data",
-    //                 permissions: [],
-    //                 sideBarProps: {
-    //                     displayText: "sidebar.items.data",
-    //                     icon: <BarChart />,
-    //                 },
-    //                 child: [
-    //                     {
-    //                         path: ROUTES.TEMP_DATA_PAGE_1,
-    //                         key: "activity.data.tempDataPage1",
-    //                         sideBarProps: {
-    //                             displayText: "sidebar.items.tempDataPage1",
-    //                         },
-    //                         permissions: [],
-    //                     },
-    //                     {
-    //                         path: ROUTES.TEMP_DATA_PAGE_2,
-    //                         key: "activity.data.tempDataPage2",
-    //                         sideBarProps: {
-    //                             displayText: "sidebar.items.tempDataPage2",
-    //                         },
-    //                         permissions: [],
-    //                     },
-    //                 ],
-    //             },
-    //             {
-    //                 path: ROUTES.REPORT,
-    //                 key: "activity.reports",
-    //                 permissions: [],
+    {
+        key: "activity",
+        permissions: [],
+        group: {
+            name: "sidebar.groups.activity",
+            child: [
+                {
+                    path: ROUTES.EVENTS,
+                    key: "activity.events",
+                    sideBarProps: {
+                        displayText: "sidebar.items.events",
+                        icon: <CalendarClock />,
+                    },
+                    permissions: ["event:view"],
+                },
+                // {
+                //     path: ROUTES.CAMPAIGNS,
+                //     key: "activity.campaigns",
+                //     sideBarProps: {
+                //         displayText: "sidebar.items.campaigns",
+                //         icon: <Megaphone />,
+                //     },
+                //     permissions: ["campaign:view"],
+                // },
+                // {
+                //     path: ROUTES.DATA,
+                //     key: "activity.data",
+                //     permissions: [],
+                //     sideBarProps: {
+                //         displayText: "sidebar.items.data",
+                //         icon: <BarChart />,
+                //     },
+                //     child: [
+                //         {
+                //             path: ROUTES.TEMP_DATA_PAGE_1,
+                //             key: "activity.data.tempDataPage1",
+                //             sideBarProps: {
+                //                 displayText: "sidebar.items.tempDataPage1",
+                //             },
+                //             permissions: [],
+                //         },
+                //         {
+                //             path: ROUTES.TEMP_DATA_PAGE_2,
+                //             key: "activity.data.tempDataPage2",
+                //             sideBarProps: {
+                //                 displayText: "sidebar.items.tempDataPage2",
+                //             },
+                //             permissions: [],
+                //         },
+                //     ],
+                // },
+                // {
+                //     path: ROUTES.REPORT,
+                //     key: "activity.reports",
+                //     permissions: [],
 
-    //                 sideBarProps: {
-    //                     displayText: "sidebar.items.reports",
-    //                     icon: <BarChart />,
-    //                 },
-    //                 child: [
-    //                     {
-    //                         path: ROUTES.TEMP_REPORT_PAGE,
-    //                         key: "activity.data.tempReportPage",
-    //                         sideBarProps: {
-    //                             displayText: "sidebar.items.tempReportPage",
-    //                         },
-    //                         permissions: [],
-    //                     },
-    //                 ],
-    //             },
-    //         ],
-    //     },
-    // },
+                //     sideBarProps: {
+                //         displayText: "sidebar.items.reports",
+                //         icon: <BarChart />,
+                //     },
+                //     child: [
+                //         {
+                //             path: ROUTES.TEMP_REPORT_PAGE,
+                //             key: "activity.data.tempReportPage",
+                //             sideBarProps: {
+                //                 displayText: "sidebar.items.tempReportPage",
+                //             },
+                //             permissions: [],
+                //         },
+                //     ],
+                // },
+            ],
+        },
+    },
     {
         key: "administration",
         permissions: [],

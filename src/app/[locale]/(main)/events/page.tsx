@@ -69,13 +69,9 @@ export default function DashboardPage() {
                         <PlusCircle className="w-5 h-5 md:mr-2" />
                         <p className="hidden md:block">{translation("action.create")}</p>
                     </Button>
-                    <Button variant={"destructive"}>
-                        <Trash2 className="w-5 h-5 md:mr-2" />
-                        <p className="hidden md:block">{translation("action.delete")}</p>
-                    </Button>
                 </div>
             </div>
-            <div className="flex flex-col md:flex-row gap-2 justify-end items-end w-full md:w-auto">
+            <div className="flex flex-col md:flex-row gap-2 justify-start items-end w-full md:w-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full md:w-auto">
                     <Select>
                         <SelectTrigger className="w-full">

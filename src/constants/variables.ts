@@ -12,6 +12,10 @@ export const phoneRegExp = new RegExp(
     /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/,
 );
 
+export const DateTimeFormat = "dd-MM-Y HH:mm:ss";
+export const DateFormat = "dd-MM-Y";
+export const DateFormatServer = "Y-MM-dd";
+
 export const STATUS_VALID = [
     { label: "New", value: "NEW" },
     { label: "Active", value: "ACTIVE" },
