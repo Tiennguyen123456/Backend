@@ -22,6 +22,7 @@ import ApiRoutes from "@/services/api.routes";
 import { useFetchDataTable } from "@/data/fetch-data-table";
 import { ComboboxSearchCompany } from "./combobox-search-company";
 import accountApi from "@/services/account-api";
+import DataTableConfig from "@/configs/DataTableConfig";
 
 interface CompanyModalProps extends IModal {
     className?: string;
@@ -119,8 +120,11 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
     // const { data: dataRole } = useFetchDataRole({ pagination: { pageSize: 50 } });
     const { data: dataRole } = useFetchDataTable<IRoleRes>({
         url: ApiRoutes.getRoles,
-        params: {
-            pagination: { page: 1, limit: 50 },
+        paramsDataTable: {
+            pagination: {
+                page: 1,
+                pageSize: DataTableConfig.pageSize,
+            },
         },
     });
     useEffect(() => {

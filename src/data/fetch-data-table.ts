@@ -2,19 +2,21 @@
 import { useEffect, useState } from "react";
 import { IParamsDataTable, IListRes } from "@/models/DataTable";
 import qs from "qs";
+import DataTableConfig from "@/configs/DataTableConfig";
 
 interface useFetchDataTableProps {
     url: string;
     paramsDataTable: IParamsDataTable;
 }
 
-export function useFetchDataTable<IDataTableRes>({ url, paramsDataTable }: useFetchDataTableProps) {
+export function useFetchDataTable<IDataTableRes>({
+    url,
+    paramsDataTable: { search, filters, pagination = { page: 1, pageSize: DataTableConfig.pageSize } },
+}: useFetchDataTableProps) {
     const [data, setData] = useState<IDataTableRes[]>([]);
     const [pageCount, setPageCount] = useState<Number>(1);
     const [loading, setLoading] = useState<Boolean>(false);
     const [refresh, setRefresh] = useState<Boolean>(false);
-
-    const { pagination, search, filters } = paramsDataTable;
 
     useEffect(() => {
         setLoading(true);

@@ -46,7 +46,7 @@ export default function CompaniesPage() {
         search: {},
         filters: {},
     });
-    const [paramsDataTable, setParamsDataTable] = useState<IParamsDataTable>({
+    const [paramsDataTable, setParamsDataTable] = useState({
         search: {},
         filters: {},
     });

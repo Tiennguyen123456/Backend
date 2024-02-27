@@ -26,22 +26,30 @@ export default function AccountsPage() {
 
     // ** User Selector
     const { userPermissions } = useAppSelector(selectUser);
-
-    // ** State
-    const [openModal, setOpenModal] = useState(false);
-    const [rowSelected, setRowSelected] = useState<AccountColumn | null>(null);
-
     // Use Row Selection
     const { rowSelection, onRowSelection } = useRowSelection();
     // Use Pagination
     const { limit, onPaginationChange, skip, pagination, page } = usePagination();
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
+
+    // ** State
+    const [openModal, setOpenModal] = useState(false);
+    const [rowSelected, setRowSelected] = useState<AccountColumn | null>(null);
+    const [paramsDataTable1, setParamsDataTable] = useState({
+        search: {},
+        filters: {},
+    });
+
     // Use fetch data
     const { data, loading, pageCount, refresh, setRefresh } = useFetchDataTable<AccountColumn>({
-        url: ApiRoutes.getAccouts,
-        params: {
-            pagination: { page, limit },
+        url: ApiRoutes.getAccounts,
+        paramsDataTable: {
+            ...paramsDataTable1,
+            pagination: {
+                page: page ?? 1,
+                pageSize: limit ?? 1,
+            },
         },
     });
 

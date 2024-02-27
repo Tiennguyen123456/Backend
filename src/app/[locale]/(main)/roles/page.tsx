@@ -39,7 +39,7 @@ export default function CompaniesPage() {
     // ** State
     const [openModal, setOpenModal] = useState(false);
     const [rowSelected, setRowSelected] = useState<RoleColumn | null>(null);
-    const [paramsDataTable, setParamsDataTable] = useState<IParamsDataTable>({
+    const [paramsDataTable, setParamsDataTable] = useState({
         search: {},
         filters: {},
     });
