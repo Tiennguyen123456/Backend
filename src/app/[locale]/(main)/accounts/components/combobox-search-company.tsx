@@ -70,8 +70,8 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }
             });
     };
 
-    const debounceSearchCompany = React.useCallback(
-        debounceFunc((nextValue: string) => fetchDataSearchCompany(nextValue), 800),
+    const debounceSearchCompany = React.useMemo(
+        () => debounceFunc((nextValue: string) => fetchDataSearchCompany(nextValue), 800),
         [],
     );
 

@@ -57,7 +57,7 @@ export function useFetchDataTable<IDataTableRes>({
             .finally(function () {
                 setLoading(false);
             });
-    }, [refresh, limit, page, setData, setLoading]);
+    }, [refresh, limit, page, url, setData, setLoading]);
 
     return { data, loading, pageCount, refresh, setRefresh };
 }
