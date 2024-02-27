@@ -21,6 +21,9 @@ import { isActionsPermissions } from "@/helpers/funcs";
 import { useAppSelector } from "@/redux/root/hooks";
 import { selectUser } from "@/redux/user/slice";
 import { ActionPermisons } from "@/constants/routes";
+import { IParamsDataTable } from "@/models/DataTable";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function CompaniesPage() {
     // ** I18n
@@ -29,33 +32,39 @@ export default function CompaniesPage() {
     // ** User Selector
     const { userPermissions } = useAppSelector(selectUser);
 
-    // ** State
-    const [openModal, setOpenModal] = useState(false);
-    const [rowSelected, setRowSelected] = useState<CompanyColumn | null>(null);
-
-    // Use Date From To
-    // const [dateFrom, setDateFrom] = useState<Date>();
-    // const [dateTo, setDateTo] = useState<Date>();
-
     // Use Row Selection
     const { rowSelection, onRowSelection } = useRowSelection();
     // Use Pagination
     const { limit, onPaginationChange, skip, pagination, page } = usePagination();
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
+
+    // ** State
+    const [openModal, setOpenModal] = useState(false);
+    const [rowSelected, setRowSelected] = useState<CompanyColumn | null>(null);
+    const [paramsSearch, setParamsSearch] = useState({
+        search: {},
+        filters: {},
+    });
+    const [paramsDataTable, setParamsDataTable] = useState<IParamsDataTable>({
+        search: {},
+        filters: {},
+        pagination: {
+            page: page ?? 1,
+            pageSize: limit ?? 10,
+        },
+    });
+
     // Use fetch data
     const { data, loading, pageCount, refresh, setRefresh } = useFetchDataTable<ICompanyRes>({
         url: ApiRoutes.getCompanies,
-        params: {
-            pagination: { page, limit },
-        },
+        paramsDataTable,
     });
 
     // Function
     const handleAfterCreate = () => {
         setRefresh(!refresh);
     };
-
     const handleEditCompany = (data: CompanyColumn) => {
         setRowSelected({
             ...data,
@@ -76,12 +85,10 @@ export default function CompaniesPage() {
         setRowSelected(null);
         setOpenModal(true);
     };
-
     const handleCloseModal = () => {
         setRowSelected(null);
         setOpenModal(false);
     };
-
     const isCreateCompany = () => {
         return isActionsPermissions(userPermissions, ActionPermisons.CREATE_COMPANY);
     };
@@ -91,7 +98,15 @@ export default function CompaniesPage() {
     const isDeleteCompany = () => {
         return isActionsPermissions(userPermissions, ActionPermisons.DELETE_COMPANY);
     };
-
+    const handleSearchTaxcode = (event: any) => {
+        setParamsSearch({ ...paramsSearch, filters: { ...paramsSearch.filters, tax_code: event.target.value } });
+    };
+    const handleSearchName = (event: any) => {
+        setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, name: event.target.value } });
+    };
+    const handleClickSearch = () => {
+        setParamsDataTable({ ...paramsDataTable, search: paramsSearch.search, filters: paramsSearch.filters });
+    };
     const columns: ColumnDef<CompanyColumn>[] = [
         {
             id: "select",
@@ -170,6 +185,7 @@ export default function CompaniesPage() {
                         />
                         {isCreateCompany() ? (
                             <Button
+                                disabled={Boolean(loading)}
                                 variant={"secondary"}
                                 onClick={handleCreateCompany}
                             >
@@ -186,33 +202,48 @@ export default function CompaniesPage() {
                     </div>
                 </div>
             </div>
-            {/* <div className="flex flex-col md:flex-row gap-2 justify-end items-end w-full md:w-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full md:w-auto">
-                    <Select>
-                        <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Select a status" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                <SelectItem value="NEW">New</SelectItem>
-                                <SelectItem value="ACTIVE">Active</SelectItem>
-                                <SelectItem value="DEACTIVE">DeActive</SelectItem>
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-                    <DateyTimePicker
-                        title={"Pick a date from"}
-                        date={dateFrom}
-                        setDate={setDateFrom}
-                    />
-                    <DateyTimePicker
-                        title={"Pick a date to"}
-                        date={dateTo}
-                        setDate={setDateTo}
-                    />
+            <div className="flex flex-col sm:flex-row gap-2 justify-start items-end w-full md:w-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full md:w-auto">
+                    <div className="grid w-full max-w-sm items-center gap-1.5">
+                        <Label
+                            className="text-base"
+                            htmlFor="taxcode"
+                        >
+                            {translation("label.taxCode")}
+                        </Label>
+                        <Input
+                            disabled={Boolean(loading)}
+                            id="taxcode"
+                            type="text"
+                            className="h-10 text"
+                            placeholder={translation("placeholder.taxCode")}
+                            onChange={handleSearchTaxcode}
+                        />
+                    </div>
+                    <div className="grid w-full sm:max-w-xl items-center gap-1.5">
+                        <Label
+                            className="text-base"
+                            htmlFor="name"
+                        >
+                            {translation("label.name")}
+                        </Label>
+                        <Input
+                            disabled={Boolean(loading)}
+                            id="name"
+                            type="text"
+                            className="h-10"
+                            placeholder={translation("placeholder.name")}
+                            onChange={handleSearchName}
+                        />
+                    </div>
                 </div>
-                <Button>Search</Button>
-            </div> */}
+                <Button
+                    disabled={Boolean(loading)}
+                    onClick={handleClickSearch}
+                >
+                    {translation("action.search")}
+                </Button>
+            </div>
             <DataTable
                 loading={loading}
                 columns={columns}

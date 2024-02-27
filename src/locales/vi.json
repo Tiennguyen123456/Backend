@@ -155,7 +155,8 @@
         "listCard": "Danh sách thiệp mời",
         "importExcel": "Tải lên dữ liệu excel",
         "exportExcel": "Tải xuống dữ liệu excel",
-        "appendField": "Thêm trường"
+        "appendField": "Thêm trường",
+        "search": "Tìm kiếm"
     },
     "label": {
         "search": "Tìm kiếm",

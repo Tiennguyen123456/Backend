@@ -156,7 +156,8 @@
         "listCard": "List card",
         "importExcel": "Import excel",
         "exportExcel": "Export excel",
-        "appendField": "Append Field"
+        "appendField": "Append Field",
+        "search": "Search"
     },
     "label": {
         "search": "Search",

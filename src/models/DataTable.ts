@@ -1,3 +1,12 @@
+export interface IParamsDataTable {
+    search: {};
+    filters: {};
+    pagination: {
+        page: number;
+        pageSize: number;
+    };
+}
+
 export interface IListRes<T> {
     collection: T[];
     pagination: {

@@ -3,7 +3,13 @@ const withNextIntl = require("next-intl/plugin")("./src/i18n-configurations/i18n
 
 const nextConfig = {
     images: {
-        domains: ["delfi.com.vn"],
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "delfi.com.vn",
+                pathname: "**",
+            },
+        ],
     },
     reactStrictMode: false,
 };

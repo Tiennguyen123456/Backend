@@ -1,38 +1,30 @@
 ﻿import { api } from "@/configs/axios.config";
 import { useEffect, useState } from "react";
-import { IListRes } from "@/models/DataTable";
+import { IParamsDataTable, IListRes } from "@/models/DataTable";
 import qs from "qs";
-
-interface ParamsFetchDatatable {
-    pagination: {
-        page: number; // number page -> default page = 1
-        limit: number; // limit record of page
-    };
-}
 
 interface useFetchDataTableProps {
     url: string;
-    params: ParamsFetchDatatable;
+    paramsDataTable: IParamsDataTable;
 }
 
-export function useFetchDataTable<IDataTableRes>({
-    url,
-    params: {
-        pagination: { page = 1, limit = 10 },
-    },
-}: useFetchDataTableProps) {
+export function useFetchDataTable<IDataTableRes>({ url, paramsDataTable }: useFetchDataTableProps) {
     const [data, setData] = useState<IDataTableRes[]>([]);
     const [pageCount, setPageCount] = useState<Number>(1);
     const [loading, setLoading] = useState<Boolean>(false);
     const [refresh, setRefresh] = useState<Boolean>(false);
+
+    const { pagination, search, filters } = paramsDataTable;
 
     useEffect(() => {
         setLoading(true);
 
         api.get<IResponse<IListRes<IDataTableRes>>>(url, {
             params: {
-                page,
-                pageSize: limit,
+                page: pagination.page,
+                pageSize: pagination.pageSize,
+                search,
+                filters,
             },
             paramsSerializer: function (params) {
                 return qs.stringify(params, { arrayFormat: "brackets" });
@@ -43,9 +35,9 @@ export function useFetchDataTable<IDataTableRes>({
                 setData(response.data.collection);
                 setPageCount(
                     Math.ceil(
-                        response.data.pagination.meta.total / limit == 0
+                        response.data.pagination.meta.total / pagination.pageSize == 0
                             ? 1
-                            : response.data.pagination.meta.total / limit,
+                            : response.data.pagination.meta.total / pagination.pageSize,
                     ),
                 );
             })
@@ -57,7 +49,7 @@ export function useFetchDataTable<IDataTableRes>({
             .finally(function () {
                 setLoading(false);
             });
-    }, [refresh, limit, page, url, setData, setLoading]);
+    }, [refresh, pagination.page, pagination.pageSize, search, filters, url, setData, setLoading]);
 
     return { data, loading, pageCount, refresh, setRefresh };
 }
