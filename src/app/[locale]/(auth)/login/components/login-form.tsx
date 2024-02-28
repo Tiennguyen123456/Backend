@@ -13,7 +13,7 @@ import { useState } from "react";
 import { PasswordInput } from "@/components/ui/password-input";
 import Cookies from "js-cookie";
 import authApi from "@/services/auth-api";
-import { APIStatus } from "@/constants/enum";
+import { APIStatus, MessageCode } from "@/constants/enum";
 import { setAxiosAuthorization } from "@/configs/axios.config";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
@@ -76,10 +76,20 @@ export default function LoginForm(props: LoginFormProps) {
             router.push(ROUTES.DASHBOARD);
         } catch (error: any) {
             const data = error?.response?.data;
-            if (data?.message_code) {
+            // if (data?.message_code) {
+            //     toastError(translation(`errorApi.${data?.message_code}`));
+            // } else {
+            //     toastError(translation("errorApi.LOGIN_FAILED"));
+            // }
+            const messageError = translation("errorApi.LOGIN_FAILED");
+            if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
+                const [value] = Object.values(data.data);
+                const message = Array(value).toString() ?? messageError;
+                toastError(message);
+            } else if (data?.message_code != MessageCode.VALIDATION_ERROR) {
                 toastError(translation(`errorApi.${data?.message_code}`));
             } else {
-                toastError(translation("errorApi.LOGIN_FAILED"));
+                toastError(messageError);
             }
             console.log("error: ", error);
         } finally {

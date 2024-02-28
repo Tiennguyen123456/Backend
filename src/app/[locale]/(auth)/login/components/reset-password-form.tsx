@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { Loader2 } from "lucide-react";
 import authApi from "@/services/auth-api";
-import { APIStatus } from "@/constants/enum";
+import { APIStatus, MessageCode } from "@/constants/enum";
 
 interface ResetPasswordFormProps {
     onChangeForm: any;
@@ -37,7 +37,7 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
         email: z
             .string()
             .min(1, { message: translation("error.requiredEmail") })
-            .email({ message: translation("error.invalidEmail") })
+            .email({ message: translation("error.invalidEmail") }),
     });
 
     type FormValues = z.infer<typeof formSchema>;
@@ -45,7 +45,7 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email: ""
+            email: "",
         },
     });
 
@@ -55,7 +55,7 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
             setLoading(true);
 
             const response = await authApi.resetPassword({
-                email: data.email
+                email: data.email,
             });
 
             if (response.data.status == APIStatus.SUCCESS) {
@@ -63,10 +63,20 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
             }
         } catch (error: any) {
             const data = error?.response?.data;
-            if (data?.message_code) {
+            // if (data?.message_code) {
+            //     toastError(translation(`errorApi.${data?.message_code}`));
+            // } else {
+            //     toastError(translation("errorApi.LOGIN_FAILED"));
+            // }
+            const messageError = translation("errorApi.RESET_PASSWORD_FAILED");
+            if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
+                const [value] = Object.values(data.data);
+                const message = Array(value).toString() ?? messageError;
+                toastError(message);
+            } else if (data?.message_code != MessageCode.VALIDATION_ERROR) {
                 toastError(translation(`errorApi.${data?.message_code}`));
             } else {
-                toastError(translation("errorApi.LOGIN_FAILED"));
+                toastError(messageError);
             }
             console.log("error: ", error);
         } finally {
@@ -133,11 +143,7 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
                             className="w-full uppercase mt-1"
                             disabled={loading}
                         >
-                            {loading ? (
-                                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                            ) : (
-                                translation("action.submit")
-                            )}
+                            {loading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : translation("action.submit")}
                         </Button>
                     </CardFooter>
                 </Card>

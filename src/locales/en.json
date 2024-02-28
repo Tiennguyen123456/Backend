@@ -286,6 +286,8 @@
     },
     "errorApi": {
         "LOGIN_FAILED": "Login failed.",
+        "RESET_PASSWORD_FAILED": "Reset password failed.",
+        "UPDATE_PASSWORD_FAILED": "Update password failed.",
         "USER_NAME_OR_PASSWORD_INCORRECT": "Email or password is incorrect.",
         "GET_USER_PROFILE_FAILED": "Get user profile failed.",
         "CREATE_ACCOUNT_FAILED": "Create account failed.",

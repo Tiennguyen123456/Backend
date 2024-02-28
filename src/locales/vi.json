@@ -287,6 +287,8 @@
     },
     "errorApi": {
         "LOGIN_FAILED": "Đăng nhập thất bại.",
+        "RESET_PASSWORD_FAILED": "Lấy lại mật khẩu thất bại.",
+        "UPDATE_PASSWORD_FAILED": "Cập nhật mật khẩu thất bại.",
         "USER_NAME_OR_PASSWORD_INCORRECT": "Email hoặc mật khẩu không đúng.",
         "GET_USER_PROFILE_FAILED": "Lấy thông tin người dùng thất bại.",
         "CREATE_ACCOUNT_FAILED": "Tạo mới tài khoản thất bại.",

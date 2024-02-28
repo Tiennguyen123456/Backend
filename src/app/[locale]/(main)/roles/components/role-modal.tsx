@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import SpanRequired from "@/components/ui/span-required";
-import { APIStatus, RoleEnable, RoleGuard } from "@/constants/enum";
+import { APIStatus, MessageCode, RoleEnable, RoleGuard } from "@/constants/enum";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { IRoleRes } from "@/models/api/role-api";
 import { Switch } from "@/components/ui/switch";
@@ -70,10 +70,19 @@ export const RoleModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, defaul
             handleCloseModal();
         } catch (error: any) {
             const data = error?.response?.data;
-            if (data.data && data?.message_code) {
+            // if (data.data && data?.message_code) {
+            //     const [value] = Object.values(data.data);
+            //     const message = Array(value).toString() ?? messageError;
+            //     toastError(message);
+            // } else {
+            //     toastError(messageError);
+            // }
+            if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
                 const [value] = Object.values(data.data);
                 const message = Array(value).toString() ?? messageError;
                 toastError(message);
+            } else if (data?.message_code != MessageCode.VALIDATION_ERROR) {
+                toastError(translation(`errorApi.${data?.message_code}`));
             } else {
                 toastError(messageError);
             }

@@ -13,7 +13,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { Loader2 } from "lucide-react";
 import authApi from "@/services/auth-api";
-import { APIStatus } from "@/constants/enum";
+import { APIStatus, MessageCode } from "@/constants/enum";
 import { PasswordInput } from "@/components/ui/password-input";
 import { ROUTES } from "@/constants/routes";
 
@@ -28,16 +28,15 @@ export default function ResetPasswordForm() {
     const [loading, setLoading] = useState(false);
 
     // useForm
-    const formSchema = z.object({
-        password: z.string().min(8, { message: translation("error.invalidPassword") }),
-        password_confirm: z.string().min(8, { message: translation("error.invalidPassword") }),
-    }).refine(
-        (data) => data.password === data.password_confirm,
-        {
+    const formSchema = z
+        .object({
+            password: z.string().min(8, { message: translation("error.invalidPassword") }),
+            password_confirm: z.string().min(8, { message: translation("error.invalidPassword") }),
+        })
+        .refine((data) => data.password === data.password_confirm, {
             message: translation("resetPassword.passwordNotMatch"),
             path: ["password_confirm"],
-        }
-    );
+        });
 
     type FormValues = z.infer<typeof formSchema>;
 
@@ -45,13 +44,13 @@ export default function ResetPasswordForm() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             password: "",
-            password_confirm: ""
+            password_confirm: "",
         },
     });
 
-    const searchParams = useSearchParams()
+    const searchParams = useSearchParams();
 
-    const token = searchParams.get('token')
+    const token = searchParams.get("token");
 
     // Func
     const onSubmit = async (data: FormValues) => {
@@ -63,12 +62,9 @@ export default function ResetPasswordForm() {
                 return;
             }
 
-            const response = await authApi.updatePasswordWithToken(
-                token,
-                {
-                    password: data.password
-                }
-            );
+            const response = await authApi.updatePasswordWithToken(token, {
+                password: data.password,
+            });
 
             if (response.data.status == APIStatus.SUCCESS) {
                 toastSuccess(translation("successApi.SUCCESS"));
@@ -76,10 +72,20 @@ export default function ResetPasswordForm() {
             }
         } catch (error: any) {
             const data = error?.response?.data;
-            if (data?.message_code) {
+            // if (data?.message_code) {
+            //     toastError(translation(`errorApi.${data?.message_code}`));
+            // } else {
+            //     toastError(translation("errorApi.LOGIN_FAILED"));
+            // }
+            const messageError = translation("errorApi.UPDATE_PASSWORD_FAILED");
+            if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
+                const [value] = Object.values(data.data);
+                const message = Array(value).toString() ?? messageError;
+                toastError(message);
+            } else if (data?.message_code != MessageCode.VALIDATION_ERROR) {
                 toastError(translation(`errorApi.${data?.message_code}`));
             } else {
-                toastError(translation("errorApi.LOGIN_FAILED"));
+                toastError(messageError);
             }
             console.log("error: ", error);
         } finally {
@@ -118,7 +124,9 @@ export default function ResetPasswordForm() {
                                 name="password"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-base">{translation("resetPassword.newPassword")}</FormLabel>
+                                        <FormLabel className="text-base">
+                                            {translation("resetPassword.newPassword")}
+                                        </FormLabel>
                                         <FormControl>
                                             <PasswordInput
                                                 disabled={loading}
@@ -135,7 +143,9 @@ export default function ResetPasswordForm() {
                                 name="password_confirm"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-base">{translation("resetPassword.confirmPassword")}</FormLabel>
+                                        <FormLabel className="text-base">
+                                            {translation("resetPassword.confirmPassword")}
+                                        </FormLabel>
                                         <FormControl>
                                             <PasswordInput
                                                 disabled={loading}
@@ -155,11 +165,7 @@ export default function ResetPasswordForm() {
                             className="w-full uppercase mt-1 bg-blue-500 hover:bg-blue-700"
                             disabled={loading}
                         >
-                            {loading ? (
-                                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                            ) : (
-                                translation("action.update")
-                            )}
+                            {loading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : translation("action.update")}
                         </Button>
                     </CardFooter>
                 </Card>

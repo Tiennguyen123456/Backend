@@ -15,7 +15,7 @@ import { useTranslations } from "next-intl";
 import { AlertModal } from "@/components/modals/alert-modal";
 import companyApi from "@/services/company-api";
 import { toastError, toastSuccess } from "@/utils/toast";
-import { APIStatus } from "@/constants/enum";
+import { APIStatus, MessageCode } from "@/constants/enum";
 
 interface CellActionProps {
     data: CompanyColumn;
@@ -52,12 +52,22 @@ export const CellAction: React.FC<CellActionProps> = ({
             onRefetch();
         } catch (error: any) {
             const data = error?.response?.data;
-            if (data?.data && data?.message_code) {
+            // if (data?.data && data?.message_code) {
+            //     const [value] = Object.values(data.data);
+            //     const message = Array(value).toString() ?? translation("errorApi.DELETE_COMPANY_FAILED");
+            //     toastError(message);
+            // } else {
+            //     toastError(translation("errorApi.DELETE_COMPANY_FAILED"));
+            // }
+            const messageError = translation("errorApi.DELETE_COMPANY_FAILED");
+            if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
                 const [value] = Object.values(data.data);
-                const message = Array(value).toString() ?? translation("errorApi.DELETE_COMPANY_FAILED");
+                const message = Array(value).toString() ?? messageError;
                 toastError(message);
+            } else if (data?.message_code != MessageCode.VALIDATION_ERROR) {
+                toastError(translation(`errorApi.${data?.message_code}`));
             } else {
-                toastError(translation("errorApi.DELETE_COMPANY_FAILED"));
+                toastError(messageError);
             }
             console.log("error: ", error);
         } finally {
