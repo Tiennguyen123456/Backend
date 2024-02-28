@@ -109,6 +109,9 @@
             "status": "Status"
         }
     },
+    "createEventPage": {
+        "title": "Create New Event"
+    },
     "companyEventPage": {
         "title": "Create New Company"
     },
@@ -183,6 +186,7 @@
         "endDate": "End Date",
         "company": "Company",
         "address": "Address",
+        "location": "Location",
         "eventDescription": "Event description",
         "website": "Website",
         "phone": "Phone",
@@ -213,7 +217,9 @@
         "taxCode": "Tax code",
         "guard": "Guard",
         "enable": "Enable",
-        "notFoundData": "Not found data."
+        "notFoundData": "Not found data.",
+        "emailContent": "Email content",
+        "cardsContent": "Cards content"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -226,6 +232,7 @@
         "company": "Select Company",
         "companyName": "Enter Company name",
         "address": "Address",
+        "location": "Location",
         "eventDescription": "Write your event description here...",
         "website": "Website",
         "phone": "Phone",
@@ -238,7 +245,9 @@
         "code": "Code",
         "companyCode": "Company code",
         "taxCode": "Tax code",
-        "guard": "Guard name"
+        "guard": "Guard name",
+        "emailContent": "Email content",
+        "cardsContent": "Cards content"
     },
     "error": {
         "requiredEmail": "Please enter your email address.",
@@ -251,6 +260,7 @@
         "requiredEventCode": "Please enter event code.",
         "requiredStartDate": "Please enter start date.",
         "requiredEndDate": "Please enter end date.",
+        "compareStartEndDate": "End date cannot be earlier than start date.",
         "requiredCompany": "Please select company.",
         "invalidDate": "Please enter valid date.",
         "requiredName": "Please enter your name.",
@@ -301,7 +311,8 @@
         "TOO_MANY_ATTEMPTS": "Too many attempts. Please try again later.",
         "TOKEN_NOT_FOUND": "Token not found",
         "VALIDATION_ERROR": "Validate request failed.",
-        "UPDATE_PERMISSION_FAILED": "Update permission failed."
+        "UPDATE_PERMISSION_FAILED": "Update permission failed.",
+        "UNAUTHORIZED_ACTION": "Token expired."
     },
     "successApi": {
         "SUCCESS": "Success",

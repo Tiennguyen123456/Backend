@@ -14,6 +14,10 @@ export enum APIStatus {
     ERROR = "error",
 }
 
+export enum MessageCode {
+    VALIDATION_ERROR = "VALIDATION_ERROR",
+}
+
 export enum EStatus {
     NEW = "NEW",
     ACTIVE = "ACTIVE",

@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { DateyTimePicker } from "@/components/ui/date-time-picker";
+import { DateTimePicker } from "@/components/ui/date-time-picker";
 import React, { useState } from "react";
 import CardTotal from "./components/card-total";
 import { useTranslations } from "next-intl";
@@ -22,12 +22,14 @@ export default function DashboardPage() {
                 <h2 className="text-3xl font-bold tracking-tight">{translation("sidebar.items.dashboard")}</h2>
                 <div className="flex flex-col md:flex-row gap-2 items-end w-full md:w-auto">
                     <div className="grid grid-cols-2 gap-2 w-full md:w-auto">
-                        <DateyTimePicker
+                        <DateTimePicker
+                            disabled={false}
                             title={"Pick a date from"}
                             date={dateFrom}
                             setDate={setDateFrom}
                         />
-                        <DateyTimePicker
+                        <DateTimePicker
+                            disabled={false}
                             title={"Pick a date to"}
                             date={dateTo}
                             setDate={setDateTo}
@@ -35,19 +37,6 @@ export default function DashboardPage() {
                     </div>
                     <Button>Search</Button>
                 </div>
-                {/* <div className="flex flex-col md:flex-row justify-end items-end gap-2 w-full">
-                    <DateyTimePicker
-                        title={"Pick a date from"}
-                        date={dateFrom}
-                        setDate={setDateFrom}
-                    />
-                    <DateyTimePicker
-                        title={"Pick a date to"}
-                        date={dateTo}
-                        setDate={setDateTo}
-                    />
-                    <Button>Search</Button>
-                </div> */}
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <CardTotal

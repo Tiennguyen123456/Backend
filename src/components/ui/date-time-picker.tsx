@@ -13,22 +13,25 @@ import { vi, enUS } from "date-fns/locale";
 import { useLocale } from "next-intl";
 import { DateTimeFormat } from "@/constants/variables";
 
-interface DateyTimePickerProps {
+interface DateTimePickerProps {
+    disabled: boolean;
+    className?: string;
     title?: string;
     date: Date | undefined;
     setDate: (date: Date | undefined) => void;
 }
 
-export function DateyTimePicker({ title = "Pick a date", date, setDate }: DateyTimePickerProps) {
+export function DateTimePicker({ title = "Pick a date", className, date, setDate, disabled }: DateTimePickerProps) {
     const locale = useLocale();
-    // const [date, setDate] = React.useState<Date>();
 
     return (
         <Popover>
             <PopoverTrigger asChild>
                 <Button
+                    disabled={disabled}
                     variant={"outline"}
                     className={cn(
+                        className,
                         "sm:w-full md:w-[200px] justify-start text-left font-normal",
                         !date && "text-muted-foreground",
                     )}

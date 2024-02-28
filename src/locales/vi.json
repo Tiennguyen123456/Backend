@@ -108,6 +108,9 @@
             "status": "Trạng thái"
         }
     },
+    "createEventPage": {
+        "title": "Tạo mới sự kiện"
+    },
     "companyEventPage": {
         "title": "Tạo mới công ty"
     },
@@ -182,6 +185,7 @@
         "endDate": "Ngày kết thúc",
         "company": "Công ty",
         "address": "Địa điểm",
+        "location": "Vị trí",
         "eventDescription": "Mô tả sự kiện",
         "website": "Trang web công ty",
         "phone": "Số điện thoại",
@@ -214,7 +218,9 @@
         "taxCode": "Mã số thuế",
         "guard": "Guard",
         "enable": "Kích hoạt",
-        "notFoundData": "Không có dữ liệu."
+        "notFoundData": "Không có dữ liệu.",
+        "emailContent": "Nội dụng email",
+        "cardsContent": "Nội dụng thiệp mời"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -227,6 +233,7 @@
         "company": "Chọn công ty",
         "companyName": "Nhập tên công ty",
         "address": "Địa điểm",
+        "location": "Vị trí",
         "eventDescription": "Nhập mô tả sự kiện ở đây...",
         "website": "Trang web công ty",
         "phone": "Số điện thoại",
@@ -239,7 +246,9 @@
         "code": "Mã code",
         "companyCode": "Mã công ty",
         "taxCode": "Mã số thuế",
-        "guard": "Guard name"
+        "guard": "Guard name",
+        "emailContent": "Nội dụng email",
+        "cardsContent": "Nội dụng thiệp mời"
     },
     "error": {
         "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
@@ -252,6 +261,7 @@
         "requiredEventCode": "Vui lòng nhập mã sự kiện",
         "requiredStartDate": "Vui lòng nhập ngày bắt đầu.",
         "requiredEndDate": "Vui lòng nhập ngày kết thúc.",
+        "compareStartEndDate": "Ngày kết thúc không thể sớm hơn ngày bắt đầu.",
         "requiredCompany": "Vui lòng chọn công ty.",
         "invalidDate": "Vui lòng nhập ngày hợp lệ.",
         "requiredName": "Vui lòng nhập tên.",
@@ -299,7 +309,8 @@
         "TOO_MANY_ATTEMPTS": "Quá nhiều lần thử. Vui lòng thử lại sau 1 phút.",
         "TOKEN_NOT_FOUND": "Mã xác thực không hợp lệ.",
         "VALIDATION_ERROR": "Dữ liệu không đúng.",
-        "UPDATE_PERMISSION_FAILED": "Cập nhật quyền thất bại."
+        "UPDATE_PERMISSION_FAILED": "Cập nhật quyền thất bại.",
+        "UNAUTHORIZED_ACTION": "Token đã hết hạn."
     },
     "successApi": {
         "SUCCESS": "Thành công",
