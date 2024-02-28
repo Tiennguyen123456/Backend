@@ -1,4 +1,5 @@
 import { AppRoutesPermissions, PRIVATE_ROUTES } from "@/constants/routes";
+import { replaceIdInURLRegExp } from "@/constants/variables";
 import { locales } from "@/i18n-configurations/config";
 
 export function checkPermission(permissions: string[], action: string) {
@@ -26,10 +27,12 @@ export function removeLocaleFromPathname(pathname: string) {
 
 export function isMatchPrivateRoute(path: string) {
     let newPath = removeLocaleFromPathname(path);
+    newPath = newPath.replace(replaceIdInURLRegExp, "$1$2");
     return PRIVATE_ROUTES.some((substr) => newPath.startsWith(substr));
 }
 
 export function checkPermissionForAccessSpecificPage(userPermissions: string[], pathname: string) {
+    pathname = pathname.replace(replaceIdInURLRegExp, "");
     for (const route of AppRoutesPermissions) {
         if (route.path === pathname) {
             const hasPermission = route.permissions.every((permission) => checkPermission(userPermissions, permission));

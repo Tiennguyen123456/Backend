@@ -185,12 +185,7 @@ export default function EventsPage() {
                         />
                     </div>
                     <div className="grid w-full sm:max-w-xl items-center gap-1.5">
-                        <Label
-                            className="text-base"
-                            htmlFor="name"
-                        >
-                            {translation("label.status")}
-                        </Label>
+                        <Label className="text-base">{translation("label.status")}</Label>
                         <Select
                             disabled={Boolean(loading)}
                             onValueChange={handleSearchStatus}

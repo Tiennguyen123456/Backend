@@ -12,6 +12,8 @@ export const phoneRegExp = new RegExp(
     /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/,
 );
 
+export const replaceIdInURLRegExp = new RegExp(/(\/\w+)\/\d+(\/\w+)?$/);
+
 export const DateTimeFormat = "dd-MM-y HH:mm:ss";
 export const DateFormat = "dd-MM-y";
 export const DateFormatServer = "y-MM-dd";
@@ -22,7 +24,15 @@ export const STATUS_VALID = [
     { label: "Active", value: "ACTIVE" },
     { label: "Inactive", value: "INACTIVE" },
 ];
+export const STATUS_VALID_FILTER = [
+    { label: "All status", value: "ALL" },
+    { label: "New", value: "NEW" },
+    { label: "Active", value: "ACTIVE" },
+    { label: "Inactive", value: "INACTIVE" },
+];
+
 export const STATUS = [...STATUS_VALID, { label: "Done", value: "DONE" }, { label: "Cancel", value: "CANCEL" }];
+
 export const STATUS_FILTER_EVENT = [
     { label: "All status", value: "ALL" },
     ...STATUS_VALID,

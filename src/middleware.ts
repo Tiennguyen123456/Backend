@@ -15,7 +15,7 @@ export default async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL(ROUTES.DASHBOARD, request.url));
     }
 
-    // Check token for rotues private
+    // Check token for routes private
     if (!token?.value && isMatchPrivateRoute(pathname)) {
         return NextResponse.redirect(new URL(ROUTES.LOGIN, request.url));
     }

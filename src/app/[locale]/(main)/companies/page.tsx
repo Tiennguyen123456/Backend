@@ -8,7 +8,6 @@ import { usePagination } from "@/hooks/use-pagination";
 import { useRowSelection } from "@/hooks/use-row-selection";
 import { useSorting } from "@/hooks/use-sorting";
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
 import { CellAction } from "./components/cell-action";
 import { CompanyColumn } from "./components/column";
 import FooterContainer from "@/components/layout/footer-container";
@@ -23,6 +22,9 @@ import { selectUser } from "@/redux/user/slice";
 import { ActionPermissions } from "@/constants/routes";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { EStatus } from "@/constants/enum";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { STATUS_VALID_FILTER } from "@/constants/variables";
 
 export default function CompaniesPage() {
     // ** I18n
@@ -104,6 +106,16 @@ export default function CompaniesPage() {
     };
     const handleSearchName = (event: any) => {
         setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, name: event.target.value } });
+    };
+    const handleSearchStatus = (statusName: any) => {
+        setParamsSearch(
+            statusName == EStatus.ALL
+                ? {
+                      ...paramsSearch,
+                      filters: { ...paramsSearch.filters, status: "" },
+                  }
+                : { ...paramsSearch, filters: { ...paramsSearch.filters, status: statusName } },
+        );
     };
     const handleClickSearch = () => {
         setParamsDataTable({ ...paramsDataTable, search: paramsSearch.search, filters: paramsSearch.filters });
@@ -205,7 +217,7 @@ export default function CompaniesPage() {
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 justify-start items-end w-full md:w-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full md:w-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full md:w-auto">
                     <div className="grid w-full max-w-sm items-center gap-1.5">
                         <Label
                             className="text-base"
@@ -237,6 +249,28 @@ export default function CompaniesPage() {
                             placeholder={translation("placeholder.name")}
                             onChange={handleSearchName}
                         />
+                    </div>
+                    <div className="grid w-full sm:max-w-xl items-center gap-1.5">
+                        <Label className="text-base">{translation("label.status")}</Label>
+                        <Select
+                            disabled={Boolean(loading)}
+                            onValueChange={handleSearchStatus}
+                            defaultValue={EStatus.ALL}
+                        >
+                            <SelectTrigger className="h-10">
+                                <SelectValue placeholder={translation("placeholder.status")} />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {STATUS_VALID_FILTER.map((status) => (
+                                    <SelectItem
+                                        key={status.value}
+                                        value={status.value}
+                                    >
+                                        {translation(`status.${status.value}`)}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
                     </div>
                 </div>
                 <Button
