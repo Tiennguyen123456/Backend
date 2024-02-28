@@ -6,7 +6,7 @@ import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import SpanRequired from "@/components/ui/span-required";
-import { DateTimeFormatServer, STATUS } from "@/constants/variables";
+import { DateTimeFormatServer, STATUS_VALID } from "@/constants/variables";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { Save } from "lucide-react";
@@ -22,10 +22,15 @@ import eventApi from "@/services/event-api";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
+import { selectUser } from "@/redux/user/slice";
+import { useAppSelector } from "@/redux/root/hooks";
 
 export default function CreateEventPage() {
     // ** I18n
     const translation = useTranslations("");
+
+    // ** User Selector
+    const { userProfile } = useAppSelector(selectUser);
 
     // ** Router
     const router = useRouter();
@@ -73,7 +78,7 @@ export default function CreateEventPage() {
                 start_time: "",
                 end_time: "",
             },
-            company_id: -1,
+            company_id: userProfile?.is_admin ? -1 : userProfile?.id,
             status: EStatus.NEW,
             description: "",
             email_content: "",
@@ -88,8 +93,14 @@ export default function CreateEventPage() {
         const messageError = translation("errorApi.CREATE_EVENT_FAILED");
         try {
             setLoading(true);
-            const { date, ...rest } = data;
-            const formattedData = { ...rest, start_time: date.start_time, end_time: date.end_time };
+            let formattedData = {};
+            if (userProfile?.is_admin) {
+                const { date, ...rest } = data;
+                formattedData = { ...rest, start_time: date.start_time, end_time: date.end_time };
+            } else {
+                const { company_id, date, ...rest } = data;
+                formattedData = { ...rest, start_time: date.start_time, end_time: date.end_time };
+            }
             const response = await eventApi.storeEvent(formattedData);
             if (response.data.status == APIStatus.SUCCESS) {
                 toastSuccess(messageSuccess);
@@ -110,6 +121,10 @@ export default function CreateEventPage() {
         } finally {
             setLoading(false);
         }
+    };
+
+    const isSysAdmin = () => {
+        return userProfile?.is_admin == true;
     };
 
     return (
@@ -226,24 +241,28 @@ export default function CreateEventPage() {
                                         </FormItem>
                                     )}
                                 />
-                                <FormField
-                                    control={form.control}
-                                    name="company_id"
-                                    render={({ field }) => (
-                                        <FormItem className="flex flex-col">
-                                            <FormLabel className="text-base">
-                                                {translation("label.company")}
-                                                <SpanRequired />
-                                            </FormLabel>
-                                            <ComboboxSearchCompany
-                                                disabled={loading}
-                                                onSelectCompany={field.onChange}
-                                                defaultName={""}
-                                            />
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                                {!isSysAdmin() ? (
+                                    ""
+                                ) : (
+                                    <FormField
+                                        control={form.control}
+                                        name="company_id"
+                                        render={({ field }) => (
+                                            <FormItem className="flex flex-col">
+                                                <FormLabel className="text-base">
+                                                    {translation("label.company")}
+                                                    <SpanRequired />
+                                                </FormLabel>
+                                                <ComboboxSearchCompany
+                                                    disabled={loading}
+                                                    onSelectCompany={field.onChange}
+                                                    defaultName={""}
+                                                />
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                )}
                                 <FormField
                                     control={form.control}
                                     name="status"
@@ -268,7 +287,7 @@ export default function CreateEventPage() {
                                                     </SelectTrigger>
                                                 </FormControl>
                                                 <SelectContent>
-                                                    {STATUS.map((status) => (
+                                                    {STATUS_VALID.map((status) => (
                                                         <SelectItem
                                                             key={status.value}
                                                             value={status.value}
