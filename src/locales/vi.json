@@ -164,7 +164,8 @@
         "exportExcel": "Tải xuống dữ liệu excel",
         "appendField": "Thêm trường",
         "search": "Tìm kiếm",
-        "client": "Khách hàng"
+        "client": "Khách hàng",
+        "back": "Quay lại"
     },
     "label": {
         "search": "Tìm kiếm",
@@ -402,6 +403,7 @@
         "roles": "Vai trò",
         "permissions": "Phân quyền",
         "accounts": "Tài khoản",
-        "events": "Sự kiện"
+        "events": "Sự kiện",
+        "createEvent": "Tạo sự kiện"
     }
 }

@@ -165,7 +165,8 @@
         "exportExcel": "Export excel",
         "appendField": "Append Field",
         "search": "Search",
-        "client": "Clients"
+        "client": "Clients",
+        "back": "Back"
     },
     "label": {
         "search": "Search",
@@ -388,14 +389,12 @@
     "403page": {
         "title": "403",
         "subtitle": "Access denied",
-        "description": "You do not have permission to access this page !",
-        "gohome": "Go home"
+        "description": "You do not have permission to access this page !"
     },
     "404page": {
         "title": "404",
         "subtitle": "Page not found",
-        "description": "The page you're looking for doesn't exist !",
-        "gohome": "Go home"
+        "description": "The page you're looking for doesn't exist !"
     },
     "breadcrumb": {
         "home": "Dashboard",
@@ -405,6 +404,6 @@
         "permissions": "Permissions",
         "accounts": "Accounts",
         "events": "Events",
-        "configEvent": "Event config"
+        "createEvent": "Create event"
     }
 }

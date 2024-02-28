@@ -83,12 +83,10 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
                     align="end"
                     className="w-40"
                 >
-                    <DropdownMenuItem onClick={() => router.push(ROUTES.EVENTS_DETAILS + `/${data.id}`)}>
+                    <DropdownMenuItem onClick={() => router.push(ROUTES.EVENTS + `/${data.id}`)}>
                         <Edit className="mr-3 h-4 w-4" /> {translation("action.edit")}
                     </DropdownMenuItem>
-                    <DropdownMenuItem
-                        onClick={() => router.push(ROUTES.EVENTS_DETAILS + `/${data.id}` + ROUTES.CLIENTS)}
-                    >
+                    <DropdownMenuItem onClick={() => router.push(ROUTES.EVENTS + `/${data.id}` + ROUTES.CLIENTS)}>
                         <Users className="mr-3 h-4 w-4" /> {translation("action.client")}
                     </DropdownMenuItem>
                 </DropdownMenuContent>
