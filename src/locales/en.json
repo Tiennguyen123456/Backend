@@ -418,5 +418,13 @@
         "accounts": "Accounts",
         "events": "Events",
         "createEvent": "Create event"
+    },
+    "status": {
+        "ALL": "All status",
+        "NEW": "New",
+        "ACTIVE": "Active",
+        "INACTIVE": "InActive",
+        "DONE": "Done",
+        "CANCEL": "Cancel"
     }
 }

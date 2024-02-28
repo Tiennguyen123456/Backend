@@ -19,6 +19,7 @@ export enum MessageCode {
 }
 
 export enum EStatus {
+    ALL = "ALL",
     NEW = "NEW",
     ACTIVE = "ACTIVE",
     INACTIVE = "INACTIVE",

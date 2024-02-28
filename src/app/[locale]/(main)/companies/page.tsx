@@ -151,6 +151,7 @@ export default function CompaniesPage() {
         {
             accessorKey: "status",
             header: () => <div className="text-black font-bold">{translation("companyPage.table.status")}</div>,
+            cell: ({ row }) => translation(`status.${row.original.status}`),
         },
         {
             id: "actions",

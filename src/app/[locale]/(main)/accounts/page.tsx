@@ -113,6 +113,7 @@ export default function AccountsPage() {
         {
             accessorKey: "status",
             header: () => <div className="text-black font-bold">{translation("accountPage.table.status")}</div>,
+            cell: ({ row }) => translation(`status.${row.original.status}`),
         },
         {
             id: "actions",

@@ -418,5 +418,13 @@
         "accounts": "Tài khoản",
         "events": "Sự kiện",
         "createEvent": "Tạo sự kiện"
+    },
+    "status": {
+        "ALL": "Tất cả",
+        "NEW": "Mới",
+        "ACTIVE": "Kích hoạt",
+        "INACTIVE": "Ngừng kích hoạt",
+        "DONE": "Đã xong",
+        "CANCEL": "Đã hủy"
     }
 }

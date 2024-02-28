@@ -22,7 +22,9 @@ import { Label } from "@/components/ui/label";
 import { IEventRes } from "@/models/api/event-api";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
-import { DateTimeFormat } from "@/constants/variables";
+import { DateTimeFormat, STATUS_FILTER_EVENT } from "@/constants/variables";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { EStatus } from "@/constants/enum";
 
 export default function EventsPage() {
     // ** I18n
@@ -73,11 +75,24 @@ export default function EventsPage() {
     const isAssetClientEvent = () => {
         return isActionsPermissions(userPermissions, ActionPermissions.DELETE_EVENT);
     };
-    const handleSearchTaxcode = (event: any) => {
-        setParamsSearch({ ...paramsSearch, filters: { ...paramsSearch.filters, tax_code: event.target.value } });
+    const handleSearchCode = (event: any) => {
+        setParamsSearch({ ...paramsSearch, filters: { ...paramsSearch.filters, code: event.target.value } });
     };
     const handleSearchName = (event: any) => {
-        setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, name: event.target.value } });
+        setParamsSearch({
+            ...paramsSearch,
+            search: { ...paramsSearch.search, name: event.target.value },
+        });
+    };
+    const handleSearchStatus = (statusName: any) => {
+        setParamsSearch(
+            statusName == EStatus.ALL
+                ? {
+                      ...paramsSearch,
+                      filters: { ...paramsSearch.filters, status: "" },
+                  }
+                : { ...paramsSearch, filters: { ...paramsSearch.filters, status: statusName } },
+        );
     };
     const handleClickSearch = () => {
         setParamsDataTable({ ...paramsDataTable, search: paramsSearch.search, filters: paramsSearch.filters });
@@ -104,6 +119,7 @@ export default function EventsPage() {
         {
             accessorKey: "status",
             header: () => <div className="text-black font-bold">{translation("eventPage.table.status")}</div>,
+            cell: ({ row }) => translation(`status.${row.original.status}`),
         },
         {
             id: "actions",
@@ -134,22 +150,22 @@ export default function EventsPage() {
                     </div>
                 </div>
             </div>
-            {/* <div className="flex flex-col sm:flex-row gap-2 justify-start items-end w-full md:w-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full md:w-auto">
+            <div className="flex flex-col sm:flex-row gap-2 justify-start items-end w-full md:w-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full md:w-auto">
                     <div className="grid w-full max-w-sm items-center gap-1.5">
                         <Label
                             className="text-base"
-                            htmlFor="taxcode"
+                            htmlFor="code"
                         >
-                            {translation("label.taxCode")}
+                            {translation("label.eventCode")}
                         </Label>
                         <Input
                             disabled={Boolean(loading)}
-                            id="taxcode"
+                            id="code"
                             type="text"
                             className="h-10 text"
-                            placeholder={translation("placeholder.taxCode")}
-                            onChange={handleSearchTaxcode}
+                            placeholder={translation("placeholder.eventCode")}
+                            onChange={handleSearchCode}
                         />
                     </div>
                     <div className="grid w-full sm:max-w-xl items-center gap-1.5">
@@ -157,16 +173,43 @@ export default function EventsPage() {
                             className="text-base"
                             htmlFor="name"
                         >
-                            {translation("label.name")}
+                            {translation("label.eventName")}
                         </Label>
                         <Input
                             disabled={Boolean(loading)}
                             id="name"
                             type="text"
                             className="h-10"
-                            placeholder={translation("placeholder.name")}
+                            placeholder={translation("placeholder.eventName")}
                             onChange={handleSearchName}
                         />
+                    </div>
+                    <div className="grid w-full sm:max-w-xl items-center gap-1.5">
+                        <Label
+                            className="text-base"
+                            htmlFor="name"
+                        >
+                            {translation("label.status")}
+                        </Label>
+                        <Select
+                            disabled={Boolean(loading)}
+                            onValueChange={handleSearchStatus}
+                            defaultValue={EStatus.ALL}
+                        >
+                            <SelectTrigger className="h-10">
+                                <SelectValue placeholder={translation("placeholder.status")} />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {STATUS_FILTER_EVENT.map((status) => (
+                                    <SelectItem
+                                        key={status.value}
+                                        value={status.value}
+                                    >
+                                        {translation(`status.${status.value}`)}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
                     </div>
                 </div>
                 <Button
@@ -175,7 +218,7 @@ export default function EventsPage() {
                 >
                     {translation("action.search")}
                 </Button>
-            </div> */}
+            </div>
             <DataTable
                 loading={loading}
                 columns={columns}
