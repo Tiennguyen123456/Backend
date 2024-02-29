@@ -66,15 +66,9 @@ export default function EventsPage() {
     });
 
     // Function
-    const isCreateEvent = () => {
-        return isActionsPermissions(userPermissions, ActionPermissions.CREATE_EVENT);
-    };
-    const isUpdateEvent = () => {
-        return isActionsPermissions(userPermissions, ActionPermissions.UPDATE_EVENT);
-    };
-    const isAssetClientEvent = () => {
-        return isActionsPermissions(userPermissions, ActionPermissions.DELETE_EVENT);
-    };
+    const canCreateEvent = isActionsPermissions(userPermissions, ActionPermissions.CREATE_EVENT);
+    const canUpdateEvent = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_EVENT);
+    const canAssetClientEvent = isActionsPermissions(userPermissions, ActionPermissions.DELETE_EVENT);
     const handleSearchCode = (event: any) => {
         setParamsSearch({ ...paramsSearch, filters: { ...paramsSearch.filters, code: event.target.value } });
     };
@@ -124,7 +118,7 @@ export default function EventsPage() {
         {
             id: "actions",
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
-            cell: ({ row }) => (!isUpdateEvent() && !isAssetClientEvent() ? "" : <CellAction data={row.original} />),
+            cell: ({ row }) => (canUpdateEvent || canAssetClientEvent ? <CellAction data={row.original} /> : ""),
         },
     ];
 
@@ -135,7 +129,7 @@ export default function EventsPage() {
                 <div className="flex flex-wrap items-center justify-between space-y-2">
                     <h2 className="text-3xl font-bold tracking-tight">{translation("eventPage.title")}</h2>
                     <div className="flex justify-end flex-wrap items-center gap-2 !mt-0">
-                        {isCreateEvent() ? (
+                        {canCreateEvent && (
                             <Button
                                 disabled={Boolean(loading)}
                                 variant={"secondary"}
@@ -144,8 +138,6 @@ export default function EventsPage() {
                                 <PlusCircle className="w-5 h-5 md:mr-2" />
                                 <p className="hidden md:block">{translation("action.create")}</p>
                             </Button>
-                        ) : (
-                            ""
                         )}
                     </div>
                 </div>

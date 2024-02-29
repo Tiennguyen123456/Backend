@@ -174,9 +174,7 @@ export default function CompaniesPage() {
             });
     };
 
-    const canAssignPermission = () => {
-        return isActionsPermissions(userPermissions, ActionPermissions.ASSIGN_PERMISSION_TO_ROLE);
-    };
+    const canAssignPermission = isActionsPermissions(userPermissions, ActionPermissions.ASSIGN_PERMISSION_TO_ROLE);
 
     return (
         <>
@@ -214,7 +212,7 @@ export default function CompaniesPage() {
                         </Select>
                     </div>
                     <div className="flex flex-col justify-end">
-                        {canAssignPermission() && (
+                        {canAssignPermission && (
                             <Button
                                 type="submit"
                                 onClick={handleUpdatePermission}

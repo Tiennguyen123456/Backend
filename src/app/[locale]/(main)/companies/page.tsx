@@ -92,16 +92,10 @@ export default function CompaniesPage() {
         setRowSelected(null);
         setOpenModal(false);
     };
-    const isCreateCompany = () => {
-        return isActionsPermissions(userPermissions, ActionPermissions.CREATE_COMPANY);
-    };
-    const isUpdateCompany = () => {
-        return isActionsPermissions(userPermissions, ActionPermissions.UPDATE_COMPANY);
-    };
-    const isDeleteCompany = () => {
-        return isActionsPermissions(userPermissions, ActionPermissions.DELETE_COMPANY);
-    };
-    const handleSearchTaxcode = (event: any) => {
+    const canCreateCompany = isActionsPermissions(userPermissions, ActionPermissions.CREATE_COMPANY);
+    const canUpdateCompany = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_COMPANY);
+    const canDeleteCompany = isActionsPermissions(userPermissions, ActionPermissions.DELETE_COMPANY);
+    const handleSearchTaxCode = (event: any) => {
         setParamsSearch({ ...paramsSearch, filters: { ...paramsSearch.filters, tax_code: event.target.value } });
     };
     const handleSearchName = (event: any) => {
@@ -169,16 +163,16 @@ export default function CompaniesPage() {
             id: "actions",
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
             cell: ({ row }) =>
-                !isUpdateCompany() && !isDeleteCompany() ? (
-                    ""
-                ) : (
+                canUpdateCompany || canDeleteCompany ? (
                     <CellAction
                         onRowSelected={() => handleEditCompany(row.original)}
                         onRefetch={handleAfterCreate}
                         data={row.original}
-                        isUpdate={isUpdateCompany()}
-                        isDelete={isDeleteCompany()}
+                        isUpdate={canUpdateCompany}
+                        isDelete={canDeleteCompany}
                     />
+                ) : (
+                    ""
                 ),
         },
     ];
@@ -197,7 +191,7 @@ export default function CompaniesPage() {
                             defaultData={rowSelected}
                             onConfirm={handleAfterCreate}
                         />
-                        {isCreateCompany() ? (
+                        {canCreateCompany && (
                             <Button
                                 disabled={Boolean(loading)}
                                 variant={"secondary"}
@@ -206,8 +200,6 @@ export default function CompaniesPage() {
                                 <PlusCircle className="w-5 h-5 md:mr-2" />
                                 <p className="hidden md:block">{translation("action.create")}</p>
                             </Button>
-                        ) : (
-                            ""
                         )}
                         {/* <Button variant={"destructive"}>
                         <Trash2 className="w-5 h-5 md:mr-2" />
@@ -231,7 +223,7 @@ export default function CompaniesPage() {
                             type="text"
                             className="h-10 text"
                             placeholder={translation("placeholder.taxCode")}
-                            onChange={handleSearchTaxcode}
+                            onChange={handleSearchTaxCode}
                         />
                     </div>
                     <div className="grid w-full sm:max-w-xl items-center gap-1.5">

@@ -84,12 +84,8 @@ export default function AccountsPage() {
         setOpenModal(false);
     };
 
-    const isCreateAccount = () => {
-        return isActionsPermissions(userPermissions, ActionPermissions.CREATE_ACCOUNT);
-    };
-    const isUpdateAccount = () => {
-        return isActionsPermissions(userPermissions, ActionPermissions.UPDATE_ACCOUNT);
-    };
+    const canCreateAccount = isActionsPermissions(userPermissions, ActionPermissions.CREATE_ACCOUNT);
+    const canUpdateAccount = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_ACCOUNT);
 
     const columns: ColumnDef<AccountColumn>[] = [
         {
@@ -119,14 +115,12 @@ export default function AccountsPage() {
             id: "actions",
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
             cell: ({ row }) =>
-                isUpdateAccount() ? (
+                canUpdateAccount && (
                     <CellAction
                         onRowSelected={() => handleEditRole(row.original)}
                         onRefetch={handleAfterCreate}
                         data={row.original}
                     />
-                ) : (
-                    ""
                 ),
         },
     ];
@@ -145,7 +139,7 @@ export default function AccountsPage() {
                             defaultData={rowSelected}
                             onConfirm={handleAfterCreate}
                         />
-                        {isCreateAccount() ? (
+                        {canCreateAccount && (
                             <Button
                                 variant={"secondary"}
                                 onClick={handleCreateRole}
@@ -153,8 +147,6 @@ export default function AccountsPage() {
                                 <PlusCircle className="w-5 h-5 md:mr-2" />
                                 <p className="hidden md:block">{translation("action.create")}</p>
                             </Button>
-                        ) : (
-                            ""
                         )}
                     </div>
                 </div>

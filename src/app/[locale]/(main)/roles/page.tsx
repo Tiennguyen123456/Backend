@@ -80,12 +80,8 @@ export default function CompaniesPage() {
         setOpenModal(false);
     };
 
-    const isCreateRole = () => {
-        return isActionsPermissions(userPermissions, ActionPermissions.CREATE_ROLE);
-    };
-    const isUpdateRole = () => {
-        return isActionsPermissions(userPermissions, ActionPermissions.UPDATE_ROLE);
-    };
+    const canCreateRole = isActionsPermissions(userPermissions, ActionPermissions.CREATE_ROLE);
+    const canUpdateRole = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_ROLE);
 
     const columns: ColumnDef<RoleColumn>[] = [
         {
@@ -105,14 +101,12 @@ export default function CompaniesPage() {
             id: "actions",
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
             cell: ({ row }) =>
-                isUpdateRole() ? (
+                canUpdateRole && (
                     <CellAction
                         onRowSelected={() => handleEditRole(row.original)}
                         onRefetch={handleAfterCreate}
                         data={row.original}
                     />
-                ) : (
-                    ""
                 ),
         },
     ];
@@ -131,7 +125,7 @@ export default function CompaniesPage() {
                             defaultData={rowSelected}
                             onConfirm={handleAfterCreate}
                         />
-                        {isCreateRole() ? (
+                        {canCreateRole && (
                             <Button
                                 variant={"secondary"}
                                 onClick={handleCreateRole}
@@ -139,8 +133,6 @@ export default function CompaniesPage() {
                                 <PlusCircle className="w-5 h-5 md:mr-2" />
                                 <p className="hidden md:block">{translation("action.create")}</p>
                             </Button>
-                        ) : (
-                            ""
                         )}
                     </div>
                 </div>
