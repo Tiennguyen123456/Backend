@@ -1,13 +1,4 @@
-import {
-    BarChart,
-    Building2,
-    CalendarClock,
-    LayoutDashboard,
-    LockKeyhole,
-    Megaphone,
-    UserRoundCog,
-    Users,
-} from "lucide-react";
+import { Building2, CalendarClock, LayoutDashboard, LockKeyhole, UserRoundCog, Users } from "lucide-react";
 import { SideBarItemType } from "../models/SideBar";
 import { ROUTES } from "./routes";
 
