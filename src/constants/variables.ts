@@ -12,7 +12,7 @@ export const phoneRegExp = new RegExp(
     /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/,
 );
 
-export const replaceIdInURLRegExp = new RegExp(/(\/\w+)\/\d+(\/\w+)?$/);
+export const replaceIdInURLRegExp = new RegExp(/\/\d+/);
 
 export const DateTimeFormat = "dd-MM-y HH:mm:ss";
 export const DateFormat = "dd-MM-y";

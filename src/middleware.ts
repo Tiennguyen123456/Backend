@@ -36,7 +36,7 @@ export default async function middleware(request: NextRequest) {
         );
 
         if (!hasPermissionAccessCurrPage) {
-            return NextResponse.redirect(new URL(ROUTES[403], request.url));
+            return NextResponse.redirect(new URL(ROUTES.FORBIDDEN, request.url));
         }
     }
 

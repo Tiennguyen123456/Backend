@@ -25,14 +25,20 @@ export function removeLocaleFromPathname(pathname: string) {
     return newPath;
 }
 
+export function removeNumberInPathname(pathname: string) {
+    return pathname.replace(replaceIdInURLRegExp, "")
+}
+
 export function isMatchPrivateRoute(path: string) {
+    path = removeNumberInPathname(path);
     let newPath = removeLocaleFromPathname(path);
-    newPath = newPath.replace(replaceIdInURLRegExp, "$1$2");
+
     return PRIVATE_ROUTES.some((substr) => newPath.startsWith(substr));
 }
 
 export function checkPermissionForAccessSpecificPage(userPermissions: string[], pathname: string) {
-    pathname = pathname.replace(replaceIdInURLRegExp, "");
+    pathname = removeNumberInPathname(pathname);
+
     for (const route of AppRoutesPermissions) {
         if (route.path === pathname) {
             const hasPermission = route.permissions.every((permission) => checkPermission(userPermissions, permission));
