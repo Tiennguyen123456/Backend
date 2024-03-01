@@ -114,6 +114,21 @@
     "companyEventPage": {
         "title": "Tạo mới công ty"
     },
+    "campaignPage": {
+        "title": "Chiến dịch",
+        "table": {
+            "name": "Tên chiến dịch",
+            "companyName": "Tên công ty",
+            "eventName": "Tên sự kiện",
+            "runTime": "Thời gian chạy",
+            "mailSubject": "Tiêu đề email",
+            "status": "Trạng thái",
+            "createdAt": "Ngày tạo"
+        }
+    },
+    "createCampaignPage": {
+        "title": "Tạo mới chiến dịch"
+    },
     "companyPage": {
         "title": "Công ty",
         "table": {
@@ -220,7 +235,15 @@
         "enable": "Kích hoạt",
         "notFoundData": "Không có dữ liệu.",
         "emailContent": "Nội dụng email",
-        "cardsContent": "Nội dụng thiệp mời"
+        "cardsContent": "Nội dụng thiệp mời",
+        "campaignName": "Tên chiến dịch",
+        "runTime": "Thời gian chạy",
+        "pickTime": "Chọn thời gian",
+        "event": "Sự kiện",
+        "mailSubject": "Tiêu đề email",
+        "filterClient": "Lọc khách mời",
+        "group": "Nhóm",
+        "configEmail": "Cấu hình email"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -247,8 +270,12 @@
         "companyCode": "Mã công ty",
         "taxCode": "Mã số thuế",
         "guard": "Guard name",
-        "emailContent": "Nội dụng email",
-        "cardsContent": "Nội dụng thiệp mời"
+        "emailContent": "Nội dung email",
+        "cardsContent": "Nội dung thiệp mời",
+        "campaignName": "Tên chiến dịch",
+        "selectEvent": "Chọn sự kiện",
+        "mailSubject": "Tiêu đề email",
+        "group": "Nhóm"
     },
     "error": {
         "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
@@ -283,7 +310,12 @@
         "invalidLimitUsers": "Giới hạn tài khoản phải ít nhất là 0.",
         "invalidLimitEvents": "Giới hạn sự kiện phải ít nhất là 0.",
         "invalidLimitCampaigns": "Giới hạn chiến dịch phải ít nhất là 0.",
-        "requiredRoleForUpdatePermission": "Vui lòng chọn vai trò để cập nhật phân quyền."
+        "requiredRoleForUpdatePermission": "Vui lòng chọn vai trò để cập nhật phân quyền.",
+        "requiredRunTime": "Vui lòng chọn thời gian chạy.",
+        "timeMustAfterNow": "Thời gian chạy phải sau thời gian hiện tại.",
+        "requiredSelectEvent": "Vui lòng chọn sự kiện.",
+        "requiredMailSubject": "Vui lòng nhập tiêu đề email.",
+        "requiredClientFilterGroup": "Vui lòng nhập nhóm để lọc khách mời."
     },
     "errorApi": {
         "LOGIN_FAILED": "Đăng nhập thất bại.",
@@ -411,13 +443,14 @@
     },
     "breadcrumb": {
         "home": "Bảng điều khiển",
+        "events": "Sự kiện",
+        "createEvent": "Tạo sự kiện",
+        "campaigns": "Chiến dịch",
         "company": "Công ty",
         "createCompany": "Tạo công ty",
         "roles": "Vai trò",
         "permissions": "Phân quyền",
-        "accounts": "Tài khoản",
-        "events": "Sự kiện",
-        "createEvent": "Tạo sự kiện"
+        "accounts": "Tài khoản"
     },
     "status": {
         "ALL": "Tất cả",
@@ -425,6 +458,10 @@
         "ACTIVE": "Kích hoạt",
         "INACTIVE": "Ngừng kích hoạt",
         "DONE": "Đã xong",
-        "CANCEL": "Đã hủy"
+        "CANCEL": "Đã hủy",
+        "RUNNING": "Đang chạy",
+        "PAUSED": "Tạm dừng",
+        "STOPPED": "Đã dừng",
+        "FINISHED": "Hoàn thành"
     }
 }

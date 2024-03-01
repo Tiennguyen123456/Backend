@@ -1,4 +1,4 @@
-import { Building2, CalendarClock, LayoutDashboard, LockKeyhole, UserRoundCog, Users } from "lucide-react";
+import { Building2, CalendarClock, LayoutDashboard, LockKeyhole, Megaphone, UserRoundCog, Users } from "lucide-react";
 import { SideBarItemType } from "../models/SideBar";
 import { ROUTES } from "./routes";
 
@@ -27,15 +27,15 @@ export const AppRoutes: SideBarItemType[] = [
                     },
                     permissions: ["event:view"],
                 },
-                // {
-                //     path: ROUTES.CAMPAIGNS,
-                //     key: "activity.campaigns",
-                //     sideBarProps: {
-                //         displayText: "sidebar.items.campaigns",
-                //         icon: <Megaphone />,
-                //     },
-                //     permissions: ["campaign:view"],
-                // },
+                {
+                    path: ROUTES.CAMPAIGNS,
+                    key: "activity.campaigns",
+                    sideBarProps: {
+                        displayText: "sidebar.items.campaigns",
+                        icon: <Megaphone />,
+                    },
+                    permissions: ["campaign:view"],
+                },
                 // {
                 //     path: ROUTES.DATA,
                 //     key: "activity.data",

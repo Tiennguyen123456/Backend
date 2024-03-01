@@ -39,4 +39,15 @@ export const STATUS_FILTER_EVENT = [
     { label: "Done", value: "DONE" },
     { label: "Cancel", value: "CANCEL" },
 ];
-// { label: "Deleted", value: "DELETED" }
+
+export const CAMPAIGN_STATUS = [
+    { label: "New", value: "NEW" },
+    { label: "Running", value: "RUNNING" },
+    { label: "Paused", value: "PAUSED" },
+    { label: "Stopped", value: "STOPPED" },
+    { label: "Finished", value: "FINISHED" }
+];
+export const STATUS_FILTER_CAMPAIGN = [
+    { label: "All status", value: "ALL" },
+    ...CAMPAIGN_STATUS
+];

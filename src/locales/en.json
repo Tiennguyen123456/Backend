@@ -112,6 +112,21 @@
     "createEventPage": {
         "title": "Create New Event"
     },
+    "campaignPage": {
+        "title": "Campaign",
+        "table": {
+            "name": "Campaign Name",
+            "companyName": "Company Name",
+            "eventName": "Event Name",
+            "runTime": "Run Time",
+            "mailSubject": "Mail Subject",
+            "status": "Status",
+            "createdAt": "Created at"
+        }
+    },
+    "createCampaignPage": {
+        "title": "Create New Campaign"
+    },
     "companyEventPage": {
         "title": "Create New Company"
     },
@@ -219,7 +234,15 @@
         "enable": "Enable",
         "notFoundData": "Not found data.",
         "emailContent": "Email content",
-        "cardsContent": "Cards content"
+        "cardsContent": "Cards content",
+        "campaignName": "Campaign Name",
+        "runTime": "Run time",
+        "pickTime": "Pick time",
+        "event": "Event",
+        "mailSubject": "Mail Subject",
+        "filterClient": "Filter client",
+        "group": "Group",
+        "configEmail": "Config Email"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -247,7 +270,11 @@
         "taxCode": "Tax code",
         "guard": "Guard name",
         "emailContent": "Email content",
-        "cardsContent": "Cards content"
+        "cardsContent": "Cards content",
+        "campaignName": "Campaign Name",
+        "selectEvent": "Select Event",
+        "mailSubject": "Type mail subject",
+        "group": "Group"
     },
     "error": {
         "requiredEmail": "Please enter your email address.",
@@ -282,7 +309,12 @@
         "invalidLimitUsers": "The limited users field must be at least 0.",
         "invalidLimitEvents": "The limited events field must be at least 0.",
         "invalidLimitCampaigns": "The limited campaigns field must be at least 0.",
-        "requiredRoleForUpdatePermission": "Please select role for update permission."
+        "requiredRoleForUpdatePermission": "Please select role for update permission.",
+        "requiredRunTime": "Please enter run time.",
+        "timeMustAfterNow": "Run time must be after now.",
+        "requiredSelectEvent": "Please select event.",
+        "requiredMailSubject": "Please enter mail subject.",
+        "requiredClientFilterGroup": "Please input group to filter client."
     },
     "errorApi": {
         "LOGIN_FAILED": "Login failed.",
@@ -411,13 +443,14 @@
     },
     "breadcrumb": {
         "home": "Dashboard",
+        "events": "Events",
+        "createEvent": "Create event",
+        "campaigns": "Campaign",
         "company": "Company",
         "createCompany": "Create company",
         "roles": "Roles",
         "permissions": "Permissions",
-        "accounts": "Accounts",
-        "events": "Events",
-        "createEvent": "Create event"
+        "accounts": "Accounts"
     },
     "status": {
         "ALL": "All status",
@@ -425,6 +458,10 @@
         "ACTIVE": "Active",
         "INACTIVE": "InActive",
         "DONE": "Done",
-        "CANCEL": "Cancel"
+        "CANCEL": "Cancel",
+        "RUNNING": "Running",
+        "PAUSED": "Paused",
+        "STOPPED": "Stopped",
+        "FINISHED": "Finished"
     }
 }
