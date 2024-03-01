@@ -8,7 +8,7 @@ import { DataTable } from "@/components/ui/data-table";
 import { usePagination } from "@/hooks/use-pagination";
 import { useRowSelection } from "@/hooks/use-row-selection";
 import { useSorting } from "@/hooks/use-sorting";
-import { DateyTimePicker } from "@/components/ui/date-time-picker";
+import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function DashboardPage() {
@@ -85,12 +85,14 @@ export default function DashboardPage() {
                             </SelectGroup>
                         </SelectContent>
                     </Select>
-                    <DateyTimePicker
+                    <DateTimePicker
+                        disabled={false}
                         title={"Pick a date from"}
                         date={dateFrom}
                         setDate={setDateFrom}
                     />
-                    <DateyTimePicker
+                    <DateTimePicker
+                        disabled={false}
                         title={"Pick a date to"}
                         date={dateTo}
                         setDate={setDateTo}

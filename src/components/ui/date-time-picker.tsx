@@ -49,10 +49,10 @@ export function DateTimePicker({ title = "Pick a date", className, date, setDate
                     selected={date}
                     onSelect={setDate}
                     fromYear={1960}
-                    toYear={Number(format(new Date(), "Y")) + 50}
+                    toYear={Number(format(new Date(), "y")) + 50}
                     initialFocus
                 />
-                <div className="p-3 border-t border-border text-center">
+                <div className="p-2 border-t border-border text-center">
                     <TimePickerDemo
                         setDate={setDate}
                         date={date}
