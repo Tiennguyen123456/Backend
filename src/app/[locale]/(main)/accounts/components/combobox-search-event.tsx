@@ -86,7 +86,9 @@ export function ComboboxSearchEvent({ disabled, onSelect, defaultName }: Combobo
     };
 
     const handleOnOpen = () => {
-        fetchDataSearch("")
+        if (!open) {
+            fetchDataSearch("")
+        }
         setOpen(!open);
     }
 

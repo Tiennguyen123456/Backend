@@ -87,7 +87,9 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }
     };
 
     const handleOnOpen = () => {
-        fetchDataSearchCompany("")
+        if (!open) {
+            fetchDataSearchCompany("")
+        }
         setOpen(!open);
     }
 
