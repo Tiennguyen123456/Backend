@@ -106,7 +106,10 @@ export const CellAction: React.FC<CellActionProps> = ({
                         ""
                     )}
                     {isDelete ? (
-                        <DropdownMenuItem onClick={() => setOpen(true)}>
+                        <DropdownMenuItem
+                            onClick={() => setOpen(true)}
+                            className="text-red-700"
+                        >
                             <Trash className="mr-3 h-4 w-4" /> {translation("action.delete")}
                         </DropdownMenuItem>
                     ) : (
