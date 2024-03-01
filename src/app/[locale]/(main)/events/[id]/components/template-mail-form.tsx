@@ -1,3 +1,3 @@
-export default function TemplateMailForm({ id }: { id: string }) {
+export default function TemplateMailForm({ id }: { id: number }) {
     return <>{id}</>;
 }

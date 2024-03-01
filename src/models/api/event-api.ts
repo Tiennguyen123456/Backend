@@ -2,9 +2,16 @@ interface IMainFields {
     name: string;
     description: string;
 }
+interface ICustomFields extends IMainFields {
+    id: number;
+}
+interface IRelationRes {
+    id: number;
+    name: string;
+}
 export interface IEventRes {
     id: number;
-    company_id: number;
+    company: IRelationRes | null;
     code: string;
     name: string;
     description: string;
@@ -16,11 +23,11 @@ export interface IEventRes {
     updated_by: number;
     created_at: string;
     updated_at: string;
+    email_content: string;
+    cards_content: string;
     main_fields: IMainFields[];
-    custom_fields: [];
+    custom_fields: ICustomFields[];
 
-    // email_content: null;
-    // cards_content: null;
     // is_default: boolean;
     // logo_path: string;
     // encrypt_file_link: boolean;

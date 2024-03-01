@@ -18,7 +18,7 @@ const ApiRoutes = {
     storeRole: baseURL + "/role/store",
     deleteRole: baseURL + "/role/",
 
-    // ** Accout Routes
+    // ** Account Routes
     getAccounts: baseURL + "/users",
     storeAccount: baseURL + "/user/store",
     deleteAccount: baseURL + "/user/",
@@ -31,7 +31,7 @@ const ApiRoutes = {
     // ** Event Routes
     getEvents: baseURL + "/events",
     storeEvent: baseURL + "/event/store",
-    deleteEvent: baseURL + "/event/",
+    getEventById: baseURL + "/event",
 
     // ** Campaign Routes
     getCampaigns: baseURL + "/campaigns",

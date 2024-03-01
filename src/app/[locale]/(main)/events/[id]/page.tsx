@@ -1,54 +1,67 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import FooterContainer from "@/components/layout/footer-container";
 import Breadcrumbs from "@/components/ui/breadcrumb";
 import { useRouter } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { TabNav } from "./components/tab-nav";
-import InfoForm from "./components/info-form";
-import TemplateMailForm from "./components/template-mail-form";
-import SettingsForm from "./components/setting-form";
+import InformationClient from "./components/information-client";
+import eventApi from "@/services/event-api";
+import { toastError } from "@/utils/toast";
+import { IEventRes } from "@/models/api/event-api";
+import { ROUTES } from "@/constants/routes";
 
 interface tabItem {
     id: number;
     title: string;
-    description: string;
-    components: React.ReactNode;
 }
 
-export default function EventDetailsPage({ params }: { params: { id: string } }) {
-    const sidebarNavItems = useMemo<tabItem[]>(
-        () => [
-            {
-                id: 1,
-                title: "Information",
-                description: "This is how others will see you on the site.",
-                components: <InfoForm id={params.id} />,
-            },
-            {
-                id: 2,
-                title: "Template email",
-                description: "This is how others will see you on the site.",
-                components: <TemplateMailForm id={params.id} />,
-            },
-            {
-                id: 3,
-                title: "Setting",
-                description: "This is how others will see you on the site.",
-                components: <SettingsForm id={params.id} />,
-            },
-        ],
-        [],
-    );
+export default function EventDetailsPage({ params }: { params: { id: number } }) {
     // ** I18n
     const translation = useTranslations("");
-
-    const [tab, setTab] = useState<Number>(1);
 
     // ** Router
     const router = useRouter();
 
+    // TabItem
+    const sidebarNavItems = useMemo<tabItem[]>(
+        () => [
+            {
+                id: 1,
+                title: translation("eventDetailsPage.tab.information"),
+            },
+            {
+                id: 2,
+                title: translation("eventDetailsPage.tab.customFields"),
+            },
+        ],
+        [],
+    );
+
+    // ** UseState
+    const [tab, setTab] = useState<Number>(1);
+    const [data, setData] = useState<IEventRes>();
+
+    const handleGetEventById = async () => {
+        try {
+            if (params.id) {
+                const response = await eventApi.getEventById(params.id);
+                if (response.status === "success") {
+                    const data = response?.data;
+                    setData(data);
+                }
+            }
+        } catch (error: any) {
+            toastError(translation("errorApi.GET_EVENT_INFORMATION_FAILED"));
+            router.push(ROUTES.EVENTS);
+        }
+    };
+
+    useEffect(() => {
+        handleGetEventById();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     return (
         <>
             <div className="w-full space-y-4">
@@ -59,7 +72,7 @@ export default function EventDetailsPage({ params }: { params: { id: string } })
                 </div>
             </div>
             <Separator />
-            <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
+            <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0 px-0 2xl:px-16">
                 <aside className="-mx-1 md:-mx-4 lg:w-1/5 overflow-x-auto">
                     <TabNav
                         items={sidebarNavItems}
@@ -67,23 +80,16 @@ export default function EventDetailsPage({ params }: { params: { id: string } })
                         setKeySelected={setTab}
                     />
                 </aside>
-                <div className="flex-1 lg:max-w-2xl">
+                <div className="flex-1 w-full">
                     <div className="space-y-6">
-                        {sidebarNavItems
-                            .filter((item) => item.id == tab)
-                            .map((item) => (
-                                <div
-                                    className="space-y-6"
-                                    key={item.id}
-                                >
-                                    <div>
-                                        <h3 className="text-lg font-medium">{item.title}</h3>
-                                        <p className="text-sm text-muted-foreground">{item.description}</p>
-                                    </div>
-                                    <Separator />
-                                    {item.components}
-                                </div>
-                            ))}
+                        {tab == 1 ? (
+                            <InformationClient
+                                data={data}
+                                onRefresh={handleGetEventById}
+                            />
+                        ) : (
+                            <></>
+                        )}
                     </div>
                 </div>
             </div>

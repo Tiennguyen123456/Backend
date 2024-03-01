@@ -306,7 +306,9 @@ export default function CreateEventPage() {
                                     name="description"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>{translation("label.description")}</FormLabel>
+                                            <FormLabel className="text-base">
+                                                {translation("label.description")}
+                                            </FormLabel>
                                             <FormControl>
                                                 <Textarea
                                                     disabled={loading}
@@ -323,7 +325,7 @@ export default function CreateEventPage() {
                                     name="location"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>{translation("label.location")}</FormLabel>
+                                            <FormLabel className="text-base">{translation("label.location")}</FormLabel>
                                             <FormControl>
                                                 <Textarea
                                                     disabled={loading}
@@ -340,7 +342,9 @@ export default function CreateEventPage() {
                                     name="email_content"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>{translation("label.emailContent")}</FormLabel>
+                                            <FormLabel className="text-base">
+                                                {translation("label.emailContent")}
+                                            </FormLabel>
                                             <FormControl>
                                                 <Textarea
                                                     disabled={loading}
@@ -357,7 +361,9 @@ export default function CreateEventPage() {
                                     name="cards_content"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>{translation("label.cardsContent")}</FormLabel>
+                                            <FormLabel className="text-base">
+                                                {translation("label.cardsContent")}
+                                            </FormLabel>
                                             <FormControl>
                                                 <Textarea
                                                     disabled={loading}

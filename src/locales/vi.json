@@ -93,7 +93,15 @@
         }
     },
     "eventDetailsPage": {
-        "title": "Chi tiết sự kiện"
+        "title": "Chi tiết sự kiện",
+        "tab": {
+            "information": "Thông tin chung",
+            "customFields": "Cấu hình trường"
+        },
+        "description": {
+            "information": "Thông tin chung về sự kiện của công ty.",
+            "customFields": "Cấu hình các trường cho sự kiện mẫu của công ty."
+        }
     },
     "companyDetailsPage": {
         "title": "Chi tiết công ty"
@@ -335,7 +343,7 @@
         "CREATE_EVENT_FAILED": "Tạo mới sự kiện thất bại.",
         "UPDATE_EVENT_FAILED": "Chỉnh sửa sự kiện thất bại.",
         "DELETE_EVENT_FAILED": "Xoá sự kiện thật bại.",
-        "GET_EVENT_CONFIG_FIELDS_FAILED": "Lấy cấu hình trường sự kiện thất bại.",
+        "GET_EVENT_INFORMATION_FAILED": "Lấy thông tin sự kiện thất bại.",
         "UPDATE_EVENT_CONFIG_FAILED": "Chỉnh sửa cấu hình sự kiện thất bại.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Xóa cấu hình trường sự kiện thất bại.",
         "USER_NOT_FOUND": "Người dùng không tồn tại.",

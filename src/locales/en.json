@@ -94,7 +94,15 @@
         }
     },
     "eventDetailsPage": {
-        "title": "Event Details"
+        "title": "Event Details",
+        "tab": {
+            "information": "Information",
+            "customFields": "Custom Fields"
+        },
+        "description": {
+            "information": "General information about company event",
+            "customFields": "Configure fields for corporate sample event"
+        }
     },
     "companyDetailsPage": {
         "title": "Company Details"
@@ -337,7 +345,7 @@
         "CREATE_ROLE_FAILED": "Create role failed.",
         "UPDATE_ROLE_FAILED": "Update role failed.",
         "DELETE_ROLE_FAILED": "Delete role failed.",
-        "GET_EVENT_CONFIG_FIELDS_FAILED": "Get event config fields failed.",
+        "GET_EVENT_INFORMATION_FAILED": "Get event information failed.",
         "UPDATE_EVENT_CONFIG_FAILED": "Update event configuration failed.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Delete event config field failed.",
         "USER_NOT_FOUND": "User not found.",
