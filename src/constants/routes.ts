@@ -178,4 +178,7 @@ export const ActionPermissions = {
     CREATE_EVENT: ["event:create"],
     UPDATE_EVENT: ["event:update"],
     DELETE_EVENT: ["event:delete"],
+    CREATE_CAMPAIGN: ["campaign:create"],
+    UPDATE_CAMPAIGN: ["campaign:update"],
+    DELETE_CAMPAIGN: ["campaign:delete"],
 };

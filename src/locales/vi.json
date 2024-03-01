@@ -344,7 +344,8 @@
         "TOKEN_NOT_FOUND": "Mã xác thực không hợp lệ.",
         "VALIDATION_ERROR": "Dữ liệu không đúng.",
         "UPDATE_PERMISSION_FAILED": "Cập nhật quyền thất bại.",
-        "UNAUTHORIZED_ACTION": "Token đã hết hạn."
+        "UNAUTHORIZED_ACTION": "Token đã hết hạn.",
+        "FAILED_TO_REMOVE": "Xoá dữ liệu thất bại."
     },
     "successApi": {
         "SUCCESS": "Thành công",

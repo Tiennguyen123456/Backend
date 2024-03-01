@@ -17,11 +17,9 @@ import { isActionsPermissions } from "@/helpers/funcs";
 import { useAppSelector } from "@/redux/root/hooks";
 import { selectUser } from "@/redux/user/slice";
 import { ActionPermissions, ROUTES } from "@/constants/routes";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
-import { format } from "date-fns";
-import { DateTimeFormat, STATUS_FILTER_CAMPAIGN, STATUS_FILTER_EVENT } from "@/constants/variables";
+import { STATUS_FILTER_CAMPAIGN } from "@/constants/variables";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { EStatus } from "@/constants/enum";
 import { CampaignColumn } from "./components/column";
@@ -67,18 +65,12 @@ export default function EventsPage() {
     });
 
     // Function
-    const canCreateEvent = isActionsPermissions(userPermissions, ActionPermissions.CREATE_EVENT);
-    const canUpdateEvent = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_EVENT);
-    const canAssetClientEvent = isActionsPermissions(userPermissions, ActionPermissions.DELETE_EVENT);
-    const handleSearchCode = (event: any) => {
-        setParamsSearch({ ...paramsSearch, filters: { ...paramsSearch.filters, code: event.target.value } });
-    };
-    const handleSearchName = (event: any) => {
-        setParamsSearch({
-            ...paramsSearch,
-            search: { ...paramsSearch.search, name: event.target.value },
-        });
-    };
+    const canCreate = isActionsPermissions(userPermissions, ActionPermissions.CREATE_CAMPAIGN);
+    const canUpdate = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_CAMPAIGN);
+    const canDelete = isActionsPermissions(userPermissions, ActionPermissions.DELETE_CAMPAIGN);
+
+    const handleAfterCreate = () => {};
+
     const handleSearchStatus = (statusName: any) => {
         setParamsSearch(
             statusName == EStatus.ALL
@@ -92,7 +84,7 @@ export default function EventsPage() {
     const handleClickSearch = () => {
         setParamsDataTable({ ...paramsDataTable, search: paramsSearch.search, filters: paramsSearch.filters });
     };
-    
+
     const columns: ColumnDef<CampaignColumn>[] = [
         {
             accessorKey: "name",
@@ -126,18 +118,15 @@ export default function EventsPage() {
         {
             id: "actions",
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
-            // cell: ({ row }) =>
-            //     canUpdateCompany || canDeleteCompany ? (
-            //         <CellAction
-            //             onRowSelected={() => handleEditCompany(row.original)}
-            //             onRefetch={handleAfterCreate}
-            //             data={row.original}
-            //             isUpdate={canUpdateCompany}
-            //             isDelete={canDeleteCompany}
-            //         />
-            //     ) : (
-            //         ""
-            //     ),
+            cell: ({ row }) => (
+                canUpdate || canDelete ?
+                    <CellAction 
+                        data={row.original}
+                        canUpdate={canUpdate}
+                        canDelete={canDelete}
+                    /> 
+                : ""
+            ),
         },
     ];
 
@@ -146,9 +135,9 @@ export default function EventsPage() {
             <div className="w-full space-y-4">
                 <Breadcrumbs />
                 <div className="flex flex-wrap items-center justify-between space-y-2">
-                    <h2 className="text-3xl font-bold tracking-tight">{translation("eventPage.title")}</h2>
+                    <h2 className="text-3xl font-bold tracking-tight">{translation("campaignPage.title")}</h2>
                     <div className="flex justify-end flex-wrap items-center gap-2 !mt-0">
-                        {canCreateEvent && (
+                        {canCreate && (
                             <Button
                                 disabled={Boolean(loading)}
                                 variant={"secondary"}

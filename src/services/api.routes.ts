@@ -36,6 +36,7 @@ const ApiRoutes = {
     // ** Campaign Routes
     getCampaigns: baseURL + "/campaigns",
     storeCampaign: baseURL + "/campaign/store",
+    deleteCampaign: baseURL + "/campaign/",
 };
 
 export default ApiRoutes;

@@ -346,7 +346,8 @@
         "TOKEN_NOT_FOUND": "Token not found",
         "VALIDATION_ERROR": "Validate request failed.",
         "UPDATE_PERMISSION_FAILED": "Update permission failed.",
-        "UNAUTHORIZED_ACTION": "Token expired."
+        "UNAUTHORIZED_ACTION": "Token expired.",
+        "FAILED_TO_REMOVE": "Failed to remove."
     },
     "successApi": {
         "SUCCESS": "Success",
@@ -366,7 +367,8 @@
         "DELETE_EVENT_SUCCESS": "Delete event successfully.",
         "UPDATE_EVENT_CONFIG_SUCCESS": "Update event configuration successfully.",
         "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Delete event config field successfully.",
-        "UPDATE_PERMISSION_SUCCESS": "Update permission successfully."
+        "UPDATE_PERMISSION_SUCCESS": "Update permission successfully.",
+        "DELETE_CAMPAIGN_SUCCESS": "Delete campaign successfully."
     },
     "localeSwitcher": {
         "en": "English",

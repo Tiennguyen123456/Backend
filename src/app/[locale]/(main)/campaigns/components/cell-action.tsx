@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Edit, MoreHorizontal, Users } from "lucide-react";
+import { Edit, MoreHorizontal, Trash } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,17 +13,19 @@ import {
 import { CampaignColumn } from "./column";
 import { useTranslations } from "next-intl";
 import { AlertModal } from "@/components/modals/alert-modal";
-import companyApi from "@/services/company-api";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { APIStatus, MessageCode } from "@/constants/enum";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
+import campaignApi from "@/services/campaign-api";
 
 interface CellActionProps {
     data: CampaignColumn;
+    canUpdate?: boolean;
+    canDelete?: boolean;
 }
 
-export const CellAction: React.FC<CellActionProps> = ({ data }) => {
+export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDelete }) => {
     // ** I18n
     const translation = useTranslations("");
 
@@ -39,22 +41,15 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         try {
             setLoading(true);
 
-            const response = await companyApi.deleteCompany(data.id);
+            const response = await campaignApi.deleteCampaign(data.id);
 
             if (response.data.status == APIStatus.SUCCESS) {
-                toastSuccess(translation("successApi.DELETE_COMPANY_SUCCESS"));
+                toastSuccess(translation(`successApi.${APIStatus.SUCCESS}`));
             }
-            // onRefetch();
         } catch (error: any) {
             const data = error?.response?.data;
-            // if (data?.data && data?.message_code) {
-            //     const [value] = Object.values(data.data);
-            //     const message = Array(value).toString() ?? translation("errorApi.DELETE_COMPANY_FAILED");
-            //     toastError(message);
-            // } else {
-            //     toastError(translation("errorApi.DELETE_COMPANY_FAILED"));
-            // }
-            const messageError = translation("errorApi.DELETE_COMPANY_FAILED");
+
+            const messageError = translation("errorApi.DELETE_CAMPAIGN_FAILED");
             if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
                 const [value] = Object.values(data.data);
                 const message = Array(value).toString() ?? messageError;
@@ -93,12 +88,19 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
                     align="end"
                     className="w-40"
                 >
-                    <DropdownMenuItem onClick={() => router.push(ROUTES.EVENTS + `/${data.id}`)}>
-                        <Edit className="mr-3 h-4 w-4" /> {translation("action.edit")}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => router.push(ROUTES.EVENTS + `/${data.id}` + ROUTES.CLIENTS)}>
-                        <Users className="mr-3 h-4 w-4" /> {translation("action.client")}
-                    </DropdownMenuItem>
+                    { canUpdate && (
+                        <DropdownMenuItem onClick={() => router.push(ROUTES.CAMPAIGNS + `/${data.id}`)}>
+                            <Edit className="mr-3 h-4 w-4" /> {translation("action.edit")}
+                        </DropdownMenuItem>
+                    )}
+                    { canDelete && (
+                        <DropdownMenuItem
+                            onClick={() => setOpen(true)}
+                            className="text-red-700"
+                        >
+                            <Trash className="mr-3 h-4 w-4" /> {translation("action.delete")}
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
         </>
