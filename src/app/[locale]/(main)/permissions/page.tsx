@@ -15,11 +15,11 @@ import { useFetchDataPermission } from "@/data/fetch-permission";
 import { useFetchDataRole } from "@/data/fetch-data-role";
 import { Loader } from "@/components/ui/loader";
 import { Checkbox } from "@/components/ui/checkbox";
-import permissionApi from "@/services/permisison-api";
 import { useAppSelector } from "@/redux/root/hooks";
 import { selectUser } from "@/redux/user/slice";
 import { isActionsPermissions } from "@/helpers/funcs";
 import { ActionPermissions } from "@/constants/routes";
+import permissionApi from "@/services/permission-api";
 
 export default function CompaniesPage() {
     // ** I18n

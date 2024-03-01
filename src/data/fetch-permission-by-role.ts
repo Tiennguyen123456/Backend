@@ -1,8 +1,8 @@
-import { ICollectionRoleRes } from "@/models/api/permisison-api";
-import permissionApi from "@/services/permisison-api";
+import { ICollectionRoleRes } from "@/models/api/permission-api";
+import permissionApi from "@/services/permission-api";
 import { useEffect, useState } from "react";
 
-export function useFetchPermisisonByRoleId(id: number) {
+export function useFetchPermissionByRoleId(id: number) {
     const [data, setData] = useState<ICollectionRoleRes[]>([]);
     const [loading, setLoading] = useState<Boolean>(false);
 

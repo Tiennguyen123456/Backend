@@ -1,5 +1,5 @@
 import { IRoleRes } from "@/models/api/role-api";
-import permissionApi from "@/services/permisison-api";
+import permissionApi from "@/services/permission-api";
 import { useEffect, useState } from "react";
 
 export function useFetchDataPermission({ pagination: { page = 1, pageSize = 10 } = {} } = {}) {

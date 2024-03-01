@@ -3,7 +3,7 @@ import { api } from "@/configs/axios.config";
 import { IListRes } from "@/models/DataTable";
 import ApiRoutes from "./api.routes";
 import { IRoleRes } from "@/models/api/role-api";
-import { ICollectionRoleRes, IPermissionRoleRes } from "@/models/api/permisison-api";
+import { ICollectionRoleRes, IPermissionRoleRes } from "@/models/api/permission-api";
 
 const permissionApi = {
     getList: async (body: any) => {
