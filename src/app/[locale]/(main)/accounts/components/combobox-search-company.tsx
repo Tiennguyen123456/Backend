@@ -86,10 +86,15 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }
         setOpen(false);
     };
 
+    const handleOnOpen = () => {
+        fetchDataSearchCompany("")
+        setOpen(!open);
+    }
+
     return (
         <Popover
             open={open}
-            onOpenChange={setOpen}
+            onOpenChange={handleOnOpen}
         >
             <PopoverTrigger asChild>
                 <Button
