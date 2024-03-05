@@ -183,6 +183,7 @@
         "save": "Save",
         "submit": "Submit",
         "update": "Update",
+        "updateEvent": "Update event",
         "edit": "Edit",
         "approve": "Approve",
         "landingPage": "Landing page",
@@ -250,7 +251,8 @@
         "mailSubject": "Mail Subject",
         "filterClient": "Filter client",
         "group": "Group",
-        "configEmail": "Config Email"
+        "configEmail": "Config Email",
+        "fieldValue": "Field Value"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -322,7 +324,10 @@
         "timeMustAfterNow": "Run time must be after now.",
         "requiredSelectEvent": "Please select event.",
         "requiredMailSubject": "Please enter mail subject.",
-        "requiredClientFilterGroup": "Please input group to filter client."
+        "requiredClientFilterGroup": "Please input group to filter client.",
+        "requiredCustomFieldName": "Please enter custom field name at least 5 characters.",
+        "invalidCustomFieldName": "Please enter the field value without spaces and special characters",
+        "requiredCustomFieldValue": "Please enter custom field value."
     },
     "errorApi": {
         "LOGIN_FAILED": "Login failed.",
@@ -345,6 +350,8 @@
         "CREATE_ROLE_FAILED": "Create role failed.",
         "UPDATE_ROLE_FAILED": "Update role failed.",
         "DELETE_ROLE_FAILED": "Delete role failed.",
+        "UPDATE_CUSTOM_FIELD_FAILED": "Update custom field failed.",
+        "DELETE_CUSTOM_FIELD_FAILED": "Delete custom field failed.",
         "GET_EVENT_INFORMATION_FAILED": "Get event information failed.",
         "UPDATE_EVENT_CONFIG_FAILED": "Update event configuration failed.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Delete event config field failed.",
@@ -373,6 +380,8 @@
         "CREATE_EVENT_SUCCESS": "Create event successfully.",
         "UPDATE_EVENT_SUCCESS": "Update event successfully.",
         "DELETE_EVENT_SUCCESS": "Delete event successfully.",
+        "UPDATE_CUSTOM_FIELD_SUCCESS": "Update custom field successfully.",
+        "DELETE_CUSTOM_FIELD_SUCCESS": "Delete custom field successfully.",
         "UPDATE_EVENT_CONFIG_SUCCESS": "Update event configuration successfully.",
         "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Delete event config field successfully.",
         "UPDATE_PERMISSION_SUCCESS": "Update permission successfully.",

@@ -32,6 +32,8 @@ const ApiRoutes = {
     getEvents: baseURL + "/events",
     storeEvent: baseURL + "/event/store",
     getEventById: baseURL + "/event",
+    updateCustomFieldsEvent: baseURL + "/event/",
+    deleteCustomFieldsEvent: baseURL + "/event",
 
     // ** Campaign Routes
     getCampaigns: baseURL + "/campaigns",

@@ -1,8 +1,9 @@
 interface IMainFields {
     name: string;
     description: string;
+    value: string;
 }
-interface ICustomFields extends IMainFields {
+export interface ICustomFields extends IMainFields {
     id: number;
 }
 interface IRelationRes {

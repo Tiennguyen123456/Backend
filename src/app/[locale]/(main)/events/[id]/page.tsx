@@ -11,6 +11,7 @@ import eventApi from "@/services/event-api";
 import { toastError } from "@/utils/toast";
 import { IEventRes } from "@/models/api/event-api";
 import { ROUTES } from "@/constants/routes";
+import CustomFieldsClient from "./components/custom-fields";
 
 interface tabItem {
     id: number;
@@ -42,9 +43,11 @@ export default function EventDetailsPage({ params }: { params: { id: number } })
     // ** UseState
     const [tab, setTab] = useState<Number>(1);
     const [data, setData] = useState<IEventRes>();
+    const [loading, setLoading] = useState(true);
 
     const handleGetEventById = async () => {
         try {
+            setLoading(true);
             if (params.id) {
                 const response = await eventApi.getEventById(params.id);
                 if (response.status === "success") {
@@ -55,6 +58,8 @@ export default function EventDetailsPage({ params }: { params: { id: number } })
         } catch (error: any) {
             toastError(translation("errorApi.GET_EVENT_INFORMATION_FAILED"));
             router.push(ROUTES.EVENTS);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -62,6 +67,8 @@ export default function EventDetailsPage({ params }: { params: { id: number } })
         handleGetEventById();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    if (loading) return null;
     return (
         <>
             <div className="w-full space-y-4">
@@ -81,14 +88,17 @@ export default function EventDetailsPage({ params }: { params: { id: number } })
                     />
                 </aside>
                 <div className="flex-1 w-full">
-                    <div className="space-y-6">
+                    <div className="space-y-5">
                         {tab == 1 ? (
                             <InformationClient
                                 data={data}
                                 onRefresh={handleGetEventById}
                             />
                         ) : (
-                            <></>
+                            <CustomFieldsClient
+                                data={data}
+                                onRefresh={handleGetEventById}
+                            />
                         )}
                     </div>
                 </div>

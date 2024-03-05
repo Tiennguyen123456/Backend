@@ -182,6 +182,7 @@
         "save": "Lưu",
         "submit": "Xác nhận",
         "update": "Cập nhật",
+        "updateEvent": "Cập nhật sự kiện",
         "edit": "Cập nhật",
         "approve": "Xác nhận",
         "landingPage": "Landing page",
@@ -251,7 +252,8 @@
         "mailSubject": "Tiêu đề email",
         "filterClient": "Lọc khách mời",
         "group": "Nhóm",
-        "configEmail": "Cấu hình email"
+        "configEmail": "Cấu hình email",
+        "fieldValue": "Giá trị trường"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -323,7 +325,10 @@
         "timeMustAfterNow": "Thời gian chạy phải sau thời gian hiện tại.",
         "requiredSelectEvent": "Vui lòng chọn sự kiện.",
         "requiredMailSubject": "Vui lòng nhập tiêu đề email.",
-        "requiredClientFilterGroup": "Vui lòng nhập nhóm để lọc khách mời."
+        "requiredClientFilterGroup": "Vui lòng nhập nhóm để lọc khách mời.",
+        "requiredCustomFieldName": "Vui lòng nhập tên trường ít nhất 5 ký tự.",
+        "invalidCustomFieldName": "Tên trường là ký tự in hoa, không khoảng trắng và ký tự đặc biệt",
+        "requiredCustomFieldValue": "Vui lòng nhập giá trị của trường."
     },
     "errorApi": {
         "LOGIN_FAILED": "Đăng nhập thất bại.",
@@ -343,6 +348,8 @@
         "CREATE_EVENT_FAILED": "Tạo mới sự kiện thất bại.",
         "UPDATE_EVENT_FAILED": "Chỉnh sửa sự kiện thất bại.",
         "DELETE_EVENT_FAILED": "Xoá sự kiện thật bại.",
+        "UPDATE_CUSTOM_FIELD_FAILED": "Cập nhật cấu hình trường thất bại.",
+        "DELETE_CUSTOM_FIELD_FAILED": "Xóa cấu hình trường thất bại.",
         "GET_EVENT_INFORMATION_FAILED": "Lấy thông tin sự kiện thất bại.",
         "UPDATE_EVENT_CONFIG_FAILED": "Chỉnh sửa cấu hình sự kiện thất bại.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Xóa cấu hình trường sự kiện thất bại.",
@@ -371,6 +378,8 @@
         "CREATE_EVENT_SUCCESS": "Tạo mới sự kiện thành công.",
         "UPDATE_EVENT_SUCCESS": "Chỉnh sửa sự kiện thành công.",
         "DELETE_EVENT_SUCCESS": "Xoá sự kiện thành công.",
+        "UPDATE_CUSTOM_FIELD_SUCCESS": "Cập nhật cấu hình trường thành công.",
+        "DELETE_CUSTOM_FIELD_SUCCESS": "Xóa cấu hình trường thành công.",
         "UPDATE_EVENT_CONFIG_SUCCESS": "Chỉnh sửa cấu hình sự kiện thành công.",
         "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Xóa cấu hình trường sự kiện thành công.",
         "UPDATE_PERMISSION_SUCCESS": "Cập nhật quyền thành công."

@@ -340,10 +340,11 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                     />
                 </div>
                 <Button
+                    disabled={loading}
                     className="ml-auto"
                     type="submit"
                 >
-                    Update event
+                    {translation("action.update")}
                 </Button>
             </form>
         </Form>
