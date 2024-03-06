@@ -75,22 +75,24 @@ export default function LoginForm(props: LoginFormProps) {
             }
             router.push(ROUTES.DASHBOARD);
         } catch (error: any) {
-            const data = error?.response?.data;
-            // if (data?.message_code) {
-            //     toastError(translation(`errorApi.${data?.message_code}`));
-            // } else {
-            //     toastError(translation("errorApi.LOGIN_FAILED"));
-            // }
             const messageError = translation("errorApi.LOGIN_FAILED");
-            if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
-                const [value] = Object.values(data.data);
-                const message = Array(value).toString() ?? messageError;
-                toastError(message);
-            } else if (data?.message_code != MessageCode.VALIDATION_ERROR) {
-                toastError(translation(`errorApi.${data?.message_code}`));
+
+            if (error.response) {
+                const data = error?.response?.data;
+
+                if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
+                    const [value] = Object.values(data.data);
+                    const message = Array(value).toString() ?? messageError;
+                    toastError(message);
+                } else if (data?.message_code != MessageCode.VALIDATION_ERROR) {
+                    toastError(translation(`errorApi.${data?.message_code}`));
+                } else {
+                    toastError(messageError);
+                }
             } else {
                 toastError(messageError);
             }
+
             console.log("error: ", error);
         } finally {
             setLoading(false);
