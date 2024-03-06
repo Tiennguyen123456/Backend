@@ -21,6 +21,8 @@ import { APIStatus, MessageCode } from "@/constants/enum";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { ComboboxSearchCompany } from "@/app/[locale]/(main)/accounts/components/combobox-search-company";
 import { IEventRes } from "@/models/api/event-api";
+import { ActionPermissions } from "@/constants/routes";
+import { isActionsPermissions } from "@/helpers/funcs";
 
 interface InformationFormProps {
     data: IEventRes | undefined;
@@ -32,10 +34,7 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
     const translation = useTranslations("");
 
     // ** User Selector
-    const { userProfile } = useAppSelector(selectUser);
-
-    // ** Router
-    const router = useRouter();
+    const { userPermissions } = useAppSelector(selectUser);
 
     // ** Use State
     const [loading, setLoading] = useState(false);
@@ -120,6 +119,7 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
             setLoading(false);
         }
     };
+    const canUpdateEvent = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_EVENT);
 
     return (
         <Form {...form}>
@@ -339,13 +339,15 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                         )}
                     />
                 </div>
-                <Button
-                    disabled={loading}
-                    className="ml-auto"
-                    type="submit"
-                >
-                    {translation("action.update")}
-                </Button>
+                {canUpdateEvent && (
+                    <Button
+                        disabled={loading}
+                        className="ml-auto"
+                        type="submit"
+                    >
+                        {translation("action.update")}
+                    </Button>
+                )}
             </form>
         </Form>
     );

@@ -15,6 +15,10 @@ import { IEventRes } from "@/models/api/event-api";
 import { Label } from "@/components/ui/label";
 import { Trash2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { isActionsPermissions } from "@/helpers/funcs";
+import { ActionPermissions } from "@/constants/routes";
+import { useAppSelector } from "@/redux/root/hooks";
+import { selectUser } from "@/redux/user/slice";
 
 interface InformationFormProps {
     data: IEventRes | undefined;
@@ -25,6 +29,9 @@ export default function CustomFieldsForm({ data, onRefresh }: InformationFormPro
     const eventId = data?.id;
     // ** I18n
     const translation = useTranslations("");
+
+    // ** User Selector
+    const { userPermissions } = useAppSelector(selectUser);
 
     // ** Use State
     const [loading, setLoading] = useState(false);
@@ -113,6 +120,8 @@ export default function CustomFieldsForm({ data, onRefresh }: InformationFormPro
             setLoading(false);
         }
     };
+    const canUpdateEvent = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_EVENT);
+
     return (
         <Form {...form}>
             <form
@@ -184,21 +193,23 @@ export default function CustomFieldsForm({ data, onRefresh }: InformationFormPro
                                 )}
                             />
                             <div className="col-span-1 flex justify-center items-end">
-                                <Button
-                                    disabled={loading}
-                                    variant={"destructive"}
-                                    type="button"
-                                    onClick={field.id ? () => onDelete(field.id) : () => remove(index)}
-                                >
-                                    <Trash2 className="w-5 h-5" />
-                                </Button>
+                                {canUpdateEvent && (
+                                    <Button
+                                        disabled={loading}
+                                        variant={"destructive"}
+                                        type="button"
+                                        onClick={field.id ? () => onDelete(field.id) : () => remove(index)}
+                                    >
+                                        <Trash2 className="w-5 h-5" />
+                                    </Button>
+                                )}
                             </div>
                         </div>
                         <Separator />
                     </div>
                 ))}
                 <div className="flex gap-2 justify-end">
-                    {fields.length > 0 && (
+                    {fields.length > 0 && canUpdateEvent && (
                         <Button
                             disabled={loading}
                             type="submit"
@@ -206,15 +217,17 @@ export default function CustomFieldsForm({ data, onRefresh }: InformationFormPro
                             {translation("action.update")}
                         </Button>
                     )}
-                    <Button
-                        disabled={loading}
-                        type="button"
-                        onClick={() => {
-                            append({ name: "", value: "", description: "" });
-                        }}
-                    >
-                        {translation("action.appendField")}
-                    </Button>
+                    {canUpdateEvent && (
+                        <Button
+                            disabled={loading}
+                            type="button"
+                            onClick={() => {
+                                append({ name: "", value: "", description: "" });
+                            }}
+                        >
+                            {translation("action.appendField")}
+                        </Button>
+                    )}
                 </div>
             </form>
         </Form>
