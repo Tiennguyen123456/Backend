@@ -86,6 +86,7 @@
             "checkIn": "Check in",
             "scanTime": "Scan time",
             "name": "Full name",
+            "address": "Address",
             "qrCode": "QR code",
             "email": "Email",
             "phone": "Phone",
@@ -355,6 +356,7 @@
         "GET_EVENT_INFORMATION_FAILED": "Get event information failed.",
         "UPDATE_EVENT_CONFIG_FAILED": "Update event configuration failed.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Delete event config field failed.",
+        "IMPORT_EXCEL_CLIENT_FAILED": "Import excel client failed.",
         "USER_NOT_FOUND": "User not found.",
         "EMAIL_NOT_FOUND": "Email not found.",
         "TOO_MANY_ATTEMPTS": "Too many attempts. Please try again later.",
@@ -384,6 +386,7 @@
         "DELETE_CUSTOM_FIELD_SUCCESS": "Delete custom field successfully.",
         "UPDATE_EVENT_CONFIG_SUCCESS": "Update event configuration successfully.",
         "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Delete event config field successfully.",
+        "IMPORT_EXCEL_CLIENT_SUCCESS": "Import excel client successfully.",
         "UPDATE_PERMISSION_SUCCESS": "Update permission successfully.",
         "DELETE_CAMPAIGN_SUCCESS": "Delete campaign successfully."
     },

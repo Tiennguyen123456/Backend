@@ -85,6 +85,7 @@
         "table": {
             "scanTime": "Giờ checkin",
             "name": "Họ tên",
+            "address": "Địa chỉ",
             "qrCode": "QR code",
             "email": "Email",
             "phone": "Số điện thoại",
@@ -353,6 +354,7 @@
         "GET_EVENT_INFORMATION_FAILED": "Lấy thông tin sự kiện thất bại.",
         "UPDATE_EVENT_CONFIG_FAILED": "Chỉnh sửa cấu hình sự kiện thất bại.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Xóa cấu hình trường sự kiện thất bại.",
+        "IMPORT_EXCEL_CLIENT_FAILED": "Nhập dữ liệu excel danh sách khách hàng thất bại",
         "USER_NOT_FOUND": "Người dùng không tồn tại.",
         "EMAIL_NOT_FOUND": "Email không tồn tại.",
         "TOO_MANY_ATTEMPTS": "Quá nhiều lần thử. Vui lòng thử lại sau 1 phút.",
@@ -382,6 +384,7 @@
         "DELETE_CUSTOM_FIELD_SUCCESS": "Xóa cấu hình trường thành công.",
         "UPDATE_EVENT_CONFIG_SUCCESS": "Chỉnh sửa cấu hình sự kiện thành công.",
         "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Xóa cấu hình trường sự kiện thành công.",
+        "IMPORT_EXCEL_CLIENT_SUCCESS": "Nhập dữ liệu excel danh sách khách hàng thành công.",
         "UPDATE_PERMISSION_SUCCESS": "Cập nhật quyền thành công."
     },
     "localeSwitcher": {

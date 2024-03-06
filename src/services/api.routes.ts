@@ -35,6 +35,10 @@ const ApiRoutes = {
     updateCustomFieldsEvent: baseURL + "/event/",
     deleteCustomFieldsEvent: baseURL + "/event",
 
+    // ** Client Routes
+    getClientsByEvent: baseURL + "/event",
+    importExcelClient: baseURL + "/event",
+
     // ** Campaign Routes
     getCampaigns: baseURL + "/campaigns",
     storeCampaign: baseURL + "/campaign/store",
