@@ -4,6 +4,7 @@ export interface IClientRes {
     fullname: string;
     email: string;
     phone: string;
+    is_checkin: number;
     group: string;
     address: string;
     type: string;

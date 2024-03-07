@@ -83,6 +83,7 @@
     "clientsPage": {
         "title": "Danh sách khách mời",
         "table": {
+            "checkIn": "Đã kiểm tra",
             "scanTime": "Giờ checkin",
             "name": "Họ tên",
             "address": "Địa chỉ",
@@ -200,7 +201,8 @@
         "search": "Tìm kiếm",
         "client": "Khách hàng",
         "back": "Quay lại",
-        "continue": "Tiếp tục"
+        "continue": "Tiếp tục",
+        "checkIn": "Kiểm tra"
     },
     "label": {
         "search": "Tìm kiếm",
@@ -264,7 +266,8 @@
         "configEmail": "Cấu hình email",
         "fieldValue": "Giá trị trường",
         "titleAlert": "Bạn có thực sự muốn thao tác không?",
-        "descriptionAlert": "Hành động này không thể được hoàn tác."
+        "descriptionAlert": "Hành động này không thể được hoàn tác.",
+        "titleCheckInAlert": "Bạn có thực sự muốn kiểm tra khách hàng này không?"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -369,6 +372,7 @@
         "CREATE_CLIENT_FAILED": "Tạo mới khách hàng thất bại.",
         "UPDATE_CLIENT_FAILED": "Chỉnh sửa khách hàng thất bại.",
         "DELETE_CLIENT_FAILED": "Xoá khách hàng thất bại.",
+        "CHECKIN_CLIENT_FAILED": "Kiểm tra khách hàng thất bại.",
         "USER_NOT_FOUND": "Người dùng không tồn tại.",
         "EMAIL_NOT_FOUND": "Email không tồn tại.",
         "TOO_MANY_ATTEMPTS": "Quá nhiều lần thử. Vui lòng thử lại sau 1 phút.",
@@ -403,6 +407,7 @@
         "CREATE_CLIENT_SUCCESS": "Tạo mới khách hàng thành công.",
         "UPDATE_CLIENT_SUCCESS": "Chỉnh sửa khách hàng thành công.",
         "DELETE_CLIENT_SUCCESS": "Xoá khách hàng thành công.",
+        "CHECKIN_CLIENT_SUCCESS": "Kiểm tra khách hàng thành công.",
         "UPDATE_PERMISSION_SUCCESS": "Cập nhật quyền thành công."
     },
     "localeSwitcher": {

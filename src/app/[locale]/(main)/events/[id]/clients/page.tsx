@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import React, { ChangeEvent, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Import } from "lucide-react";
+import { CheckCircle, Import } from "lucide-react";
 import { DataTable } from "@/components/ui/data-table";
 import { usePagination } from "@/hooks/use-pagination";
 import { useRowSelection } from "@/hooks/use-row-selection";
@@ -198,8 +198,10 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
             header: () => <div className="text-black font-bold">{translation("clientsPage.table.email")}</div>,
         },
         {
-            accessorKey: "address",
-            header: () => <div className="text-black font-bold">{translation("clientsPage.table.address")}</div>,
+            accessorKey: "check_in",
+            header: () => <div className="text-black font-bold">{translation("clientsPage.table.checkIn")}</div>,
+            cell: ({ row }) =>
+                row.original.is_checkin === 1 ? <CheckCircle className="h-5 w-5 text-green-700" /> : "",
         },
         {
             accessorKey: "type",

@@ -40,6 +40,7 @@ const ApiRoutes = {
     importExcelClient: baseURL + "/event",
     storeClient: baseURL + "/event",
     deleteClient: baseURL + "/event",
+    checkInClient: baseURL + "/event",
 
     // ** Campaign Routes
     getCampaigns: baseURL + "/campaigns",

@@ -16,5 +16,9 @@ const clientApi = {
         const url = ApiRoutes.deleteClient + `/${eventId}/client/${clientId}`;
         return await api.delete<IResponse<null>>(url);
     },
+    checkInClient: async (eventId: number, clientId: any) => {
+        const url = ApiRoutes.checkInClient + `/${eventId}/client/${clientId}/checkin`;
+        return await api.post<IResponse<null>>(url);
+    },
 };
 export default clientApi;

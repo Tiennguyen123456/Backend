@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Edit, MoreHorizontal, Trash } from "lucide-react";
+import { Edit, MoreHorizontal, ScanBarcode, Trash } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -72,8 +72,45 @@ export const CellAction: React.FC<CellActionProps> = ({
         }
     };
 
+    const onConfirmCheckIn = async () => {
+        try {
+            setLoading(true);
+
+            const response = await clientApi.checkInClient(eventId, data.id);
+
+            if (response.data.status == APIStatus.SUCCESS) {
+                toastSuccess(translation("successApi.CHECKIN_CLIENT_SUCCESS"));
+            }
+            onRefetch();
+        } catch (error: any) {
+            const data = error?.response?.data;
+            const messageError = translation("errorApi.CHECKIN_CLIENT_FAILED");
+            if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
+                const [value] = Object.values(data.data);
+                const message = Array(value).toString() ?? messageError;
+                toastError(message);
+            } else if (data?.message_code != MessageCode.VALIDATION_ERROR) {
+                toastError(translation(`errorApi.${data?.message_code}`));
+            } else {
+                toastError(messageError);
+            }
+            console.log("error: ", error);
+        } finally {
+            setOpenModalCheckIn(false);
+            setLoading(false);
+        }
+    };
+
     return (
         <>
+            <AlertModal
+                isOpen={openModalCheckIn}
+                onClose={() => setOpenModalCheckIn(false)}
+                onConfirm={onConfirmCheckIn}
+                loading={loading}
+                title={translation("label.titleCheckInAlert")}
+                description=""
+            />
             <AlertModal
                 isOpen={openModalDelete}
                 onClose={() => setOpenModalDelete(false)}
@@ -94,6 +131,16 @@ export const CellAction: React.FC<CellActionProps> = ({
                     align="end"
                     className="w-40"
                 >
+                    {isDelete ? (
+                        <DropdownMenuItem
+                            onClick={() => setOpenModalCheckIn(true)}
+                            className="text-green-700"
+                        >
+                            <ScanBarcode className="mr-3 h-4 w-4" /> {translation("action.checkIn")}
+                        </DropdownMenuItem>
+                    ) : (
+                        ""
+                    )}
                     {isUpdate ? (
                         <DropdownMenuItem onClick={onRowSelected}>
                             <Edit className="mr-3 h-4 w-4" /> {translation("action.edit")}
