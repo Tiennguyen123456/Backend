@@ -10,17 +10,18 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CompanyColumn } from "./column";
+import { ClientColumn } from "./column";
 import { useTranslations } from "next-intl";
 import { AlertModal } from "@/components/modals/alert-modal";
-import companyApi from "@/services/company-api";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { APIStatus, MessageCode } from "@/constants/enum";
+import clientApi from "@/services/client-api";
 
 interface CellActionProps {
-    data: CompanyColumn;
+    data: ClientColumn;
     onRefetch: () => void;
     onRowSelected: () => void;
+    eventId: number;
     isUpdate?: boolean;
     isDelete?: boolean;
 }
@@ -29,6 +30,7 @@ export const CellAction: React.FC<CellActionProps> = ({
     data,
     onRefetch,
     onRowSelected,
+    eventId,
     isUpdate = false,
     isDelete = false,
 }) => {
@@ -36,30 +38,24 @@ export const CellAction: React.FC<CellActionProps> = ({
     const translation = useTranslations("");
 
     // ** State
-    const [open, setOpen] = useState(false);
+    const [openModalCheckIn, setOpenModalCheckIn] = useState(false);
+    const [openModalDelete, setOpenModalDelete] = useState(false);
     const [loading, setLoading] = useState(false);
 
     // ** Func
-    const onConfirm = async () => {
+    const onConfirmDelete = async () => {
         try {
             setLoading(true);
 
-            const response = await companyApi.deleteCompany(data.id);
+            const response = await clientApi.deleteClient(eventId, data.id);
 
             if (response.data.status == APIStatus.SUCCESS) {
-                toastSuccess(translation("successApi.DELETE_COMPANY_SUCCESS"));
+                toastSuccess(translation("successApi.DELETE_CLIENT_SUCCESS"));
             }
             onRefetch();
         } catch (error: any) {
             const data = error?.response?.data;
-            // if (data?.data && data?.message_code) {
-            //     const [value] = Object.values(data.data);
-            //     const message = Array(value).toString() ?? translation("errorApi.DELETE_COMPANY_FAILED");
-            //     toastError(message);
-            // } else {
-            //     toastError(translation("errorApi.DELETE_COMPANY_FAILED"));
-            // }
-            const messageError = translation("errorApi.DELETE_COMPANY_FAILED");
+            const messageError = translation("errorApi.DELETE_CLIENT_FAILED");
             if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
                 const [value] = Object.values(data.data);
                 const message = Array(value).toString() ?? messageError;
@@ -71,7 +67,7 @@ export const CellAction: React.FC<CellActionProps> = ({
             }
             console.log("error: ", error);
         } finally {
-            setOpen(false);
+            setOpenModalDelete(false);
             setLoading(false);
         }
     };
@@ -79,9 +75,9 @@ export const CellAction: React.FC<CellActionProps> = ({
     return (
         <>
             <AlertModal
-                isOpen={open}
-                onClose={() => setOpen(false)}
-                onConfirm={onConfirm}
+                isOpen={openModalDelete}
+                onClose={() => setOpenModalDelete(false)}
+                onConfirm={onConfirmDelete}
                 loading={loading}
             />
             <DropdownMenu>
@@ -107,7 +103,7 @@ export const CellAction: React.FC<CellActionProps> = ({
                     )}
                     {isDelete ? (
                         <DropdownMenuItem
-                            onClick={() => setOpen(true)}
+                            onClick={() => setOpenModalDelete(true)}
                             className="text-red-700"
                         >
                             <Trash className="mr-3 h-4 w-4" /> {translation("action.delete")}

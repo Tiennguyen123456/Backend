@@ -92,6 +92,12 @@
             "phone": "Phone",
             "type": "Type",
             "status": "Status"
+        },
+        "create": {
+            "title": "Create Client"
+        },
+        "edit": {
+            "title": "Edit Client"
         }
     },
     "eventDetailsPage": {
@@ -194,7 +200,8 @@
         "appendField": "Append Field",
         "search": "Search",
         "client": "Clients",
-        "back": "Back"
+        "back": "Back",
+        "continue": "Continue"
     },
     "label": {
         "search": "Search",
@@ -252,8 +259,11 @@
         "mailSubject": "Mail Subject",
         "filterClient": "Filter client",
         "group": "Group",
+        "type": "Type",
         "configEmail": "Config Email",
-        "fieldValue": "Field Value"
+        "fieldValue": "Field Value",
+        "titleAlert": "Are you sure?",
+        "descriptionAlert": "This action cannot be undone."
     },
     "placeholder": {
         "email": "example@example.com",
@@ -285,7 +295,8 @@
         "campaignName": "Campaign Name",
         "selectEvent": "Select Event",
         "mailSubject": "Type mail subject",
-        "group": "Group"
+        "group": "Group",
+        "type": "Select type"
     },
     "error": {
         "requiredEmail": "Please enter your email address.",
@@ -357,6 +368,9 @@
         "UPDATE_EVENT_CONFIG_FAILED": "Update event configuration failed.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Delete event config field failed.",
         "IMPORT_EXCEL_CLIENT_FAILED": "Import excel client failed.",
+        "CREATE_CLIENT_FAILED": "Create client failed.",
+        "UPDATE_CLIENT_FAILED": "Update client failed.",
+        "DELETE_CLIENT_FAILED": "Delete client failed.",
         "USER_NOT_FOUND": "User not found.",
         "EMAIL_NOT_FOUND": "Email not found.",
         "TOO_MANY_ATTEMPTS": "Too many attempts. Please try again later.",
@@ -364,7 +378,8 @@
         "VALIDATION_ERROR": "Validate request failed.",
         "UPDATE_PERMISSION_FAILED": "Update permission failed.",
         "UNAUTHORIZED_ACTION": "Token expired.",
-        "FAILED_TO_REMOVE": "Failed to remove."
+        "FAILED_TO_REMOVE": "Failed to remove.",
+        "METHOD_IS_NOT_SUPPORT": "Method is not support"
     },
     "successApi": {
         "SUCCESS": "Success",
@@ -387,6 +402,9 @@
         "UPDATE_EVENT_CONFIG_SUCCESS": "Update event configuration successfully.",
         "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Delete event config field successfully.",
         "IMPORT_EXCEL_CLIENT_SUCCESS": "Import excel client successfully.",
+        "CREATE_CLIENT_SUCCESS": "Create client successfully.",
+        "UPDATE_CLIENT_SUCCESS": "Update client successfully.",
+        "DELETE_CLIENT_SUCCESS": "Delete client successfully.",
         "UPDATE_PERMISSION_SUCCESS": "Update permission successfully.",
         "DELETE_CAMPAIGN_SUCCESS": "Delete campaign successfully."
     },

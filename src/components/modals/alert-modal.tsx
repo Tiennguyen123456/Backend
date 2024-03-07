@@ -3,17 +3,24 @@
 import { useEffect, useState } from "react";
 import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 interface AlertModalProps {
     isOpen: boolean;
     onClose: () => void;
     onConfirm: () => void;
     loading: boolean;
+    title?: string;
+    description?: string;
 }
 
-export const AlertModal: React.FC<AlertModalProps> = ({ isOpen, onClose, onConfirm, loading }) => {
-    const [isMounted, setIsMounted] = useState(false);
+export const AlertModal: React.FC<AlertModalProps> = ({ isOpen, onClose, onConfirm, loading, title, description }) => {
+    // ** I18n
+    const translation = useTranslations("");
 
+    const titleTrans = title ?? translation("label.titleAlert");
+    const descriptionTrans = description ?? translation("label.descriptionAlert");
+    const [isMounted, setIsMounted] = useState(false);
     useEffect(() => {
         setIsMounted(true);
     }, []);
@@ -24,8 +31,8 @@ export const AlertModal: React.FC<AlertModalProps> = ({ isOpen, onClose, onConfi
 
     return (
         <Modal
-            title="Are you sure?"
-            description="This action cannot be undone."
+            title={titleTrans}
+            description={descriptionTrans}
             isOpen={isOpen}
             onClose={onClose}
         >
@@ -35,14 +42,14 @@ export const AlertModal: React.FC<AlertModalProps> = ({ isOpen, onClose, onConfi
                     variant="destructive"
                     onClick={onConfirm}
                 >
-                    Continue
+                    {translation("action.continue")}
                 </Button>
                 <Button
                     disabled={loading}
                     variant="outline"
                     onClick={onClose}
                 >
-                    Cancel
+                    {translation("action.cancel")}
                 </Button>
             </div>
         </Modal>

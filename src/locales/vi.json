@@ -91,6 +91,12 @@
             "phone": "Số điện thoại",
             "type": "Loại",
             "status": "Trạng thái"
+        },
+        "create": {
+            "title": "Tạo mới khách hàng"
+        },
+        "edit": {
+            "title": "Cập nhật khách hàng"
         }
     },
     "eventDetailsPage": {
@@ -193,7 +199,8 @@
         "appendField": "Thêm trường",
         "search": "Tìm kiếm",
         "client": "Khách hàng",
-        "back": "Quay lại"
+        "back": "Quay lại",
+        "continue": "Tiếp tục"
     },
     "label": {
         "search": "Tìm kiếm",
@@ -253,8 +260,11 @@
         "mailSubject": "Tiêu đề email",
         "filterClient": "Lọc khách mời",
         "group": "Nhóm",
+        "type": "Loại",
         "configEmail": "Cấu hình email",
-        "fieldValue": "Giá trị trường"
+        "fieldValue": "Giá trị trường",
+        "titleAlert": "Bạn có thực sự muốn thao tác không?",
+        "descriptionAlert": "Hành động này không thể được hoàn tác."
     },
     "placeholder": {
         "email": "example@example.com",
@@ -286,7 +296,8 @@
         "campaignName": "Tên chiến dịch",
         "selectEvent": "Chọn sự kiện",
         "mailSubject": "Tiêu đề email",
-        "group": "Nhóm"
+        "group": "Nhóm",
+        "type": "Chọn loại"
     },
     "error": {
         "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
@@ -348,13 +359,16 @@
         "DELETE_COMPANY_FAILED": "Xoá công ty thất bại.",
         "CREATE_EVENT_FAILED": "Tạo mới sự kiện thất bại.",
         "UPDATE_EVENT_FAILED": "Chỉnh sửa sự kiện thất bại.",
-        "DELETE_EVENT_FAILED": "Xoá sự kiện thật bại.",
+        "DELETE_EVENT_FAILED": "Xoá sự kiện thất bại.",
         "UPDATE_CUSTOM_FIELD_FAILED": "Cập nhật cấu hình trường thất bại.",
         "DELETE_CUSTOM_FIELD_FAILED": "Xóa cấu hình trường thất bại.",
         "GET_EVENT_INFORMATION_FAILED": "Lấy thông tin sự kiện thất bại.",
         "UPDATE_EVENT_CONFIG_FAILED": "Chỉnh sửa cấu hình sự kiện thất bại.",
         "DELETE_EVENT_CONFIG_FIELD_FAILED": "Xóa cấu hình trường sự kiện thất bại.",
         "IMPORT_EXCEL_CLIENT_FAILED": "Nhập dữ liệu excel danh sách khách hàng thất bại",
+        "CREATE_CLIENT_FAILED": "Tạo mới khách hàng thất bại.",
+        "UPDATE_CLIENT_FAILED": "Chỉnh sửa khách hàng thất bại.",
+        "DELETE_CLIENT_FAILED": "Xoá khách hàng thất bại.",
         "USER_NOT_FOUND": "Người dùng không tồn tại.",
         "EMAIL_NOT_FOUND": "Email không tồn tại.",
         "TOO_MANY_ATTEMPTS": "Quá nhiều lần thử. Vui lòng thử lại sau 1 phút.",
@@ -362,7 +376,8 @@
         "VALIDATION_ERROR": "Dữ liệu không đúng.",
         "UPDATE_PERMISSION_FAILED": "Cập nhật quyền thất bại.",
         "UNAUTHORIZED_ACTION": "Token đã hết hạn.",
-        "FAILED_TO_REMOVE": "Xoá dữ liệu thất bại."
+        "FAILED_TO_REMOVE": "Xoá dữ liệu thất bại.",
+        "METHOD_IS_NOT_SUPPORT": "Phương thức không được hổ trợ"
     },
     "successApi": {
         "SUCCESS": "Thành công",
@@ -385,6 +400,9 @@
         "UPDATE_EVENT_CONFIG_SUCCESS": "Chỉnh sửa cấu hình sự kiện thành công.",
         "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Xóa cấu hình trường sự kiện thành công.",
         "IMPORT_EXCEL_CLIENT_SUCCESS": "Nhập dữ liệu excel danh sách khách hàng thành công.",
+        "CREATE_CLIENT_SUCCESS": "Tạo mới khách hàng thành công.",
+        "UPDATE_CLIENT_SUCCESS": "Chỉnh sửa khách hàng thành công.",
+        "DELETE_CLIENT_SUCCESS": "Xoá khách hàng thành công.",
         "UPDATE_PERMISSION_SUCCESS": "Cập nhật quyền thành công."
     },
     "localeSwitcher": {
