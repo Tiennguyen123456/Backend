@@ -8,6 +8,8 @@ export interface IParamsDataTable {
 }
 
 export interface IListRes<T> {
+    totalClient?: number;
+    totalCheckin?: number;
     collection: T[];
     pagination: {
         meta: {

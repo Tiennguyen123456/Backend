@@ -26,6 +26,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { IClientRes } from "@/models/api/client-api";
 import { toastError, toastSuccess } from "@/utils/toast";
 import clientApi from "@/services/client-api";
+import { Badge } from "@/components/ui/badge";
 
 export default function EventClientPage({ params }: { params: { id: number } }) {
     // ** I18n
@@ -57,7 +58,7 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
     });
 
     // Use fetch data
-    const { data, loading, pageCount, refresh, setRefresh } = useFetchDataTable<IClientRes>({
+    const { data, loading, pageCount, refresh, setRefresh, totalClient, totalCheckIn } = useFetchDataTable<IClientRes>({
         url: ApiRoutes.getClientsByEvent + `/${params.id}/clients`,
         paramsDataTable: {
             ...paramsDataTable,
@@ -333,6 +334,37 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
                     {translation("action.search")}
                 </Button>
             </div> */}
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-5">
+                <div className="relative w-auto">
+                    Tổng số khách mời
+                    <Badge
+                        className="absolute right-0 sm:-top-4 sm:-right-6"
+                        variant="destructive"
+                    >
+                        {totalClient.toString()}
+                    </Badge>
+                </div>
+                <div className="hidden sm:block">-</div>
+                <div className="relative">
+                    Đã checkin
+                    <Badge
+                        className="absolute right-0 sm:-top-4 sm:-right-6"
+                        variant="destructive"
+                    >
+                        {totalCheckIn.toString()}
+                    </Badge>
+                </div>
+                <div className="hidden sm:block">-</div>
+                <div className="relative">
+                    Chưa checkin
+                    <Badge
+                        className="absolute right-0 sm:-top-4 sm:-right-6"
+                        variant="destructive"
+                    >
+                        {(Number(totalClient) - Number(totalCheckIn)).toString()}
+                    </Badge>
+                </div>
+            </div>
             <DataTable
                 loading={loading}
                 columns={columns}

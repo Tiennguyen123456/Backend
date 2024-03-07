@@ -18,6 +18,11 @@ export function useFetchDataTable<IDataTableRes>({
     const [loading, setLoading] = useState<Boolean>(false);
     const [refresh, setRefresh] = useState<Boolean>(false);
 
+    // private for page client
+    const [totalClient, setTotalClient] = useState<Number>(0);
+    const [totalCheckIn, setTotalCheckIn] = useState<Number>(0);
+    // private for page client
+
     useEffect(() => {
         setLoading(true);
 
@@ -42,16 +47,26 @@ export function useFetchDataTable<IDataTableRes>({
                             : response.data.pagination.meta.total / pagination.pageSize,
                     ),
                 );
+
+                // private for page client
+                setTotalClient(response.data?.totalClient ?? 0);
+                setTotalCheckIn(response.data?.totalCheckin ?? 0);
+                // private for page client
             })
             .catch(function (error) {
                 console.log(error);
                 setData([]);
                 setPageCount(0);
+
+                // private for page client
+                setTotalClient(0);
+                setTotalCheckIn(0);
+                // private for page client
             })
             .finally(function () {
                 setLoading(false);
             });
     }, [refresh, pagination.page, pagination.pageSize, search, filters, url, setData, setLoading]);
 
-    return { data, loading, pageCount, refresh, setRefresh };
+    return { data, loading, pageCount, refresh, setRefresh, totalCheckIn, totalClient };
 }
