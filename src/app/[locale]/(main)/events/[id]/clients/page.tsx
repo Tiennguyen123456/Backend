@@ -20,13 +20,13 @@ import { useAppSelector } from "@/redux/root/hooks";
 import { selectUser } from "@/redux/user/slice";
 import { ActionPermissions } from "@/constants/routes";
 import { Input } from "@/components/ui/input";
-import { APIStatus, EStatus, MessageCode } from "@/constants/enum";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { APIStatus, MessageCode } from "@/constants/enum";
 import { Checkbox } from "@/components/ui/checkbox";
 import { IClientRes } from "@/models/api/client-api";
 import { toastError, toastSuccess } from "@/utils/toast";
 import clientApi from "@/services/client-api";
 import { Badge } from "@/components/ui/badge";
+import { Label } from "@/components/ui/label";
 
 export default function EventClientPage({ params }: { params: { id: number } }) {
     // ** I18n
@@ -98,21 +98,13 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
     const canCheckInClient = isActionsPermissions(userPermissions, ActionPermissions.CHECK_IN_CLIENT);
     const canUpdateClient = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_CLIENT);
     const canDeleteClient = isActionsPermissions(userPermissions, ActionPermissions.DELETE_CLIENT);
-    const handleSearchTaxCode = (event: any) => {
-        setParamsSearch({ ...paramsSearch, filters: { ...paramsSearch.filters, tax_code: event.target.value } });
+    const handleSearchEmail = (event: any) => {
+        if (event.target.value.length > 5)
+            setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, email: event.target.value } });
     };
-    const handleSearchName = (event: any) => {
-        setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, name: event.target.value } });
-    };
-    const handleSearchStatus = (statusName: any) => {
-        setParamsSearch(
-            statusName == EStatus.ALL
-                ? {
-                      ...paramsSearch,
-                      filters: { ...paramsSearch.filters, status: "" },
-                  }
-                : { ...paramsSearch, filters: { ...paramsSearch.filters, status: statusName } },
-        );
+    const handleSearchPhone = (event: any) => {
+        if (event.target.value.length > 5)
+            setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, phone: event.target.value } });
     };
     const handleClickSearch = () => {
         setParamsDataTable({ ...paramsDataTable, search: paramsSearch.search, filters: paramsSearch.filters });
@@ -278,70 +270,6 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
                     </div>
                 </div>
             </div>
-            {/* <div className="flex flex-col sm:flex-row gap-2 justify-start items-end w-full md:w-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full md:w-auto">
-                    <div className="grid w-full max-w-sm items-center gap-1.5">
-                        <Label
-                            className="text-base"
-                            htmlFor="taxcode"
-                        >
-                            {translation("label.taxCode")}
-                        </Label>
-                        <Input
-                            disabled={Boolean(loading)}
-                            id="taxcode"
-                            type="text"
-                            className="h-10 text"
-                            placeholder={translation("placeholder.taxCode")}
-                            onChange={handleSearchTaxCode}
-                        />
-                    </div>
-                    <div className="grid w-full sm:max-w-xl items-center gap-1.5">
-                        <Label
-                            className="text-base"
-                            htmlFor="name"
-                        >
-                            {translation("label.name")}
-                        </Label>
-                        <Input
-                            disabled={Boolean(loading)}
-                            id="name"
-                            type="text"
-                            className="h-10"
-                            placeholder={translation("placeholder.name")}
-                            onChange={handleSearchName}
-                        />
-                    </div>
-                    <div className="grid w-full sm:max-w-xl items-center gap-1.5">
-                        <Label className="text-base">{translation("label.status")}</Label>
-                        <Select
-                            disabled={Boolean(loading)}
-                            onValueChange={handleSearchStatus}
-                            defaultValue={EStatus.ALL}
-                        >
-                            <SelectTrigger className="h-10">
-                                <SelectValue placeholder={translation("placeholder.status")} />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {STATUS_VALID_FILTER.map((status) => (
-                                    <SelectItem
-                                        key={status.value}
-                                        value={status.value}
-                                    >
-                                        {translation(`status.${status.value}`)}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
-                </div>
-                <Button
-                    disabled={Boolean(loading)}
-                    onClick={handleClickSearch}
-                >
-                    {translation("action.search")}
-                </Button>
-            </div> */}
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-5">
                 <div className="relative w-auto">
                     Tổng số khách mời
@@ -372,6 +300,68 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
                         {(Number(totalClient) - Number(totalCheckIn)).toString()}
                     </Badge>
                 </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2 justify-start items-end w-full md:w-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full md:w-auto">
+                    <div className="grid w-full max-w-sm items-center gap-1.5">
+                        <Label
+                            className="text-base"
+                            htmlFor="email"
+                        >
+                            {translation("label.email")}
+                        </Label>
+                        <Input
+                            disabled={Boolean(loading)}
+                            id="email"
+                            type="text"
+                            className="h-10 text"
+                            onChange={handleSearchEmail}
+                        />
+                    </div>
+                    <div className="grid w-full sm:max-w-xl items-center gap-1.5">
+                        <Label
+                            className="text-base"
+                            htmlFor="phone"
+                        >
+                            {translation("label.phone")}
+                        </Label>
+                        <Input
+                            disabled={Boolean(loading)}
+                            id="name"
+                            type="text"
+                            className="h-10"
+                            onChange={handleSearchPhone}
+                        />
+                    </div>
+                    {/* <div className="grid w-full sm:max-w-xl items-center gap-1.5">
+                        <Label className="text-base">{translation("label.status")}</Label>
+                        <Select
+                            disabled={Boolean(loading)}
+                            onValueChange={handleSearchStatus}
+                            defaultValue={EStatus.ALL}
+                        >
+                            <SelectTrigger className="h-10">
+                                <SelectValue placeholder={translation("placeholder.status")} />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {STATUS_VALID_FILTER.map((status) => (
+                                    <SelectItem
+                                        key={status.value}
+                                        value={status.value}
+                                    >
+                                        {translation(`status.${status.value}`)}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div> */}
+                </div>
+                <Button
+                    disabled={Boolean(loading)}
+                    onClick={handleClickSearch}
+                >
+                    {translation("action.search")}
+                </Button>
             </div>
             <DataTable
                 loading={loading}
