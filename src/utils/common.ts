@@ -26,7 +26,7 @@ export function removeLocaleFromPathname(pathname: string) {
 }
 
 export function removeNumberInPathname(pathname: string) {
-    return pathname.replace(replaceIdInURLRegExp, "")
+    return pathname.replace(replaceIdInURLRegExp, "");
 }
 
 export function isMatchPrivateRoute(path: string) {

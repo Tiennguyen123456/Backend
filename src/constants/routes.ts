@@ -5,6 +5,7 @@ export const ROUTES = {
     DASHBOARD: "/dashboard",
     EVENTS: "/events",
     EVENTS_CREATE: "/events/create",
+    CLIENTS: "/events/clients",
     // EVENTS_DETAILS: "/events",
     // EVENTS_CONFIG: "/events/config",
     CAMPAIGNS: "/campaigns",
@@ -23,7 +24,6 @@ export const ROUTES = {
     PERMISSIONS: "/permissions",
     // LANGUAGES: "/languages",
     // CONFIGURATIONS: "/configurations",
-    CLIENTS: "/clients",
     FORBIDDEN: "/forbidden",
 };
 
@@ -121,6 +121,7 @@ export const PRIVATE_ROUTES = [
     ROUTES.DASHBOARD,
     ROUTES.EVENTS,
     ROUTES.EVENTS_CREATE,
+    ROUTES.CLIENTS,
     // ROUTES.EVENTS_DETAILS,
     // ROUTES.EVENTS_CONFIG,
     ROUTES.CAMPAIGNS,
@@ -137,7 +138,6 @@ export const PRIVATE_ROUTES = [
     ROUTES.PERMISSIONS,
     // ROUTES.LANGUAGES,
     // ROUTES.CONFIGURATIONS,
-    // ROUTES.CLIENTS,
     ROUTES.FORBIDDEN,
 ];
 
@@ -146,6 +146,7 @@ export const AppRoutesPermissions = [
     { path: ROUTES.DASHBOARD, permissions: [] },
     { path: ROUTES.EVENTS, permissions: ["event:view"] },
     { path: ROUTES.EVENTS_CREATE, permissions: ["event:create"] },
+    { path: ROUTES.CLIENTS, permissions: ["client:view"] },
     // { path: ROUTES.EVENTS_DETAILS, permissions: ["event:update"] },
     // { path: ROUTES.EVENTS_CONFIG, permissions: ["event:update", "event:config"] },
     { path: ROUTES.CAMPAIGNS, permissions: ["campaign:view"] },
@@ -162,7 +163,6 @@ export const AppRoutesPermissions = [
     { path: ROUTES.PERMISSIONS, permissions: ["user_permission:view"] },
     // { path: ROUTES.LANGUAGES, permissions: ["language:view"] },
     // { path: ROUTES.CONFIGURATIONS, permissions: ["event:config"] },
-    // { path: ROUTES.CLIENTS, permissions: [] },
     { path: ROUTES.FORBIDDEN, permissions: [] },
 ];
 
@@ -178,6 +178,11 @@ export const ActionPermissions = {
     CREATE_EVENT: ["event:create"],
     UPDATE_EVENT: ["event:update"],
     DELETE_EVENT: ["event:delete"],
+    IMPORT_CLIENT: ["client:import"],
+    CREATE_CLIENT: ["client:create"],
+    UPDATE_CLIENT: ["client:update"],
+    DELETE_CLIENT: ["client:delete"],
+    CHECK_IN_CLIENT: ["client:check-in"],
     CREATE_CAMPAIGN: ["campaign:create"],
     UPDATE_CAMPAIGN: ["campaign:update"],
     DELETE_CAMPAIGN: ["campaign:delete"],

@@ -24,6 +24,7 @@ interface CellActionProps {
     eventId: number;
     isUpdate?: boolean;
     isDelete?: boolean;
+    isCheckIn?: boolean;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({
@@ -33,6 +34,7 @@ export const CellAction: React.FC<CellActionProps> = ({
     eventId,
     isUpdate = false,
     isDelete = false,
+    isCheckIn = false,
 }) => {
     // ** I18n
     const translation = useTranslations("");
@@ -131,7 +133,7 @@ export const CellAction: React.FC<CellActionProps> = ({
                     align="end"
                     className="w-40"
                 >
-                    {isDelete ? (
+                    {isCheckIn ? (
                         <DropdownMenuItem
                             onClick={() => setOpenModalCheckIn(true)}
                             className="text-green-700"

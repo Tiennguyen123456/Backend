@@ -23,6 +23,7 @@ interface ClientModalProps extends IModal {
     defaultData: IClientRes | null;
     onConfirm: () => void;
     eventId: number;
+    isUpdate?: boolean;
 }
 
 export const ClientModal: React.FC<ClientModalProps> = ({
@@ -32,6 +33,7 @@ export const ClientModal: React.FC<ClientModalProps> = ({
     className,
     onConfirm,
     eventId,
+    isUpdate = false,
 }) => {
     // ** I18n
     const translation = useTranslations("");
@@ -294,13 +296,15 @@ export const ClientModal: React.FC<ClientModalProps> = ({
                         />
                     </div>
                     <div className="space-x-2 flex items-center justify-end w-full mt-2 sm:mt-0">
-                        <Button
-                            disabled={loading}
-                            variant="default"
-                            type="submit"
-                        >
-                            {action}
-                        </Button>
+                        {isUpdate && (
+                            <Button
+                                disabled={loading}
+                                variant="default"
+                                type="submit"
+                            >
+                                {action}
+                            </Button>
+                        )}
                         <Button
                             type="button"
                             disabled={loading}

@@ -26,19 +26,16 @@ export default function EventDetailsPage({ params }: { params: { id: number } })
     const router = useRouter();
 
     // TabItem
-    const sidebarNavItems = useMemo<tabItem[]>(
-        () => [
-            {
-                id: 1,
-                title: translation("eventDetailsPage.tab.information"),
-            },
-            {
-                id: 2,
-                title: translation("eventDetailsPage.tab.customFields"),
-            },
-        ],
-        [],
-    );
+    const sidebarNavItems: tabItem[] = [
+        {
+            id: 1,
+            title: translation("eventDetailsPage.tab.information"),
+        },
+        {
+            id: 2,
+            title: translation("eventDetailsPage.tab.customFields"),
+        },
+    ];
 
     // ** UseState
     const [tab, setTab] = useState<Number>(1);

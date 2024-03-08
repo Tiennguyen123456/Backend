@@ -94,8 +94,10 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
         setRowSelected(null);
         setOpenModal(false);
     };
-    const canUpdateClient = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_COMPANY);
-    const canDeleteClient = isActionsPermissions(userPermissions, ActionPermissions.DELETE_COMPANY);
+    const canImportClient = isActionsPermissions(userPermissions, ActionPermissions.IMPORT_CLIENT);
+    const canCheckInClient = isActionsPermissions(userPermissions, ActionPermissions.CHECK_IN_CLIENT);
+    const canUpdateClient = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_CLIENT);
+    const canDeleteClient = isActionsPermissions(userPermissions, ActionPermissions.DELETE_CLIENT);
     const handleSearchTaxCode = (event: any) => {
         setParamsSearch({ ...paramsSearch, filters: { ...paramsSearch.filters, tax_code: event.target.value } });
     };
@@ -216,7 +218,7 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
             id: "actions",
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
             cell: ({ row }) =>
-                canUpdateClient || canDeleteClient ? (
+                canUpdateClient || canDeleteClient || canCheckInClient ? (
                     <CellAction
                         onRowSelected={() => handleEditClient(row.original)}
                         onRefetch={handleOnRefreshDataTable}
@@ -224,6 +226,7 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
                         eventId={params.id}
                         isUpdate={canUpdateClient}
                         isDelete={canDeleteClient}
+                        isCheckIn={canCheckInClient}
                     />
                 ) : (
                     ""
@@ -244,15 +247,18 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
                             defaultData={rowSelected}
                             onConfirm={handleOnRefreshDataTable}
                             eventId={params.id}
+                            isUpdate={canUpdateClient}
                         />
-                        <Button
-                            disabled={loadingPage}
-                            variant={"secondary"}
-                            onClick={handleImportFile}
-                        >
-                            <Import className="w-5 h-5 md:mr-2" />
-                            <p className="hidden md:block">{translation("action.importExcel")}</p>
-                        </Button>
+                        {canImportClient && (
+                            <Button
+                                disabled={loadingPage}
+                                variant={"secondary"}
+                                onClick={handleImportFile}
+                            >
+                                <Import className="w-5 h-5 md:mr-2" />
+                                <p className="hidden md:block">{translation("action.importExcel")}</p>
+                            </Button>
+                        )}
                         <Input
                             ref={InputFileRef}
                             className="hidden"
