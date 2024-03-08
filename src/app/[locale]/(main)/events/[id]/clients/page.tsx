@@ -193,10 +193,8 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
             header: () => <div className="text-black font-bold">{translation("clientsPage.table.email")}</div>,
         },
         {
-            accessorKey: "check_in",
-            header: () => <div className="text-black font-bold">{translation("clientsPage.table.checkIn")}</div>,
-            cell: ({ row }) =>
-                row.original.is_checkin === 1 ? <CheckCircle className="h-5 w-5 text-green-700" /> : "",
+            accessorKey: "group",
+            header: () => <div className="text-black font-bold">{translation("clientsPage.table.group")}</div>,
         },
         {
             accessorKey: "type",
@@ -206,6 +204,12 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
             accessorKey: "status",
             header: () => <div className="text-black font-bold">{translation("clientsPage.table.status")}</div>,
             cell: ({ row }) => translation(`status.${row.original.status}`),
+        },
+        {
+            accessorKey: "check_in",
+            header: () => <div className="text-black font-bold">{translation("clientsPage.table.checkIn")}</div>,
+            cell: ({ row }) =>
+                row.original.is_checkin === 1 ? <CheckCircle className="h-5 w-5 text-green-700" /> : "",
         },
         {
             id: "actions",

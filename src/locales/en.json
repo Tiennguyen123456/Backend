@@ -91,7 +91,8 @@
             "email": "Email",
             "phone": "Phone",
             "type": "Type",
-            "status": "Status"
+            "status": "Status",
+            "group": "Group"
         },
         "create": {
             "title": "Create Client"

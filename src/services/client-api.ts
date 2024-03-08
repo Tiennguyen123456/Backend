@@ -9,7 +9,7 @@ const clientApi = {
         });
     },
     storeClient: async (eventId: number, body: any) => {
-        const url = ApiRoutes.storeClient + `/${eventId}/client`;
+        const url = ApiRoutes.storeClient + `/${eventId}/client/store`;
         return await api.post<IResponse<null>>(url, body);
     },
     deleteClient: async (eventId: number, clientId: number) => {
