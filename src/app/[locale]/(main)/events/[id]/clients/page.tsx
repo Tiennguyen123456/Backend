@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import React, { ChangeEvent, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { CheckCircle, Import } from "lucide-react";
+import { CheckCircle, Import, PlusCircle } from "lucide-react";
 import { DataTable } from "@/components/ui/data-table";
 import { usePagination } from "@/hooks/use-pagination";
 import { useRowSelection } from "@/hooks/use-row-selection";
@@ -86,7 +86,7 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
         });
         setOpenModal(true);
     };
-    const handleCreateCompany = () => {
+    const handleCreateClient = () => {
         setRowSelected(null);
         setOpenModal(true);
     };
@@ -96,6 +96,7 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
     };
     const canImportClient = isActionsPermissions(userPermissions, ActionPermissions.IMPORT_CLIENT);
     const canCheckInClient = isActionsPermissions(userPermissions, ActionPermissions.CHECK_IN_CLIENT);
+    const canCreateClient = isActionsPermissions(userPermissions, ActionPermissions.CREATE_CLIENT);
     const canUpdateClient = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_CLIENT);
     const canDeleteClient = isActionsPermissions(userPermissions, ActionPermissions.DELETE_CLIENT);
     const handleSearchEmail = (event: any) => {
@@ -257,16 +258,16 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
                             type="file"
                             onChange={handleFileChange}
                         />
-                        {/* {canCreateCompany && (
+                        {canCreateClient && (
                             <Button
                                 disabled={Boolean(loading)}
                                 variant={"secondary"}
-                                onClick={handleCreateCompany}
+                                onClick={handleCreateClient}
                             >
                                 <PlusCircle className="w-5 h-5 md:mr-2" />
                                 <p className="hidden md:block">{translation("action.create")}</p>
                             </Button>
-                        )} */}
+                        )}
                     </div>
                 </div>
             </div>
