@@ -31,6 +31,12 @@ export enum EStatus {
     STOPPED = "STOPPED",
 }
 
+export enum EStatusAction {
+    START = "START",
+    PAUSE = "PAUSE",
+    STOP = "STOP",
+}
+
 export enum RoleEnable {
     Active = 1,
     Inactive = 0,

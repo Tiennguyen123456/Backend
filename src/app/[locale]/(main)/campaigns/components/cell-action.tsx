@@ -14,18 +14,19 @@ import { CampaignColumn } from "./column";
 import { useTranslations } from "next-intl";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { toastError, toastSuccess } from "@/utils/toast";
-import { APIStatus, EStatus, MessageCode } from "@/constants/enum";
+import { APIStatus, EStatus, EStatusAction, MessageCode } from "@/constants/enum";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
 import campaignApi from "@/services/campaign-api";
 
 interface CellActionProps {
     data: CampaignColumn;
+    onRefetch: () => void;
     canUpdate?: boolean;
     canDelete?: boolean;
 }
 
-export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDelete }) => {
+export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDelete, onRefetch }) => {
     // ** I18n
     const translation = useTranslations("");
 
@@ -36,10 +37,10 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const [action, setAction] = useState('');
+    const [action, setAction] = useState("");
     const [openModalAction, setOpenModalAction] = useState(false);
-    const [modalActionTitle, setModalActionTitle] = useState('');
-    const [modalActionDescription, setModalActionDescription] = useState('');
+    const [modalActionTitle, setModalActionTitle] = useState("");
+    const [modalActionDescription, setModalActionDescription] = useState("");
 
     const canStart = data.status == EStatus.NEW || data.status == EStatus.PAUSED;
 
@@ -56,6 +57,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
 
             if (response.data.status == APIStatus.SUCCESS) {
                 toastSuccess(translation(`successApi.${APIStatus.SUCCESS}`));
+                onRefetch();
             }
         } catch (error: any) {
             const data = error?.response?.data;
@@ -82,15 +84,15 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
         setAction(type);
 
         switch (type) {
-            case 'start':
+            case EStatusAction.START:
                 setModalActionTitle(translation("action.start"));
                 setModalActionDescription(translation("campaignPage.description.confirmStart"));
                 break;
-            case 'pause':
+            case EStatusAction.PAUSE:
                 setModalActionTitle(translation("action.pause"));
                 setModalActionDescription(translation("campaignPage.description.confirmPause"));
                 break;
-            case 'stop':
+            case EStatusAction.STOP:
                 setModalActionTitle(translation("action.stop"));
                 setModalActionDescription(translation("campaignPage.description.confirmStop"));
                 break;
@@ -98,7 +100,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
             default:
                 break;
         }
-    }
+    };
 
     const onAction = async () => {
         try {
@@ -106,16 +108,17 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
             const response = await campaignApi.handleAction(data.id, { action });
 
             if (response.data.status == APIStatus.SUCCESS) {
-                toastSuccess(translation('successApi.SUCCESS'));
+                toastSuccess(translation("successApi.SUCCESS"));
+                onRefetch();
             }
         } catch (error: any) {
-            console.log(error)
+            console.log(error);
             handleApiError(error);
         } finally {
             setOpenModalAction(false);
             setLoading(false);
         }
-    }
+    };
 
     const handleApiError = (error: any) => {
         const { response, code } = error;
@@ -129,7 +132,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
         } else {
             toastError(translation("errorApi.UNKNOWN_ERROR"));
         }
-    }
+    };
 
     return (
         <>
@@ -160,28 +163,31 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
                 <DropdownMenuContent
                     align="end"
                     className="w-40"
-                    >
-                    { canStart && (
-                        <DropdownMenuItem onClick={() => handleAction('start')}>
+                >
+                    {canStart && (
+                        <DropdownMenuItem onClick={() => handleAction(EStatusAction.START)}>
                             <Play className="mr-3 h-4 w-4" /> {translation("action.start")}
                         </DropdownMenuItem>
                     )}
-                    { canPause && (
-                        <DropdownMenuItem onClick={() => handleAction('pause')}>
+                    {canPause && (
+                        <DropdownMenuItem onClick={() => handleAction(EStatusAction.PAUSE)}>
                             <Pause className="mr-3 h-4 w-4" /> {translation("action.pause")}
                         </DropdownMenuItem>
                     )}
-                    { canStop && (
-                        <DropdownMenuItem onClick={() => handleAction('stop')} className="text-red-700">
+                    {canStop && (
+                        <DropdownMenuItem
+                            onClick={() => handleAction(EStatusAction.STOP)}
+                            className="text-red-700"
+                        >
                             <StopCircle className="mr-3 h-4 w-4" /> {translation("action.stop")}
                         </DropdownMenuItem>
                     )}
-                    { canUpdate && canStart && (
+                    {canUpdate && canStart && (
                         <DropdownMenuItem onClick={() => router.push(ROUTES.CAMPAIGNS + `/${data.id}`)}>
                             <Edit className="mr-3 h-4 w-4" /> {translation("action.edit")}
                         </DropdownMenuItem>
                     )}
-                    { canDelete && canStart && (
+                    {canDelete && canStart && (
                         <DropdownMenuItem
                             onClick={() => setOpen(true)}
                             className="text-red-700"

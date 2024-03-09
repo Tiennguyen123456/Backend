@@ -53,7 +53,7 @@ export default function EventsPage() {
     });
 
     // Use fetch data
-    const { data, loading, pageCount } = useFetchDataTable<ICampaignRes>({
+    const { data, loading, pageCount, refresh, setRefresh } = useFetchDataTable<ICampaignRes>({
         url: ApiRoutes.getCampaigns,
         paramsDataTable: {
             ...paramsDataTable,
@@ -68,6 +68,10 @@ export default function EventsPage() {
     const canCreate = isActionsPermissions(userPermissions, ActionPermissions.CREATE_CAMPAIGN);
     const canUpdate = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_CAMPAIGN);
     const canDelete = isActionsPermissions(userPermissions, ActionPermissions.DELETE_CAMPAIGN);
+
+    const handleRefreshDataTable = () => {
+        setRefresh(!refresh);
+    };
 
     const handleSearchStatus = (statusName: any) => {
         setParamsSearch(
@@ -90,7 +94,7 @@ export default function EventsPage() {
             cell: ({ row }) => (
                 <Button
                     variant="link"
-                    onClick={() => router.push(ROUTES.CAMPAIGNS + '/' + row.original.id ) }
+                    onClick={() => router.push(ROUTES.CAMPAIGNS + "/" + row.original.id)}
                 >
                     {row.original.name}
                 </Button>
@@ -124,15 +128,17 @@ export default function EventsPage() {
         {
             id: "actions",
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
-            cell: ({ row }) => (
-                canUpdate || canDelete ?
+            cell: ({ row }) =>
+                canUpdate || canDelete ? (
                     <CellAction
+                        onRefetch={handleRefreshDataTable}
                         data={row.original}
                         canUpdate={canUpdate}
                         canDelete={canDelete}
                     />
-                : ""
-            ),
+                ) : (
+                    ""
+                ),
         },
     ];
 
