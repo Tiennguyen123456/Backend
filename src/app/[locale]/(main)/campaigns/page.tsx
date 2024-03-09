@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { PlusCircle } from "lucide-react";
+import { Link, PlusCircle } from "lucide-react";
 import { DataTable } from "@/components/ui/data-table";
 import { usePagination } from "@/hooks/use-pagination";
 import { useRowSelection } from "@/hooks/use-row-selection";
@@ -69,8 +69,6 @@ export default function EventsPage() {
     const canUpdate = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_CAMPAIGN);
     const canDelete = isActionsPermissions(userPermissions, ActionPermissions.DELETE_CAMPAIGN);
 
-    const handleAfterCreate = () => {};
-
     const handleSearchStatus = (statusName: any) => {
         setParamsSearch(
             statusName == EStatus.ALL
@@ -89,6 +87,14 @@ export default function EventsPage() {
         {
             accessorKey: "name",
             header: () => <div className="text-black font-bold">{translation("campaignPage.table.name")}</div>,
+            cell: ({ row }) => (
+                <Button
+                    variant="link"
+                    onClick={() => router.push(ROUTES.CAMPAIGNS + '/' + row.original.id ) }
+                >
+                    {row.original.name}
+                </Button>
+            ),
         },
         {
             accessorKey: "event.name",

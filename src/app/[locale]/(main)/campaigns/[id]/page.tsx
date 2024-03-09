@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import FooterContainer from "@/components/layout/footer-container";
 import Breadcrumbs from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
@@ -11,11 +11,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { Save } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ComboboxSearchCompany } from "../../accounts/components/combobox-search-company";
 import { APIStatus, EStatus, MessageCode } from "@/constants/enum";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { useRouter } from "next/navigation";
@@ -27,7 +28,7 @@ import { Separator } from "@/components/ui/separator";
 import { Label } from "@radix-ui/react-label";
 import campaignApi from "@/services/campaign-api";
 
-export default function CreateEventPage() {
+export default function CreateEventPage({ params }: { params: { id: number } }) {
     // ** I18n
     const translation = useTranslations("");
 
@@ -61,13 +62,12 @@ export default function CreateEventPage() {
         //         new Date(value) > new Date()
         //     , { message: translation("error.timeMustAfterNow") }),
         status: z.string(),
-        description: z.string(),
         mail_subject: z.string().min(1, { message: translation("error.requiredMailSubject") }),
         filter_client: z
             .object({
                 group: z.string()
             }),
-        location: z.string(),
+        description: z.string(),
     });
     type CampaignFormValues = z.infer<typeof formSchema>;
     const form = useForm<CampaignFormValues>({
@@ -78,12 +78,11 @@ export default function CreateEventPage() {
             event_id: -1,
             // run_time: "",
             status: EStatus.NEW,
-            description: "",
             mail_subject: "",
             filter_client: {
                 group: ""
             },
-            location: "",
+            description: "",
         },
     });
 
@@ -124,6 +123,39 @@ export default function CreateEventPage() {
             ...paramsSearch,
             filters: { ...paramsSearch.filters, group: event.target.value } });
     };
+
+    const handleGetCampaignById = async () => {
+        try {
+            if (params.id) {
+                const response = await campaignApi.getCampaignById(params.id);
+                if (response.data.status === "success") {
+                    const formData = response?.data.data;
+                    console.log(formData)
+                    // Set all form values
+                    form.reset({
+                        name: formData.name,
+                        company_id: formData.company_id,
+                        event_id: formData.event_id,
+                        // run_time: formData.run_time,
+                        status: formData.status,
+                        description: formData.description,
+                        mail_subject: formData.mail_subject,
+                        filter_client: {
+                            group: formData.filter_client.group
+                        },
+                    });
+                }
+            }
+        } catch (error: any) {
+            toastError(translation("errorApi.RESOURCES_NOT_FOUND"));
+            // router.push(ROUTES.CAMPAIGNS);
+        }
+    };
+
+    useEffect(() => {
+        handleGetCampaignById();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>
@@ -284,6 +316,7 @@ export default function CreateEventPage() {
                                                 <FormItem>
                                                     <FormLabel className="text-base">
                                                         {translation("label.group")}
+                                                        <SpanRequired />
                                                     </FormLabel>
                                                     <FormControl>
                                                         <Input

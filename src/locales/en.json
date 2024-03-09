@@ -203,7 +203,10 @@
         "client": "Clients",
         "back": "Back",
         "continue": "Continue",
-        "checkIn": "Check In"
+        "checkIn": "Check In",
+        "start": "Start",
+        "pause": "Pause",
+        "stop": "Stop"
     },
     "label": {
         "search": "Search",

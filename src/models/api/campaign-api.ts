@@ -4,7 +4,7 @@ export interface ICampaignRes {
     company_id: number;
     event_id: number;
     run_time: string;
-    filter_client: string;
+    filter_client: any;
     status: string;
     mail_content: string;
     mail_subject: string;

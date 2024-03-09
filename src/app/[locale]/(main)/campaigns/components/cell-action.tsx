@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Edit, MoreHorizontal, Trash } from "lucide-react";
+import { Edit, MoreHorizontal, Trash, Play, Pause, StopCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -36,6 +36,12 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const canStart = data.status == "NEW" || data.status == "PAUSED";
+
+    const canPause = data.status == "RUNNING";
+
+    const canStop = data.status != "STOPPED";
+
     // ** Func
     const onConfirm = async () => {
         try {
@@ -66,6 +72,10 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
         }
     };
 
+    const handleAction = async (type: any) => {
+        console.log('type: ', type);
+    }
+
     return (
         <>
             <AlertModal
@@ -87,13 +97,28 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
                 <DropdownMenuContent
                     align="end"
                     className="w-40"
-                >
-                    { canUpdate && (
+                    >
+                    { canStart && (
+                        <DropdownMenuItem onClick={() => handleAction('start')}>
+                            <Play className="mr-3 h-4 w-4" /> {translation("action.start")}
+                        </DropdownMenuItem>
+                    )}
+                    { canPause && (
+                        <DropdownMenuItem onClick={() => handleAction('pause')}>
+                            <Pause className="mr-3 h-4 w-4" /> {translation("action.pause")}
+                        </DropdownMenuItem>
+                    )}
+                    { canStop && (
+                        <DropdownMenuItem onClick={() => handleAction('stop')} className="text-red-700">
+                            <StopCircle className="mr-3 h-4 w-4" /> {translation("action.stop")}
+                        </DropdownMenuItem>
+                    )}
+                    { canUpdate && canStart && (
                         <DropdownMenuItem onClick={() => router.push(ROUTES.CAMPAIGNS + `/${data.id}`)}>
                             <Edit className="mr-3 h-4 w-4" /> {translation("action.edit")}
                         </DropdownMenuItem>
                     )}
-                    { canDelete && (
+                    { canDelete && canStart && (
                         <DropdownMenuItem
                             onClick={() => setOpen(true)}
                             className="text-red-700"

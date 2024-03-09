@@ -203,7 +203,10 @@
         "client": "Khách hàng",
         "back": "Quay lại",
         "continue": "Tiếp tục",
-        "checkIn": "Kiểm tra"
+        "checkIn": "Kiểm tra",
+        "start": "Bắt đầu",
+        "pause": "Tạm dừng",
+        "stop": "Dừng"
     },
     "label": {
         "search": "Tìm kiếm",
