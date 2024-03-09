@@ -108,9 +108,9 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
 
             if (response.data.status == APIStatus.SUCCESS) {
                 toastSuccess(messageSuccess);
+                onConfirm();
+                handleCloseModal();
             }
-            onConfirm();
-            handleCloseModal();
         } catch (error: any) {
             const data = error?.response?.data;
             // if (data.data && data?.message_code) {

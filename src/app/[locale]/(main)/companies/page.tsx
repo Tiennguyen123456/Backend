@@ -65,7 +65,7 @@ export default function CompaniesPage() {
     });
 
     // Function
-    const handleAfterCreate = () => {
+    const handleReFreshDataTable = () => {
         setRefresh(!refresh);
     };
     const handleEditCompany = (data: CompanyColumn) => {
@@ -166,7 +166,7 @@ export default function CompaniesPage() {
                 canUpdateCompany || canDeleteCompany ? (
                     <CellAction
                         onRowSelected={() => handleEditCompany(row.original)}
-                        onRefetch={handleAfterCreate}
+                        onRefetch={handleReFreshDataTable}
                         data={row.original}
                         isUpdate={canUpdateCompany}
                         isDelete={canDeleteCompany}
@@ -189,7 +189,7 @@ export default function CompaniesPage() {
                             isOpen={openModal}
                             onClose={handleCloseModal}
                             defaultData={rowSelected}
-                            onConfirm={handleAfterCreate}
+                            onConfirm={handleReFreshDataTable}
                         />
                         {canCreateCompany && (
                             <Button

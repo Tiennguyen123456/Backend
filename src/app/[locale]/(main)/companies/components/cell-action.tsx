@@ -48,8 +48,8 @@ export const CellAction: React.FC<CellActionProps> = ({
 
             if (response.data.status == APIStatus.SUCCESS) {
                 toastSuccess(translation("successApi.DELETE_COMPANY_SUCCESS"));
+                onRefetch();
             }
-            onRefetch();
         } catch (error: any) {
             const data = error?.response?.data;
             // if (data?.data && data?.message_code) {

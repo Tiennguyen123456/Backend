@@ -56,7 +56,7 @@ export default function AccountsPage() {
     });
 
     // Func
-    const handleAfterCreate = () => {
+    const handleReFreshDataTable = () => {
         setRefresh(!refresh);
     };
 
@@ -118,7 +118,7 @@ export default function AccountsPage() {
                 canUpdateAccount && (
                     <CellAction
                         onRowSelected={() => handleEditRole(row.original)}
-                        onRefetch={handleAfterCreate}
+                        onRefetch={handleReFreshDataTable}
                         data={row.original}
                     />
                 ),
@@ -137,7 +137,7 @@ export default function AccountsPage() {
                             isOpen={openModal}
                             onClose={handleCloseModal}
                             defaultData={rowSelected}
-                            onConfirm={handleAfterCreate}
+                            onConfirm={handleReFreshDataTable}
                         />
                         {canCreateAccount && (
                             <Button

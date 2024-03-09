@@ -56,7 +56,7 @@ export default function CompaniesPage() {
     });
 
     // Func
-    const handleAfterCreate = () => {
+    const handleReFreshDataTable = () => {
         setRefresh(!refresh);
     };
 
@@ -104,7 +104,7 @@ export default function CompaniesPage() {
                 canUpdateRole && (
                     <CellAction
                         onRowSelected={() => handleEditRole(row.original)}
-                        onRefetch={handleAfterCreate}
+                        onRefetch={handleReFreshDataTable}
                         data={row.original}
                     />
                 ),
@@ -123,7 +123,7 @@ export default function CompaniesPage() {
                             isOpen={openModal}
                             onClose={handleCloseModal}
                             defaultData={rowSelected}
-                            onConfirm={handleAfterCreate}
+                            onConfirm={handleReFreshDataTable}
                         />
                         {canCreateRole && (
                             <Button
