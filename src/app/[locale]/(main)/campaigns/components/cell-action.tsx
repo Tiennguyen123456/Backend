@@ -14,7 +14,7 @@ import { CampaignColumn } from "./column";
 import { useTranslations } from "next-intl";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { toastError, toastSuccess } from "@/utils/toast";
-import { APIStatus, MessageCode } from "@/constants/enum";
+import { APIStatus, EStatus, MessageCode } from "@/constants/enum";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
 import campaignApi from "@/services/campaign-api";
@@ -36,11 +36,11 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const canStart = data.status == "NEW" || data.status == "PAUSED";
+    const canStart = data.status == EStatus.NEW || data.status == EStatus.PAUSED;
 
-    const canPause = data.status == "RUNNING";
+    const canPause = data.status == EStatus.RUNNING;
 
-    const canStop = data.status != "STOPPED";
+    const canStop = data.status != EStatus.STOPPED;
 
     // ** Func
     const onConfirm = async () => {

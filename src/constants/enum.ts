@@ -26,6 +26,9 @@ export enum EStatus {
     DELETED = "DELETED",
     DONE = "DONE",
     CANCEL = "CANCEL",
+    PAUSED = "PAUSED",
+    RUNNING = "RUNNING",
+    STOPPED = "STOPPED",
 }
 
 export enum RoleEnable {
