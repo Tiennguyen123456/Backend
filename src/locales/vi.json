@@ -382,7 +382,8 @@
         "UPDATE_PERMISSION_FAILED": "Cập nhật quyền thất bại.",
         "UNAUTHORIZED_ACTION": "Token đã hết hạn.",
         "FAILED_TO_REMOVE": "Xoá dữ liệu thất bại.",
-        "METHOD_IS_NOT_SUPPORT": "Phương thức không được hổ trợ"
+        "METHOD_IS_NOT_SUPPORT": "Phương thức không được hổ trợ",
+        "EMAIL_CONTENT_IS_EMPTY": "Sự kiện không có nội dung email"
     },
     "successApi": {
         "SUCCESS": "Thành công",

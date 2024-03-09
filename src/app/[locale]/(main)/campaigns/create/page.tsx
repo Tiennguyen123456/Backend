@@ -16,9 +16,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ComboboxSearchCompany } from "../../accounts/components/combobox-search-company";
 import { APIStatus, EStatus, MessageCode } from "@/constants/enum";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import eventApi from "@/services/event-api";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
@@ -55,21 +53,19 @@ export default function CreateEventPage() {
         name: z.string().min(1, { message: translation("error.requiredName") }),
         company_id: z.number().min(1, { message: translation("error.requiredCompany") }),
         event_id: z.number().min(1, { message: translation("error.requiredSelectEvent") }),
-        run_time: z
-            .string()
-            .datetime({ message: translation("error.requiredRunTime") })
-            .transform((date) => format(date, DateTimeFormatServer))
-            .refine((value) => 
-                new Date(value) > new Date()
-            , { message: translation("error.timeMustAfterNow") }),
+        // run_time: z
+        //     .string()
+        //     .datetime({ message: translation("error.requiredRunTime") })
+        //     .transform((date) => format(date, DateTimeFormatServer))
+        //     .refine((value) =>
+        //         new Date(value) > new Date()
+        //     , { message: translation("error.timeMustAfterNow") }),
         status: z.string(),
         description: z.string(),
         mail_subject: z.string().min(1, { message: translation("error.requiredMailSubject") }),
         filter_client: z
             .object({
-                group: z
-                    .string()
-                    .min(1, { message: translation("error.requiredClientFilterGroup") }),
+                group: z.string()
             }),
         location: z.string(),
     });
@@ -80,7 +76,7 @@ export default function CreateEventPage() {
             name: "",
             company_id: userProfile?.is_admin ? -1 : userProfile?.id,
             event_id: -1,
-            run_time: "",
+            // run_time: "",
             status: EStatus.NEW,
             description: "",
             mail_subject: "",
@@ -223,7 +219,7 @@ export default function CreateEventPage() {
                                         </FormItem>
                                     )}
                                 />
-                                <FormField
+                                {/* <FormField
                                     control={form.control}
                                     name="run_time"
                                     render={({ field }) => (
@@ -244,13 +240,13 @@ export default function CreateEventPage() {
                                             <FormMessage />
                                         </FormItem>
                                     )}
-                                />
+                                /> */}
                             </div>
 
                             <Separator className="my-5" />
 
                             <Label className="text-lg">{translation("label.configEmail")}</Label>
-                            
+
                             <Separator className="my-5" />
 
                             <div className="grid grid-cols-1 gap-x-8 gap-y-4">

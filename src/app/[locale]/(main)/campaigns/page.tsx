@@ -98,10 +98,10 @@ export default function EventsPage() {
             accessorKey: "company.name",
             header: () => <div className="text-black font-bold">{translation("campaignPage.table.companyName")}</div>,
         },
-        {
-            accessorKey: "run_time",
-            header: () => <div className="text-black font-bold">{translation("campaignPage.table.runTime")}</div>,
-        },
+        // {
+        //     accessorKey: "run_time",
+        //     header: () => <div className="text-black font-bold">{translation("campaignPage.table.runTime")}</div>,
+        // },
         {
             accessorKey: "mail_subject",
             header: () => <div className="text-black font-bold">{translation("campaignPage.table.mailSubject")}</div>,
@@ -120,11 +120,11 @@ export default function EventsPage() {
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
             cell: ({ row }) => (
                 canUpdate || canDelete ?
-                    <CellAction 
+                    <CellAction
                         data={row.original}
                         canUpdate={canUpdate}
                         canDelete={canDelete}
-                    /> 
+                    />
                 : ""
             ),
         },

@@ -383,7 +383,8 @@
         "UPDATE_PERMISSION_FAILED": "Update permission failed.",
         "UNAUTHORIZED_ACTION": "Token expired.",
         "FAILED_TO_REMOVE": "Failed to remove.",
-        "METHOD_IS_NOT_SUPPORT": "Method is not support"
+        "METHOD_IS_NOT_SUPPORT": "Method is not support",
+        "EMAIL_CONTENT_IS_EMPTY": "Email content is empty"
     },
     "successApi": {
         "SUCCESS": "Success",
