@@ -138,6 +138,11 @@
             "mailSubject": "Mail Subject",
             "status": "Status",
             "createdAt": "Created at"
+        },
+        "description": {
+            "confirmStart": "Are you sure want to start this campaign?",
+            "confirmPause": "Are you sure want to pause this campaign?",
+            "confirmStop": "Are you sure want to stop this campaign?"
         }
     },
     "createCampaignPage": {
@@ -387,7 +392,9 @@
         "UNAUTHORIZED_ACTION": "Token expired.",
         "FAILED_TO_REMOVE": "Failed to remove.",
         "METHOD_IS_NOT_SUPPORT": "Method is not support",
-        "EMAIL_CONTENT_IS_EMPTY": "Email content is empty"
+        "EMAIL_CONTENT_IS_EMPTY": "Email content is empty",
+        "UNKNOWN_ERROR": "Unknown error",
+        "ERR_NETWORK": "Network error"
     },
     "successApi": {
         "SUCCESS": "Success",

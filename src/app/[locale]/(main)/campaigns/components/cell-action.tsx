@@ -36,6 +36,11 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const [action, setAction] = useState('');
+    const [openModalAction, setOpenModalAction] = useState(false);
+    const [modalActionTitle, setModalActionTitle] = useState('');
+    const [modalActionDescription, setModalActionDescription] = useState('');
+
     const canStart = data.status == EStatus.NEW || data.status == EStatus.PAUSED;
 
     const canPause = data.status == EStatus.RUNNING;
@@ -73,7 +78,57 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
     };
 
     const handleAction = async (type: any) => {
-        console.log('type: ', type);
+        setOpenModalAction(true);
+        setAction(type);
+
+        switch (type) {
+            case 'start':
+                setModalActionTitle(translation("action.start"));
+                setModalActionDescription(translation("campaignPage.description.confirmStart"));
+                break;
+            case 'pause':
+                setModalActionTitle(translation("action.pause"));
+                setModalActionDescription(translation("campaignPage.description.confirmPause"));
+                break;
+            case 'stop':
+                setModalActionTitle(translation("action.stop"));
+                setModalActionDescription(translation("campaignPage.description.confirmStop"));
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    const onAction = async () => {
+        try {
+            setLoading(true);
+            const response = await campaignApi.handleAction(data.id, { action });
+
+            if (response.data.status == APIStatus.SUCCESS) {
+                toastSuccess(translation('successApi.SUCCESS'));
+            }
+        } catch (error: any) {
+            console.log(error)
+            handleApiError(error);
+        } finally {
+            setOpenModalAction(false);
+            setLoading(false);
+        }
+    }
+
+    const handleApiError = (error: any) => {
+        const { response, code } = error;
+
+        if (code == "ERR_NETWORK") {
+            toastError(translation("errorApi.ERR_NETWORK"));
+        } else if (response?.data?.message_code == MessageCode.VALIDATION_ERROR) {
+            const [value] = Object.values(response.data.data);
+            const message = Array(value).toString() ?? translation("errorApi.UNKNOWN_ERROR");
+            toastError(message);
+        } else {
+            toastError(translation("errorApi.UNKNOWN_ERROR"));
+        }
     }
 
     return (
@@ -83,6 +138,14 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
                 onClose={() => setOpen(false)}
                 onConfirm={onConfirm}
                 loading={loading}
+            />
+            <AlertModal
+                isOpen={openModalAction}
+                onClose={() => setOpenModalAction(false)}
+                onConfirm={onAction}
+                loading={loading}
+                title={modalActionTitle}
+                description={modalActionDescription}
             />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>

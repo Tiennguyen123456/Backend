@@ -141,6 +141,11 @@
             "mailSubject": "Tiêu đề email",
             "status": "Trạng thái",
             "createdAt": "Ngày tạo"
+        },
+        "description": {
+            "confirmStart": "Bạn có chắc chắn muốn bắt đầu chiến dịch này không?",
+            "confirmPause": "Bạn có chắc chắn muốn tạm dừng chiến dịch này không?",
+            "confirmStop": "Bạn có chắc chắn muốn dừng chiến dịch này không?"
         }
     },
     "createCampaignPage": {
@@ -386,7 +391,9 @@
         "UNAUTHORIZED_ACTION": "Token đã hết hạn.",
         "FAILED_TO_REMOVE": "Xoá dữ liệu thất bại.",
         "METHOD_IS_NOT_SUPPORT": "Phương thức không được hổ trợ",
-        "EMAIL_CONTENT_IS_EMPTY": "Sự kiện không có nội dung email"
+        "EMAIL_CONTENT_IS_EMPTY": "Sự kiện không có nội dung email",
+        "UNKNOWN_ERROR": "Lỗi không xác định.",
+        "ERR_NETWORK": "Lỗi kết nối mạng"
     },
     "successApi": {
         "SUCCESS": "Thành công",

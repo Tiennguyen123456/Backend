@@ -12,5 +12,8 @@ const campaignApi = {
     deleteCampaign: async (id: number) => {
         return await api.delete<IResponse<null>>(ApiRoutes.deleteCampaign + id);
     },
+    handleAction: async (id: number, body: any) => {
+        return await api.post<IResponse<ICampaignRes>>(ApiRoutes.handleAction.replace('$id', id.toString()), body);
+    }
 };
 export default campaignApi;
