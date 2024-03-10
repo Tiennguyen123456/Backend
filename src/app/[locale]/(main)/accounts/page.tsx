@@ -21,6 +21,7 @@ import { isActionsPermissions } from "@/helpers/funcs";
 import { ActionPermissions } from "@/constants/routes";
 import { format } from "date-fns";
 import { DateTimeFormat } from "@/constants/variables";
+import { BadgeStatus } from "@/components/ui/badge-status";
 
 export default function AccountsPage() {
     // ** I18n
@@ -109,7 +110,9 @@ export default function AccountsPage() {
         {
             accessorKey: "status",
             header: () => <div className="text-black font-bold">{translation("accountPage.table.status")}</div>,
-            cell: ({ row }) => translation(`status.${row.original.status}`),
+            cell: ({ row }) => (
+                <BadgeStatus status={row.original.status}>{translation(`status.${row.original.status}`)}</BadgeStatus>
+            ),
         },
         {
             id: "actions",

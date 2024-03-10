@@ -25,6 +25,7 @@ import { format } from "date-fns";
 import { DateTimeFormat, STATUS_FILTER_EVENT } from "@/constants/variables";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { EStatus } from "@/constants/enum";
+import { BadgeStatus } from "@/components/ui/badge-status";
 
 export default function EventsPage() {
     // ** I18n
@@ -113,7 +114,9 @@ export default function EventsPage() {
         {
             accessorKey: "status",
             header: () => <div className="text-black font-bold">{translation("eventPage.table.status")}</div>,
-            cell: ({ row }) => translation(`status.${row.original.status}`),
+            cell: ({ row }) => (
+                <BadgeStatus status={row.original.status}>{translation(`status.${row.original.status}`)}</BadgeStatus>
+            ),
         },
         {
             id: "actions",

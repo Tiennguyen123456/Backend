@@ -27,6 +27,7 @@ import { toastError, toastSuccess } from "@/utils/toast";
 import clientApi from "@/services/client-api";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
+import { BadgeStatus } from "@/components/ui/badge-status";
 
 export default function EventClientPage({ params }: { params: { id: number } }) {
     // ** I18n
@@ -203,7 +204,9 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
         {
             accessorKey: "status",
             header: () => <div className="text-black font-bold">{translation("clientsPage.table.status")}</div>,
-            cell: ({ row }) => translation(`status.${row.original.status}`),
+            cell: ({ row }) => (
+                <BadgeStatus status={row.original.status}>{translation(`status.${row.original.status}`)}</BadgeStatus>
+            ),
         },
         {
             accessorKey: "check_in",

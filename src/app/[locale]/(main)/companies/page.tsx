@@ -25,6 +25,7 @@ import { Label } from "@/components/ui/label";
 import { EStatus } from "@/constants/enum";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { STATUS_VALID_FILTER } from "@/constants/variables";
+import { BadgeStatus } from "@/components/ui/badge-status";
 
 export default function CompaniesPage() {
     // ** I18n
@@ -157,7 +158,9 @@ export default function CompaniesPage() {
         {
             accessorKey: "status",
             header: () => <div className="text-black font-bold">{translation("companyPage.table.status")}</div>,
-            cell: ({ row }) => translation(`status.${row.original.status}`),
+            cell: ({ row }) => (
+                <BadgeStatus status={row.original.status}>{translation(`status.${row.original.status}`)}</BadgeStatus>
+            ),
         },
         {
             id: "actions",

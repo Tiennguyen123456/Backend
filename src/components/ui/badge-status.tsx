@@ -33,12 +33,5 @@ export const BadgeStatus: React.FC<ModalProps> = ({ status, children }) => {
         default:
             break;
     }
-    return (
-        <Badge
-            className={cn(classNameStatus, "")}
-            variant={"outline"}
-        >
-            {children}
-        </Badge>
-    );
+    return <Badge className={cn(classNameStatus, "")}>{children}</Badge>;
 };
