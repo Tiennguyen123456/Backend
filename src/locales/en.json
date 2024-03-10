@@ -528,6 +528,9 @@
         "RUNNING": "Running",
         "PAUSED": "Paused",
         "STOPPED": "Stopped",
-        "FINISHED": "Finished"
+        "FINISHED": "Finished",
+        "SUCCESS": "Success",
+        "PENDING": "Pending",
+        "ERROR": "Error"
     }
 }

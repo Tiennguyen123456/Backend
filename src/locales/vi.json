@@ -528,6 +528,9 @@
         "RUNNING": "Đang chạy",
         "PAUSED": "Tạm dừng",
         "STOPPED": "Đã dừng",
-        "FINISHED": "Hoàn thành"
+        "FINISHED": "Hoàn thành",
+        "SUCCESS": "Thành công",
+        "PENDING": "Đang xử lý",
+        "ERROR": "Lỗi"
     }
 }

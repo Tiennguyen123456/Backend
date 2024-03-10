@@ -15,6 +15,7 @@ import { EStatus } from "@/constants/enum";
 import { LogSendEmailColumn } from "./components/column";
 import { ILogSendEmailRes } from "@/models/api/log-send-email-api";
 import { format } from "date-fns";
+import { BadgeStatus } from "@/components/ui/badge-status";
 
 export default function LogSendEmailPage({ params }: { params: { id: number } }) {
     // ** I18n
@@ -76,6 +77,9 @@ export default function LogSendEmailPage({ params }: { params: { id: number } })
         {
             accessorKey: "status",
             header: () => <div className="text-black font-bold">{translation("logSendEmailPage.table.status")}</div>,
+            cell: ({ row }) => (
+                <BadgeStatus status={row.original.status}>{translation(`status.${row.original.status}`)}</BadgeStatus>
+            ),
         },
         {
             accessorKey: "sent_at",

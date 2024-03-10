@@ -29,6 +29,9 @@ export enum EStatus {
     PAUSED = "PAUSED",
     RUNNING = "RUNNING",
     STOPPED = "STOPPED",
+    SUCCESS = "SUCCESS",
+    PENDING = "PENDING",
+    ERROR = "ERROR",
 }
 
 export enum EStatusAction {
