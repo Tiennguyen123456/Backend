@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Edit, MoreHorizontal, Trash, Play, Pause, StopCircle } from "lucide-react";
+import { Edit, MoreHorizontal, Trash, Play, Pause, StopCircle, History } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -195,6 +195,9 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
                             <Trash className="mr-3 h-4 w-4" /> {translation("action.delete")}
                         </DropdownMenuItem>
                     )}
+                    <DropdownMenuItem onClick={() => router.push(ROUTES.CAMPAIGNS + `/${data.id}/log-send-email`)}>
+                        <History className="mr-3 h-4 w-4" /> {translation("action.logEmail")}
+                    </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </>

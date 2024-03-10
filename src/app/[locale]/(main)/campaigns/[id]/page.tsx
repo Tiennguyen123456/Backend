@@ -28,7 +28,7 @@ import { Separator } from "@/components/ui/separator";
 import { Label } from "@radix-ui/react-label";
 import campaignApi from "@/services/campaign-api";
 
-export default function CreateEventPage({ params }: { params: { id: number } }) {
+export default function EditCampaignPage({ params }: { params: { id: number } }) {
     // ** I18n
     const translation = useTranslations("");
 
@@ -63,10 +63,9 @@ export default function CreateEventPage({ params }: { params: { id: number } }) 
         //     , { message: translation("error.timeMustAfterNow") }),
         status: z.string(),
         mail_subject: z.string().min(1, { message: translation("error.requiredMailSubject") }),
-        filter_client: z
-            .object({
-                group: z.string()
-            }),
+        filter_client: z.object({
+            group: z.string(),
+        }),
         description: z.string(),
     });
     type CampaignFormValues = z.infer<typeof formSchema>;
@@ -80,7 +79,7 @@ export default function CreateEventPage({ params }: { params: { id: number } }) 
             status: EStatus.NEW,
             mail_subject: "",
             filter_client: {
-                group: ""
+                group: "",
             },
             description: "",
         },
@@ -121,7 +120,8 @@ export default function CreateEventPage({ params }: { params: { id: number } }) 
     const handleSearchCode = (event: any) => {
         setParamsSearch({
             ...paramsSearch,
-            filters: { ...paramsSearch.filters, group: event.target.value } });
+            filters: { ...paramsSearch.filters, group: event.target.value },
+        });
     };
 
     const handleGetCampaignById = async () => {
@@ -130,7 +130,7 @@ export default function CreateEventPage({ params }: { params: { id: number } }) 
                 const response = await campaignApi.getCampaignById(params.id);
                 if (response.data.status === "success") {
                     const formData = response?.data.data;
-                    console.log(formData)
+                    console.log(formData);
                     // Set all form values
                     form.reset({
                         name: formData.name,
@@ -141,7 +141,7 @@ export default function CreateEventPage({ params }: { params: { id: number } }) 
                         description: formData.description,
                         mail_subject: formData.mail_subject,
                         filter_client: {
-                            group: formData.filter_client.group
+                            group: formData.filter_client.group,
                         },
                     });
                 }
@@ -304,9 +304,7 @@ export default function CreateEventPage({ params }: { params: { id: number } }) 
                                     )}
                                 />
 
-                                <FormLabel className="text-base">
-                                    {translation("label.filterClient")}
-                                </FormLabel>
+                                <FormLabel className="text-base">{translation("label.filterClient")}</FormLabel>
                                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 w-full md:w-auto p-4 rounded border-2 border-sky-800">
                                     <div className="grid w-full max-w-sm items-center gap-1.5">
                                         <FormField
@@ -333,7 +331,6 @@ export default function CreateEventPage({ params }: { params: { id: number } }) 
                                         />
                                     </div>
                                 </div>
-
                             </div>
 
                             <Separator className="my-5" />
@@ -343,9 +340,7 @@ export default function CreateEventPage({ params }: { params: { id: number } }) 
                                 name="description"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-base">
-                                            {translation("label.description")}
-                                        </FormLabel>
+                                        <FormLabel className="text-base">{translation("label.description")}</FormLabel>
                                         <FormControl>
                                             <Textarea
                                                 className="h-10"

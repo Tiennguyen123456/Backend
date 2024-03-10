@@ -47,7 +47,10 @@ const ApiRoutes = {
     storeCampaign: baseURL + "/campaign/store",
     deleteCampaign: baseURL + "/campaign/",
     getCampaignById: baseURL + "/campaign/",
-    handleAction: baseURL + "/campaign/$id/action"
+    handleAction: baseURL + "/campaign/$id/action",
+
+    // ** Campaign Routes
+    getLogSendEmailByCampaignId: baseURL + "/campaign/$campaignId/log-send-email",
 };
 
 export default ApiRoutes;

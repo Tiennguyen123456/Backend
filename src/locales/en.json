@@ -101,6 +101,15 @@
             "title": "Edit Client"
         }
     },
+    "logSendEmailPage": {
+        "title": "Log Send Email",
+        "table": {
+            "client": "Client",
+            "email": "Email",
+            "status": "Status",
+            "sentAt": "Sent at"
+        }
+    },
     "eventDetailsPage": {
         "title": "Event Details",
         "tab": {
@@ -211,7 +220,8 @@
         "checkIn": "Check In",
         "start": "Start",
         "pause": "Pause",
-        "stop": "Stop"
+        "stop": "Stop",
+        "logEmail": "Log email"
     },
     "label": {
         "search": "Search",
