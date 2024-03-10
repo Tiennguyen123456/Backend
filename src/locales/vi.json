@@ -403,7 +403,11 @@
         "METHOD_IS_NOT_SUPPORT": "Phương thức không được hổ trợ",
         "EMAIL_CONTENT_IS_EMPTY": "Sự kiện không có nội dung email",
         "UNKNOWN_ERROR": "Lỗi không xác định.",
-        "ERR_NETWORK": "Lỗi kết nối mạng"
+        "ERR_NETWORK": "Lỗi kết nối mạng",
+        "CAMPAIGN_HAS_NO_CLIENT": "Chiến dịch không có khách hàng",
+        "CAMPAIGN_IS_NOT_NEW_OR_PAUSED": "Chiến dịch không phải là mới hoặc tạm dừng",
+        "CAMPAIGN_IS_NOT_RUNNING": "Chiến dịch không phải là đang chạy",
+        "CAMPAIGN_IS_ALREADY_STOPPED": "Chiến dịch đang có trạng thái dừng"
     },
     "successApi": {
         "SUCCESS": "Thành công",

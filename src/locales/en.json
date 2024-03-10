@@ -404,7 +404,11 @@
         "METHOD_IS_NOT_SUPPORT": "Method is not support",
         "EMAIL_CONTENT_IS_EMPTY": "Email content is empty",
         "UNKNOWN_ERROR": "Unknown error",
-        "ERR_NETWORK": "Network error"
+        "ERR_NETWORK": "Network error",
+        "CAMPAIGN_HAS_NO_CLIENT": "Campaign has no client",
+        "CAMPAIGN_IS_NOT_NEW_OR_PAUSED": "Campaign is not new or paused",
+        "CAMPAIGN_IS_NOT_RUNNING": "Campaign is not running",
+        "CAMPAIGN_IS_ALREADY_STOPPED": "Campaign is already stopped"
     },
     "successApi": {
         "SUCCESS": "Success",

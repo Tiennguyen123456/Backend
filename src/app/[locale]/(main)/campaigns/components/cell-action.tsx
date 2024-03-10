@@ -130,7 +130,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate, canDele
             const message = Array(value).toString() ?? translation("errorApi.UNKNOWN_ERROR");
             toastError(message);
         } else {
-            toastError(translation("errorApi.UNKNOWN_ERROR"));
+            toastError(translation(`errorApi.${response?.data?.message_code ?? "UNKNOWN_ERROR"}`));
         }
     };
 
