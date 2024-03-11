@@ -26,6 +26,7 @@ import { ComboboxSearchEvent } from "../../accounts/components/combobox-search-e
 import { Separator } from "@/components/ui/separator";
 import { Label } from "@radix-ui/react-label";
 import campaignApi from "@/services/campaign-api";
+import { Switch } from "@/components/ui/switch";
 
 export default function CreateEventPage() {
     // ** I18n
@@ -39,6 +40,7 @@ export default function CreateEventPage() {
 
     // ** Use State
     const [loading, setLoading] = useState(false);
+    const [isFilterClient, setIsFilterClient] = useState(false);
 
     // STATUS
     const STATUS = STATUS_VALID.filter((status) => status.value === EStatus.NEW);
@@ -65,8 +67,9 @@ export default function CreateEventPage() {
         mail_subject: z.string().min(1, { message: translation("error.requiredMailSubject") }),
         filter_client: z
             .object({
-                group: z.string()
-            }),
+                group: z.string(),
+            })
+            .nullable(),
         location: z.string(),
     });
     type CampaignFormValues = z.infer<typeof formSchema>;
@@ -81,7 +84,7 @@ export default function CreateEventPage() {
             description: "",
             mail_subject: "",
             filter_client: {
-                group: ""
+                group: "",
             },
             location: "",
         },
@@ -93,7 +96,8 @@ export default function CreateEventPage() {
         const messageError = translation("errorApi.CREATE_EVENT_FAILED");
         try {
             setLoading(true);
-            const response = await campaignApi.storeCampaign(data);
+            let formatData: CampaignFormValues = isFilterClient ? data : { ...data, filter_client: null };
+            const response = await campaignApi.storeCampaign(formatData);
             if (response.data.status == APIStatus.SUCCESS) {
                 toastSuccess(messageSuccess);
                 router.push(ROUTES.CAMPAIGNS);
@@ -122,7 +126,8 @@ export default function CreateEventPage() {
     const handleSearchCode = (event: any) => {
         setParamsSearch({
             ...paramsSearch,
-            filters: { ...paramsSearch.filters, group: event.target.value } });
+            filters: { ...paramsSearch.filters, group: event.target.value },
+        });
     };
 
     return (
@@ -152,7 +157,7 @@ export default function CreateEventPage() {
                     </div>
                     <div>
                         <div className="md:max-w-[976px] mx-auto p-2 md:py-6 md:pb-8 md:px-8 border bg-white shadow-md">
-                            <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
                                 {!isSysAdmin() ? (
                                     ""
                                 ) : (
@@ -271,10 +276,13 @@ export default function CreateEventPage() {
                                         </FormItem>
                                     )}
                                 />
-
-                                <FormLabel className="text-base">
-                                    {translation("label.filterClient")}
-                                </FormLabel>
+                                <div className="flex gap-3">
+                                    <FormLabel className="text-base">{translation("label.filterClient")}</FormLabel>
+                                    <Switch
+                                        defaultChecked={isFilterClient}
+                                        onCheckedChange={setIsFilterClient}
+                                    />
+                                </div>
                                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 w-full md:w-auto p-4 rounded border-2 border-sky-800">
                                     <div className="grid w-full max-w-sm items-center gap-1.5">
                                         <FormField
@@ -288,7 +296,7 @@ export default function CreateEventPage() {
                                                     <FormControl>
                                                         <Input
                                                             className="h-10"
-                                                            disabled={loading}
+                                                            disabled={loading || !isFilterClient}
                                                             placeholder={translation("placeholder.group")}
                                                             onInput={handleSearchCode}
                                                             {...field}
@@ -300,7 +308,6 @@ export default function CreateEventPage() {
                                         />
                                     </div>
                                 </div>
-
                             </div>
 
                             <Separator className="my-5" />
@@ -310,9 +317,7 @@ export default function CreateEventPage() {
                                 name="description"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-base">
-                                            {translation("label.description")}
-                                        </FormLabel>
+                                        <FormLabel className="text-base">{translation("label.description")}</FormLabel>
                                         <FormControl>
                                             <Textarea
                                                 className="h-10"
