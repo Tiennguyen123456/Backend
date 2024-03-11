@@ -155,6 +155,12 @@
             "confirmStart": "Bạn có chắc chắn muốn bắt đầu chiến dịch này không?",
             "confirmPause": "Bạn có chắc chắn muốn tạm dừng chiến dịch này không?",
             "confirmStop": "Bạn có chắc chắn muốn dừng chiến dịch này không?"
+        },
+        "create": {
+            "title": "Tạo mới chiến dịch"
+        },
+        "edit": {
+            "title": "Cập nhật chiến dịch"
         }
     },
     "createCampaignPage": {
@@ -406,6 +412,9 @@
         "EMAIL_CONTENT_IS_EMPTY": "Sự kiện không có nội dung email",
         "UNKNOWN_ERROR": "Lỗi không xác định.",
         "ERR_NETWORK": "Lỗi kết nối mạng",
+        "CREATE_CAMPAIGN_FAILED": "Tạo mới chiến dịch thất bại.",
+        "UPDATE_CAMPAIGN_FAILED": "Cập nhật chiến dịch thất bại.",
+        "DELETE_CAMPAIGN_FAILED": "Xóa chiến dịch thất bại.",
         "CAMPAIGN_HAS_NO_CLIENT": "Chiến dịch không có khách hàng",
         "CAMPAIGN_IS_NOT_NEW_OR_PAUSED": "Chiến dịch không phải là mới hoặc tạm dừng",
         "CAMPAIGN_IS_NOT_RUNNING": "Chiến dịch không phải là đang chạy",
@@ -445,7 +454,10 @@
         "UPDATE_CLIENT_SUCCESS": "Chỉnh sửa khách hàng thành công.",
         "DELETE_CLIENT_SUCCESS": "Xoá khách hàng thành công.",
         "CHECKIN_CLIENT_SUCCESS": "Kiểm tra khách hàng thành công.",
-        "UPDATE_PERMISSION_SUCCESS": "Cập nhật quyền thành công."
+        "UPDATE_PERMISSION_SUCCESS": "Cập nhật quyền thành công.",
+        "CREATE_CAMPAIGN_SUCCESS": "Tạo mới chiến dịch thành công.",
+        "UPDATE_CAMPAIGN_SUCCESS": "Cập nhật chiến dịch thành công.",
+        "DELETE_CAMPAIGN_SUCCESS": "Xóa chiến dịch thành công."
     },
     "localeSwitcher": {
         "en": "Tiếng Anh",

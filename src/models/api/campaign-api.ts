@@ -1,3 +1,5 @@
+import { IRelationRes } from "./event-api";
+
 export interface ICampaignRes {
     id: number;
     name: string;
@@ -15,6 +17,6 @@ export interface ICampaignRes {
     updated_by: number;
     created_at: string;
     updated_at: string;
-    company: [];
-    event: [];
+    company: IRelationRes | null;
+    event: IRelationRes | null;
 }

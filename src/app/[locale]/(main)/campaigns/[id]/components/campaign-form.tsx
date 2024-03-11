@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import FooterContainer from "@/components/layout/footer-container";
 import Breadcrumbs from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { ComboboxSearchCompany } from "../../accounts/components/combobox-search-company";
+import { ComboboxSearchCompany } from "../../../accounts/components/combobox-search-company";
 import { APIStatus, EStatus, MessageCode } from "@/constants/enum";
 import { Textarea } from "@/components/ui/textarea";
 import { toastError, toastSuccess } from "@/utils/toast";
@@ -22,13 +22,18 @@ import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
 import { selectUser } from "@/redux/user/slice";
 import { useAppSelector } from "@/redux/root/hooks";
-import { ComboboxSearchEvent } from "../../accounts/components/combobox-search-event";
+import { ComboboxSearchEvent } from "../../../accounts/components/combobox-search-event";
 import { Separator } from "@/components/ui/separator";
 import { Label } from "@radix-ui/react-label";
 import campaignApi from "@/services/campaign-api";
 import { Switch } from "@/components/ui/switch";
+import { ICampaignRes } from "@/models/api/campaign-api";
 
-export default function CreateEventPage() {
+interface CampaignFormProps {
+    data: ICampaignRes | undefined;
+}
+
+export default function CampaignForm({ data }: CampaignFormProps) {
     // ** I18n
     const translation = useTranslations("");
 
@@ -40,18 +45,14 @@ export default function CreateEventPage() {
 
     // ** Use State
     const [loading, setLoading] = useState(false);
-    const [isFilterClient, setIsFilterClient] = useState(false);
+    const [isFilterClient, setIsFilterClient] = useState(data?.filter_client ? true : false);
 
     // STATUS
     const STATUS = STATUS_VALID.filter((status) => status.value === EStatus.NEW);
 
-    const [paramsSearch, setParamsSearch] = useState({
-        search: {},
-        filters: {},
-    });
-
     // useForm
     const formSchema = z.object({
+        id: z.number(),
         name: z.string().min(1, { message: translation("error.requiredName") }),
         company_id: z.number().min(1, { message: translation("error.requiredCompany") }),
         event_id: z.number().min(1, { message: translation("error.requiredSelectEvent") }),
@@ -63,37 +64,36 @@ export default function CreateEventPage() {
         //         new Date(value) > new Date()
         //     , { message: translation("error.timeMustAfterNow") }),
         status: z.string(),
-        description: z.string(),
         mail_subject: z.string().min(1, { message: translation("error.requiredMailSubject") }),
         filter_client: z
             .object({
                 group: z.string(),
             })
             .nullable(),
-        location: z.string(),
+        description: z.string(),
     });
     type CampaignFormValues = z.infer<typeof formSchema>;
     const form = useForm<CampaignFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
-            company_id: userProfile?.is_admin ? -1 : userProfile?.id,
-            event_id: -1,
+            id: data?.id,
+            name: data?.name ?? "",
+            company_id: data?.company_id ?? -1,
+            event_id: data?.event_id ?? -1,
             // run_time: "",
-            status: EStatus.NEW,
-            description: "",
-            mail_subject: "",
+            status: data?.status ?? EStatus.NEW,
+            mail_subject: data?.mail_subject ?? "",
             filter_client: {
-                group: "",
+                group: data?.filter_client?.group ?? "",
             },
-            location: "",
+            description: data?.description ?? "",
         },
     });
 
     // ** Func
     const onSubmit = async (data: CampaignFormValues) => {
-        const messageSuccess = translation("successApi.CREATE_CAMPAIGN_SUCCESS");
-        const messageError = translation("errorApi.CREATE_CAMPAIGN_FAILED");
+        const messageSuccess = translation("successApi.UPDATE_CAMPAIGN_SUCCESS");
+        const messageError = translation("errorApi.UPDATE_CAMPAIGN_FAILED");
         try {
             setLoading(true);
             let formatData: CampaignFormValues = isFilterClient ? data : { ...data, filter_client: null };
@@ -123,13 +123,6 @@ export default function CreateEventPage() {
         return userProfile?.is_admin == true;
     };
 
-    const handleSearchCode = (event: any) => {
-        setParamsSearch({
-            ...paramsSearch,
-            filters: { ...paramsSearch.filters, group: event.target.value },
-        });
-    };
-
     return (
         <>
             <Form {...form}>
@@ -141,7 +134,7 @@ export default function CreateEventPage() {
                         <Breadcrumbs />
                         <div className="flex flex-wrap items-center justify-between space-y-2">
                             <h2 className="text-3xl font-bold tracking-tight">
-                                {translation("createCampaignPage.title")}
+                                {translation("campaignPage.edit.title")}
                             </h2>
                             <div className="flex justify-end flex-wrap items-center gap-2 !mt-0">
                                 <Button
@@ -157,7 +150,7 @@ export default function CreateEventPage() {
                     </div>
                     <div>
                         <div className="md:max-w-[976px] mx-auto p-2 md:py-6 md:pb-8 md:px-8 border bg-white shadow-md">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+                            <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                                 {!isSysAdmin() ? (
                                     ""
                                 ) : (
@@ -171,9 +164,9 @@ export default function CreateEventPage() {
                                                     <SpanRequired />
                                                 </FormLabel>
                                                 <ComboboxSearchCompany
-                                                    disabled={loading}
+                                                    disabled={true}
                                                     onSelectCompany={field.onChange}
-                                                    defaultName={""}
+                                                    defaultName={data?.company?.name ?? ""}
                                                 />
                                                 <FormMessage />
                                             </FormItem>
@@ -193,9 +186,9 @@ export default function CreateEventPage() {
                                                     <SpanRequired />
                                                 </FormLabel>
                                                 <ComboboxSearchEvent
-                                                    disabled={loading}
+                                                    disabled={true}
                                                     onSelect={field.onChange}
-                                                    defaultName={""}
+                                                    defaultName={data?.event?.name ?? ""}
                                                 />
                                                 <FormMessage />
                                             </FormItem>
@@ -276,9 +269,11 @@ export default function CreateEventPage() {
                                         </FormItem>
                                     )}
                                 />
+
                                 <div className="flex gap-3">
                                     <FormLabel className="text-base">{translation("label.filterClient")}</FormLabel>
                                     <Switch
+                                        checked={isFilterClient}
                                         defaultChecked={isFilterClient}
                                         onCheckedChange={setIsFilterClient}
                                     />
@@ -292,13 +287,13 @@ export default function CreateEventPage() {
                                                 <FormItem>
                                                     <FormLabel className="text-base">
                                                         {translation("label.group")}
+                                                        <SpanRequired />
                                                     </FormLabel>
                                                     <FormControl>
                                                         <Input
                                                             className="h-10"
                                                             disabled={loading || !isFilterClient}
                                                             placeholder={translation("placeholder.group")}
-                                                            onInput={handleSearchCode}
                                                             {...field}
                                                         />
                                                     </FormControl>

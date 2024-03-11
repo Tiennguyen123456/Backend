@@ -6,7 +6,7 @@ interface IMainFields {
 export interface ICustomFields extends IMainFields {
     id: number;
 }
-interface IRelationRes {
+export interface IRelationRes {
     id: number;
     name: string;
 }

@@ -152,6 +152,12 @@
             "confirmStart": "Are you sure want to start this campaign?",
             "confirmPause": "Are you sure want to pause this campaign?",
             "confirmStop": "Are you sure want to stop this campaign?"
+        },
+        "create": {
+            "title": "Create New Campaign"
+        },
+        "edit": {
+            "title": "Edit Campaign"
         }
     },
     "createCampaignPage": {
@@ -407,6 +413,9 @@
         "EMAIL_CONTENT_IS_EMPTY": "Email content is empty.",
         "UNKNOWN_ERROR": "Unknown error.",
         "ERR_NETWORK": "Network error.",
+        "CREATE_CAMPAIGN_FAILED": "Create campaign failed.",
+        "UPDATE_CAMPAIGN_FAILED": "Update campaign failed.",
+        "DELETE_CAMPAIGN_FAILED": "Delete campaign failed.",
         "CAMPAIGN_HAS_NO_CLIENT": "Campaign has no client.",
         "CAMPAIGN_IS_NOT_NEW_OR_PAUSED": "Campaign is not new or paused.",
         "CAMPAIGN_IS_NOT_RUNNING": "Campaign is not running.",
@@ -446,8 +455,10 @@
         "UPDATE_CLIENT_SUCCESS": "Update client successfully.",
         "DELETE_CLIENT_SUCCESS": "Delete client successfully.",
         "UPDATE_PERMISSION_SUCCESS": "Update permission successfully.",
-        "DELETE_CAMPAIGN_SUCCESS": "Delete campaign successfully.",
-        "CHECKIN_CLIENT_SUCCESS": "CheckIn client successfully."
+        "CHECKIN_CLIENT_SUCCESS": "CheckIn client successfully.",
+        "CREATE_CAMPAIGN_SUCCESS": "Create campaign success.",
+        "UPDATE_CAMPAIGN_SUCCESS": "Update campaign success.",
+        "DELETE_CAMPAIGN_SUCCESS": "Delete campaign success."
     },
     "localeSwitcher": {
         "en": "English",
