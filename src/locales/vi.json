@@ -365,6 +365,8 @@
         "requiredCustomFieldValue": "Vui lòng nhập giá trị của trường."
     },
     "errorApi": {
+        "RESOURCES_NOT_FOUND": "Không tìm thấy tài nguyên.",
+        "RESOURCE_NOT_FOUND": "Không tìm thấy tài nguyên.",
         "LOGIN_FAILED": "Đăng nhập thất bại.",
         "RESET_PASSWORD_FAILED": "Lấy lại mật khẩu thất bại.",
         "UPDATE_PASSWORD_FAILED": "Cập nhật mật khẩu thất bại.",
@@ -407,7 +409,16 @@
         "CAMPAIGN_HAS_NO_CLIENT": "Chiến dịch không có khách hàng",
         "CAMPAIGN_IS_NOT_NEW_OR_PAUSED": "Chiến dịch không phải là mới hoặc tạm dừng",
         "CAMPAIGN_IS_NOT_RUNNING": "Chiến dịch không phải là đang chạy",
-        "CAMPAIGN_IS_ALREADY_STOPPED": "Chiến dịch đang có trạng thái dừng"
+        "CAMPAIGN_IS_ALREADY_STOPPED": "Chiến dịch đang có trạng thái dừng",
+        "ACCESS_DENIED": "Không được phép truy cập.",
+        "PERMISSION_DENIED": "Không được phép thực hiện hành động.",
+        "INTERNAL_SERVER_ERROR": "Lỗi phía máy chủ.",
+        "FAILED_TO_DELETE": "Xóa thất bại.",
+        "FAILED_TO_STORE": "Lưu thất bại.",
+        "FILE_UPLOAD_FAILED": "Upload file thất bại.",
+        "FAILED_TO_UPDATE": "Cập nhất thất bại.",
+        "CAMPAIGN_NOT_FOUND": "Không tìm thấy chiến dịch.",
+        "FAILED_ACTION": "Hành động thất bại."
     },
     "successApi": {
         "SUCCESS": "Thành công",
