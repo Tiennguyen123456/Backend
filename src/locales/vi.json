@@ -58,6 +58,7 @@
         "table": {
             "name": "Tên tài khoản",
             "email": "Email",
+            "companyName": "Tên công ty",
             "role": "Tên vai trò",
             "createdAt": "Ngày tạo",
             "status": "Trạng thái"
@@ -129,6 +130,7 @@
         "table": {
             "name": "Tên sự kiện",
             "code": "Mã sự kiện",
+            "companyName": "Tên công ty",
             "startTime": "Ngày bắt đầu",
             "endTime": "Ngày kết thúc",
             "status": "Trạng thái"

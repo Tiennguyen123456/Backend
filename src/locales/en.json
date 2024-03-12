@@ -58,6 +58,7 @@
         "table": {
             "name": "Name",
             "email": "Email",
+            "companyName": "Company Name",
             "role": "Role",
             "createdAt": "Created at",
             "status": "Status"
@@ -129,6 +130,7 @@
         "table": {
             "name": "Event Name",
             "code": "Event Code",
+            "companyName": "Company Name",
             "startTime": "Start Date",
             "endTime": "End Date",
             "status": "Status"

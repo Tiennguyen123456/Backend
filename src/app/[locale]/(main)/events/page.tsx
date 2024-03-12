@@ -102,6 +102,10 @@ export default function EventsPage() {
             header: () => <div className="text-black font-bold">{translation("eventPage.table.name")}</div>,
         },
         {
+            accessorKey: "company.name",
+            header: () => <div className="text-black font-bold">{translation("eventPage.table.companyName")}</div>,
+        },
+        {
             accessorKey: "start_time",
             header: () => <div className="text-black font-bold">{translation("eventPage.table.startTime")}</div>,
             cell: ({ row }) => format(row.original.start_time, DateTimeFormat),
