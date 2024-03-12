@@ -41,6 +41,8 @@ export default function CreateEventPage() {
     // ** Use State
     const [loading, setLoading] = useState(false);
     const [isFilterClient, setIsFilterClient] = useState(false);
+    const [companyId, setCompanyId] = useState<Number>(-1);
+    const [eventReset, setEventReset] = useState({id: null, label: null});
 
     // STATUS
     const STATUS = STATUS_VALID.filter((status) => status.value === EStatus.NEW);
@@ -172,7 +174,12 @@ export default function CreateEventPage() {
                                                 </FormLabel>
                                                 <ComboboxSearchCompany
                                                     disabled={loading}
-                                                    onSelectCompany={field.onChange}
+                                                    onSelectCompany={(id) => {
+                                                        setEventReset({...eventReset});
+                                                        setCompanyId(id)
+                                                        form.setValue('event_id', -1);
+                                                        field.onChange(id)
+                                                    }}
                                                     defaultName={""}
                                                 />
                                                 <FormMessage />
@@ -195,7 +202,8 @@ export default function CreateEventPage() {
                                                 <ComboboxSearchEvent
                                                     disabled={loading}
                                                     onSelect={field.onChange}
-                                                    defaultName={""}
+                                                    dataSelected={eventReset}
+                                                    filterCompanyId={isSysAdmin() ? companyId.toString() : ''}
                                                 />
                                                 <FormMessage />
                                             </FormItem>

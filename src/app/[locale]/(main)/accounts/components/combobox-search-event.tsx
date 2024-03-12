@@ -23,19 +23,21 @@ interface IOptionItem {
 }
 
 interface ComboboxSearchEventProps {
-    defaultName: string;
+    dataSelected: IOptionItem | {id: null, label: null}
+    defaultName?: string;
     disabled: boolean;
+    filterCompanyId?: string;
     onSelect: (value: number) => void;
 }
 
-export function ComboboxSearchEvent({ disabled, onSelect, defaultName }: ComboboxSearchEventProps) {
+export function ComboboxSearchEvent({ disabled, onSelect, filterCompanyId = '', dataSelected = {id: null, label: null} }: ComboboxSearchEventProps) {
     // ** I18n
     const translation = useTranslations("");
 
     // ** State
     const [dataSearch, setDataSearch] = React.useState<IOptionItem[]>([]);
     const [open, setOpen] = React.useState(false);
-    const [selectd, setSelectd] = React.useState<IOptionItem | undefined>();
+    const [onSelected, setOnSelected] = React.useState<IOptionItem | {id: null, label: null}>(dataSelected);
     const [loading, setLoading] = React.useState(false);
 
     // ** FUNC
@@ -47,6 +49,9 @@ export function ComboboxSearchEvent({ disabled, onSelect, defaultName }: Combobo
                 search: {
                     name: textSearch
                 },
+                filters: {
+                    company_id: filterCompanyId
+                }
             },
             paramsSerializer: function (params) {
                 return qs.stringify(params, { arrayFormat: "brackets" });
@@ -80,7 +85,7 @@ export function ComboboxSearchEvent({ disabled, onSelect, defaultName }: Combobo
     };
 
     const handleOnSelect = (item: IOptionItem, currentValue: number) => {
-        setSelectd(selectd?.id == currentValue ? { ...selectd } : { id: item.id, label: item.label });
+        setOnSelected(onSelected?.id == currentValue ? { ...onSelected } : { id: item.id, label: item.label });
         onSelect(currentValue);
         setOpen(false);
     };
@@ -91,6 +96,10 @@ export function ComboboxSearchEvent({ disabled, onSelect, defaultName }: Combobo
         }
         setOpen(!open);
     }
+
+    React.useEffect(() => {
+        setOnSelected(dataSelected);
+    }, [dataSelected])
 
     return (
         <Popover
@@ -105,7 +114,7 @@ export function ComboboxSearchEvent({ disabled, onSelect, defaultName }: Combobo
                     className="w-full justify-between"
                     disabled={disabled}
                 >
-                    {selectd ? selectd?.label : defaultName ? defaultName : translation("placeholder.selectEvent")}
+                    {!onSelected.hasOwnProperty('label') || onSelected?.label == null ?  translation("placeholder.selectEvent") : onSelected?.label} 
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -136,7 +145,7 @@ export function ComboboxSearchEvent({ disabled, onSelect, defaultName }: Combobo
                                     <Check
                                         className={cn(
                                             "ml-auto h-4 w-4",
-                                            selectd?.id === item.id ? "opacity-100" : "opacity-0",
+                                            onSelected?.id === item.id ? "opacity-100" : "opacity-0",
                                         )}
                                     />
                                 </CommandItem>
