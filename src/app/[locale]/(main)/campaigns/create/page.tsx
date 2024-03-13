@@ -2,13 +2,10 @@
 import FooterContainer from "@/components/layout/footer-container";
 import Breadcrumbs from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
-import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import SpanRequired from "@/components/ui/span-required";
-import { DateTimeFormatServer, STATUS_VALID } from "@/constants/variables";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
 import { Save } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -43,9 +40,6 @@ export default function CreateEventPage() {
     const [isFilterClient, setIsFilterClient] = useState(false);
     const [companyId, setCompanyId] = useState<Number>(-1);
     const [eventReset, setEventReset] = useState({id: null, label: null});
-
-    // STATUS
-    const STATUS = STATUS_VALID.filter((status) => status.value === EStatus.NEW);
 
     const [paramsSearch, setParamsSearch] = useState({
         search: {},
