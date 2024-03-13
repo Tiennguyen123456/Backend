@@ -16,6 +16,7 @@ import { ICompanyRes } from "@/models/api/company-api";
 import ApiRoutes from "@/services/api.routes";
 import qs from "qs";
 import { useTranslations } from "next-intl";
+import { EStatus } from "@/constants/enum";
 
 interface IOptionItem {
     id: number;
@@ -50,6 +51,7 @@ export function ComboboxSearchEvent({ disabled, onSelect, filterCompanyId = '', 
                     name: textSearch
                 },
                 filters: {
+                    status: EStatus.ACTIVE,
                     company_id: filterCompanyId
                 }
             },

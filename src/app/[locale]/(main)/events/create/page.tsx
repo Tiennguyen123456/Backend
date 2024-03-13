@@ -6,7 +6,7 @@ import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import SpanRequired from "@/components/ui/span-required";
-import { DateTimeFormatServer, STATUS_VALID } from "@/constants/variables";
+import { DateTimeFormatServer, EVENT_STATUS } from "@/constants/variables";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { Save } from "lucide-react";
@@ -79,7 +79,7 @@ export default function CreateEventPage() {
                 end_time: "",
             },
             company_id: userProfile?.is_admin ? -1 : userProfile?.id,
-            status: EStatus.NEW,
+            status: EStatus.ACTIVE,
             description: "",
             email_content: "",
             cards_content: "",
@@ -287,7 +287,7 @@ export default function CreateEventPage() {
                                                     </SelectTrigger>
                                                 </FormControl>
                                                 <SelectContent>
-                                                    {STATUS_VALID.map((status) => (
+                                                    {EVENT_STATUS.map((status) => (
                                                         <SelectItem
                                                             key={status.value}
                                                             value={status.value}

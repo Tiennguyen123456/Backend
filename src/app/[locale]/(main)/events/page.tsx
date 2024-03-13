@@ -22,7 +22,7 @@ import { Label } from "@/components/ui/label";
 import { IEventRes } from "@/models/api/event-api";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
-import { DateTimeFormat, STATUS_FILTER_EVENT } from "@/constants/variables";
+import { DateTimeFormat, EVENT_STATUS } from "@/constants/variables";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { EStatus } from "@/constants/enum";
 import { BadgeStatus } from "@/components/ui/badge-status";
@@ -43,6 +43,11 @@ export default function EventsPage() {
     const { limit, onPaginationChange, skip, pagination, page } = usePagination();
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
+
+    const STATUS_FILTER_EVENT = [
+        { label: "All status", value: "ALL" },
+        ...EVENT_STATUS
+    ];
 
     // ** State
     const [paramsSearch, setParamsSearch] = useState({

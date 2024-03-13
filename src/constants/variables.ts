@@ -31,6 +31,11 @@ export const STATUS_VALID_FILTER = [
     { label: "Inactive", value: "INACTIVE" },
 ];
 
+export const EVENT_STATUS = [
+    { label: "Active", value: "ACTIVE" },
+    { label: "Inactive", value: "INACTIVE" },
+];
+
 export const STATUS = [...STATUS_VALID, { label: "Done", value: "DONE" }, { label: "Cancel", value: "CANCEL" }];
 
 export const STATUS_FILTER_EVENT = [
