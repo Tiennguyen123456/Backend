@@ -560,6 +560,7 @@
         "FINISHED": "Hoàn thành",
         "SUCCESS": "Thành công",
         "PENDING": "Đang xử lý",
-        "ERROR": "Lỗi"
+        "ERROR": "Lỗi",
+        "PROCESSING": "Đang xử lý"
     }
 }
