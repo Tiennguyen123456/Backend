@@ -20,7 +20,7 @@ import { useAppSelector } from "@/redux/root/hooks";
 import { selectUser } from "@/redux/user/slice";
 import { ActionPermissions } from "@/constants/routes";
 import { Input } from "@/components/ui/input";
-import { APIStatus, MessageCode } from "@/constants/enum";
+import { APIStatus, EStatus, MessageCode } from "@/constants/enum";
 import { Checkbox } from "@/components/ui/checkbox";
 import { IClientRes } from "@/models/api/client-api";
 import { toastError, toastSuccess } from "@/utils/toast";
@@ -28,6 +28,8 @@ import clientApi from "@/services/client-api";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { BadgeStatus } from "@/components/ui/badge-status";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { STATUS_FILTER_CLIENT_CHECK_IN } from "@/constants/variables";
 
 export default function EventClientPage({ params }: { params: { id: number } }) {
     // ** I18n
@@ -107,6 +109,19 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
     const handleSearchPhone = (event: any) => {
         if (event.target.value.length > 5)
             setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, phone: event.target.value } });
+    };
+    const handleSearchStatus = (statusName: any) => {
+        setParamsSearch(
+            statusName == EStatus.ALL
+                ? {
+                      ...paramsSearch,
+                      filters: { ...paramsSearch.filters, is_checkin: "" },
+                  }
+                : {
+                      ...paramsSearch,
+                      filters: { ...paramsSearch.filters, is_checkin: statusName == EStatus.CHECKIN ? 1 : 0 },
+                  },
+        );
     };
     const handleClickSearch = () => {
         setParamsDataTable({ ...paramsDataTable, search: paramsSearch.search, filters: paramsSearch.filters });
@@ -310,7 +325,7 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 justify-start items-end w-full md:w-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full md:w-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full md:w-auto">
                     <div className="grid w-full max-w-sm items-center gap-1.5">
                         <Label
                             className="text-base"
@@ -341,8 +356,8 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
                             onChange={handleSearchPhone}
                         />
                     </div>
-                    {/* <div className="grid w-full sm:max-w-xl items-center gap-1.5">
-                        <Label className="text-base">{translation("label.status")}</Label>
+                    <div className="grid w-full sm:max-w-xl items-center gap-1.5">
+                        <Label className="text-base">{translation("label.checkIn")}</Label>
                         <Select
                             disabled={Boolean(loading)}
                             onValueChange={handleSearchStatus}
@@ -352,7 +367,7 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
                                 <SelectValue placeholder={translation("placeholder.status")} />
                             </SelectTrigger>
                             <SelectContent>
-                                {STATUS_VALID_FILTER.map((status) => (
+                                {STATUS_FILTER_CLIENT_CHECK_IN.map((status) => (
                                     <SelectItem
                                         key={status.value}
                                         value={status.value}
@@ -362,7 +377,7 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
                                 ))}
                             </SelectContent>
                         </Select>
-                    </div> */}
+                    </div>
                 </div>
                 <Button
                     disabled={Boolean(loading)}

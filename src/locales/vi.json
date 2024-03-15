@@ -257,6 +257,7 @@
         "allClients": "Tổng số khách mời",
         "checkInAvailable": "Đã checkin",
         "notCheckIn": "Chưa checkin",
+        "checkIn": "Kiểm tra",
         "ordinalNumber": "STT",
         "fieldName": "Tên trường",
         "description": "Mô tả",
@@ -561,6 +562,8 @@
         "SUCCESS": "Thành công",
         "PENDING": "Đang xử lý",
         "ERROR": "Lỗi",
-        "PROCESSING": "Đang xử lý"
+        "PROCESSING": "Đang xử lý",
+        "CHECKIN": "Đã kiểm tra",
+        "UNCHECKIN": "Chưa kiểm tra"
     }
 }

@@ -257,6 +257,7 @@
         "allClients": "All clients",
         "checkInAvailable": "Checkin available",
         "notCheckIn": "Not checkin",
+        "checkIn": "Check In",
         "ordinalNumber": "No.",
         "fieldName": "Field Name",
         "description": "Description",
@@ -560,6 +561,8 @@
         "SUCCESS": "Success",
         "PENDING": "Pending",
         "ERROR": "Error",
-        "PROCESSING": "Processing"
+        "PROCESSING": "Processing",
+        "CHECKIN": "CheckIn",
+        "UNCHECKIN": "UnCheckIn"
     }
 }

@@ -32,6 +32,8 @@ export enum EStatus {
     SUCCESS = "SUCCESS",
     PENDING = "PENDING",
     ERROR = "ERROR",
+    CHECKIN = "CHECKIN",
+    UNCHECKIN = "UNCHECKIN",
 }
 
 export enum EStatusAction {
