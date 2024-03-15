@@ -88,12 +88,6 @@ export default function CreateEventPage() {
             location: "",
         },
     });
-    
-    const { setValue } = form;
-
-    const handleEditorEmailContent = (content: string) => {
-        setValue("email_content", content);
-    }
 
     // ** Func
     const onSubmit = async (data: EventFormValues) => {
@@ -134,7 +128,6 @@ export default function CreateEventPage() {
     const isSysAdmin = () => {
         return userProfile?.is_admin == true;
     };
-
 
     return (
         <>
@@ -346,7 +339,6 @@ export default function CreateEventPage() {
                                         </FormItem>
                                     )}
                                 />
-                                
                             </div>
 
                             <Separator className="my-5" />
@@ -361,7 +353,7 @@ export default function CreateEventPage() {
                                                 {translation("label.emailContent")}
                                             </FormLabel>
                                             <FormControl>
-                                                <HtmlEditor handleEditorChange={handleEditorEmailContent} />
+                                                <HtmlEditor handleEditorChange={field.onChange} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -376,12 +368,7 @@ export default function CreateEventPage() {
                                                 {translation("label.cardsContent")}
                                             </FormLabel>
                                             <FormControl>
-                                                <Textarea
-                                                    disabled={loading}
-                                                    placeholder={translation("placeholder.cardsContent")}
-                                                    rows={10}
-                                                    {...field}
-                                                />
+                                                <HtmlEditor handleEditorChange={field.onChange} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>

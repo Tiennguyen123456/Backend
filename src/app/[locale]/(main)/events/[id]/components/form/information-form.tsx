@@ -11,7 +11,6 @@ import { useState } from "react";
 import * as z from "zod";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/redux/root/hooks";
 import { selectUser } from "@/redux/user/slice";
 import { useForm } from "react-hook-form";
@@ -23,6 +22,7 @@ import { ComboboxSearchCompany } from "@/app/[locale]/(main)/accounts/components
 import { IEventRes } from "@/models/api/event-api";
 import { ActionPermissions } from "@/constants/routes";
 import { isActionsPermissions } from "@/helpers/funcs";
+import { HtmlEditor } from "@/components/ui/html-editor";
 
 interface InformationFormProps {
     data: IEventRes | undefined;
@@ -308,13 +308,12 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                         control={form.control}
                         name="email_content"
                         render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="col-span-3">
                                 <FormLabel className="text-base">{translation("label.emailContent")}</FormLabel>
                                 <FormControl>
-                                    <Textarea
-                                        disabled={loading}
-                                        placeholder={translation("placeholder.emailContent")}
-                                        {...field}
+                                    <HtmlEditor
+                                        handleEditorChange={field.onChange}
+                                        valueDefault={field.value}
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -325,13 +324,12 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                         control={form.control}
                         name="cards_content"
                         render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="col-span-3">
                                 <FormLabel className="text-base">{translation("label.cardsContent")}</FormLabel>
                                 <FormControl>
-                                    <Textarea
-                                        disabled={loading}
-                                        placeholder={translation("placeholder.cardsContent")}
-                                        {...field}
+                                    <HtmlEditor
+                                        handleEditorChange={field.onChange}
+                                        valueDefault={field.value}
                                     />
                                 </FormControl>
                                 <FormMessage />
