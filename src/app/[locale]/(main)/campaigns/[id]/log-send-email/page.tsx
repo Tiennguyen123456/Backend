@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { DataTable } from "@/components/ui/data-table";
 import { usePagination } from "@/hooks/use-pagination";
@@ -10,16 +10,22 @@ import FooterContainer from "@/components/layout/footer-container";
 import Breadcrumbs from "@/components/ui/breadcrumb";
 import { useFetchDataTable } from "@/data/fetch-data-table";
 import ApiRoutes from "@/services/api.routes";
-import { DateTimeFormat } from "@/constants/variables";
+import { DateTimeFormat, emailRegExp } from "@/constants/variables";
 import { EStatus } from "@/constants/enum";
 import { LogSendEmailColumn } from "./components/column";
 import { ILogSendEmailRes } from "@/models/api/log-send-email-api";
 import { format } from "date-fns";
 import { BadgeStatus } from "@/components/ui/badge-status";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { toastError, toastSuccess } from "@/utils/toast";
 
 export default function LogSendEmailPage({ params }: { params: { id: number } }) {
     // ** I18n
     const translation = useTranslations("");
+    // Use Ref
+    const InputEmailSearchRef = useRef<HTMLInputElement>(null);
 
     // Use Row Selection
     const { rowSelection, onRowSelection } = useRowSelection();
@@ -51,6 +57,9 @@ export default function LogSendEmailPage({ params }: { params: { id: number } })
     });
 
     // Function
+    const handleSearchEmail = (event: any) => {
+        setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, email: event.target.value } });
+    };
     const handleSearchStatus = (statusName: any) => {
         setParamsSearch(
             statusName == EStatus.ALL
@@ -62,6 +71,11 @@ export default function LogSendEmailPage({ params }: { params: { id: number } })
         );
     };
     const handleClickSearch = () => {
+        let email = InputEmailSearchRef.current?.value.trim() ?? "";
+        if (!emailRegExp.test(email)) {
+            toastError(translation("error.invalidEmail"));
+            return false;
+        }
         setParamsDataTable({ ...paramsDataTable, search: paramsSearch.search, filters: paramsSearch.filters });
     };
 
@@ -96,25 +110,25 @@ export default function LogSendEmailPage({ params }: { params: { id: number } })
                     <h2 className="text-3xl font-bold tracking-tight">{translation("logSendEmailPage.title")}</h2>
                 </div>
             </div>
-            {/* <div className="flex flex-col sm:flex-row gap-2 justify-start items-end w-full md:w-auto">
+            <div className="flex flex-col sm:flex-row gap-2 justify-start items-end w-full md:w-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-1 gap-2 w-full md:w-auto">
                     <div className="grid w-full max-w-sm items-center gap-1.5">
                         <Label
                             className="text-base"
-                            htmlFor="code"
+                            htmlFor="email"
                         >
-                            {translation("label.campaignName")}
+                            {translation("label.email")}
                         </Label>
                         <Input
+                            ref={InputEmailSearchRef}
                             disabled={Boolean(loading)}
-                            id="code"
+                            id="email"
                             type="text"
                             className="h-10 text"
-                            placeholder={translation("placeholder.campaignName")}
-                            onChange={handleSearchCode}
+                            onChange={handleSearchEmail}
                         />
                     </div>
-                    <div className="grid w-full sm:max-w-xl items-center gap-1.5">
+                    {/* <div className="grid w-full sm:max-w-xl items-center gap-1.5">
                         <Label
                             className="text-base"
                             htmlFor="name"
@@ -151,7 +165,7 @@ export default function LogSendEmailPage({ params }: { params: { id: number } })
                                 ))}
                             </SelectContent>
                         </Select>
-                    </div>
+                    </div> */}
                 </div>
                 <Button
                     disabled={Boolean(loading)}
@@ -159,7 +173,7 @@ export default function LogSendEmailPage({ params }: { params: { id: number } })
                 >
                     {translation("action.search")}
                 </Button>
-            </div> */}
+            </div>
             <DataTable
                 loading={loading}
                 columns={columns}
