@@ -24,6 +24,8 @@ import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
 import { selectUser } from "@/redux/user/slice";
 import { useAppSelector } from "@/redux/root/hooks";
+import { Separator } from "@/components/ui/separator";
+import { HtmlEditor } from "@/components/ui/html-editor";
 
 export default function CreateEventPage() {
     // ** I18n
@@ -86,6 +88,12 @@ export default function CreateEventPage() {
             location: "",
         },
     });
+    
+    const { setValue } = form;
+
+    const handleEditorEmailContent = (content: string) => {
+        setValue("email_content", content);
+    }
 
     // ** Func
     const onSubmit = async (data: EventFormValues) => {
@@ -126,6 +134,7 @@ export default function CreateEventPage() {
     const isSysAdmin = () => {
         return userProfile?.is_admin == true;
     };
+
 
     return (
         <>
@@ -337,6 +346,12 @@ export default function CreateEventPage() {
                                         </FormItem>
                                     )}
                                 />
+                                
+                            </div>
+
+                            <Separator className="my-5" />
+
+                            <div className="grid grid-cols-1 sm:grid-cols-1 gap-x-8 gap-y-6">
                                 <FormField
                                     control={form.control}
                                     name="email_content"
@@ -346,11 +361,7 @@ export default function CreateEventPage() {
                                                 {translation("label.emailContent")}
                                             </FormLabel>
                                             <FormControl>
-                                                <Textarea
-                                                    disabled={loading}
-                                                    placeholder={translation("placeholder.emailContent")}
-                                                    {...field}
-                                                />
+                                                <HtmlEditor handleEditorChange={handleEditorEmailContent} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -368,6 +379,7 @@ export default function CreateEventPage() {
                                                 <Textarea
                                                     disabled={loading}
                                                     placeholder={translation("placeholder.cardsContent")}
+                                                    rows={10}
                                                     {...field}
                                                 />
                                             </FormControl>
