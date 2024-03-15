@@ -80,7 +80,7 @@ export default function CreateEventPage() {
                 start_time: "",
                 end_time: "",
             },
-            company_id: userProfile?.is_admin ? -1 : userProfile?.id,
+            company_id: userProfile?.is_admin ? -1 : userProfile?.company_id,
             status: EStatus.ACTIVE,
             description: "",
             email_content: "",
@@ -95,15 +95,15 @@ export default function CreateEventPage() {
         const messageError = translation("errorApi.CREATE_EVENT_FAILED");
         try {
             setLoading(true);
-            let formattedData = {};
-            if (userProfile?.is_admin) {
-                const { date, ...rest } = data;
-                formattedData = { ...rest, start_time: date.start_time, end_time: date.end_time };
-            } else {
-                const { company_id, date, ...rest } = data;
-                formattedData = { ...rest, start_time: date.start_time, end_time: date.end_time };
-            }
+
+            let formattedData = {
+                ...data,
+                start_time: data.date.start_time,
+                end_time: data.date.end_time
+            };
+
             const response = await eventApi.storeEvent(formattedData);
+
             if (response.data.status == APIStatus.SUCCESS) {
                 toastSuccess(messageSuccess);
                 router.push(ROUTES.EVENTS);
@@ -125,9 +125,7 @@ export default function CreateEventPage() {
         }
     };
 
-    const isSysAdmin = () => {
-        return userProfile?.is_admin == true;
-    };
+    const isSysAdmin = () => userProfile?.is_admin == true;
 
     return (
         <>

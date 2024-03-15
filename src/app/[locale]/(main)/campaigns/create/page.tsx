@@ -73,7 +73,7 @@ export default function CreateEventPage() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
-            company_id: userProfile?.is_admin ? -1 : userProfile?.id,
+            company_id: userProfile?.is_admin ? -1 : userProfile?.company_id,
             event_id: -1,
             // run_time: "",
             status: EStatus.NEW,
@@ -115,9 +115,7 @@ export default function CreateEventPage() {
         }
     };
 
-    const isSysAdmin = () => {
-        return userProfile?.is_admin == true;
-    };
+    const isSysAdmin = () => userProfile?.is_admin == true;
 
     const handleSearchCode = (event: any) => {
         setParamsSearch({

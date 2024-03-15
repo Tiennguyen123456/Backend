@@ -119,9 +119,7 @@ export default function CampaignForm({ data }: CampaignFormProps) {
         }
     };
 
-    const isSysAdmin = () => {
-        return userProfile?.is_admin == true;
-    };
+    const isSysAdmin = () => userProfile?.is_admin == true;
 
     return (
         <>
