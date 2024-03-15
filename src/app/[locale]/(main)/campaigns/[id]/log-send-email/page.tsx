@@ -72,7 +72,7 @@ export default function LogSendEmailPage({ params }: { params: { id: number } })
     };
     const handleClickSearch = () => {
         let email = InputEmailSearchRef.current?.value.trim() ?? "";
-        if (!emailRegExp.test(email)) {
+        if (!emailRegExp.test(email) && email.length > 0) {
             toastError(translation("error.invalidEmail"));
             return false;
         }

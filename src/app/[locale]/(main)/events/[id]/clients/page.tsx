@@ -29,7 +29,7 @@ import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { BadgeStatus } from "@/components/ui/badge-status";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { STATUS_FILTER_CLIENT_CHECK_IN } from "@/constants/variables";
+import { STATUS_FILTER_CLIENT_CHECK_IN, emailRegExp } from "@/constants/variables";
 
 export default function EventClientPage({ params }: { params: { id: number } }) {
     // ** I18n
@@ -39,6 +39,7 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
     const { userPermissions } = useAppSelector(selectUser);
     // Use Ref
     const InputFileRef = useRef<HTMLInputElement>(null);
+    const InputEmailSearchRef = useRef<HTMLInputElement>(null);
 
     // Use Row Selection
     const { rowSelection, onRowSelection } = useRowSelection();
@@ -103,12 +104,10 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
     const canUpdateClient = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_CLIENT);
     const canDeleteClient = isActionsPermissions(userPermissions, ActionPermissions.DELETE_CLIENT);
     const handleSearchEmail = (event: any) => {
-        if (event.target.value.length > 5)
-            setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, email: event.target.value } });
+        setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, email: event.target.value } });
     };
     const handleSearchPhone = (event: any) => {
-        if (event.target.value.length > 5)
-            setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, phone: event.target.value } });
+        setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, phone: event.target.value } });
     };
     const handleSearchStatus = (statusName: any) => {
         setParamsSearch(
@@ -124,6 +123,11 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
         );
     };
     const handleClickSearch = () => {
+        let email = InputEmailSearchRef.current?.value.trim() ?? "";
+        if (!emailRegExp.test(email) && email.length > 0) {
+            toastError(translation("error.invalidEmail"));
+            return false;
+        }
         setParamsDataTable({ ...paramsDataTable, search: paramsSearch.search, filters: paramsSearch.filters });
     };
     const handleImportFile = () => {
@@ -334,6 +338,7 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
                             {translation("label.email")}
                         </Label>
                         <Input
+                            ref={InputEmailSearchRef}
                             disabled={Boolean(loading)}
                             id="email"
                             type="text"
