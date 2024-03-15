@@ -21,7 +21,7 @@ export function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
     const secondRef = React.useRef<HTMLInputElement>(null);
 
     return (
-        <div className="flex justify-center items-center gap-2">
+        <div className="flex justify-center items-center gap-1">
             <Label
                 htmlFor="hours"
                 className="text-xs"
@@ -30,7 +30,7 @@ export function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
             </Label>
             <div className="grid gap-1 text-center">
                 <TimePickerInput
-                    className="h-10 p-1"
+                    className="h-18 w-9 p-1"
                     picker="hours"
                     date={date}
                     setDate={setDate}
@@ -40,7 +40,7 @@ export function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
             </div>
             <div className="grid gap-1 text-center">
                 <TimePickerInput
-                    className="h-10 p-1"
+                    className="h-18 w-9 p-1"
                     picker="minutes"
                     date={date}
                     setDate={setDate}
@@ -51,7 +51,7 @@ export function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
             </div>
             <div className="grid gap-1 text-center">
                 <TimePickerInput
-                    className="h-10 p-1"
+                    className="h-18 w-9 p-1"
                     picker="seconds"
                     date={date}
                     setDate={setDate}
