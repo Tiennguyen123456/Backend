@@ -24,21 +24,26 @@ interface IOptionItem {
 }
 
 interface ComboboxSearchEventProps {
-    dataSelected: IOptionItem | {id: null, label: null}
+    dataSelected: IOptionItem | { id: null; label: null };
     defaultName?: string;
     disabled: boolean;
     filterCompanyId?: string;
     onSelect: (value: number) => void;
 }
 
-export function ComboboxSearchEvent({ disabled, onSelect, filterCompanyId = '', dataSelected = {id: null, label: null} }: ComboboxSearchEventProps) {
+export function ComboboxSearchEvent({
+    disabled,
+    onSelect,
+    filterCompanyId = "",
+    dataSelected = { id: null, label: null },
+}: ComboboxSearchEventProps) {
     // ** I18n
     const translation = useTranslations("");
 
     // ** State
     const [dataSearch, setDataSearch] = React.useState<IOptionItem[]>([]);
     const [open, setOpen] = React.useState(false);
-    const [onSelected, setOnSelected] = React.useState<IOptionItem | {id: null, label: null}>(dataSelected);
+    const [onSelected, setOnSelected] = React.useState<IOptionItem | { id: null; label: null }>(dataSelected);
     const [loading, setLoading] = React.useState(false);
 
     // ** FUNC
@@ -48,12 +53,12 @@ export function ComboboxSearchEvent({ disabled, onSelect, filterCompanyId = '', 
                 page: 1,
                 pageSize: 10,
                 search: {
-                    name: textSearch
+                    name: textSearch,
                 },
                 filters: {
                     status: EStatus.ACTIVE,
-                    company_id: filterCompanyId
-                }
+                    company_id: filterCompanyId,
+                },
             },
             paramsSerializer: function (params) {
                 return qs.stringify(params, { arrayFormat: "brackets" });
@@ -76,10 +81,10 @@ export function ComboboxSearchEvent({ disabled, onSelect, filterCompanyId = '', 
             });
     };
 
-    const debounceSearch = React.useMemo(
-        () => debounceFunc((nextValue: string) => fetchDataSearch(nextValue), 800),
-        [],
-    );
+    const debounceSearch = React.useMemo(() => {
+        return debounceFunc((nextValue: string) => fetchDataSearch(nextValue), 800);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleSearch = (text: string) => {
         setLoading(true);
@@ -94,14 +99,14 @@ export function ComboboxSearchEvent({ disabled, onSelect, filterCompanyId = '', 
 
     const handleOnOpen = () => {
         if (!open) {
-            fetchDataSearch("")
+            fetchDataSearch("");
         }
         setOpen(!open);
-    }
+    };
 
     React.useEffect(() => {
         setOnSelected(dataSelected);
-    }, [dataSelected])
+    }, [dataSelected]);
 
     return (
         <Popover
@@ -116,7 +121,9 @@ export function ComboboxSearchEvent({ disabled, onSelect, filterCompanyId = '', 
                     className="w-full justify-between"
                     disabled={disabled}
                 >
-                    {!onSelected.hasOwnProperty('label') || onSelected?.label == null ?  translation("placeholder.selectEvent") : onSelected?.label} 
+                    {!onSelected.hasOwnProperty("label") || onSelected?.label == null
+                        ? translation("placeholder.selectEvent")
+                        : onSelected?.label}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>

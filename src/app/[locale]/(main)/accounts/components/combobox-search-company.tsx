@@ -70,10 +70,10 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }
             });
     };
 
-    const debounceSearchCompany = React.useMemo(
-        () => debounceFunc((nextValue: string) => fetchDataSearchCompany(nextValue), 800),
-        [],
-    );
+    const debounceSearchCompany = React.useMemo(() => {
+        return debounceFunc((nextValue: string) => fetchDataSearchCompany(nextValue), 800);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleSearch = (text: string) => {
         setLoading(true);
@@ -88,10 +88,10 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }
 
     const handleOnOpen = () => {
         if (!open) {
-            fetchDataSearchCompany("")
+            fetchDataSearchCompany("");
         }
         setOpen(!open);
-    }
+    };
 
     return (
         <Popover
