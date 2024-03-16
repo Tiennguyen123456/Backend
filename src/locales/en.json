@@ -454,7 +454,7 @@
         "DELETE_CUSTOM_FIELD_SUCCESS": "Delete custom field successfully.",
         "UPDATE_EVENT_CONFIG_SUCCESS": "Update event configuration successfully.",
         "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Delete event config field successfully.",
-        "IMPORT_EXCEL_CLIENT_SUCCESS": "Import excel client successfully.",
+        "IMPORT_EXCEL_CLIENT_SUCCESS": "Import excel client is being processed.",
         "CREATE_CLIENT_SUCCESS": "Create client successfully.",
         "UPDATE_CLIENT_SUCCESS": "Update client successfully.",
         "DELETE_CLIENT_SUCCESS": "Delete client successfully.",

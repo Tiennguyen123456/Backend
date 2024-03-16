@@ -453,7 +453,7 @@
         "DELETE_CUSTOM_FIELD_SUCCESS": "Xóa cấu hình trường thành công.",
         "UPDATE_EVENT_CONFIG_SUCCESS": "Chỉnh sửa cấu hình sự kiện thành công.",
         "DELETE_EVENT_CONFIG_FIELD_SUCCESS": "Xóa cấu hình trường sự kiện thành công.",
-        "IMPORT_EXCEL_CLIENT_SUCCESS": "Nhập dữ liệu excel danh sách khách hàng thành công.",
+        "IMPORT_EXCEL_CLIENT_SUCCESS": "Nhập dữ liệu excel danh sách khách hàng đang được xử lý.",
         "CREATE_CLIENT_SUCCESS": "Tạo mới khách hàng thành công.",
         "UPDATE_CLIENT_SUCCESS": "Chỉnh sửa khách hàng thành công.",
         "DELETE_CLIENT_SUCCESS": "Xoá khách hàng thành công.",

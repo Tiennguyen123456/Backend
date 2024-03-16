@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input";
 import { APIStatus, EStatus, MessageCode } from "@/constants/enum";
 import { Checkbox } from "@/components/ui/checkbox";
 import { IClientRes } from "@/models/api/client-api";
-import { toastError, toastSuccess } from "@/utils/toast";
+import { toastError, toastLoading, toastSuccess } from "@/utils/toast";
 import clientApi from "@/services/client-api";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
@@ -190,7 +190,7 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
             const response = await clientApi.importExcelClient(params.id, formData);
 
             if (response.data.status == APIStatus.SUCCESS) {
-                toastSuccess(messageSuccess);
+                toastLoading(messageSuccess);
                 handleOnRefreshDataTable();
             }
         } catch (error: any) {
