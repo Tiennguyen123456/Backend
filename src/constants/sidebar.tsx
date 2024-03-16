@@ -112,7 +112,7 @@ export const AppRoutes: SideBarItemType[] = [
                 },
                 {
                     key: "administration.roles",
-                    permissions: ["user_role:view"],
+                    permissions: ["user_role:view", "user_role:create", "user_role:update"],
                     path: ROUTES.ROLES,
                     sideBarProps: {
                         displayText: "sidebar.items.roles",

@@ -159,7 +159,7 @@ export const AppRoutesPermissions = [
     { path: ROUTES.COMPANIES, permissions: ["company:view"] },
     // { path: ROUTES.COMPANY_CREATE, permissions: ["company:create"] },
     { path: ROUTES.ACCOUNTS, permissions: ["user:view"] },
-    { path: ROUTES.ROLES, permissions: ["user_role:view"] },
+    { path: ROUTES.ROLES, permissions: ["user_role:view", "user_role:create", "user_role:update"] },
     { path: ROUTES.PERMISSIONS, permissions: ["user_permission:view"] },
     // { path: ROUTES.LANGUAGES, permissions: ["language:view"] },
     // { path: ROUTES.CONFIGURATIONS, permissions: ["event:config"] },
