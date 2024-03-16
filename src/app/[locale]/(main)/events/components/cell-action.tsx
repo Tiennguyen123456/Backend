@@ -18,12 +18,16 @@ import { toastError, toastSuccess } from "@/utils/toast";
 import { APIStatus, MessageCode } from "@/constants/enum";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
+import { useAppSelector } from "@/redux/root/hooks";
+import { selectUser } from "@/redux/user/slice";
 
 interface CellActionProps {
     data: EventColumn;
+    canUpdate?: boolean;
+    canAssetClient?: boolean;
 }
 
-export const CellAction: React.FC<CellActionProps> = ({ data }) => {
+export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate = false, canAssetClient = false }) => {
     // ** I18n
     const translation = useTranslations("");
 
@@ -93,12 +97,20 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
                     align="end"
                     className="w-40"
                 >
-                    <DropdownMenuItem onClick={() => router.push(ROUTES.EVENTS + `/${data.id}`)}>
-                        <Edit className="mr-3 h-4 w-4" /> {translation("action.edit")}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => router.push(ROUTES.EVENTS + `/${data.id}/clients`)}>
-                        <Users className="mr-3 h-4 w-4" /> {translation("action.client")}
-                    </DropdownMenuItem>
+                    {
+                        canUpdate && (
+                            <DropdownMenuItem onClick={() => router.push(ROUTES.EVENTS + `/${data.id}`)}>
+                                <Edit className="mr-3 h-4 w-4" /> {translation("action.edit")}
+                            </DropdownMenuItem>
+                        )
+                    }
+                    {
+                        canAssetClient && (
+                            <DropdownMenuItem onClick={() => router.push(ROUTES.EVENTS + `/${data.id}/clients`)}>
+                                <Users className="mr-3 h-4 w-4" /> {translation("action.client")}
+                            </DropdownMenuItem>
+                        )
+                    }
                 </DropdownMenuContent>
             </DropdownMenu>
         </>

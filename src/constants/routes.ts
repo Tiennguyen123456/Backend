@@ -178,6 +178,7 @@ export const ActionPermissions = {
     CREATE_EVENT: ["event:create"],
     UPDATE_EVENT: ["event:update"],
     DELETE_EVENT: ["event:delete"],
+    VIEW_CLIENT: ["client:view"],
     IMPORT_CLIENT: ["client:import"],
     CREATE_CLIENT: ["client:create"],
     UPDATE_CLIENT: ["client:update"],

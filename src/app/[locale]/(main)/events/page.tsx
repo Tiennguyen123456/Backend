@@ -74,7 +74,7 @@ export default function EventsPage() {
     // Function
     const canCreateEvent = isActionsPermissions(userPermissions, ActionPermissions.CREATE_EVENT);
     const canUpdateEvent = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_EVENT);
-    const canAssetClientEvent = isActionsPermissions(userPermissions, ActionPermissions.DELETE_EVENT);
+    const canAssetClientEvent = isActionsPermissions(userPermissions, ActionPermissions.VIEW_CLIENT);
     const handleSearchCode = (event: any) => {
         setParamsSearch({ ...paramsSearch, filters: { ...paramsSearch.filters, code: event.target.value } });
     };
@@ -130,7 +130,7 @@ export default function EventsPage() {
         {
             id: "actions",
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
-            cell: ({ row }) => (canUpdateEvent || canAssetClientEvent ? <CellAction data={row.original} /> : ""),
+            cell: ({ row }) => (canUpdateEvent || canAssetClientEvent ? <CellAction data={row.original} canUpdate={canUpdateEvent} canAssetClient={canAssetClientEvent} /> : ""),
         },
     ];
 
