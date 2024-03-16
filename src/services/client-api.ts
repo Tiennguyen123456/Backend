@@ -20,5 +20,11 @@ const clientApi = {
         const url = ApiRoutes.checkInClient + `/${eventId}/client/${clientId}/checkin`;
         return await api.post<IResponse<null>>(url);
     },
+    downloadSampleExcel: async () => {
+        const url = ApiRoutes.downloadSampleExcel;
+        return await api.get<IResponse<Blob>>(url, {
+            responseType: "blob",
+        });
+    },
 };
 export default clientApi;

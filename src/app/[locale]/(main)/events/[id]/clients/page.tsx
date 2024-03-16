@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import React, { ChangeEvent, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { CheckCircle, Import, PlusCircle } from "lucide-react";
+import { CheckCircle, FileDown, Import, PlusCircle } from "lucide-react";
 import { DataTable } from "@/components/ui/data-table";
 import { usePagination } from "@/hooks/use-pagination";
 import { useRowSelection } from "@/hooks/use-row-selection";
@@ -132,6 +132,35 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
     };
     const handleImportFile = () => {
         InputFileRef.current?.click();
+    };
+    const handleDownloadFileSample = async () => {
+        try {
+            setLoadingPage(true);
+            const response = await clientApi.downloadSampleExcel();
+            var blob = new Blob([response.data as unknown as Blob]);
+            var url = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "Sample_Import_Client.xlsx";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (error: any) {
+            const data = error?.response?.data;
+            if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
+                const [value] = Object.values(data.data);
+                const message = Array(value).toString() ?? translation("errorApi.UNKNOWN_ERROR");
+                toastError(message);
+            } else if (data?.message_code != MessageCode.VALIDATION_ERROR) {
+                toastError(translation(`errorApi.${data?.message_code}`));
+            } else {
+                toastError(translation("errorApi.UNKNOWN_ERROR"));
+            }
+            console.log("error: ", error);
+        } finally {
+            setLoadingPage(false);
+        }
     };
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const fileInput = e.target;
@@ -269,14 +298,23 @@ export default function EventClientPage({ params }: { params: { id: number } }) 
                             isUpdate={canUpdateClient}
                         />
                         {canImportClient && (
-                            <Button
-                                disabled={loadingPage}
-                                variant={"secondary"}
-                                onClick={handleImportFile}
-                            >
-                                <Import className="w-5 h-5 md:mr-2" />
-                                <p className="hidden md:block">{translation("action.importExcel")}</p>
-                            </Button>
+                            <>
+                                <Button
+                                    disabled={loadingPage}
+                                    onClick={handleDownloadFileSample}
+                                >
+                                    <FileDown className="w-5 h-5 md:mr-2" />
+                                    <p className="hidden md:block">{translation("action.sampleExcel")}</p>
+                                </Button>
+                                <Button
+                                    disabled={loadingPage}
+                                    variant={"secondary"}
+                                    onClick={handleImportFile}
+                                >
+                                    <Import className="w-5 h-5 md:mr-2" />
+                                    <p className="hidden md:block">{translation("action.importExcel")}</p>
+                                </Button>
+                            </>
                         )}
                         <Input
                             ref={InputFileRef}
