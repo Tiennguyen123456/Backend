@@ -4,7 +4,7 @@ import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import SpanRequired from "@/components/ui/span-required";
-import { DateTimeFormatServer, STATUS_VALID } from "@/constants/variables";
+import { DateTimeFormatServer, EVENT_STATUS } from "@/constants/variables";
 import { format } from "date-fns";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -256,7 +256,7 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        {STATUS_VALID.map((status) => (
+                                        {EVENT_STATUS.map((status) => (
                                             <SelectItem
                                                 key={status.value}
                                                 value={status.value}
