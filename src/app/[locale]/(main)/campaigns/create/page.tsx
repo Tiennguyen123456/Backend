@@ -39,7 +39,7 @@ export default function CreateEventPage() {
     const [loading, setLoading] = useState(false);
     const [isFilterClient, setIsFilterClient] = useState(false);
     const [companyId, setCompanyId] = useState<Number>(-1);
-    const [eventReset, setEventReset] = useState({id: null, label: null});
+    const [eventReset, setEventReset] = useState({ id: null, label: null });
 
     const [paramsSearch, setParamsSearch] = useState({
         search: {},
@@ -167,10 +167,10 @@ export default function CreateEventPage() {
                                                 <ComboboxSearchCompany
                                                     disabled={loading}
                                                     onSelectCompany={(id) => {
-                                                        setEventReset({...eventReset});
-                                                        setCompanyId(id)
-                                                        form.setValue('event_id', -1);
-                                                        field.onChange(id)
+                                                        setEventReset({ ...eventReset });
+                                                        setCompanyId(id);
+                                                        form.setValue("event_id", -1);
+                                                        field.onChange(id);
                                                     }}
                                                     defaultName={""}
                                                 />
@@ -179,29 +179,25 @@ export default function CreateEventPage() {
                                         )}
                                     />
                                 )}
-                                {!isSysAdmin() ? (
-                                    ""
-                                ) : (
-                                    <FormField
-                                        control={form.control}
-                                        name="event_id"
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-col">
-                                                <FormLabel className="text-base">
-                                                    {translation("label.event")}
-                                                    <SpanRequired />
-                                                </FormLabel>
-                                                <ComboboxSearchEvent
-                                                    disabled={loading}
-                                                    onSelect={field.onChange}
-                                                    dataSelected={eventReset}
-                                                    filterCompanyId={isSysAdmin() ? companyId.toString() : ''}
-                                                />
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                )}
+                                <FormField
+                                    control={form.control}
+                                    name="event_id"
+                                    render={({ field }) => (
+                                        <FormItem className="flex flex-col">
+                                            <FormLabel className="text-base">
+                                                {translation("label.event")}
+                                                <SpanRequired />
+                                            </FormLabel>
+                                            <ComboboxSearchEvent
+                                                disabled={loading}
+                                                onSelect={field.onChange}
+                                                dataSelected={eventReset}
+                                                filterCompanyId={isSysAdmin() ? companyId.toString() : ""}
+                                            />
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
 
                                 <FormField
                                     control={form.control}
