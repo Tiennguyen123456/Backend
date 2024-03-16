@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import axios from "axios";
+import { ROUTES } from "@/constants/routes";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 const appKey = process.env.NEXT_PUBLIC_API_APP_KEY;
@@ -25,7 +26,7 @@ api.interceptors.response.use(
         const status = error.response?.status;
 
         if (status === 403) {
-            window.location.href = "/403";
+            window.location.href = ROUTES.FORBIDDEN;
         }
         return Promise.reject(error);
     },
