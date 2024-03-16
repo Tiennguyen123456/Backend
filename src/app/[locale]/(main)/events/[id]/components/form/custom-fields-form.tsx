@@ -135,10 +135,10 @@ export default function CustomFieldsForm({ data, onRefresh }: InformationFormPro
                     <Label className="col-span-1"></Label>
                 </div>
                 <Separator className="hidden md:block" />
-                {fields.map((field, index) => (
+                {fields.map((item, index) => (
                     <div
                         className="space-y-4"
-                        key={field.id}
+                        key={item.keyRow}
                     >
                         <div className="grid grid-cols-4 md:grid-cols-8 gap-x-2 md:gap-x-4 gap-y-4">
                             <FormField
@@ -198,7 +198,9 @@ export default function CustomFieldsForm({ data, onRefresh }: InformationFormPro
                                         disabled={loading}
                                         variant={"destructive"}
                                         type="button"
-                                        onClick={field.id ? () => onDelete(field.id) : () => remove(index)}
+                                        onClick={() => {
+                                            item.id ? onDelete(item.id) : remove(index);
+                                        }}
                                     >
                                         <Trash2 className="w-5 h-5" />
                                     </Button>
