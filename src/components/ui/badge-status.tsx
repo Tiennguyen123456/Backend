@@ -28,6 +28,7 @@ export const BadgeStatus: React.FC<ModalProps> = ({ status, children }) => {
             classNameStatus = "bg-yellow-600 text-white";
             break;
         case EStatus.RUNNING:
+        case EStatus.PROCESSING:
             classNameStatus = "bg-blue-500 text-white";
             break;
         default:
