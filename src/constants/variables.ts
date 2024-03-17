@@ -37,6 +37,17 @@ export const STATUS_FILTER_COMPANY = [
     { label: "Inactive", value: "INACTIVE" },
 ];
 
+export const ACCOUNT_STATUS = [
+    { label: "Active", value: "ACTIVE" },
+    { label: "Inactive", value: "INACTIVE" },
+];
+
+export const STATUS_FILTER_ACCOUNT = [
+    { label: "All status", value: "ALL" },
+    { label: "Active", value: "ACTIVE" },
+    { label: "Inactive", value: "INACTIVE" },
+];
+
 export const EVENT_STATUS = [
     { label: "Active", value: "ACTIVE" },
     { label: "Inactive", value: "INACTIVE" },

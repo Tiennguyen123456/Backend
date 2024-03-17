@@ -15,7 +15,7 @@ import { APIStatus, EStatus, MessageCode } from "@/constants/enum";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { IAccountRes } from "@/models/api/account-api";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { STATUS_VALID } from "@/constants/variables";
+import { ACCOUNT_STATUS } from "@/constants/variables";
 import { IOption } from "@/models/Select";
 import { IRoleRes } from "@/models/api/role-api";
 import ApiRoutes from "@/services/api.routes";
@@ -265,7 +265,7 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            {STATUS_VALID.map((status) => (
+                                            {ACCOUNT_STATUS.map((status) => (
                                                 <SelectItem
                                                     key={status.value}
                                                     value={status.value}
