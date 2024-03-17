@@ -25,9 +25,14 @@ export const STATUS_VALID = [
     { label: "Active", value: "ACTIVE" },
     { label: "Inactive", value: "INACTIVE" },
 ];
-export const STATUS_VALID_FILTER = [
+
+export const COMPANY_STATUS = [
+    { label: "Active", value: "ACTIVE" },
+    { label: "Inactive", value: "INACTIVE" },
+];
+
+export const STATUS_FILTER_COMPANY = [
     { label: "All status", value: "ALL" },
-    { label: "New", value: "NEW" },
     { label: "Active", value: "ACTIVE" },
     { label: "Inactive", value: "INACTIVE" },
 ];

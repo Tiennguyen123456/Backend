@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import SpanRequired from "@/components/ui/span-required";
-import { STATUS_VALID, phoneRegExp } from "@/constants/variables";
+import { COMPANY_STATUS, phoneRegExp } from "@/constants/variables";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { APIStatus, EStatus, MessageCode } from "@/constants/enum";
 import { toastError, toastSuccess } from "@/utils/toast";
@@ -326,7 +326,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            {STATUS_VALID.map((status) => (
+                                            {COMPANY_STATUS.map((status) => (
                                                 <SelectItem
                                                     key={status.value}
                                                     value={status.value}

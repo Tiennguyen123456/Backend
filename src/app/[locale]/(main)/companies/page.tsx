@@ -24,7 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EStatus } from "@/constants/enum";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { STATUS_VALID_FILTER } from "@/constants/variables";
+import { STATUS_FILTER_COMPANY } from "@/constants/variables";
 import { BadgeStatus } from "@/components/ui/badge-status";
 
 export default function CompaniesPage() {
@@ -256,7 +256,7 @@ export default function CompaniesPage() {
                                 <SelectValue placeholder={translation("placeholder.status")} />
                             </SelectTrigger>
                             <SelectContent>
-                                {STATUS_VALID_FILTER.map((status) => (
+                                {STATUS_FILTER_COMPANY.map((status) => (
                                     <SelectItem
                                         key={status.value}
                                         value={status.value}
