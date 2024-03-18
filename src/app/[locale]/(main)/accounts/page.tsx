@@ -67,6 +67,7 @@ export default function AccountsPage() {
             name: data.name ?? "",
             username: data.username ?? "",
             email: data.email ?? "",
+            password: "",
             company_id: data?.company?.id ?? -1,
             company_name: data?.company?.name ?? "",
             role_id: data?.role?.id ?? -1,
@@ -140,7 +141,8 @@ export default function AccountsPage() {
                     <h2 className="text-3xl font-bold tracking-tight">{translation("accountPage.title")}</h2>
                     <div className="flex justify-end flex-wrap items-center gap-2 !mt-0">
                         <AccountModal
-                            className="sm:max-w-[460px] overflow-y-auto"
+                            // className="sm:max-w-[460px] overflow-y-auto"
+                            className="sm:max-w-[976px] overflow-y-auto max-h-svh md:max-h-[550px] 2xl:max-h-[780px]"
                             isOpen={openModal}
                             onClose={handleCloseModal}
                             defaultData={rowSelected}

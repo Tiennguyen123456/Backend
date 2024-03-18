@@ -5,4 +5,5 @@ export interface AccountColumn extends IAccountRes {
     company_name: string;
     role_id: number;
     role_name: string;
+    password: string;
 }

@@ -23,6 +23,9 @@ import { useFetchDataTable } from "@/data/fetch-data-table";
 import { ComboboxSearchCompany } from "./combobox-search-company";
 import accountApi from "@/services/account-api";
 import DataTableConfig from "@/configs/DataTableConfig";
+import { PasswordInput } from "@/components/ui/password-input";
+import { useAppSelector } from "@/redux/root/hooks";
+import { selectUser } from "@/redux/user/slice";
 
 interface CompanyModalProps extends IModal {
     className?: string;
@@ -33,6 +36,9 @@ interface CompanyModalProps extends IModal {
 export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, defaultData, className, onConfirm }) => {
     // ** I18n
     const translation = useTranslations("");
+
+    // ** use selector
+    const { userProfile } = useAppSelector(selectUser);
 
     // ** Use State
     const [roles, setRoles] = useState<IOption[]>([]);
@@ -57,6 +63,11 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
             .string()
             .min(1, { message: translation("error.requiredEmail") })
             .email({ message: translation("error.invalidEmail") }),
+        password: z
+            .string()
+            .min(8 , { message: translation("error.invalidPassword") })
+            .optional()
+            .or(z.literal("")),
         status: z.string(),
         role_id: z.number().min(1, { message: translation("error.requiredRole") }),
         company_id: z.number().min(1, { message: translation("error.requiredCompany") }),
@@ -68,7 +79,7 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
         email: "",
         status: EStatus.ACTIVE,
         role_id: -1,
-        company_id: -1,
+        company_id: userProfile?.is_admin ? -1 : (userProfile?.company_id ?? -1),
     };
     const form = useForm<AccountFormValues>({
         resolver: zodResolver(formSchema),
@@ -165,22 +176,28 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="w-full"
                 >
-                    <div className="grid grid-cols-1 gap-2 md:gap-4 py-1 md:py-4">
-                        <FormField
-                            control={form.control}
-                            name="company_id"
-                            render={({ field }) => (
-                                <FormItem className="flex flex-col">
-                                    <FormLabel className="text-base">{translation("label.company")}</FormLabel>
-                                    <ComboboxSearchCompany
-                                        disabled={loading}
-                                        onSelectCompany={field.onChange}
-                                        defaultName={defaultData?.company?.name || ""}
-                                    />
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                    {/* <div className="grid grid-cols-1 gap-2 md:gap-4 py-1 md:py-4"> */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 py-1 md:py-4">
+                        {
+                            userProfile?.is_admin && (  
+                                <FormField
+                                    control={form.control}
+                                    name="company_id"
+                                    render={({ field }) => (
+                                        <FormItem className="flex flex-col">
+                                            <FormLabel className="text-base">{translation("label.company")}</FormLabel>
+                                            <ComboboxSearchCompany
+                                                disabled={loading}
+                                                onSelectCompany={field.onChange}
+                                                defaultName={defaultData?.company?.name || ""}
+                                            />
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            )
+                        }
+                        
                         <FormField
                             control={form.control}
                             name="name"
@@ -223,6 +240,30 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
                                 </FormItem>
                             )}
                         />
+                        {
+                            defaultData &&(
+                                <FormField
+                                    control={form.control}
+                                    name="password"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className="text-base">
+                                                {translation("label.password")}
+                                            </FormLabel>
+                                            <FormControl>
+                                                <PasswordInput
+                                                    className="h-10"
+                                                    disabled={loading}
+                                                    placeholder={translation("placeholder.password")}
+                                                    {...field}
+                                                    />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            )
+                        }
                         <FormField
                             control={form.control}
                             name="email"
@@ -240,6 +281,39 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
                                             {...field}
                                         />
                                     </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="role_id"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-base">{translation("label.role")}</FormLabel>
+                                    <Select
+                                        disabled={loading}
+                                        onValueChange={(event) => {
+                                            field.onChange(Number(event));
+                                        }}
+                                        defaultValue={field.value == -1 ? "" : field.value.toString()}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger className="h-10">
+                                                <SelectValue placeholder={translation("placeholder.role")} />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            {roles.map((status) => (
+                                                <SelectItem
+                                                    key={status.value.toString()}
+                                                    value={status.value.toString()}
+                                                >
+                                                    {status.label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -269,39 +343,6 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
                                                 <SelectItem
                                                     key={status.value}
                                                     value={status.value}
-                                                >
-                                                    {status.label}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="role_id"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel className="text-base">{translation("label.role")}</FormLabel>
-                                    <Select
-                                        disabled={loading}
-                                        onValueChange={(event) => {
-                                            field.onChange(Number(event));
-                                        }}
-                                        defaultValue={field.value == -1 ? "" : field.value.toString()}
-                                    >
-                                        <FormControl>
-                                            <SelectTrigger className="h-10">
-                                                <SelectValue placeholder={translation("placeholder.role")} />
-                                            </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent>
-                                            {roles.map((status) => (
-                                                <SelectItem
-                                                    key={status.value.toString()}
-                                                    value={status.value.toString()}
                                                 >
                                                     {status.label}
                                                 </SelectItem>
