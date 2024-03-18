@@ -122,6 +122,15 @@
             "customFields": "Cấu hình các trường cho sự kiện mẫu của công ty."
         }
     },
+    "customFieldModal": {
+        "title": "Cấu hình trường",
+        "create": {
+            "title": "Tạo mới cấu hình trường"
+        },
+        "edit": {
+            "title": "Cập nhật cấu hình trường"
+        }
+    },
     "companyDetailsPage": {
         "title": "Chi tiết công ty"
     },
@@ -221,7 +230,7 @@
         "importExcel": "Tải lên dữ liệu excel",
         "exportExcel": "Tải xuống dữ liệu excel",
         "sampleExcel": "Tải xuống mẫu excel",
-        "appendField": "Thêm trường",
+        "createField": "Thêm trường",
         "search": "Tìm kiếm",
         "client": "Khách hàng",
         "back": "Quay lại",
@@ -394,6 +403,7 @@
         "CREATE_EVENT_FAILED": "Tạo mới sự kiện thất bại.",
         "UPDATE_EVENT_FAILED": "Chỉnh sửa sự kiện thất bại.",
         "DELETE_EVENT_FAILED": "Xoá sự kiện thất bại.",
+        "CREATE_CUSTOM_FIELD_FAILED": "Tạo mới cấu hình trường thất bại.",
         "UPDATE_CUSTOM_FIELD_FAILED": "Cập nhật cấu hình trường thất bại.",
         "DELETE_CUSTOM_FIELD_FAILED": "Xóa cấu hình trường thất bại.",
         "GET_EVENT_INFORMATION_FAILED": "Lấy thông tin sự kiện thất bại.",
@@ -449,6 +459,7 @@
         "CREATE_EVENT_SUCCESS": "Tạo mới sự kiện thành công.",
         "UPDATE_EVENT_SUCCESS": "Chỉnh sửa sự kiện thành công.",
         "DELETE_EVENT_SUCCESS": "Xoá sự kiện thành công.",
+        "CREATE_CUSTOM_FIELD_SUCCESS": "Tạo mới cấu hình trường thành công.",
         "UPDATE_CUSTOM_FIELD_SUCCESS": "Cập nhật cấu hình trường thành công.",
         "DELETE_CUSTOM_FIELD_SUCCESS": "Xóa cấu hình trường thành công.",
         "UPDATE_EVENT_CONFIG_SUCCESS": "Chỉnh sửa cấu hình sự kiện thành công.",

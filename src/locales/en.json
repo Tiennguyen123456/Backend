@@ -122,6 +122,15 @@
             "customFields": "Configure fields for corporate sample event"
         }
     },
+    "customFieldModal": {
+        "title": "Custom Fields",
+        "create": {
+            "title": "Create New Custom Field"
+        },
+        "edit": {
+            "title": "Edit Custom Field"
+        }
+    },
     "companyDetailsPage": {
         "title": "Company Details"
     },
@@ -221,7 +230,7 @@
         "importExcel": "Import excel",
         "exportExcel": "Export excel",
         "sampleExcel": "Sample excel",
-        "appendField": "Append Field",
+        "createField": "Create Field",
         "search": "Search",
         "client": "Clients",
         "back": "Back",
@@ -395,6 +404,7 @@
         "CREATE_ROLE_FAILED": "Create role failed.",
         "UPDATE_ROLE_FAILED": "Update role failed.",
         "DELETE_ROLE_FAILED": "Delete role failed.",
+        "CREATE_CUSTOM_FIELD_FAILED": "Create custom field failed.",
         "UPDATE_CUSTOM_FIELD_FAILED": "Update custom field failed.",
         "DELETE_CUSTOM_FIELD_FAILED": "Delete custom field failed.",
         "GET_EVENT_INFORMATION_FAILED": "Get event information failed.",
@@ -450,6 +460,7 @@
         "CREATE_EVENT_SUCCESS": "Create event successfully.",
         "UPDATE_EVENT_SUCCESS": "Update event successfully.",
         "DELETE_EVENT_SUCCESS": "Delete event successfully.",
+        "CREATE_CUSTOM_FIELD_SUCCESS": "Create custom field successfully.",
         "UPDATE_CUSTOM_FIELD_SUCCESS": "Update custom field successfully.",
         "DELETE_CUSTOM_FIELD_SUCCESS": "Delete custom field successfully.",
         "UPDATE_EVENT_CONFIG_SUCCESS": "Update event configuration successfully.",

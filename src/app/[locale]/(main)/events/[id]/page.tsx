@@ -11,7 +11,7 @@ import eventApi from "@/services/event-api";
 import { toastError } from "@/utils/toast";
 import { IEventRes } from "@/models/api/event-api";
 import { ROUTES } from "@/constants/routes";
-import CustomFieldsClient from "./components/custom-fields";
+import CustomFieldsClient from "./components/custom-field-client";
 
 interface tabItem {
     id: number;
@@ -93,6 +93,7 @@ export default function EventDetailsPage({ params }: { params: { id: number } })
                             />
                         ) : (
                             <CustomFieldsClient
+                                eventId={params.id}
                                 data={data}
                                 onRefresh={handleGetEventById}
                             />

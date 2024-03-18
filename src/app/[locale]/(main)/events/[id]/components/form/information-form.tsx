@@ -125,7 +125,7 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-8"
+                className="space-y-6"
             >
                 <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-x-6 gap-y-4">
                     <FormField
@@ -304,11 +304,13 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                             </FormItem>
                         )}
                     />
+                </div>
+                <div className="grid grid-cols-1 gap-x-6 gap-y-4">
                     <FormField
                         control={form.control}
                         name="email_content"
                         render={({ field }) => (
-                            <FormItem className="col-span-3">
+                            <FormItem>
                                 <FormLabel className="text-base">{translation("label.emailContent")}</FormLabel>
                                 <FormControl>
                                     <HtmlEditor
@@ -324,7 +326,7 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                         control={form.control}
                         name="cards_content"
                         render={({ field }) => (
-                            <FormItem className="col-span-3">
+                            <FormItem>
                                 <FormLabel className="text-base">{translation("label.cardsContent")}</FormLabel>
                                 <FormControl>
                                     <HtmlEditor
