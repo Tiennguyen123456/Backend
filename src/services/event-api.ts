@@ -1,6 +1,6 @@
 import { api } from "@/configs/axios.config";
 import ApiRoutes from "./api.routes";
-import { ICustomFields, IEventRes } from "@/models/api/event-api";
+import { ICustomFields, IEventRes, IResFieldBasic } from "@/models/api/event-api";
 
 interface IResStoreCustomFields {
     collection: ICustomFields[];
@@ -22,6 +22,11 @@ const eventApi = {
     deleteCustomFieldsEvent: async (customFieldId: any) => {
         var url = ApiRoutes.deleteCustomFieldsEvent + "/custom-field/" + customFieldId;
         return await api.delete<IResponse<IResStoreCustomFields>>(url);
+    },
+    getFieldBasic: async () => {
+        var url = ApiRoutes.getFieldBasic;
+        const response = await api.get<IResponse<IResFieldBasic>>(url);
+        return response.data;
     },
 };
 export default eventApi;

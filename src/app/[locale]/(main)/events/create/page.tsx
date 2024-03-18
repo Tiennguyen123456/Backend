@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { Save } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ComboboxSearchCompany } from "../../accounts/components/combobox-search-company";
@@ -26,6 +26,8 @@ import { selectUser } from "@/redux/user/slice";
 import { useAppSelector } from "@/redux/root/hooks";
 import { Separator } from "@/components/ui/separator";
 import { HtmlEditor } from "@/components/ui/html-editor";
+import { ITagsList } from "@/models/api/event-api";
+import { useFetchDataFieldBasic } from "@/data/fetch-data-field-basic";
 
 export default function CreateEventPage() {
     // ** I18n
@@ -39,6 +41,7 @@ export default function CreateEventPage() {
 
     // ** Use State
     const [loading, setLoading] = useState(false);
+    const [fieldBasic, setFieldBasic] = useState<ITagsList[]>([]);
 
     // useForm
     const formSchema = z.object({
@@ -126,6 +129,18 @@ export default function CreateEventPage() {
     };
 
     const isSysAdmin = () => userProfile?.is_admin == true;
+
+    // Use Fetch data Role
+    const { data: dataFieldBasic } = useFetchDataFieldBasic({ pagination: { pageSize: 50 } });
+    useEffect(() => {
+        if(dataFieldBasic) {
+            let fileBasicFormatted: ITagsList[] = [];
+            for (const [key, value] of Object.entries(dataFieldBasic)) {
+                fileBasicFormatted.push({title: value, value: key});
+            }
+            setFieldBasic(fileBasicFormatted);
+        }
+    }, [dataFieldBasic]);
 
     return (
         <>
@@ -351,7 +366,7 @@ export default function CreateEventPage() {
                                                 {translation("label.emailContent")}
                                             </FormLabel>
                                             <FormControl>
-                                                <HtmlEditor handleEditorChange={field.onChange} />
+                                                <HtmlEditor handleEditorChange={field.onChange} tagsList={fieldBasic}/>
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -366,7 +381,7 @@ export default function CreateEventPage() {
                                                 {translation("label.cardsContent")}
                                             </FormLabel>
                                             <FormControl>
-                                                <HtmlEditor handleEditorChange={field.onChange} />
+                                                <HtmlEditor handleEditorChange={field.onChange} tagsList={fieldBasic}/>
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>

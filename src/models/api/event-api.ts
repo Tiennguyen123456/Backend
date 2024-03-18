@@ -10,6 +10,13 @@ export interface IRelationRes {
     id: number;
     name: string;
 }
+export interface ITagsList {
+    title: string;
+    value: string; 
+}
+export interface IResFieldBasic {
+    [x: string]: string;
+}
 export interface IEventRes {
     id: number;
     company: IRelationRes | null;

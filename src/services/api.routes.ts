@@ -34,6 +34,7 @@ const ApiRoutes = {
     getEventById: baseURL + "/event",
     updateCustomFieldsEvent: baseURL + "/event/",
     deleteCustomFieldsEvent: baseURL + "/event",
+    getFieldBasic: baseURL + "/event/main-fields",
 
     // ** Client Routes
     getClientsByEvent: baseURL + "/event",

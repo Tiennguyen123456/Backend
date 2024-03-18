@@ -1,9 +1,10 @@
+import { ITagsList } from "@/models/api/event-api";
 import { Editor } from "@tinymce/tinymce-react";
 
 interface HtmlEditorProps {
     handleEditorChange?: (content: string) => void;
     valueDefault?: string;
-    tagsList?: { value: string; title: string }[];
+    tagsList?: ITagsList[];
 }
 
 export const HtmlEditor: React.FC<HtmlEditorProps> = ({ handleEditorChange, valueDefault = "", tagsList = [] }) => {
