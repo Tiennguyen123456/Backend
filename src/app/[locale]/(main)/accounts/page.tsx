@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { PlusCircle } from "lucide-react";
 import { DataTable } from "@/components/ui/data-table";
@@ -20,13 +20,26 @@ import { selectUser } from "@/redux/user/slice";
 import { isActionsPermissions } from "@/helpers/funcs";
 import { ActionPermissions } from "@/constants/routes";
 import { format } from "date-fns";
-import { DateTimeFormat } from "@/constants/variables";
+import { DateTimeFormat, emailRegExp } from "@/constants/variables";
 import { BadgeStatus } from "@/components/ui/badge-status";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { toastError } from "@/utils/toast";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useFetchDataRole } from "@/data/fetch-data-role";
+
+interface RoleFilter {
+    label: string;
+    value: number;
+}
 
 export default function AccountsPage() {
     // ** I18n
     const translation = useTranslations("");
 
+    // ** useRef
+    const InputEmailSearchRef = useRef<HTMLInputElement>(null);
+    
     // ** User Selector
     const { userPermissions } = useAppSelector(selectUser);
     // Use Row Selection
@@ -35,11 +48,16 @@ export default function AccountsPage() {
     const { limit, onPaginationChange, skip, pagination, page } = usePagination();
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
-
+    
     // ** State
+    const [roles, setRoles] = useState<RoleFilter[]>([{label: 'All', value: 0}]);
     const [openModal, setOpenModal] = useState(false);
     const [rowSelected, setRowSelected] = useState<AccountColumn | null>(null);
-    const [paramsDataTable1, setParamsDataTable] = useState({
+    const [paramsSearch, setParamsSearch] = useState({
+        search: {},
+        filters: {},
+    });
+    const [paramsDataTable, setParamsDataTable] = useState({
         search: {},
         filters: {},
     });
@@ -48,7 +66,7 @@ export default function AccountsPage() {
     const { data, loading, pageCount, refresh, setRefresh } = useFetchDataTable<AccountColumn>({
         url: ApiRoutes.getAccounts,
         paramsDataTable: {
-            ...paramsDataTable1,
+            ...paramsDataTable,
             pagination: {
                 page: page ?? 1,
                 pageSize: limit ?? 1,
@@ -84,6 +102,34 @@ export default function AccountsPage() {
     const handleCloseModal = () => {
         setRowSelected(null);
         setOpenModal(false);
+    };
+
+    const handleSearchEmail = (event: any) => {
+        setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, email: event.target.value } });
+    };
+
+    const handleSearchRole = (roleSelected: number) => {
+        console.log(roleSelected);
+        setParamsSearch(
+            roleSelected == 0
+                ? {
+                      ...paramsSearch,
+                      filters: { ...paramsSearch.filters, role_id: "" },
+                  }
+                : {
+                      ...paramsSearch,
+                      filters: { ...paramsSearch.filters, role_id: roleSelected },
+                  },
+        );
+    };
+
+    const handleClickSearch = () => {
+        let email = InputEmailSearchRef.current?.value.trim() ?? "";
+        if (!emailRegExp.test(email) && email.length > 0) {
+            toastError(translation("error.invalidEmail"));
+            return false;
+        }
+        setParamsDataTable({ ...paramsDataTable, search: paramsSearch.search, filters: paramsSearch.filters });
     };
 
     const canCreateAccount = isActionsPermissions(userPermissions, ActionPermissions.CREATE_ACCOUNT);
@@ -133,6 +179,17 @@ export default function AccountsPage() {
         },
     ];
 
+    // Use fetch data
+    const { data: dataRole } = useFetchDataRole({ pagination: { pageSize: 50 } });
+
+    useEffect(() => {
+        const rolesFormatted = dataRole.map((role) => ({
+            label: role.name,
+            value: role.id,
+        }));
+        setRoles([...roles, ...rolesFormatted]);
+    }, [dataRole]);
+
     return (
         <>
             <div className="w-full space-y-4">
@@ -159,6 +216,54 @@ export default function AccountsPage() {
                         )}
                     </div>
                 </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2 justify-start items-end w-full md:w-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full md:w-auto">
+                    <div className="grid w-full max-w-sm items-center gap-1.5">
+                        <Label
+                            className="text-base"
+                            htmlFor="email"
+                        >
+                            {translation("label.email")}
+                        </Label>
+                        <Input
+                            ref={InputEmailSearchRef}
+                            disabled={Boolean(loading)}
+                            id="email"
+                            type="text"
+                            className="h-10 text"
+                            onChange={handleSearchEmail}
+                        />
+                    </div>
+                    <div className="grid w-full sm:max-w-xl items-center gap-1.5">
+                        <Label className="text-base">{translation("label.role")}</Label>
+                        <Select
+                            disabled={Boolean(loading)}
+                            onValueChange={(value) => handleSearchRole(+value)}
+                            defaultValue={'0'}
+                        >
+                            <SelectTrigger className="h-10">
+                                <SelectValue placeholder={translation("placeholder.status")} />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {roles.map((role) => (
+                                    <SelectItem
+                                        key={role.value}
+                                        value={role.value.toString()}
+                                    >
+                                        {role.label[0].toUpperCase() + role.label.slice(1)}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+                </div>
+                <Button
+                    disabled={Boolean(loading)}
+                    onClick={handleClickSearch}
+                >
+                    {translation("action.search")}
+                </Button>
             </div>
 
             <DataTable
