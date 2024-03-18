@@ -42,7 +42,7 @@ export default function LoginForm(props: LoginFormProps) {
             .string()
             .min(1, { message: translation("error.requiredEmail") })
             .email({ message: translation("error.invalidEmail") }),
-        password: z.string().min(6, { message: translation("error.invalidPassword") }),
+        password: z.string().min(8, { message: translation("error.invalidPassword") }),
         rememberMe: z.boolean(),
     });
 
