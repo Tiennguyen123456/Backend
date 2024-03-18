@@ -237,7 +237,7 @@ export default function CompaniesPage() {
                     <Loader />
                 </div>
             ) : (
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     {groupPermission.map((group: any, groupIndex: number) => (
                         <div key={groupIndex}>
                             <div className="flex items-center space-x-2 py-1 font-normal">
