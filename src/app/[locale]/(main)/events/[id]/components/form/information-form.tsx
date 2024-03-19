@@ -7,7 +7,7 @@ import SpanRequired from "@/components/ui/span-required";
 import { DateTimeFormatServer, EVENT_STATUS } from "@/constants/variables";
 import { format } from "date-fns";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as z from "zod";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,7 +19,7 @@ import eventApi from "@/services/event-api";
 import { APIStatus, MessageCode } from "@/constants/enum";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { ComboboxSearchCompany } from "@/app/[locale]/(main)/accounts/components/combobox-search-company";
-import { IEventRes } from "@/models/api/event-api";
+import { IEventRes, ITagsList } from "@/models/api/event-api";
 import { ActionPermissions } from "@/constants/routes";
 import { isActionsPermissions } from "@/helpers/funcs";
 import { HtmlEditor } from "@/components/ui/html-editor";
@@ -38,6 +38,8 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
 
     // ** Use State
     const [loading, setLoading] = useState(false);
+    const [fieldBasic, setFieldBasic] = useState<ITagsList[]>([]);
+    const [componentLoaded, setComponentLoaded] = useState(false);
 
     // useForm
     const formSchema = z.object({
@@ -119,8 +121,17 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
             setLoading(false);
         }
     };
-    const canUpdateEvent = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_EVENT);
 
+    const canUpdateEvent = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_EVENT);
+    useEffect(() => {
+        if(data) {
+            let dataMainField = data.main_fields ?? [];
+            let dataCustomField = data.custom_fields ?? [];
+            let dataFormatField = [...dataMainField, ...dataCustomField].map(filed => ({ title: filed.description, value: filed.name}))
+            setFieldBasic(dataFormatField);
+            setComponentLoaded(true)
+        }
+    }, [data]);
     return (
         <Form {...form}>
             <form
@@ -313,10 +324,11 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                             <FormItem>
                                 <FormLabel className="text-base">{translation("label.emailContent")}</FormLabel>
                                 <FormControl>
-                                    <HtmlEditor
-                                        handleEditorChange={field.onChange}
-                                        valueDefault={field.value}
-                                    />
+                                    {
+                                        componentLoaded
+                                        ? <HtmlEditor handleEditorChange={field.onChange} valueDefault={field.value} tagsList={fieldBasic}/> 
+                                        : <Textarea disabled={loading} placeholder={translation("placeholder.emailContent")} {...field} />
+                                    }
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -329,10 +341,11 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                             <FormItem>
                                 <FormLabel className="text-base">{translation("label.cardsContent")}</FormLabel>
                                 <FormControl>
-                                    <HtmlEditor
-                                        handleEditorChange={field.onChange}
-                                        valueDefault={field.value}
-                                    />
+                                    {
+                                        componentLoaded 
+                                        ? <HtmlEditor handleEditorChange={field.onChange} valueDefault={field.value} tagsList={fieldBasic}/> 
+                                        : <Textarea disabled={loading} placeholder={translation("placeholder.cardsContent")} {...field} />
+                                    }
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

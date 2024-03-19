@@ -386,7 +386,10 @@ export default function CreateEventPage() {
                                                 {translation("label.cardsContent")}
                                             </FormLabel>
                                             <FormControl>
-                                                <HtmlEditor handleEditorChange={field.onChange} tagsList={fieldBasic}/>
+                                            {componentLoaded 
+                                                ? <HtmlEditor handleEditorChange={field.onChange} tagsList={fieldBasic}/> 
+                                                : <Textarea disabled={loading} placeholder={translation("placeholder.cardsContent")} {...field} />
+                                            }
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
