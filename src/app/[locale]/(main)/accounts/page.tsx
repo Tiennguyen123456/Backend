@@ -187,7 +187,7 @@ export default function AccountsPage() {
             label: role.name,
             value: role.id,
         }));
-        setRoles([...roles, ...rolesFormatted]);
+        setRoles(prev => [...prev,...rolesFormatted]);
     }, [dataRole]);
 
     return (
@@ -199,6 +199,7 @@ export default function AccountsPage() {
                     <div className="flex justify-end flex-wrap items-center gap-2 !mt-0">
                         <AccountModal
                             // className="sm:max-w-[460px] overflow-y-auto"
+                            dataRoles={roles.filter((role) => role.value != 0)}
                             className="sm:max-w-[976px] overflow-y-auto max-h-svh md:max-h-[550px] 2xl:max-h-[780px]"
                             isOpen={openModal}
                             onClose={handleCloseModal}

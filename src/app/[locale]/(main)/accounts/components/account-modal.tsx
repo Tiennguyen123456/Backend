@@ -31,9 +31,10 @@ interface CompanyModalProps extends IModal {
     className?: string;
     defaultData: IAccountRes | null;
     onConfirm: () => void;
+    dataRoles: IOption[] | []
 }
 
-export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, defaultData, className, onConfirm }) => {
+export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, defaultData, className, onConfirm, dataRoles }) => {
     // ** I18n
     const translation = useTranslations("");
 
@@ -136,24 +137,9 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [defaultData]);
 
-    // Use fetch data
-    // const { data: dataRole } = useFetchDataRole({ pagination: { pageSize: 50 } });
-    const { data: dataRole } = useFetchDataTable<IRoleRes>({
-        url: ApiRoutes.getRoles,
-        paramsDataTable: {
-            pagination: {
-                page: 1,
-                pageSize: DataTableConfig.pageSize,
-            },
-        },
-    });
     useEffect(() => {
-        const roles = dataRole.map((role) => ({
-            label: role.name,
-            value: role.id,
-        }));
-        setRoles(roles);
-    }, [dataRole]);
+        setRoles(dataRoles);
+    }, [dataRoles]);
 
     useEffect(() => {
         setIsMounted(true);
