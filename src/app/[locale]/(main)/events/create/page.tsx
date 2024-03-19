@@ -42,6 +42,7 @@ export default function CreateEventPage() {
     // ** Use State
     const [loading, setLoading] = useState(false);
     const [fieldBasic, setFieldBasic] = useState<ITagsList[]>([]);
+    const [componentLoaded, setComponentLoaded] = useState(false);
 
     // useForm
     const formSchema = z.object({
@@ -139,6 +140,7 @@ export default function CreateEventPage() {
                 fileBasicFormatted.push({title: value, value: key});
             }
             setFieldBasic(fileBasicFormatted);
+            setComponentLoaded(true)
         }
     }, [dataFieldBasic]);
 
@@ -366,7 +368,10 @@ export default function CreateEventPage() {
                                                 {translation("label.emailContent")}
                                             </FormLabel>
                                             <FormControl>
-                                                <HtmlEditor handleEditorChange={field.onChange} tagsList={fieldBasic}/>
+                                            {componentLoaded 
+                                                ? <HtmlEditor handleEditorChange={field.onChange} tagsList={fieldBasic}/> 
+                                                : <Textarea disabled={loading} placeholder={translation("placeholder.emailContent")} {...field} />
+                                            }
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
