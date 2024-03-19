@@ -171,6 +171,9 @@
             "title": "Edit Campaign"
         }
     },
+    "scanQrPage": {
+        "title": "Scan QR"
+    },
     "createCampaignPage": {
         "title": "Create New Campaign"
     },
@@ -239,7 +242,8 @@
         "start": "Start",
         "pause": "Pause",
         "stop": "Stop",
-        "logEmail": "Log email"
+        "logEmail": "Log email",
+        "scanQr": "Scan QR"
     },
     "label": {
         "search": "Search",
@@ -499,7 +503,8 @@
             "roles": "Roles",
             "permissions": "Permissions",
             "languages": "Languages",
-            "configurations": "Configurations"
+            "configurations": "Configurations",
+            "scanQr": "Scan QR"
         }
     },
     "topbar": {
@@ -557,7 +562,8 @@
         "createCompany": "Create company",
         "roles": "Roles",
         "permissions": "Permissions",
-        "accounts": "Accounts"
+        "accounts": "Accounts",
+        "scanQr": "Scan QR"
     },
     "status": {
         "ALL": "All status",

@@ -1,4 +1,4 @@
-import { Building2, CalendarClock, LayoutDashboard, LockKeyhole, Megaphone, UserRoundCog, Users } from "lucide-react";
+import { Building2, CalendarClock, LayoutDashboard, LockKeyhole, Megaphone, QrCode, UserRoundCog, Users } from "lucide-react";
 import { SideBarItemType } from "../models/SideBar";
 import { ROUTES } from "./routes";
 
@@ -35,6 +35,15 @@ export const AppRoutes: SideBarItemType[] = [
                         icon: <Megaphone />,
                     },
                     permissions: ["campaign:view"],
+                },
+                {
+                    path: ROUTES.SCAN_QR,
+                    key: "activity.scanQR",
+                    sideBarProps: {
+                        displayText: "sidebar.items.scanQr",
+                        icon: <QrCode />,
+                    },
+                    permissions: []
                 },
                 // {
                 //     path: ROUTES.DATA,

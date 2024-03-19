@@ -177,6 +177,9 @@
     "createCampaignPage": {
         "title": "Tạo mới chiến dịch"
     },
+    "scanQrPage": {
+        "title": "Quét QR"
+    },
     "companyPage": {
         "title": "Công ty",
         "table": {
@@ -239,7 +242,8 @@
         "start": "Bắt đầu",
         "pause": "Tạm dừng",
         "stop": "Dừng",
-        "logEmail": "Lịch sử email"
+        "logEmail": "Lịch sử email",
+        "scanQr": "Quét QR"
     },
     "label": {
         "search": "Tìm kiếm",
@@ -498,7 +502,8 @@
             "roles": "Vai trò",
             "permissions": "Phân quyền",
             "languages": "Ngôn ngữ",
-            "configurations": "Cấu hình"
+            "configurations": "Cấu hình",
+            "scanQr": "Quét QR"
         }
     },
     "topbar": {
@@ -558,7 +563,8 @@
         "createCompany": "Tạo công ty",
         "roles": "Vai trò",
         "permissions": "Phân quyền",
-        "accounts": "Tài khoản"
+        "accounts": "Tài khoản",
+        "scanQr": "Quét QR"
     },
     "status": {
         "ALL": "Tất cả",
