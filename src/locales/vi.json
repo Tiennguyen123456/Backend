@@ -178,7 +178,7 @@
         "title": "Tạo mới chiến dịch"
     },
     "scanQrPage": {
-        "title": "Quét QR"
+        "title": "Quét Mã QR"
     },
     "companyPage": {
         "title": "Công ty",
@@ -243,7 +243,7 @@
         "pause": "Tạm dừng",
         "stop": "Dừng",
         "logEmail": "Lịch sử email",
-        "scanQr": "Quét QR"
+        "scanQr": "Quét mã QR"
     },
     "label": {
         "search": "Tìm kiếm",
@@ -445,7 +445,8 @@
         "FILE_UPLOAD_FAILED": "Upload file thất bại.",
         "FAILED_TO_UPDATE": "Cập nhất thất bại.",
         "CAMPAIGN_NOT_FOUND": "Không tìm thấy chiến dịch.",
-        "FAILED_ACTION": "Hành động thất bại."
+        "FAILED_ACTION": "Hành động thất bại.",
+        "SCAN_QR_CODE_FAILED": "Quét mã QR thất bại."
     },
     "successApi": {
         "SUCCESS": "Thành công",
@@ -476,7 +477,9 @@
         "UPDATE_PERMISSION_SUCCESS": "Cập nhật quyền thành công.",
         "CREATE_CAMPAIGN_SUCCESS": "Tạo mới chiến dịch thành công.",
         "UPDATE_CAMPAIGN_SUCCESS": "Cập nhật chiến dịch thành công.",
-        "DELETE_CAMPAIGN_SUCCESS": "Xóa chiến dịch thành công."
+        "DELETE_CAMPAIGN_SUCCESS": "Xóa chiến dịch thành công.",
+        "SCAN_QR_CODE_SUCCESS": "Quét mã QR thành công.",
+        "CLIENT_HAVE_ALDREADY_CHECKIN": "Khách hàng đã được kiểm tra trước đó."
     },
     "localeSwitcher": {
         "en": "Tiếng Anh",

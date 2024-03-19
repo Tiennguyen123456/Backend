@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import CampaignForm from "./components/campaign-form";
 import { ROUTES } from "@/constants/routes";
-import { MessageCode } from "@/constants/enum";
+import { APIStatus, MessageCode } from "@/constants/enum";
 
 export default function EditCampaignPage({ params }: { params: { id: number } }) {
     // ** I18n
@@ -26,7 +26,7 @@ export default function EditCampaignPage({ params }: { params: { id: number } })
             if (params.id) {
                 if (params.id) {
                     const response = await campaignApi.getCampaignById(params.id);
-                    if (response.data.status === "success") {
+                    if (response.data.status === APIStatus.SUCCESS) {
                         const formData = response?.data.data;
                         setData(formData);
                     }

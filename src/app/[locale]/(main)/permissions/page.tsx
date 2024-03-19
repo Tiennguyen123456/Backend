@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
 import FooterContainer from "@/components/layout/footer-container";
-import { useRouter } from "next/navigation";
 import Breadcrumbs from "@/components/ui/breadcrumb";
 import { IOption } from "@/models/Select";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -20,6 +19,7 @@ import { selectUser } from "@/redux/user/slice";
 import { isActionsPermissions } from "@/helpers/funcs";
 import { ActionPermissions } from "@/constants/routes";
 import permissionApi from "@/services/permission-api";
+import { APIStatus } from "@/constants/enum";
 
 export default function CompaniesPage() {
     // ** I18n
@@ -159,7 +159,7 @@ export default function CompaniesPage() {
                 role_id: roleId,
             })
             .then(function (response) {
-                if (response.status === "success") {
+                if (response.status === APIStatus.SUCCESS) {
                     toastSuccess(translation("successApi.UPDATE_PERMISSION_SUCCESS"));
                 } else {
                     toastError(translation(`errorApi.${response.message_code}`));

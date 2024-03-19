@@ -3,46 +3,21 @@ import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import FooterContainer from "@/components/layout/footer-container";
 import Breadcrumbs from "@/components/ui/breadcrumb";
-import { useRouter } from "next/navigation";
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Scan } from "lucide-react";
-import { Scanner } from "@yudiel/react-qr-scanner";
+import QRScanner from "@/components/ui/qr-scanner";
 
 export default function EventsPage() {
     // ** I18n
     const translation = useTranslations("");
 
-    // ** Router
-    const router = useRouter();
-
     // ** Use State
     const [startScan, setStartScan] = useState(false);
-    const [loadingScan, setLoadingScan] = useState(false);
-    const [selected, setSelected] = useState("environment");
-    const [data, setData] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    const handleScan = async (scanData: any) => {
-        setLoadingScan(true);
-        console.log(`loaded data data`, scanData);
-        // if (scanData && scanData !== "") {
-        //     console.log(`loaded >>>`, scanData);
-        //     setData(scanData);
-        //     setStartScan(false);
-        //     setLoadingScan(false);
-        //     // setPrecScan(scanData);
-        // }
-    };
-    const handleError = (err: any) => {
-        console.error(err);
+    const toggleLoading = (value: boolean) => {
+        setLoading(value);
     };
 
     return (
@@ -103,37 +78,31 @@ export default function EventsPage() {
                             Scan QR codes for clients attending company events
                         </p>
 
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button
-                                    size="default"
-                                    className="relative"
-                                    onClick={() => {
-                                        setStartScan(true);
-                                    }}
-                                >
-                                    <Scan className="w-5 h-5 md:mr-2" />
-                                    <p className="ml-1">{translation("action.scanQr")}</p>
-                                </Button>
-                            </DialogTrigger>
+                        <Button
+                            size="default"
+                            className="relative"
+                            disabled={loading}
+                            onClick={() => {
+                                setStartScan(true);
+                            }}
+                        >
+                            <Scan className="w-5 h-5 md:mr-2" />
+                            <p className="ml-1">{translation("action.scanQr")}</p>
+                        </Button>
+                        <Dialog open={startScan}>
                             <DialogContent>
                                 <DialogHeader>
                                     <DialogTitle>Scan QR</DialogTitle>
                                 </DialogHeader>
-                                <div className="grid gap-4 py-4">
-                                    <div className="grid gap-2">
-                                        <Scanner
-                                            enabled={startScan}
-                                            onResult={(text, result) => console.log(text, result)}
-                                            onError={(error) => console.log(error?.message)}
-                                        />
-                                    </div>
+                                <div className="grid gap-2 py-2">
+                                    {startScan && <QRScanner handleLoadingModal={toggleLoading} />}
                                 </div>
                                 <DialogFooter>
                                     <DialogClose asChild>
                                         <Button
                                             type="button"
                                             variant="destructive"
+                                            disabled={loading}
                                             onClick={() => {
                                                 setStartScan(false);
                                             }}

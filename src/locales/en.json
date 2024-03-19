@@ -172,7 +172,7 @@
         }
     },
     "scanQrPage": {
-        "title": "Scan QR"
+        "title": "Scan QR Code"
     },
     "createCampaignPage": {
         "title": "Create New Campaign"
@@ -446,7 +446,8 @@
         "FILE_UPLOAD_FAILED": "File upload failed.",
         "FAILED_TO_UPDATE": "Failed to update.",
         "CAMPAIGN_NOT_FOUND": "Campaign not found.",
-        "FAILED_ACTION": "Failed action."
+        "FAILED_ACTION": "Failed action.",
+        "SCAN_QR_CODE_FAILED": "Scan QR code failed."
     },
     "successApi": {
         "SUCCESS": "Success",
@@ -475,9 +476,11 @@
         "DELETE_CLIENT_SUCCESS": "Delete client successfully.",
         "UPDATE_PERMISSION_SUCCESS": "Update permission successfully.",
         "CHECKIN_CLIENT_SUCCESS": "CheckIn client successfully.",
-        "CREATE_CAMPAIGN_SUCCESS": "Create campaign success.",
-        "UPDATE_CAMPAIGN_SUCCESS": "Update campaign success.",
-        "DELETE_CAMPAIGN_SUCCESS": "Delete campaign success."
+        "CREATE_CAMPAIGN_SUCCESS": "Create campaign successfully.",
+        "UPDATE_CAMPAIGN_SUCCESS": "Update campaign successfully.",
+        "DELETE_CAMPAIGN_SUCCESS": "Delete campaign successfully.",
+        "SCAN_QR_CODE_SUCCESS": "Scan QR code successfully.",
+        "CLIENT_HAVE_ALDREADY_CHECKIN": "The client has been checked in."
     },
     "localeSwitcher": {
         "en": "English",

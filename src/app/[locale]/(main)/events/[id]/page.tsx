@@ -12,6 +12,7 @@ import { toastError } from "@/utils/toast";
 import { IEventRes } from "@/models/api/event-api";
 import { ROUTES } from "@/constants/routes";
 import CustomFieldsClient from "./components/custom-field-client";
+import { APIStatus } from "@/constants/enum";
 
 interface tabItem {
     id: number;
@@ -47,7 +48,7 @@ export default function EventDetailsPage({ params }: { params: { id: number } })
             setLoading(true);
             if (params.id) {
                 const response = await eventApi.getEventById(params.id);
-                if (response.status === "success") {
+                if (response.status === APIStatus.SUCCESS) {
                     const data = response?.data;
                     setData(data);
                 }

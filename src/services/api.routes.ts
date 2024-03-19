@@ -35,6 +35,7 @@ const ApiRoutes = {
     updateCustomFieldsEvent: baseURL + "/event/",
     deleteCustomFieldsEvent: baseURL + "/event",
     getFieldBasic: baseURL + "/event/main-fields",
+    scanQRCode: baseURL + "/event/qr-checkin",
 
     // ** Client Routes
     getClientsByEvent: baseURL + "/event",
@@ -43,6 +44,7 @@ const ApiRoutes = {
     deleteClient: baseURL + "/event",
     checkInClient: baseURL + "/event",
     downloadSampleExcel: baseURL + "/event/client/import-sample",
+    generateQrCode: baseURL + "/generate-client-qrcode",
 
     // ** Campaign Routes
     getCampaigns: baseURL + "/campaigns",

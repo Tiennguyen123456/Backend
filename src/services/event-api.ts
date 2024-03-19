@@ -28,5 +28,10 @@ const eventApi = {
         const response = await api.get<IResponse<IResFieldBasic>>(url);
         return response.data;
     },
+    scanQRCode: async (body: any) => {
+        var url = ApiRoutes.scanQRCode;
+        const response = await api.post<IResponse<null>>(url, body);
+        return response.data;
+    },
 };
 export default eventApi;

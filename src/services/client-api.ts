@@ -1,3 +1,4 @@
+import qs from "qs";
 import { api } from "@/configs/axios.config";
 import ApiRoutes from "./api.routes";
 
@@ -25,6 +26,16 @@ const clientApi = {
         return await api.get<IResponse<Blob>>(url, {
             responseType: "blob",
         });
+    },
+    generateQrCode: async (body: any) => {
+        const url = ApiRoutes.generateQrCode;
+        const response = await api.get<IResponse<string>>(url, {
+            params: body,
+            paramsSerializer: function (params) {
+                return qs.stringify(params, { arrayFormat: "brackets" });
+            },
+        });
+        return response.data;
     },
 };
 export default clientApi;
