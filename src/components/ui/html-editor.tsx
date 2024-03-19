@@ -3,11 +3,11 @@ import { Editor } from "@tinymce/tinymce-react";
 
 interface HtmlEditorProps {
     handleEditorChange?: (content: string) => void;
-    valueDefault?: string;
+    value?: string;
     tagsList?: ITagsList[];
 }
 
-export const HtmlEditor: React.FC<HtmlEditorProps> = ({ handleEditorChange, valueDefault = "", tagsList = [] }) => {
+export const HtmlEditor: React.FC<HtmlEditorProps> = ({ handleEditorChange, value = "", tagsList = [] }) => {
     return (
         <Editor
             apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
@@ -22,7 +22,7 @@ export const HtmlEditor: React.FC<HtmlEditorProps> = ({ handleEditorChange, valu
                 mergetags_suffix: "}}",
                 mergetags_list: tagsList,
             }}
-            initialValue={valueDefault}
+            value={value}
         />
     );
 };

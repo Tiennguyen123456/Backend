@@ -326,7 +326,7 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                                 <FormControl>
                                     {
                                         componentLoaded
-                                        ? <HtmlEditor handleEditorChange={field.onChange} valueDefault={field.value} tagsList={fieldBasic}/> 
+                                        ? <HtmlEditor handleEditorChange={field.onChange} value={field.value} tagsList={fieldBasic}/> 
                                         : <Textarea disabled={loading} placeholder={translation("placeholder.emailContent")} {...field} />
                                     }
                                 </FormControl>
@@ -343,7 +343,7 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                                 <FormControl>
                                     {
                                         componentLoaded 
-                                        ? <HtmlEditor handleEditorChange={field.onChange} valueDefault={field.value} tagsList={fieldBasic}/> 
+                                        ? <HtmlEditor handleEditorChange={field.onChange} value={field.value} tagsList={fieldBasic}/> 
                                         : <Textarea disabled={loading} placeholder={translation("placeholder.cardsContent")} {...field} />
                                     }
                                 </FormControl>
