@@ -74,7 +74,8 @@ export const CLIENT_CHECK_IN_STATUS = [
     { label: "UnCheckIn", value: "UNCHECKIN" },
 ];
 export const SCAN_QR_CODE_CAMERA = [
-    { id: "environment", label: "Default Camera" },
+    { id: "environment", label: "Environment Camera (Default)" },
+    { id: "user", label: "User Camera" },
 ];
 export const STATUS_FILTER_CAMPAIGN = [{ label: "All status", value: "ALL" }, ...CAMPAIGN_STATUS];
 export const STATUS_FILTER_CLIENT_CHECK_IN = [{ label: "All", value: "ALL" }, ...CLIENT_CHECK_IN_STATUS];
