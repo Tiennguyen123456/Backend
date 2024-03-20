@@ -19,7 +19,7 @@ export default function EventsPage() {
     // ** Use State
     const [startScan, setStartScan] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [cameraId, setCameraId] = useState<string>(ScanQRCamera.DEFAULT);
+    const [cameraId, setCameraId] = useState<string>(ScanQRCamera.USER);
     const [listCamera, setListCamera] = useState<QrScanner.Camera[]>(SCAN_QR_CODE_CAMERA);
 
     const toggleLoading = (value: boolean) => {
@@ -28,15 +28,15 @@ export default function EventsPage() {
 
     const handleSwitchCamera = (value: string) => {
         setCameraId(value);
-    }
+    };
 
     const handleCloseModalScanQR = (value: boolean) => {
         setStartScan(false);
-    }
+    };
 
     const handleSetListCamera = (value: QrScanner.Camera[]) => {
-        setListCamera([...SCAN_QR_CODE_CAMERA, ...value])
-    }
+        setListCamera([...SCAN_QR_CODE_CAMERA, ...value]);
+    };
 
     return (
         <>
@@ -107,26 +107,41 @@ export default function EventsPage() {
                             <Scan className="w-5 h-5 md:mr-2" />
                             <p className="ml-1">{translation("action.scanQr")}</p>
                         </Button>
-                        <Dialog open={startScan} onOpenChange={handleCloseModalScanQR}>
+                        <Dialog
+                            open={startScan}
+                            onOpenChange={handleCloseModalScanQR}
+                        >
                             <DialogContent onInteractOutside={(e) => e.preventDefault()}>
                                 <DialogHeader>
                                     <DialogTitle className="flex items-center">
-                                        <Select defaultValue={ScanQRCamera.DEFAULT} onValueChange={handleSwitchCamera}>
+                                        <Select
+                                            defaultValue={ScanQRCamera.USER}
+                                            onValueChange={handleSwitchCamera}
+                                        >
                                             <SelectTrigger className="w-[150px]">
-                                                <SelectValue defaultValue={'environment'} />
+                                                <SelectValue defaultValue={"environment"} />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                {
-                                                    listCamera.map((camera, index) => (
-                                                        <SelectItem value={camera.id} key={index}>{camera.label}</SelectItem>
-                                                    ))
-                                                }
+                                                {listCamera.map((camera, index) => (
+                                                    <SelectItem
+                                                        value={camera.id}
+                                                        key={index}
+                                                    >
+                                                        {camera.label}
+                                                    </SelectItem>
+                                                ))}
                                             </SelectContent>
                                         </Select>
                                     </DialogTitle>
                                 </DialogHeader>
                                 <div className="grid gap-2 py-2">
-                                    {startScan && <QRScanner handleLoadingModal={toggleLoading} handleSetListCamera={handleSetListCamera} cameraId={cameraId}/>}
+                                    {startScan && (
+                                        <QRScanner
+                                            handleLoadingModal={toggleLoading}
+                                            handleSetListCamera={handleSetListCamera}
+                                            cameraId={cameraId}
+                                        />
+                                    )}
                                 </div>
                                 <DialogFooter>
                                     <DialogClose asChild>
