@@ -54,7 +54,7 @@ const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRC
                 {
                     returnDetailedScanResult: true,
                     highlightScanRegion: true,
-                    highlightCodeOutline: true,
+                    highlightCodeOutline: false,
                     maxScansPerSecond: 1,
                 },
             );
