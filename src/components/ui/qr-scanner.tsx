@@ -16,6 +16,8 @@ const QRScanner = ({ handleLoadingModal, preferredCamera = ScanQRCamera.DEFAULT 
 
     const videoElementRef = useRef<HTMLVideoElement>(null);
     const [loading, setLoading] = useState(false);
+    const [notFound, setNotFound] = useState(false);
+    const [listCameraData, setListCameraData] = useState<any>('');
 
     useEffect(() => {
         const video: HTMLVideoElement | null = videoElementRef.current;
@@ -56,9 +58,11 @@ const QRScanner = ({ handleLoadingModal, preferredCamera = ScanQRCamera.DEFAULT 
                     preferredCamera: preferredCamera
                 },
             );
-            qrScanner.start();
             console.log("start camera");
+            qrScanner.start();
             console.log(qrScanner);
+            QrScanner.hasCamera().then((hasCamera) => !hasCamera && setNotFound(true))
+            QrScanner.listCameras().then((listCameras) => setListCameraData(listCameras))
             
             return () => {
                 console.log("stop camera");
@@ -72,11 +76,13 @@ const QRScanner = ({ handleLoadingModal, preferredCamera = ScanQRCamera.DEFAULT 
         <div>
             <div className="videoWrapper flex justify-center items-center min-h-[200px] sm:min-h-[250px]">
                 {loading && <FadeLoader color="#3498db" />}
+                {notFound && <p className="text-base sm:text-xl">Not Found Camera</p>}
                 <video
-                    className={cn("qrVideo", loading ? "hidden" : "")}
+                    className={cn("qrVideo", loading || notFound ? "hidden" : "")}
                     ref={videoElementRef}
-                />
+                    />
             </div>
+            {listCameraData && (<>List Camera: {JSON.stringify(listCameraData)}</>)}
         </div>
     );
 };
