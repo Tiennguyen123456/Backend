@@ -64,7 +64,7 @@ const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRC
 
             // get list camera
             console.log(qrScanner);
-            QrScanner.listCameras().then((listCameras) =>
+            QrScanner.listCameras(true).then((listCameras) =>
                 handleSetListCamera(listCameras.filter((item) => item.id != "")),
             );
 
