@@ -61,7 +61,7 @@ export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [
     },
     {
         code: "scanQr",
-        name: "Scan QR",
+        name: "Scan QR Code",
         slug: ROUTES.SCAN_QR,
     },
     // {
@@ -157,7 +157,7 @@ export const AppRoutesPermissions = [
     // { path: ROUTES.EVENTS_DETAILS, permissions: ["event:update"] },
     // { path: ROUTES.EVENTS_CONFIG, permissions: ["event:update", "event:config"] },
     { path: ROUTES.CAMPAIGNS, permissions: ["campaign:view"] },
-    { path: ROUTES.SCAN_QR, permissions: [] },
+    { path: ROUTES.SCAN_QR, permissions: ["client:scan-qr"] },
     // { path: ROUTES.CAMPAIGNS_DETAILS, permissions: ["campaign:view"] },
     // { path: ROUTES.DATA, permissions: [] },
     // { path: ROUTES.TEMP_DATA_PAGE_1, permissions: [] },

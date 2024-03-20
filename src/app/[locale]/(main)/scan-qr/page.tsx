@@ -7,6 +7,9 @@ import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogT
 import { Button } from "@/components/ui/button";
 import { Scan } from "lucide-react";
 import QRScanner from "@/components/ui/qr-scanner";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SCAN_QR_CODE_CAMERA } from "@/constants/variables";
+import { ScanQRCamera } from "@/constants/enum";
 
 export default function EventsPage() {
     // ** I18n
@@ -15,10 +18,19 @@ export default function EventsPage() {
     // ** Use State
     const [startScan, setStartScan] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [scanCamera, setScanCamera] = useState<string>(ScanQRCamera.DEFAULT);
 
     const toggleLoading = (value: boolean) => {
         setLoading(value);
     };
+
+    const handleSwitchCamera = (value: string) => {
+        setScanCamera(value);
+    }
+
+    const handleCloseModalScanQR = (value: boolean) => {
+        setStartScan(false);
+    }
 
     return (
         <>
@@ -27,7 +39,7 @@ export default function EventsPage() {
                 <div className="flex flex-wrap items-center justify-between space-y-2">
                     <h2 className="text-3xl font-bold tracking-tight">{translation("scanQrPage.title")}</h2>
                 </div>
-                <div className="flex h-[450px] shrink-0 items-center justify-center rounded-md border border-dashed">
+                <div className="flex h-[300px] sm:h-[450px] shrink-0 items-center justify-center rounded-md border border-dashed">
                     <div className="mx-auto flex max-w-[250px] flex-col items-center justify-center text-center">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +87,7 @@ export default function EventsPage() {
 
                         <h3 className="mt-4 text-lg font-semibold">QR Code</h3>
                         <p className="mb-4 mt-2 text-sm text-muted-foreground">
-                            Scan QR codes for clients attending company events
+                            {translation("scanQrPage.description")}
                         </p>
 
                         <Button
@@ -89,13 +101,26 @@ export default function EventsPage() {
                             <Scan className="w-5 h-5 md:mr-2" />
                             <p className="ml-1">{translation("action.scanQr")}</p>
                         </Button>
-                        <Dialog open={startScan}>
-                            <DialogContent>
+                        <Dialog open={startScan} onOpenChange={handleCloseModalScanQR}>
+                            <DialogContent onInteractOutside={(e) => e.preventDefault()}>
                                 <DialogHeader>
-                                    <DialogTitle>Scan QR</DialogTitle>
+                                    <DialogTitle className="flex items-center">
+                                        <Select defaultValue={scanCamera} onValueChange={handleSwitchCamera}>
+                                            <SelectTrigger className="w-[150px]">
+                                                <SelectValue defaultValue={'environment'} />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {
+                                                    SCAN_QR_CODE_CAMERA.map((camera, index) => (
+                                                        <SelectItem value={camera.value} key={index}>{translation(`scanQrPage.${camera.label}`)}</SelectItem>
+                                                    ))
+                                                }
+                                            </SelectContent>
+                                        </Select>
+                                    </DialogTitle>
                                 </DialogHeader>
                                 <div className="grid gap-2 py-2">
-                                    {startScan && <QRScanner handleLoadingModal={toggleLoading} />}
+                                    {startScan && <QRScanner handleLoadingModal={toggleLoading} preferredCamera={scanCamera} />}
                                 </div>
                                 <DialogFooter>
                                     <DialogClose asChild>
@@ -103,11 +128,8 @@ export default function EventsPage() {
                                             type="button"
                                             variant="destructive"
                                             disabled={loading}
-                                            onClick={() => {
-                                                setStartScan(false);
-                                            }}
                                         >
-                                            Stop Scan
+                                            {translation("action.stopScan")}
                                         </Button>
                                     </DialogClose>
                                 </DialogFooter>

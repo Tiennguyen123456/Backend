@@ -43,7 +43,7 @@ export const AppRoutes: SideBarItemType[] = [
                         displayText: "sidebar.items.scanQr",
                         icon: <QrCode />,
                     },
-                    permissions: []
+                    permissions: ['client:scan-qr']
                 },
                 // {
                 //     path: ROUTES.DATA,

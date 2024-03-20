@@ -178,7 +178,11 @@
         "title": "Tạo mới chiến dịch"
     },
     "scanQrPage": {
-        "title": "Quét Mã QR"
+        "title": "Quét Mã QR",
+        "description": "Quét mã QR cho khách hàng tham dự sự kiện của công ty.",
+        "switchCamera": "Chuyển Camera",
+        "CameraBack": "Camera Sau",
+        "CameraFront": "Camera Trước"
     },
     "companyPage": {
         "title": "Công ty",
@@ -243,7 +247,8 @@
         "pause": "Tạm dừng",
         "stop": "Dừng",
         "logEmail": "Lịch sử email",
-        "scanQr": "Quét mã QR"
+        "scanQr": "Quét mã QR",
+        "stopScan": "Hủy Quét"
     },
     "label": {
         "search": "Tìm kiếm",

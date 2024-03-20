@@ -172,7 +172,11 @@
         }
     },
     "scanQrPage": {
-        "title": "Scan QR Code"
+        "title": "Scan QR Code",
+        "description": "Scan QR codes for clients attending company events",
+        "switchCamera": "Switch Camera",
+        "CameraBack": "Camera Back",
+        "CameraFront": "Camera Front"
     },
     "createCampaignPage": {
         "title": "Create New Campaign"
@@ -243,7 +247,8 @@
         "pause": "Pause",
         "stop": "Stop",
         "logEmail": "Log email",
-        "scanQr": "Scan QR"
+        "scanQr": "Scan QR Code",
+        "stopScan": "Stop Scan"
     },
     "label": {
         "search": "Search",
@@ -507,7 +512,7 @@
             "permissions": "Permissions",
             "languages": "Languages",
             "configurations": "Configurations",
-            "scanQr": "Scan QR"
+            "scanQr": "Scan QR Code"
         }
     },
     "topbar": {
@@ -566,7 +571,7 @@
         "roles": "Roles",
         "permissions": "Permissions",
         "accounts": "Accounts",
-        "scanQr": "Scan QR"
+        "scanQr": "Scan QR Code"
     },
     "status": {
         "ALL": "All status",

@@ -51,3 +51,8 @@ export enum RoleEnable {
 export enum RoleGuard {
     API = "api",
 }
+
+export enum ScanQRCamera {
+    DEFAULT = "environment",
+    USER = "user"
+}
