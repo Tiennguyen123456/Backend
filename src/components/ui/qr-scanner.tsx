@@ -8,16 +8,17 @@ import { APIStatus, ScanQRCamera } from "@/constants/enum";
 import { useTranslations } from "next-intl";
 interface QRScannerProps {
     handleLoadingModal: (value: boolean) => void;
-    preferredCamera?: string;
+    handleSetListCamera: (value: QrScanner.Camera[]) => void;
+    cameraId: string;
 }
-const QRScanner = ({ handleLoadingModal, preferredCamera = ScanQRCamera.DEFAULT }: QRScannerProps) => {
+
+const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRCamera.DEFAULT }: QRScannerProps) => {
     // ** I18n
     const translation = useTranslations("");
-
+    
     const videoElementRef = useRef<HTMLVideoElement>(null);
     const [loading, setLoading] = useState(false);
     const [notFound, setNotFound] = useState(false);
-    const [listCameraData, setListCameraData] = useState<any>('');
 
     useEffect(() => {
         const video: HTMLVideoElement | null = videoElementRef.current;
@@ -55,34 +56,38 @@ const QRScanner = ({ handleLoadingModal, preferredCamera = ScanQRCamera.DEFAULT 
                     highlightScanRegion: true,
                     highlightCodeOutline: false,
                     maxScansPerSecond: 1,
-                    preferredCamera: preferredCamera
                 },
             );
-            console.log("start camera");
             qrScanner.start();
-            console.log(qrScanner);
+            console.log("start camera");
             QrScanner.hasCamera().then((hasCamera) => !hasCamera && setNotFound(true))
-            QrScanner.listCameras().then((listCameras) => setListCameraData(listCameras))
-            
+
+            // get list camera
+            console.log(qrScanner);
+            QrScanner.listCameras().then((listCameras) => handleSetListCamera(listCameras))
+
+            // set camera
+            console.log('cameraId: ', cameraId);
+            qrScanner.setCamera(cameraId)
+
             return () => {
                 console.log("stop camera");
                 qrScanner.stop();
                 qrScanner.destroy();
             };
         }
-    }, [preferredCamera]);
+    }, [cameraId]);
 
     return (
         <div>
             <div className="videoWrapper flex justify-center items-center min-h-[200px] sm:min-h-[250px]">
                 {loading && <FadeLoader color="#3498db" />}
-                {notFound && <p className="text-base sm:text-xl">Not Found Camera</p>}
+                {notFound && <p className="text-base sm:text-xl">{translation('label.notFoundCamera')}</p>}
                 <video
                     className={cn("qrVideo", loading || notFound ? "hidden" : "")}
                     ref={videoElementRef}
                     />
             </div>
-            {listCameraData && (<>List Camera: {JSON.stringify(listCameraData)}</>)}
         </div>
     );
 };

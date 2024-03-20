@@ -298,6 +298,7 @@
         "guard": "Guard",
         "enable": "Enable",
         "notFoundData": "Not found data.",
+        "notFoundCamera": "Not found camera.",
         "emailContent": "Email content",
         "cardsContent": "Cards content",
         "campaignName": "Campaign Name",

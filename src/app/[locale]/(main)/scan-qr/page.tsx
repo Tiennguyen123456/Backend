@@ -10,6 +10,7 @@ import QRScanner from "@/components/ui/qr-scanner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SCAN_QR_CODE_CAMERA } from "@/constants/variables";
 import { ScanQRCamera } from "@/constants/enum";
+import QrScanner from "qr-scanner";
 
 export default function EventsPage() {
     // ** I18n
@@ -18,18 +19,23 @@ export default function EventsPage() {
     // ** Use State
     const [startScan, setStartScan] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [scanCamera, setScanCamera] = useState<string>(ScanQRCamera.DEFAULT);
+    const [cameraId, setCameraId] = useState<string>(ScanQRCamera.DEFAULT);
+    const [listCamera, setListCamera] = useState<QrScanner.Camera[]>(SCAN_QR_CODE_CAMERA);
 
     const toggleLoading = (value: boolean) => {
         setLoading(value);
     };
 
     const handleSwitchCamera = (value: string) => {
-        setScanCamera(value);
+        setCameraId(value);
     }
 
     const handleCloseModalScanQR = (value: boolean) => {
         setStartScan(false);
+    }
+
+    const handleSetListCamera = (value: QrScanner.Camera[]) => {
+        setListCamera([...SCAN_QR_CODE_CAMERA, ...value])
     }
 
     return (
@@ -105,14 +111,14 @@ export default function EventsPage() {
                             <DialogContent onInteractOutside={(e) => e.preventDefault()}>
                                 <DialogHeader>
                                     <DialogTitle className="flex items-center">
-                                        <Select defaultValue={scanCamera} onValueChange={handleSwitchCamera}>
+                                        <Select defaultValue={ScanQRCamera.DEFAULT} onValueChange={handleSwitchCamera}>
                                             <SelectTrigger className="w-[150px]">
                                                 <SelectValue defaultValue={'environment'} />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 {
-                                                    SCAN_QR_CODE_CAMERA.map((camera, index) => (
-                                                        <SelectItem value={camera.value} key={index}>{translation(`scanQrPage.${camera.label}`)}</SelectItem>
+                                                    listCamera.map((camera, index) => (
+                                                        <SelectItem value={camera.id} key={index}>{camera.label}</SelectItem>
                                                     ))
                                                 }
                                             </SelectContent>
@@ -120,7 +126,7 @@ export default function EventsPage() {
                                     </DialogTitle>
                                 </DialogHeader>
                                 <div className="grid gap-2 py-2">
-                                    {startScan && <QRScanner handleLoadingModal={toggleLoading} preferredCamera={scanCamera} />}
+                                    {startScan && <QRScanner handleLoadingModal={toggleLoading} handleSetListCamera={handleSetListCamera} cameraId={cameraId}/>}
                                 </div>
                                 <DialogFooter>
                                     <DialogClose asChild>

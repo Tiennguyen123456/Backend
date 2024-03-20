@@ -300,6 +300,7 @@
         "guard": "Guard",
         "enable": "Kích hoạt",
         "notFoundData": "Không có dữ liệu.",
+        "notFoundCamera": "Không tìm thấy camera.",
         "emailContent": "Nội dụng email",
         "cardsContent": "Nội dụng thiệp mời",
         "campaignName": "Tên chiến dịch",
