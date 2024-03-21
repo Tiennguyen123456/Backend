@@ -360,6 +360,7 @@
         "requiredStartDate": "Please enter start date.",
         "requiredEndDate": "Please enter end date.",
         "compareStartEndDate": "End date cannot be earlier than start date.",
+        "compareFromToDate": "Date From cannot be earlier than Date To.",
         "requiredCompany": "Please select company.",
         "invalidDate": "Please enter valid date.",
         "requiredName": "Please enter your name.",
@@ -540,6 +541,8 @@
             "eventActive": "Event Active",
             "eventInActive": "Event InActive"
         },
+        "dateFrom": "Date from",
+        "dateTo": "Date to",
         "chart": "Chart"
     },
     "datatable": {

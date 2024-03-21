@@ -2,15 +2,14 @@ import { IDashboardReportRes, IResFieldBasic } from "@/models/api/event-api";
 import eventApi from "@/services/event-api";
 import { useEffect, useState } from "react";
 
-export function useFetchDashboardReport({ from = "", to = "" } = {}) {
+export function useFetchDashboardReport(params = {}) {
     const [data, setData] = useState<IDashboardReportRes | null>(null);
     const [loading, setLoading] = useState<Boolean>(false);
-    const [reCall, setReCall] = useState<Boolean>(false);
 
     useEffect(() => {
         setLoading(true);
         eventApi
-            .dashboardReport({ from, to })
+            .dashboardReport(params)
             .then(function (response) {
                 setData(response.data);
             })
@@ -21,7 +20,7 @@ export function useFetchDashboardReport({ from = "", to = "" } = {}) {
             .finally(function () {
                 setLoading(false);
             });
-    }, [reCall, setData, setLoading]);
+    }, [params, setData, setLoading]);
 
-    return { data, loading, reCall, setReCall };
+    return { data, loading };
 }

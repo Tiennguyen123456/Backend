@@ -11,6 +11,8 @@ import { useFetchDashboardReport } from "@/data/fetch-dashboard-report";
 import { DateFormat, DateFormatServer } from "@/constants/variables";
 import { Overview } from "./components/overview";
 import FooterContainer from "@/components/layout/footer-container";
+import { toastError } from "@/utils/toast";
+import { Label } from "@/components/ui/label";
 
 export default function DashboardPage() {
     // ** I18n
@@ -20,12 +22,21 @@ export default function DashboardPage() {
     const currentDate = new Date();
     const [dateFrom, setDateFrom] = useState<Date | undefined>(startOfDay(subDays(currentDate, 7)));
     const [dateTo, setDateTo] = useState<Date | undefined>(endOfDay(currentDate));
+    const [paramSearch, setParamSearch] = useState({ from: "", to: "" });
 
     // Use fetch data
-    const { data, loading, reCall, setReCall } = useFetchDashboardReport({
-        from: dateFrom ? format(dateFrom, DateFormatServer) : "",
-        to: dateTo ? format(dateTo, DateFormatServer) : "",
-    });
+    const { data, loading } = useFetchDashboardReport(paramSearch);
+
+    const handleSearchDashboard = () => {
+        if (dateFrom && dateTo && dateFrom > dateTo) {
+            toastError(translation("error.compareFromToDate"));
+            return false;
+        }
+        setParamSearch({
+            from: dateFrom ? format(dateFrom, DateFormatServer) : "",
+            to: dateTo ? format(dateTo, DateFormatServer) : "",
+        });
+    };
 
     return (
         <>
@@ -33,26 +44,32 @@ export default function DashboardPage() {
                 <h2 className="text-3xl font-bold tracking-tight">{translation("sidebar.items.dashboard")}</h2>
                 <div className="flex flex-col md:flex-row gap-2 items-end w-full md:w-auto">
                     <div className="grid grid-cols-2 gap-2 w-full md:w-auto">
-                        <DateTimePicker
-                            disabled={false}
-                            title={"Pick a date from"}
-                            date={dateFrom}
-                            setDate={setDateFrom}
-                            onTimePicker={false}
-                            formatDate={DateFormat}
-                        />
-                        <DateTimePicker
-                            disabled={false}
-                            title={"Pick a date to"}
-                            date={dateTo}
-                            setDate={(value) => setDateTo(value)}
-                            onTimePicker={false}
-                            formatDate={DateFormat}
-                        />
+                        <div className="flex flex-col gap-1">
+                            <Label className="text-base">{translation("dashboardPage.dateFrom")}</Label>
+                            <DateTimePicker
+                                disabled={false}
+                                title={"Pick a date from"}
+                                date={dateFrom}
+                                setDate={setDateFrom}
+                                onTimePicker={false}
+                                formatDate={DateFormat}
+                            />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                            <Label className="text-base">{translation("dashboardPage.dateTo")}</Label>
+                            <DateTimePicker
+                                disabled={false}
+                                title={"Pick a date to"}
+                                date={dateTo}
+                                setDate={(value) => setDateTo(value)}
+                                onTimePicker={false}
+                                formatDate={DateFormat}
+                            />
+                        </div>
                     </div>
                     <Button
                         disabled={Boolean(loading)}
-                        onClick={() => setReCall(!reCall)}
+                        onClick={handleSearchDashboard}
                     >
                         Search
                     </Button>

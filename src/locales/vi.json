@@ -362,6 +362,7 @@
         "requiredStartDate": "Vui lòng nhập ngày bắt đầu.",
         "requiredEndDate": "Vui lòng nhập ngày kết thúc.",
         "compareStartEndDate": "Ngày kết thúc không thể sớm hơn ngày bắt đầu.",
+        "compareFromToDate": "Từ ngày không thể sớm hơn đến ngày.",
         "requiredCompany": "Vui lòng chọn công ty.",
         "invalidDate": "Vui lòng nhập ngày hợp lệ.",
         "requiredName": "Vui lòng nhập tên.",
@@ -539,6 +540,8 @@
             "eventActive": "Sự kiện đang diễn ra",
             "eventInActive": "Sự kiện tạm dừng"
         },
+        "dateFrom": "Từ ngày",
+        "dateTo": "Đến ngày",
         "chart": "Biểu đồ"
     },
     "datatable": {
