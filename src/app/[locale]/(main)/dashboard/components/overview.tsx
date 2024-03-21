@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 interface OverviewProps {
-    value: {
-        [x: string]: string;
-    } | null;
+    value:
+        | {
+              [x: string]: string;
+          }
+        | [];
     loading: boolean;
 }
 interface OverviewData {
@@ -17,7 +19,7 @@ interface OverviewData {
 }
 
 export function Overview({ value, loading }: OverviewProps) {
-    const [data, setData] = useState<OverviewData[] | null>(null);
+    const [data, setData] = useState<OverviewData[] | []>([]);
     useEffect(() => {
         if (value) {
             let formatData: OverviewData[] = [];
@@ -42,7 +44,7 @@ export function Overview({ value, loading }: OverviewProps) {
                             dataKey="name"
                             tickLine={true}
                             axisLine={true}
-                            tickFormatter={(value) => `${format(value, 'dd-MM')}`}
+                            tickFormatter={(value) => `${format(value, "dd-MM")}`}
                         />
                         <YAxis
                             fontSize={12}

@@ -78,12 +78,12 @@ export default function DashboardPage() {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8">
                 <Card className="col-span-4">
                     <CardHeader>
-                        <CardTitle>Overview</CardTitle>
+                        <CardTitle>{translation("dashboardPage.chart")}</CardTitle>
                     </CardHeader>
                     <CardContent className="pl-2">
                         <Overview
                             loading={Boolean(loading)}
-                            value={data?.count_by_date || null}
+                            value={data?.count_by_date || []}
                         />
                     </CardContent>
                 </Card>

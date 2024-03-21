@@ -538,7 +538,8 @@
             "totalEvent": "Tổng sự kiện",
             "eventActive": "Sự kiện đang diễn ra",
             "eventInActive": "Sự kiện tạm dừng"
-        }
+        },
+        "chart": "Biểu đồ"
     },
     "datatable": {
         "pagination": {

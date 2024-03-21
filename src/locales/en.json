@@ -539,7 +539,8 @@
             "totalEvent": "Total Event",
             "eventActive": "Event Active",
             "eventInActive": "Event InActive"
-        }
+        },
+        "chart": "Chart"
     },
     "datatable": {
         "pagination": {
