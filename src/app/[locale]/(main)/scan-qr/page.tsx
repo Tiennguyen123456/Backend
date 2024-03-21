@@ -19,7 +19,7 @@ export default function EventsPage() {
     // ** Use State
     const [startScan, setStartScan] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [cameraId, setCameraId] = useState<string>(ScanQRCamera.USER);
+    const [cameraId, setCameraId] = useState<string>(ScanQRCamera.DEFAULT);
     const [listCamera, setListCamera] = useState<QrScanner.Camera[]>(SCAN_QR_CODE_CAMERA);
 
     const toggleLoading = (value: boolean) => {
@@ -115,7 +115,8 @@ export default function EventsPage() {
                                 <DialogHeader>
                                     <DialogTitle className="flex items-center">
                                         <Select
-                                            defaultValue={ScanQRCamera.USER}
+                                            disabled={loading}
+                                            defaultValue={ScanQRCamera.DEFAULT}
                                             onValueChange={handleSwitchCamera}
                                         >
                                             <SelectTrigger className="w-[150px]">
