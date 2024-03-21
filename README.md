@@ -25,7 +25,7 @@ To get started, just clone the repository and run `npm install && npm run dev`:
 
 
 ```bash
-    git clone https://github.com/Tiennguyen123456/Backend_savitel.git
+    git clone https://github.com/Tiennguyen123456/Frontend_savitel.git
     npm install
     cp .env.example .env //setup config URL and APP-KEY API
     npm run dev
