@@ -1,6 +1,7 @@
 "use client";
 
 import { Skeleton } from "@/components/ui/skeleton";
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
@@ -41,6 +42,7 @@ export function Overview({ value, loading }: OverviewProps) {
                             dataKey="name"
                             tickLine={true}
                             axisLine={true}
+                            tickFormatter={(value) => `${format(value, 'dd-MM')}`}
                         />
                         <YAxis
                             fontSize={12}
