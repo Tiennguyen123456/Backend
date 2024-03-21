@@ -36,6 +36,7 @@ const ApiRoutes = {
     deleteCustomFieldsEvent: baseURL + "/event",
     getFieldBasic: baseURL + "/event/main-fields",
     scanQRCode: baseURL + "/event/qr-checkin",
+    dashboardReport: baseURL + "/event/dashboard-report",
 
     // ** Client Routes
     getClientsByEvent: baseURL + "/event",

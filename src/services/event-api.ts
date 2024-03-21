@@ -1,6 +1,7 @@
+import qs from "qs";
 import { api } from "@/configs/axios.config";
 import ApiRoutes from "./api.routes";
-import { ICustomFields, IEventRes, IResFieldBasic } from "@/models/api/event-api";
+import { ICustomFields, IDashboardReportRes, IEventRes, IResFieldBasic } from "@/models/api/event-api";
 
 interface IResStoreCustomFields {
     collection: ICustomFields[];
@@ -31,6 +32,16 @@ const eventApi = {
     scanQRCode: async (body: any) => {
         var url = ApiRoutes.scanQRCode;
         const response = await api.post<IResponse<null>>(url, body);
+        return response.data;
+    },
+    dashboardReport: async (body: any) => {
+        var url = ApiRoutes.dashboardReport;
+        const response = await api.get<IResponse<IDashboardReportRes>>(url, {
+            params: body,
+            paramsSerializer: function (params) {
+                return qs.stringify(params, { arrayFormat: "brackets" });
+            },
+        });
         return response.data;
     },
 };

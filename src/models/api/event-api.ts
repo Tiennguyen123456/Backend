@@ -12,7 +12,7 @@ export interface IRelationRes {
 }
 export interface ITagsList {
     title: string;
-    value: string; 
+    value: string;
 }
 export interface IResFieldBasic {
     [x: string]: string;
@@ -45,4 +45,15 @@ export interface IEventRes {
     // contact_name: string;
     // contact_email: string;
     // contact_phone: string;
+}
+
+export interface IDashboardReportRes {
+    status: {
+        TOTAL: number;
+        ACTIVE: number;
+        INACTIVE: number;
+    };
+    count_by_date: {
+        [x: string]: string;
+    };
 }

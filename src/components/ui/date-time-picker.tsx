@@ -19,9 +19,19 @@ interface DateTimePickerProps {
     title?: string;
     date: Date | undefined;
     setDate: (date: Date | undefined) => void;
+    onTimePicker?: boolean;
+    formatDate?: string;
 }
 
-export function DateTimePicker({ title = "Pick a date", className, date, setDate, disabled }: DateTimePickerProps) {
+export function DateTimePicker({
+    title = "Pick a date",
+    className,
+    date,
+    setDate,
+    disabled,
+    onTimePicker = true,
+    formatDate = DateTimeFormat,
+}: DateTimePickerProps) {
     const locale = useLocale();
 
     return (
@@ -37,7 +47,7 @@ export function DateTimePicker({ title = "Pick a date", className, date, setDate
                     )}
                 >
                     <CalendarIcon className={`${date ? "hidden sm:block" : "block"} mr-2 h-4 w-4`} />
-                    {date ? format(date, DateTimeFormat.toString()) : <span>{title}</span>}
+                    {date ? format(date, formatDate.toString()) : <span>{title}</span>}
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">
@@ -52,12 +62,14 @@ export function DateTimePicker({ title = "Pick a date", className, date, setDate
                     toYear={Number(format(new Date(), "y")) + 50}
                     initialFocus
                 />
-                <div className="p-2 border-t border-border text-center">
-                    <TimePickerDemo
-                        setDate={setDate}
-                        date={date}
-                    />
-                </div>
+                {onTimePicker && (
+                    <div className="p-2 border-t border-border text-center">
+                        <TimePickerDemo
+                            setDate={setDate}
+                            date={date}
+                        />
+                    </div>
+                )}
             </PopoverContent>
         </Popover>
     );

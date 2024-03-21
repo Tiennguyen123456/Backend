@@ -1,20 +1,31 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
 import React, { useState } from "react";
 import CardTotal from "./components/card-total";
 import { useTranslations } from "next-intl";
-import { CalendarClock, LayoutList, MonitorPlay, PauseOctagon } from "lucide-react";
+import { LayoutList, MonitorPlay, PauseOctagon } from "lucide-react";
+import { endOfDay, format, startOfDay, subDays } from "date-fns";
+import { useFetchDashboardReport } from "@/data/fetch-dashboard-report";
+import { DateFormat, DateFormatServer } from "@/constants/variables";
+import { Overview } from "./components/overview";
+import FooterContainer from "@/components/layout/footer-container";
 
 export default function DashboardPage() {
     // ** I18n
     const translation = useTranslations();
 
     // Use state
-    const [dateFrom, setDateFrom] = useState<Date>();
-    const [dateTo, setDateTo] = useState<Date>();
-    // console.log("dateFrom: ", dateFrom ? format(dateFrom, "yyyy-MM-dd HH:mm:ss") : "");
+    const currentDate = new Date();
+    const [dateFrom, setDateFrom] = useState<Date | undefined>(startOfDay(subDays(currentDate, 7)));
+    const [dateTo, setDateTo] = useState<Date | undefined>(endOfDay(currentDate));
+
+    // Use fetch data
+    const { data, loading, reCall, setReCall } = useFetchDashboardReport({
+        from: dateFrom ? format(dateFrom, DateFormatServer) : "",
+        to: dateTo ? format(dateTo, DateFormatServer) : "",
+    });
 
     return (
         <>
@@ -27,56 +38,57 @@ export default function DashboardPage() {
                             title={"Pick a date from"}
                             date={dateFrom}
                             setDate={setDateFrom}
+                            onTimePicker={false}
+                            formatDate={DateFormat}
                         />
                         <DateTimePicker
                             disabled={false}
                             title={"Pick a date to"}
                             date={dateTo}
-                            setDate={setDateTo}
+                            setDate={(value) => setDateTo(value)}
+                            onTimePicker={false}
+                            formatDate={DateFormat}
                         />
                     </div>
-                    <Button>Search</Button>
+                    <Button
+                        disabled={Boolean(loading)}
+                        onClick={() => setReCall(!reCall)}
+                    >
+                        Search
+                    </Button>
                 </div>
             </div>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
                 <CardTotal
                     title={`${translation("dashboardPage.card.totalEvent")}`}
                     icon={<LayoutList className="h-5 w-5 text-muted-foreground" />}
+                    amount={data?.status.TOTAL || 0}
                 />
                 <CardTotal
-                    title={`${translation("dashboardPage.card.upcomingEvent")}`}
-                    icon={<CalendarClock className="h-5 w-5 text-muted-foreground" />}
-                />
-                <CardTotal
-                    title={`${translation("dashboardPage.card.eventTakingPlace")}`}
+                    title={`${translation("dashboardPage.card.eventActive")}`}
                     icon={<MonitorPlay className="h-5 w-5 text-muted-foreground" />}
+                    amount={data?.status.ACTIVE || 0}
                 />
                 <CardTotal
-                    title={`${translation("dashboardPage.card.pausedEvent")}`}
+                    title={`${translation("dashboardPage.card.eventInActive")}`}
                     icon={<PauseOctagon className="h-5 w-5 text-muted-foreground" />}
+                    amount={data?.status.INACTIVE || 0}
                 />
             </div>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8">
                 <Card className="col-span-4">
                     <CardHeader>
                         <CardTitle>Overview</CardTitle>
                     </CardHeader>
                     <CardContent className="pl-2">
-                        {/* <Overview /> */}
-                        Chart
-                    </CardContent>
-                </Card>
-                <Card className="col-span-3">
-                    <CardHeader>
-                        <CardTitle>Recent Sales</CardTitle>
-                        <CardDescription>You made 265 sales this month.</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        {/* <RecentSales /> */}
-                        Table
+                        <Overview
+                            loading={Boolean(loading)}
+                            value={data?.count_by_date || null}
+                        />
                     </CardContent>
                 </Card>
             </div>
+            <FooterContainer />
         </>
     );
 }

@@ -537,9 +537,8 @@
     "dashboardPage": {
         "card": {
             "totalEvent": "Total Event",
-            "upcomingEvent": "Upcoming Event",
-            "eventTakingPlace": "Event Taking Place",
-            "pausedEvent": "Paused Event"
+            "eventActive": "Event Active",
+            "eventInActive": "Event InActive"
         }
     },
     "datatable": {

@@ -536,9 +536,8 @@
     "dashboardPage": {
         "card": {
             "totalEvent": "Tổng sự kiện",
-            "upcomingEvent": "Sự kiện sắp diễn ra",
-            "eventTakingPlace": "Sự kiện đang diễn ra",
-            "pausedEvent": "Sự kiện tạm dừng"
+            "eventActive": "Sự kiện đang diễn ra",
+            "eventInActive": "Sự kiện tạm dừng"
         }
     },
     "datatable": {
