@@ -26,6 +26,7 @@ export const ROUTES = {
     // LANGUAGES: "/languages",
     // CONFIGURATIONS: "/configurations",
     FORBIDDEN: "/forbidden",
+    LANDING_PAGE: "/landingpage",
 };
 
 export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [

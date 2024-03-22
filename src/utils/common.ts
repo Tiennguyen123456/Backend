@@ -1,4 +1,4 @@
-import { AppRoutesPermissions, PRIVATE_ROUTES } from "@/constants/routes";
+import { AppRoutesPermissions, PRIVATE_ROUTES, ROUTES } from "@/constants/routes";
 import { replaceIdInURLRegExp } from "@/constants/variables";
 import { locales } from "@/i18n-configurations/config";
 
@@ -33,7 +33,7 @@ export function isMatchPrivateRoute(path: string) {
     path = removeNumberInPathname(path);
     let newPath = removeLocaleFromPathname(path);
 
-    return PRIVATE_ROUTES.some((substr) => newPath.startsWith(substr));
+    return PRIVATE_ROUTES.some((substr) => newPath.startsWith(substr) || newPath.startsWith(ROUTES.LANDING_PAGE));
 }
 
 export function checkPermissionForAccessSpecificPage(userPermissions: string[], pathname: string) {
