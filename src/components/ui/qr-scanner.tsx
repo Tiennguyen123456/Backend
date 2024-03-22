@@ -73,17 +73,16 @@ const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRC
                 highlightCodeOutline: false,
                 maxScansPerSecond: 1,
             });
-            qrScanner.start();
-            console.log("start camera");
-            QrScanner.hasCamera().then((hasCamera) => handleHasCamera(hasCamera));
 
-            // get list camera
-            console.log(qrScanner);
-            QrScanner.listCameras(true).then((listCameras) => handleListCameras(listCameras));
+            let hasCameraPromise = QrScanner.hasCamera().then((hasCamera) => handleHasCamera(hasCamera));
+            let listCamerasPromise = QrScanner.listCameras(true).then((listCameras) => handleListCameras(listCameras));
+            Promise.all([hasCameraPromise, listCamerasPromise]).then(async () => {
+                console.log("Start camera");
+                await qrScanner.start();
 
-            // set camera
-            // console.log("cameraId: ", cameraId);
-            // qrScanner.setCamera(cameraId);
+                console.log("Set cameraId: ", cameraId);
+                await qrScanner.setCamera(cameraId);
+            });
 
             return () => {
                 console.log("stop camera");
