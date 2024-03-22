@@ -30,8 +30,8 @@ const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRC
 
     const handleOnResultScan = async (scanner: QrScanner, result: QrScanner.ScanResult) => {
         try {
-            beepSound.play();
             scanner.pause();
+            await beepSound.play();
             handleLoadingModal(true);
             setLoading(true);
             if (result?.data) {
@@ -82,8 +82,8 @@ const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRC
             QrScanner.listCameras(true).then((listCameras) => handleListCameras(listCameras));
 
             // set camera
-            console.log("cameraId: ", cameraId);
-            qrScanner.setCamera(cameraId);
+            // console.log("cameraId: ", cameraId);
+            // qrScanner.setCamera(cameraId);
 
             return () => {
                 console.log("stop camera");
