@@ -252,7 +252,7 @@
     },
     "label": {
         "search": "Search",
-        "email": "Email Address",
+        "email": "Email",
         "password": "Password",
         "active": "Active",
         "notAvailable": "Not Available",
@@ -349,6 +349,7 @@
         "type": "Select type"
     },
     "error": {
+        "requiredAddress": "Please enter your address.",
         "requiredEmail": "Please enter your email address.",
         "invalidEmail": "Please enter valid email address.",
         "requiredPassword": "Please enter your password.",

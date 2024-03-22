@@ -351,6 +351,7 @@
         "type": "Chọn loại"
     },
     "error": {
+        "requiredAddress": "Vui lòng nhập địa chỉ của bạn.",
         "requiredEmail": "Vui lòng nhập địa chỉ email của bạn.",
         "invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ.",
         "requiredPassword": "Vui lòng nhập mật khẩu của bạn.",
