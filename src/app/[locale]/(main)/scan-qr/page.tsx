@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/ui/breadcrumb";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Scan } from "lucide-react";
-import QRScanner from "@/components/ui/qr-scanner";
+import QRScannerComponent from "@/components/ui/qr-scanner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SCAN_QR_CODE_CAMERA } from "@/constants/variables";
 import { ScanQRCamera } from "@/constants/enum";
@@ -137,7 +137,7 @@ export default function EventsPage() {
                                 </DialogHeader>
                                 <div className="grid gap-2 py-2">
                                     {startScan && (
-                                        <QRScanner
+                                        <QRScannerComponent
                                             handleLoadingModal={toggleLoading}
                                             handleSetListCamera={handleSetListCamera}
                                             cameraId={cameraId}

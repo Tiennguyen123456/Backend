@@ -12,7 +12,11 @@ interface QRScannerProps {
     cameraId: string;
 }
 
-const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRCamera.DEFAULT }: QRScannerProps) => {
+const QRScannerCompoment = ({
+    handleLoadingModal,
+    handleSetListCamera,
+    cameraId = ScanQRCamera.DEFAULT,
+}: QRScannerProps) => {
     // ** I18n
     const translation = useTranslations("");
 
@@ -73,7 +77,7 @@ const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRC
                 {
                     returnDetailedScanResult: true,
                     highlightScanRegion: true,
-                    highlightCodeOutline: true,
+                    highlightCodeOutline: false,
                     maxScansPerSecond: 1,
                 },
             );
@@ -142,4 +146,4 @@ const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRC
     );
 };
 
-export default QRScanner;
+export default QRScannerCompoment;
