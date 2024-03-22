@@ -21,6 +21,7 @@ const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRC
     );
 
     const videoElementRef = useRef<HTMLVideoElement>(null);
+    const [scanner, setScanner] = useState<QrScanner | null>(null);
     const [loading, setLoading] = useState(false);
     const [notFound, setNotFound] = useState(false);
 
@@ -30,7 +31,7 @@ const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRC
 
     const handleOnResultScan = async (scanner: QrScanner, result: QrScanner.ScanResult) => {
         try {
-            scanner.pause();
+            await scanner.pause();
             await beepSound.play();
             handleLoadingModal(true);
             setLoading(true);
@@ -48,10 +49,10 @@ const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRC
             toastError(messageScanError);
             console.log(error);
         } finally {
-            setTimeout(() => {
+            setTimeout(async () => {
                 handleLoadingModal(false);
                 setLoading(false);
-                scanner.start();
+                await scanner.start();
             }, 1500);
         }
     };
@@ -65,33 +66,67 @@ const QRScanner = ({ handleLoadingModal, handleSetListCamera, cameraId = ScanQRC
     };
 
     useEffect(() => {
-        const video: HTMLVideoElement | null = videoElementRef.current;
-        if (video) {
-            const qrScanner: QrScanner = new QrScanner(video, async (result) => handleOnResultScan(qrScanner, result), {
-                returnDetailedScanResult: true,
-                highlightScanRegion: true,
-                highlightCodeOutline: false,
-                maxScansPerSecond: 1,
+        if (videoElementRef.current) {
+            const qrScanner: QrScanner = new QrScanner(
+                videoElementRef.current,
+                async (result) => handleOnResultScan(qrScanner, result),
+                {
+                    returnDetailedScanResult: true,
+                    highlightScanRegion: true,
+                    highlightCodeOutline: true,
+                    maxScansPerSecond: 1,
+                },
+            );
+            setScanner(qrScanner);
+            qrScanner.start().then(async () => {
+                console.log("start camera: ", qrScanner);
+                await QrScanner.hasCamera().then((hasCamera) => handleHasCamera(hasCamera));
+                await QrScanner.listCameras(true).then((listCameras) => handleListCameras(listCameras));
             });
-
-            let hasCameraPromise = QrScanner.hasCamera().then((hasCamera) => handleHasCamera(hasCamera));
-            let listCamerasPromise = QrScanner.listCameras(true).then((listCameras) => handleListCameras(listCameras));
-            Promise.all([hasCameraPromise, listCamerasPromise]).then(async () => {
-                console.log("Start camera");
-                await qrScanner.start();
-
-                console.log("Set cameraId: ", cameraId);
-                await qrScanner.setCamera(cameraId);
-            });
-
             return () => {
                 console.log("stop camera");
                 qrScanner.stop();
                 qrScanner.destroy();
             };
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
+        if (scanner) {
+            console.log("setCamera: ", cameraId);
+            scanner.setCamera(cameraId);
+            console.log("camera after set: ", scanner);
+        }
     }, [cameraId]);
+
+    // useEffect(() => {
+    //     const video: HTMLVideoElement | null = videoElementRef.current;
+    //     if (video) {
+    //         const qrScanner: QrScanner = new QrScanner(video, async (result) => handleOnResultScan(qrScanner, result), {
+    //             returnDetailedScanResult: true,
+    //             highlightScanRegion: true,
+    //             highlightCodeOutline: false,
+    //             maxScansPerSecond: 1,
+    //         });
+
+    //         let hasCameraPromise = QrScanner.hasCamera().then((hasCamera) => handleHasCamera(hasCamera));
+    //         let listCamerasPromise = QrScanner.listCameras(true).then((listCameras) => handleListCameras(listCameras));
+    //         Promise.all([hasCameraPromise, listCamerasPromise]).then(async () => {
+    //             console.log("Start camera");
+    //             await qrScanner.start();
+
+    //             console.log("Set cameraId: ", cameraId);
+    //             await qrScanner.setCamera(cameraId);
+    //         });
+
+    //         return () => {
+    //             console.log("stop camera");
+    //             qrScanner.stop();
+    //             qrScanner.destroy();
+    //         };
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [cameraId]);
 
     return (
         <div>
