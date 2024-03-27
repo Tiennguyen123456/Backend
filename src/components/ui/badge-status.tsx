@@ -12,6 +12,7 @@ export const BadgeStatus: React.FC<ModalProps> = ({ status, children }) => {
         case EStatus.ACTIVE:
         case EStatus.DONE:
         case EStatus.SUCCESS:
+        case EStatus.FINISHED:
             classNameStatus = "bg-green-700 text-white";
             break;
         case EStatus.INACTIVE:

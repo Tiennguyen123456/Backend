@@ -30,6 +30,7 @@ export enum EStatus {
     RUNNING = "RUNNING",
     STOPPED = "STOPPED",
     SUCCESS = "SUCCESS",
+    FINISHED  = "FINISHED",
     PROCESSING = "PROCESSING",
     PENDING = "PENDING",
     ERROR = "ERROR",
