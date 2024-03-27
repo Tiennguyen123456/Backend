@@ -102,6 +102,20 @@
             "title": "Edit Client"
         }
     },
+    "landingPage": {
+        "title": "Landing page",
+        "table": {
+            "title": "Title",
+            "subtitle": "Subtitle",
+            "status": "Status"
+        },
+        "create": {
+            "title": "Create Landing Page"
+        },
+        "edit": {
+            "title": "Edit Landing Page"
+        }
+    },
     "logSendEmailPage": {
         "title": "Log Send Email",
         "table": {
@@ -313,7 +327,10 @@
         "fieldValue": "Field Value",
         "titleAlert": "Are you sure?",
         "descriptionAlert": "This action cannot be undone.",
-        "titleCheckInAlert": "Are you sure want to check in this client?"
+        "titleCheckInAlert": "Are you sure want to check in this client?",
+        "title": "Title",
+        "subtitle": "Subtitle",
+        "content": "Content"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -346,7 +363,10 @@
         "selectEvent": "Select Event",
         "mailSubject": "Type mail subject",
         "group": "Group",
-        "type": "Select type"
+        "type": "Select type",
+        "title": "Title",
+        "subtitle": "Subtitle",
+        "content": "Content"
     },
     "error": {
         "requiredAddress": "Please enter your address.",

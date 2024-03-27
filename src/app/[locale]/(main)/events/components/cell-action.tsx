@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Edit, MoreHorizontal, Users } from "lucide-react";
+import { Edit, MoreHorizontal, Users, Wallpaper } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -111,6 +111,9 @@ export const CellAction: React.FC<CellActionProps> = ({ data, canUpdate = false,
                             </DropdownMenuItem>
                         )
                     }
+                    <DropdownMenuItem onClick={() => router.push(ROUTES.EVENTS + `/${data.id}/landing-pages`)}>
+                        <Wallpaper className="mr-3 h-4 w-4" /> {translation("action.landingPage")}
+                    </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </>

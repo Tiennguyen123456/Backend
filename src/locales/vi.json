@@ -102,6 +102,20 @@
             "title": "Cập nhật khách hàng"
         }
     },
+    "landingPage": {
+        "title": "Landing page",
+        "table": {
+            "title": "Tiêu đề",
+            "subtitle": "Tiêu đề phụ",
+            "status": "Trạng thái"
+        },
+        "create": {
+            "title": "Tạo Landing Page"
+        },
+        "edit": {
+            "title": "Cập nhật Landing Page"
+        }
+    },
     "logSendEmailPage": {
         "title": "Lịch sử gửi email",
         "table": {
@@ -315,7 +329,10 @@
         "fieldValue": "Giá trị trường",
         "titleAlert": "Bạn có thực sự muốn thao tác không?",
         "descriptionAlert": "Hành động này không thể được hoàn tác.",
-        "titleCheckInAlert": "Bạn có thực sự muốn kiểm tra khách hàng này không?"
+        "titleCheckInAlert": "Bạn có thực sự muốn kiểm tra khách hàng này không?",
+        "title": "Tiêu đề",
+        "subtitle": "Tiêu đề phụ",
+        "content": "Nội Dung"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -348,7 +365,10 @@
         "selectEvent": "Chọn sự kiện",
         "mailSubject": "Tiêu đề email",
         "group": "Nhóm",
-        "type": "Chọn loại"
+        "type": "Chọn loại",
+        "title": "Tiêu đề",
+        "subtitle": "Tiêu đề phụ",
+        "content": "Nội Dung"
     },
     "error": {
         "requiredAddress": "Vui lòng nhập địa chỉ của bạn.",
