@@ -3,15 +3,15 @@ import FooterContainer from "@/components/layout/footer-container";
 import Breadcrumbs from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import SpanRequired from "@/components/ui/span-required";
 import { DateTimeFormatServer, EVENT_STATUS } from "@/constants/variables";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { Save } from "lucide-react";
+import { Save, Trash, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { APIStatus, EStatus, MessageCode } from "@/constants/enum";
@@ -28,7 +28,11 @@ import { HtmlEditor } from "@/components/ui/html-editor";
 import { ITagsList } from "@/models/api/event-api";
 import { useFetchDataFieldBasic } from "@/data/fetch-data-field-basic";
 import { ComboboxSearchCompany } from "../../../../accounts/components/combobox-search-company";
+import { Switch } from "@/components/ui/switch";
+import Image from "next/image";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 export default function CreateLandingPage() {
     // ** I18n
     const translation = useTranslations("");
@@ -39,27 +43,82 @@ export default function CreateLandingPage() {
     // ** Router
     const router = useRouter();
 
+    const BgImgRef = useRef<HTMLInputElement>(null);
     // ** Use State
     const [loading, setLoading] = useState(false);
     const [fieldBasic, setFieldBasic] = useState<ITagsList[]>([]);
     const [componentLoaded, setComponentLoaded] = useState(false);
+    const [bgImg, setBgImg] = useState<string>();
 
     // useForm
     const formSchema = z.object({
+        name: z.string().min(1, { message: translation("error.requiredName") }),
+        slug: z.string().min(1, { message: translation("error.requiredName") }),
         title: z.string().min(1, { message: translation("error.requiredName") }),
         subtitle: z.string().min(1, { message: translation("error.requiredName") }),
         status: z.string(),
         content: z.string(),
+        background_img: z.any().superRefine((val, ctx) => {
+            if (!val) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: `Please select background images.`,
+                });
+            } else {
+                if (!(val instanceof File)) {
+                    ctx.addIssue({
+                        code: z.ZodIssueCode.custom,
+                        message: `Expected a file.`,
+                    });
+                }
+                if (!ACCEPTED_IMAGE_TYPES.includes(val.type)) {
+                    console.log("error file");
+                    ctx.addIssue({
+                        code: z.ZodIssueCode.custom,
+                        message: `Only these types are allowed .jpg, .jpeg, .png`,
+                    });
+                }
+            }
+        }),
+        // .refine(
+        //     (files) => {
+        //         if (!files) return false;
+        //         return Array.from(files).every((file) => file instanceof File);
+        //     },
+        //     { message: "Expected a file" },
+        // )
+        // .refine(
+        //     (files) => Array.from(files).every((file) => ACCEPTED_IMAGE_TYPES.includes(file.type)),
+        //     "Only these types are allowed .jpg, .jpeg, .png and .webp",
+        // ),
+        // .refine(
+        //     (files) => {
+        //         if (!files) return false;
+        //         return Array.from(files).every((file) => file instanceof File);
+        //     },
+        //     { message: "Please select background images." },
+        // )
+        // .refine(
+        //     (files) => {
+        //         if (!files) return false;
+        //         console.log(Array.from(files));
+        //         return false;
+        //         // return false;
+        //     },
+        //     { message: "Only these types are allowed .jpg, .jpeg, .png" },
+        // ),
     });
     type EventFormValues = z.infer<typeof formSchema>;
     const form = useForm<EventFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: '',
-            subtitle: '',
-            content: '',
+            name: "",
+            slug: "",
+            title: "",
+            subtitle: "",
+            content: "",
             status: EStatus.ACTIVE,
-
+            background_img: "",
         },
     });
 
@@ -69,7 +128,7 @@ export default function CreateLandingPage() {
         const messageError = translation("errorApi.CREATE_EVENT_FAILED");
         try {
             setLoading(true);
-
+            console.log(data);
             // let formattedData = {
             //     ...data,
             //     start_time: data.date.start_time,
@@ -128,7 +187,49 @@ export default function CreateLandingPage() {
                     </div>
                     <div>
                         <div className="md:max-w-[976px] mx-auto p-4 md:py-6 md:pb-8 md:px-8 border bg-white shadow-md">
-                            <div className="grid grid-cols-1 gap-x-8 gap-y-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+                                <FormField
+                                    control={form.control}
+                                    name="name"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className="text-base">
+                                                {translation("label.name")}
+                                                <SpanRequired />
+                                            </FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    className="h-10"
+                                                    disabled={loading}
+                                                    placeholder={translation("placeholder.name")}
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="slug"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className="text-base">
+                                                {translation("label.slug")}
+                                                <SpanRequired />
+                                            </FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    className="h-10"
+                                                    disabled={true}
+                                                    placeholder={translation("placeholder.slug")}
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                                 <FormField
                                     control={form.control}
                                     name="title"
@@ -209,9 +310,122 @@ export default function CreateLandingPage() {
                                         </FormItem>
                                     )}
                                 />
+                                <FormField
+                                    control={form.control}
+                                    name="background_img"
+                                    render={({ field: { value, onChange, ...fieldProps } }) => (
+                                        <FormItem>
+                                            <FormLabel>Picture</FormLabel>
+                                            <FormControl>
+                                                {bgImg ? (
+                                                    <div className="w-full relative">
+                                                        <AspectRatio ratio={2 / 1}>
+                                                            <Image
+                                                                src={bgImg}
+                                                                alt="Image"
+                                                                layout="fill"
+                                                                className="rounded-md object-cover"
+                                                            />
+                                                        </AspectRatio>
+                                                        <Button
+                                                            className="p-3 absolute right-1 bottom-1"
+                                                            variant={"destructive"}
+                                                            onClick={() => {
+                                                                setBgImg("");
+                                                                form.setValue("background_img", "");
+                                                            }}
+                                                        >
+                                                            <Trash2 className="h-5 w-5" />
+                                                        </Button>
+                                                    </div>
+                                                ) : (
+                                                    // <div className="overflow-hidden rounded-md relative h-[200px] w-full">
+                                                    //     <Image
+                                                    //         src={
+                                                    //             "https://images.unsplash.com/photo-1490300472339-79e4adc6be4a?w=300&dpr=2&q=80"
+                                                    //         }
+                                                    //         alt={"Background Image"}
+                                                    //         layout="fill"
+                                                    //         className="h-auto w-auto object-cover transition-all aspect-square"
+                                                    //     />
+                                                    //     <Button
+                                                    //         className="p-3 absolute right-1 bottom-1"
+                                                    //         variant={"destructive"}
+                                                    //         onClick={() => {
+                                                    //             setBgImg("");
+                                                    //             form.setValue("background_img", "");
+                                                    //         }}
+                                                    //     >
+                                                    //         <Trash2 className="h-5 w-5" />
+                                                    //     </Button>
+                                                    // </div>
+                                                    <div className="h-[200px]">
+                                                        <div
+                                                            className="flex h-full w-full items-center justify-center rounded-md border border-dashed"
+                                                            onClick={() => BgImgRef.current?.click()}
+                                                            // onDrop={(event) => console.log(event)}
+                                                        >
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                width="24"
+                                                                height="24"
+                                                                viewBox="0 0 24 24"
+                                                                fill="none"
+                                                                stroke="currentColor"
+                                                                strokeWidth="2"
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                className="lucide lucide-upload h-4 w-4 text-muted-foreground"
+                                                            >
+                                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                                <polyline points="17 8 12 3 7 8"></polyline>
+                                                                <line
+                                                                    x1="12"
+                                                                    x2="12"
+                                                                    y1="3"
+                                                                    y2="15"
+                                                                ></line>
+                                                            </svg>
+                                                            <span className="sr-only">Upload</span>
+                                                        </div>
+                                                        <Input
+                                                            className="h-10 hidden"
+                                                            {...fieldProps}
+                                                            placeholder="Picture"
+                                                            type="file"
+                                                            accept="image/*"
+                                                            ref={BgImgRef}
+                                                            onChange={(event) => {
+                                                                if (event.target.files) {
+                                                                    onChange(event.target.files[0]);
+                                                                    setBgImg(
+                                                                        URL.createObjectURL(event.target.files[0]),
+                                                                    );
+                                                                }
+                                                            }}
+                                                        />
+                                                    </div>
+                                                )}
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                {/* <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                                    <div className="space-y-0.5">
+                                        <FormLabel className="text-base">Communication emails</FormLabel>
+                                        <FormDescription>Receive emails about your account activity.</FormDescription>
+                                    </div>
+                                    <FormControl>
+                                        <Switch
+                                            checked={true}
+                                            onCheckedChange={field.onChange}
+                                        />
+                                    </FormControl>
+                                </FormItem> */}
                             </div>
 
-                            <Separator className="my-5" />
+                            {/* <Separator className="my-5" />
 
                             <div className="grid grid-cols-1 sm:grid-cols-1 gap-x-8 gap-y-6">
                                 <FormField
@@ -229,7 +443,7 @@ export default function CreateLandingPage() {
                                         </FormItem>
                                     )}
                                 />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <FooterContainer />

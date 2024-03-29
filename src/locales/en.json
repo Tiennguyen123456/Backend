@@ -330,7 +330,8 @@
         "titleCheckInAlert": "Are you sure want to check in this client?",
         "title": "Title",
         "subtitle": "Subtitle",
-        "content": "Content"
+        "content": "Content",
+        "slug": "Slug"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -366,7 +367,8 @@
         "type": "Select type",
         "title": "Title",
         "subtitle": "Subtitle",
-        "content": "Content"
+        "content": "Content",
+        "slug": "/slug"
     },
     "error": {
         "requiredAddress": "Please enter your address.",

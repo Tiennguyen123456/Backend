@@ -332,7 +332,8 @@
         "titleCheckInAlert": "Bạn có thực sự muốn kiểm tra khách hàng này không?",
         "title": "Tiêu đề",
         "subtitle": "Tiêu đề phụ",
-        "content": "Nội Dung"
+        "content": "Nội Dung",
+        "slug": "Slug"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -368,7 +369,8 @@
         "type": "Chọn loại",
         "title": "Tiêu đề",
         "subtitle": "Tiêu đề phụ",
-        "content": "Nội Dung"
+        "content": "Nội Dung",
+        "slug": "/slug"
     },
     "error": {
         "requiredAddress": "Vui lòng nhập địa chỉ của bạn.",
