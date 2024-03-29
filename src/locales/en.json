@@ -331,7 +331,14 @@
         "title": "Title",
         "subtitle": "Subtitle",
         "content": "Content",
-        "slug": "Slug"
+        "slug": "Slug",
+        "backgroundImage": "Background Image",
+        "formTitle": "Form Title",
+        "formDescription": "Form Description",
+        "formEnable": "Form Enable",
+        "fieldEmail": "Field Email",
+        "fieldPhone": "Field Phone",
+        "fieldAddress": "Field Address"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -368,7 +375,10 @@
         "title": "Title",
         "subtitle": "Subtitle",
         "content": "Content",
-        "slug": "/slug"
+        "slug": "/slug",
+        "backgroundImage": "Click or drag && drop a image here.",
+        "formTitle": "Form Title",
+        "formDescription": "Form Description"
     },
     "error": {
         "requiredAddress": "Please enter your address.",

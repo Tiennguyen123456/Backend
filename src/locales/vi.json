@@ -333,7 +333,14 @@
         "title": "Tiêu đề",
         "subtitle": "Tiêu đề phụ",
         "content": "Nội Dung",
-        "slug": "Slug"
+        "slug": "Slug",
+        "backgroundImage": "Ảnh nền",
+        "formTitle": "Tiêu đề Form",
+        "formDescription": "Mô tả Form",
+        "formEnable": "Bật Form",
+        "fieldEmail": "Trường email",
+        "fieldPhone": "Trường số điện thoại",
+        "fieldAddress": "Trường địa chỉ"
     },
     "placeholder": {
         "email": "example@example.com",
@@ -370,7 +377,10 @@
         "title": "Tiêu đề",
         "subtitle": "Tiêu đề phụ",
         "content": "Nội Dung",
-        "slug": "/slug"
+        "slug": "/slug",
+        "backgroundImage": "Chọn hoặc kéo thả ảnh nền ở đây.",
+        "formTitle": "Tiêu đề Form",
+        "formDescription": "Mô tả Form"
     },
     "error": {
         "requiredAddress": "Vui lòng nhập địa chỉ của bạn.",

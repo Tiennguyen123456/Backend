@@ -57,3 +57,8 @@ export enum ScanQRCamera {
     DEFAULT = "environment",
     USER = "user"
 }
+
+export enum LandingPageEnable {
+    On = 1,
+    Off = 0
+}
