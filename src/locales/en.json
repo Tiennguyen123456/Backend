@@ -492,7 +492,9 @@
         "FAILED_TO_UPDATE": "Failed to update.",
         "CAMPAIGN_NOT_FOUND": "Campaign not found.",
         "FAILED_ACTION": "Failed action.",
-        "SCAN_QR_CODE_FAILED": "Scan QR code failed."
+        "SCAN_QR_CODE_FAILED": "Scan QR code failed.",
+        "CREATE_LANDING_PAGE_FAILED": "Create landing page failed.",
+        "UPDATE_LANDING_PAGE_FAILED": "Update landing page failed."
     },
     "successApi": {
         "SUCCESS": "Success",
@@ -525,7 +527,9 @@
         "UPDATE_CAMPAIGN_SUCCESS": "Update campaign successfully.",
         "DELETE_CAMPAIGN_SUCCESS": "Delete campaign successfully.",
         "SCAN_QR_CODE_SUCCESS": "Scan QR code successfully.",
-        "CLIENT_HAVE_ALDREADY_CHECKIN": "The client has been checked in."
+        "CLIENT_HAVE_ALDREADY_CHECKIN": "The client has been checked in.",
+        "CREATE_LANDING_PAGE_SUCCESS": "Create landing page successfully.",
+        "UPDATE_LANDING_PAGE_SUCCESS": "Update landing page successfully."
     },
     "localeSwitcher": {
         "en": "English",
