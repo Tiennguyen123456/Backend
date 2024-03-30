@@ -377,7 +377,7 @@
         "title": "Tiêu đề",
         "subtitle": "Tiêu đề phụ",
         "content": "Nội Dung",
-        "slug": "/slug",
+        "slug": "/",
         "backgroundImage": "Chọn hoặc kéo thả ảnh nền ở đây.",
         "formTitle": "Tiêu đề Form",
         "formDescription": "Mô tả Form"
@@ -425,7 +425,12 @@
         "requiredClientFilterGroup": "Vui lòng nhập nhóm để lọc khách mời.",
         "requiredCustomFieldName": "Vui lòng nhập tên trường ít nhất 5 ký tự.",
         "invalidCustomFieldName": "Tên trường là ký tự in hoa, không khoảng trắng và ký tự đặc biệt",
-        "requiredCustomFieldValue": "Vui lòng nhập giá trị của trường."
+        "requiredCustomFieldValue": "Vui lòng nhập giá trị của trường.",
+        "requiredTitleLP": "Vui lòng nhập tiều đề landing page.",
+        "requiredSubtitleLP": "Vui lòng nhập tiều đề phụ landing page.",
+        "requiredNameLP": "Vui lòng nhập tên landing page.",
+        "requiredBgImgLP": "Vui lòng chọn ảnh nền landing page.",
+        "invalidBgImgLP": "Những file ảnh cho phép là .jpg, .jpeg, .png"
     },
     "errorApi": {
         "RESOURCES_NOT_FOUND": "Không tìm thấy tài nguyên.",

@@ -13,6 +13,8 @@ export const phoneRegExp = new RegExp(
 );
 export const emailRegExp = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
 
+export const specialCharacterRegExp = new RegExp(/[\!\@\#\$\%\^\&\*\)\/(\+\=\.\,\?\<\>\{\}\[\]\\:\;\'\"\|\~\`\_\-]/g);
+
 export const replaceIdInURLRegExp = new RegExp(/\/\d+/);
 
 export const DateTimeFormat = "dd-MM-y HH:mm:ss";

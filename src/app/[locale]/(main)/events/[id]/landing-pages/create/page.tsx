@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import SpanRequired from "@/components/ui/span-required";
-import { EVENT_STATUS } from "@/constants/variables";
+import { EVENT_STATUS, specialCharacterRegExp } from "@/constants/variables";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Save, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { EStatus, LandingPageEnable, MessageCode} from "@/constants/enum";
+import { EStatus, LandingPageEnable, MessageCode } from "@/constants/enum";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import eventApi from "@/services/event-api";
 import { toastError, toastSuccess } from "@/utils/toast";
@@ -27,7 +27,7 @@ import { ComboboxSearchCompany } from "../../../../accounts/components/combobox-
 import { Switch } from "@/components/ui/switch";
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import slugtify from 'slugify';
+import slugtify from "slugify";
 
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 export default function CreateLandingPage() {
@@ -50,38 +50,38 @@ export default function CreateLandingPage() {
 
     // useForm
     const formSchema = z.object({
-        name: z.string().min(1, { message: translation("error.requiredName") }),
-        slug: z.string().min(1, { message: translation("error.requiredName") }),
-        title: z.string().min(1, { message: translation("error.requiredName") }),
-        subtitle: z.string().min(1, { message: translation("error.requiredName") }),
+        name: z.string().min(1, { message: translation("error.requiredNameLP") }),
+        slug: z.string(),
+        title: z.string().min(1, { message: translation("error.requiredTitleLP") }),
+        subtitle: z.string().min(1, { message: translation("error.requiredSubtitleLP") }),
         status: z.string(),
         content: z.string(),
         background_img: z.any().superRefine((val, ctx) => {
             if (!val) {
                 ctx.addIssue({
                     code: z.ZodIssueCode.custom,
-                    message: `Please select background images.`,
+                    message: translation("error.requiredBgImgLP"),
                 });
             } else {
                 if (!(val instanceof File)) {
                     ctx.addIssue({
                         code: z.ZodIssueCode.custom,
-                        message: `Expected a file.`,
+                        message: translation("error.requiredBgImgLP"),
                     });
                 }
                 if (!ACCEPTED_IMAGE_TYPES.includes(val.type)) {
                     console.log("error file");
                     ctx.addIssue({
                         code: z.ZodIssueCode.custom,
-                        message: `Only these types are allowed .jpg, .jpeg, .png`,
+                        message: translation("error.invalidBgImgLP"),
                     });
                 }
             }
         }),
         form_enable: z.number().default(LandingPageEnable.On),
-        form_title: z.string().min(1, { message: translation("error.requiredName") }),
-        form_description: z.string().min(1, { message: translation("error.requiredName") }),
-        form_input: z.string().array()
+        form_title: z.string(),
+        form_description: z.string(),
+        form_input: z.string().array(),
     });
     type LandingPageValues = z.infer<typeof formSchema>;
     const form = useForm<LandingPageValues>({
@@ -97,7 +97,7 @@ export default function CreateLandingPage() {
             form_enable: LandingPageEnable.On,
             form_title: "",
             form_description: "",
-            form_input: formInput
+            form_input: formInput,
         },
     });
 
@@ -107,7 +107,20 @@ export default function CreateLandingPage() {
         const messageError = translation("errorApi.CREATE_EVENT_FAILED");
         try {
             setLoading(true);
-            console.log(data);
+
+            const formData = new FormData();
+            Object.entries(data).forEach((entry) => {
+                const [key, value] = entry;
+                if (key == "form_input" && value instanceof Array) {
+                    // formData.append(`form_input`, JSON.stringify(value));
+                    Array.from(value).forEach((input, index) => {
+                        formData.append(`form_input`, input);
+                    });
+                } else {
+                    formData.append(key, value);
+                }
+            });
+            console.log(formData);
             // let formattedData = {
             //     ...data,
             //     start_time: data.date.start_time,
@@ -137,19 +150,17 @@ export default function CreateLandingPage() {
         }
     };
 
-    const isSysAdmin = () => userProfile?.is_admin == true;
-
     const handleFormInputChange = (key: string) => {
-        let formInputChange = form.getValues('form_input');
+        let formInputChange = form.getValues("form_input");
         let index = formInputChange.indexOf(key);
-        if(index !== -1) {
+        if (index !== -1) {
             formInputChange = formInputChange.filter((item) => item !== key);
         } else {
             formInputChange.push(key);
         }
-        setFormInput(formInputChange)
-        form.setValue('form_input', formInputChange);
-    }
+        setFormInput(formInputChange);
+        form.setValue("form_input", formInputChange);
+    };
 
     return (
         <>
@@ -182,7 +193,7 @@ export default function CreateLandingPage() {
                                 <FormField
                                     control={form.control}
                                     name="name"
-                                    render={({ field: {value, onChange, ...fieldProps} }) => (
+                                    render={({ field: { value, onChange, ...fieldProps } }) => (
                                         <FormItem>
                                             <FormLabel className="text-base">
                                                 {translation("label.name")}
@@ -197,8 +208,16 @@ export default function CreateLandingPage() {
                                                     onChange={(event) => {
                                                         let nameInput = event.target.value;
                                                         onChange(nameInput);
-                                                        form.setValue('slug', slugtify(nameInput, '-'));
-                                                        form.trigger('slug', { shouldFocus: true })
+                                                        form.setValue(
+                                                            "slug",
+                                                            `/${slugtify(nameInput, {
+                                                                replacement: "-",
+                                                                remove: specialCharacterRegExp,
+                                                                lower: true,
+                                                                strict: false,
+                                                                trim: true,
+                                                            })}`,
+                                                        );
                                                     }}
                                                 />
                                             </FormControl>
@@ -211,10 +230,7 @@ export default function CreateLandingPage() {
                                     name="slug"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="text-base">
-                                                {translation("label.slug")}
-                                                <SpanRequired />
-                                            </FormLabel>
+                                            <FormLabel className="text-base">{translation("label.slug")}</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     className="h-10"
@@ -274,7 +290,7 @@ export default function CreateLandingPage() {
                                                             onClick={() => {
                                                                 setBgImg("");
                                                                 form.setValue("background_img", "");
-                                                                form.trigger('background_img', { shouldFocus: true })
+                                                                form.trigger("background_img", { shouldFocus: true });
                                                             }}
                                                         >
                                                             <Trash2 className="h-5 w-5" />
@@ -288,14 +304,20 @@ export default function CreateLandingPage() {
                                                             onDrop={(event) => {
                                                                 event.preventDefault();
                                                                 event.stopPropagation();
-                                                                if(event.dataTransfer.files) {
-                                                                    let fileUpload = event.dataTransfer.files[0]
+                                                                if (event.dataTransfer.files) {
+                                                                    let fileUpload = event.dataTransfer.files[0];
                                                                     form.setValue("background_img", fileUpload);
-                                                                    form.trigger('background_img', { shouldFocus: true })
+                                                                    form.trigger("background_img", {
+                                                                        shouldFocus: true,
+                                                                    });
 
-                                                                    if(ACCEPTED_IMAGE_TYPES.includes(fileUpload.type)) {
+                                                                    if (
+                                                                        ACCEPTED_IMAGE_TYPES.includes(fileUpload.type)
+                                                                    ) {
                                                                         setBgImg(
-                                                                            URL.createObjectURL(event.dataTransfer.files[0])
+                                                                            URL.createObjectURL(
+                                                                                event.dataTransfer.files[0],
+                                                                            ),
                                                                         );
                                                                     }
                                                                 }
@@ -333,13 +355,15 @@ export default function CreateLandingPage() {
                                                             ref={BgImgRef}
                                                             onChange={(event) => {
                                                                 if (event.target.files) {
-                                                                    let fileUpload = event.target.files[0]
+                                                                    let fileUpload = event.target.files[0];
                                                                     onChange(fileUpload);
-                                                                    form.trigger('background_img', { shouldFocus: true })
-                                                                    if(ACCEPTED_IMAGE_TYPES.includes(fileUpload.type)) {
-                                                                        setBgImg(
-                                                                            URL.createObjectURL(fileUpload)
-                                                                        );
+                                                                    form.trigger("background_img", {
+                                                                        shouldFocus: true,
+                                                                    });
+                                                                    if (
+                                                                        ACCEPTED_IMAGE_TYPES.includes(fileUpload.type)
+                                                                    ) {
+                                                                        setBgImg(URL.createObjectURL(fileUpload));
                                                                     }
                                                                 }
                                                             }}
@@ -423,7 +447,9 @@ export default function CreateLandingPage() {
                                                     className="!mt-0"
                                                     checked={field.value == LandingPageEnable.On ? true : false}
                                                     onCheckedChange={(event) => {
-                                                        field.onChange(event ? LandingPageEnable.On : LandingPageEnable.Off);
+                                                        field.onChange(
+                                                            event ? LandingPageEnable.On : LandingPageEnable.Off,
+                                                        );
                                                     }}
                                                     defaultChecked={field.value == LandingPageEnable.On ? true : false}
                                                 />
@@ -432,98 +458,104 @@ export default function CreateLandingPage() {
                                         </FormItem>
                                     )}
                                 />
-                                {
-                                    form.getValues('form_enable') == LandingPageEnable.On && (
-                                        <>
-                                            <Separator className="my-1 col-span-2 hidden sm:block" />
-                                            <FormField
-                                                control={form.control}
-                                                name="form_title"
-                                                render={({ field }) => (
-                                                    <FormItem>
-                                                        <FormLabel className="text-base">
-                                                            {translation("label.formTitle")}
-                                                        </FormLabel>
-                                                        <FormControl>
-                                                            <Input
-                                                                className="h-10"
-                                                                disabled={loading}
-                                                                placeholder={translation("placeholder.formTitle")}
-                                                                {...field}
-                                                            />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
-                                            <FormField
-                                                control={form.control}
-                                                name="form_description"
-                                                render={({ field }) => (
-                                                    <FormItem>
-                                                        <FormLabel className="text-base">
-                                                            {translation("label.formDescription")}
-                                                        </FormLabel>
-                                                        <FormControl>
-                                                            <Input
-                                                                className="h-10"
-                                                                disabled={loading}
-                                                                placeholder={translation("placeholder.formDescription")}
-                                                                {...field}
-                                                            />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
-                                            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                                                <div className="space-y-0.5">
-                                                    <FormLabel className="text-base">{translation('label.fieldName')}</FormLabel>
-                                                    {/* <FormDescription>Receive emails about your account activity.</FormDescription> */}
-                                                </div>
-                                                <FormControl>
-                                                    <Switch
-                                                        checked={formInput.includes('name')}
-                                                        onCheckedChange={(event) => handleFormInputChange('name')}
-                                                    />
-                                                </FormControl>
-                                            </FormItem>
-                                            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                                                <div className="space-y-0.5">
-                                                    <FormLabel className="text-base">{translation('label.fieldEmail')}</FormLabel>
-                                                </div>
-                                                <FormControl>
-                                                    <Switch
-                                                        checked={form.getValues('form_input').includes('email')}
-                                                        onCheckedChange={(event) => handleFormInputChange('email')}
-                                                    />
-                                                </FormControl>
-                                            </FormItem>
-                                            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                                                <div className="space-y-0.5">
-                                                    <FormLabel className="text-base">{translation('label.fieldPhone')}</FormLabel>
-                                                </div>
-                                                <FormControl>
-                                                    <Switch
-                                                        checked={form.getValues('form_input').includes('phone')}
-                                                        onCheckedChange={(event) => handleFormInputChange('phone')}
-                                                    />
-                                                </FormControl>
-                                            </FormItem>
-                                            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                                                <div className="space-y-0.5">
-                                                    <FormLabel className="text-base">{translation('label.fieldAddress')}</FormLabel>
-                                                </div>
-                                                <FormControl>
-                                                    <Switch
-                                                        checked={form.getValues('form_input').includes('address')}
-                                                        onCheckedChange={(event) => handleFormInputChange('address')}
-                                                    />
-                                                </FormControl>
-                                            </FormItem>
-                                        </>
-                                    )
-                                }
+                                {form.getValues("form_enable") == LandingPageEnable.On && (
+                                    <>
+                                        <Separator className="my-1 col-span-2 hidden sm:block" />
+                                        <FormField
+                                            control={form.control}
+                                            name="form_title"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel className="text-base">
+                                                        {translation("label.formTitle")}
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            className="h-10"
+                                                            disabled={loading}
+                                                            placeholder={translation("placeholder.formTitle")}
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="form_description"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel className="text-base">
+                                                        {translation("label.formDescription")}
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            className="h-10"
+                                                            disabled={loading}
+                                                            placeholder={translation("placeholder.formDescription")}
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                                            <div className="space-y-0.5">
+                                                <FormLabel className="text-base">
+                                                    {translation("label.fieldName")}
+                                                </FormLabel>
+                                                {/* <FormDescription>Receive emails about your account activity.</FormDescription> */}
+                                            </div>
+                                            <FormControl>
+                                                <Switch
+                                                    checked={formInput.includes("name")}
+                                                    onCheckedChange={(event) => handleFormInputChange("name")}
+                                                />
+                                            </FormControl>
+                                        </FormItem>
+                                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                                            <div className="space-y-0.5">
+                                                <FormLabel className="text-base">
+                                                    {translation("label.fieldEmail")}
+                                                </FormLabel>
+                                            </div>
+                                            <FormControl>
+                                                <Switch
+                                                    checked={form.getValues("form_input").includes("email")}
+                                                    onCheckedChange={(event) => handleFormInputChange("email")}
+                                                />
+                                            </FormControl>
+                                        </FormItem>
+                                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                                            <div className="space-y-0.5">
+                                                <FormLabel className="text-base">
+                                                    {translation("label.fieldPhone")}
+                                                </FormLabel>
+                                            </div>
+                                            <FormControl>
+                                                <Switch
+                                                    checked={form.getValues("form_input").includes("phone")}
+                                                    onCheckedChange={(event) => handleFormInputChange("phone")}
+                                                />
+                                            </FormControl>
+                                        </FormItem>
+                                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                                            <div className="space-y-0.5">
+                                                <FormLabel className="text-base">
+                                                    {translation("label.fieldAddress")}
+                                                </FormLabel>
+                                            </div>
+                                            <FormControl>
+                                                <Switch
+                                                    checked={form.getValues("form_input").includes("address")}
+                                                    onCheckedChange={(event) => handleFormInputChange("address")}
+                                                />
+                                            </FormControl>
+                                        </FormItem>
+                                    </>
+                                )}
                             </div>
 
                             {/* <Separator className="my-5" />

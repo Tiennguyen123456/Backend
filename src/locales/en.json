@@ -375,7 +375,7 @@
         "title": "Title",
         "subtitle": "Subtitle",
         "content": "Content",
-        "slug": "/slug",
+        "slug": "/",
         "backgroundImage": "Click or drag && drop a image here.",
         "formTitle": "Form Title",
         "formDescription": "Form Description"
@@ -423,7 +423,12 @@
         "requiredClientFilterGroup": "Please input group to filter client.",
         "requiredCustomFieldName": "Please enter custom field name at least 5 characters.",
         "invalidCustomFieldName": "Please enter the field value without spaces and special characters",
-        "requiredCustomFieldValue": "Please enter custom field value."
+        "requiredCustomFieldValue": "Please enter custom field value.",
+        "requiredTitleLP": "Please enter title landing page.",
+        "requiredSubtitleLP": "Please enter subtitle landing page.",
+        "requiredNameLP": "Please enter name landing page.",
+        "requiredBgImgLP": "Please select background image landing page.",
+        "invalidBgImgLP": "Only these types are allowed .jpg, .jpeg, .png"
     },
     "errorApi": {
         "RESOURCES_NOT_FOUND": "Resources not found.",
