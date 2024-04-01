@@ -254,7 +254,7 @@
     "label": {
         "search": "Tìm kiếm",
         "email": "Email",
-        "password": "Mật khẩu",
+        "password": "",
         "active": "Kích hoạt",
         "notAvailable": "Không tồn tại",
         "role": "Vai trò",

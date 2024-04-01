@@ -31,10 +31,17 @@ interface CompanyModalProps extends IModal {
     className?: string;
     defaultData: IAccountRes | null;
     onConfirm: () => void;
-    dataRoles: IOption[] | []
+    dataRoles: IOption[] | [];
 }
 
-export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, defaultData, className, onConfirm, dataRoles }) => {
+export const AccountModal: React.FC<CompanyModalProps> = ({
+    isOpen,
+    onClose,
+    defaultData,
+    className,
+    onConfirm,
+    dataRoles,
+}) => {
     // ** I18n
     const translation = useTranslations("");
 
@@ -59,14 +66,13 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
     const formSchema = z.object({
         id: z.number().optional(),
         name: z.string().min(1, { message: translation("error.requiredName") }),
-        username: z.string().min(4, { message: translation("error.invalidUserName") }),
         email: z
             .string()
             .min(1, { message: translation("error.requiredEmail") })
             .email({ message: translation("error.invalidEmail") }),
         password: z
             .string()
-            .min(8 , { message: translation("error.invalidPassword") })
+            .min(8, { message: translation("error.invalidPassword") })
             .optional()
             .or(z.literal("")),
         status: z.string(),
@@ -76,11 +82,10 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
     type AccountFormValues = z.infer<typeof formSchema>;
     const resetDataForm: AccountFormValues = {
         name: "",
-        username: "",
         email: "",
         status: EStatus.ACTIVE,
         role_id: -1,
-        company_id: userProfile?.is_admin ? -1 : (userProfile?.company_id ?? -1),
+        company_id: userProfile?.is_admin ? -1 : userProfile?.company_id ?? -1,
     };
     const form = useForm<AccountFormValues>({
         resolver: zodResolver(formSchema),
@@ -99,13 +104,6 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
             }
         } catch (error: any) {
             const data = error?.response?.data;
-            // if (data?.data && data?.message_code) {
-            //     const [value] = Object.values(data.data);
-            //     const message = Array(value).toString() ?? messageError;
-            //     toastError(message);
-            // } else {
-            //     toastError(messageError);
-            // }
             if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
                 const [value] = Object.values(data.data);
                 const message = Array(value).toString() ?? messageError;
@@ -164,26 +162,24 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
                 >
                     {/* <div className="grid grid-cols-1 gap-2 md:gap-4 py-1 md:py-4"> */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 py-1 md:py-4">
-                        {
-                            userProfile?.is_admin && (  
-                                <FormField
-                                    control={form.control}
-                                    name="company_id"
-                                    render={({ field }) => (
-                                        <FormItem className="flex flex-col">
-                                            <FormLabel className="text-base">{translation("label.company")}</FormLabel>
-                                            <ComboboxSearchCompany
-                                                disabled={loading}
-                                                onSelectCompany={field.onChange}
-                                                defaultName={defaultData?.company?.name || ""}
-                                            />
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            )
-                        }
-                        
+                        {userProfile?.is_admin && (
+                            <FormField
+                                control={form.control}
+                                name="company_id"
+                                render={({ field }) => (
+                                    <FormItem className="flex flex-col">
+                                        <FormLabel className="text-base">{translation("label.company")}</FormLabel>
+                                        <ComboboxSearchCompany
+                                            disabled={loading}
+                                            onSelectCompany={field.onChange}
+                                            defaultName={defaultData?.company?.name || ""}
+                                        />
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        )}
+
                         <FormField
                             control={form.control}
                             name="name"
@@ -205,51 +201,26 @@ export const AccountModal: React.FC<CompanyModalProps> = ({ isOpen, onClose, def
                                 </FormItem>
                             )}
                         />
-                        <FormField
-                            control={form.control}
-                            name="username"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel className="text-base">
-                                        {translation("label.username")}
-                                        <SpanRequired />
-                                    </FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            className="h-10"
-                                            disabled={loading || defaultData != null}
-                                            placeholder={translation("placeholder.username")}
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        {
-                            defaultData &&(
-                                <FormField
-                                    control={form.control}
-                                    name="password"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel className="text-base">
-                                                {translation("label.password")}
-                                            </FormLabel>
-                                            <FormControl>
-                                                <PasswordInput
-                                                    className="h-10"
-                                                    disabled={loading}
-                                                    placeholder={translation("placeholder.password")}
-                                                    {...field}
-                                                    />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            )
-                        }
+                        {defaultData && (
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className="text-base">{translation("label.password")}</FormLabel>
+                                        <FormControl>
+                                            <PasswordInput
+                                                className="h-10"
+                                                disabled={loading}
+                                                placeholder={translation("placeholder.password")}
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        )}
                         <FormField
                             control={form.control}
                             name="email"

@@ -318,7 +318,7 @@
     },
     "placeholder": {
         "email": "example@example.com",
-        "password": "••••••••••••",
+        "password": "",
         "role": "Select role",
         "status": "Select status",
         "name": "Name",

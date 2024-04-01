@@ -39,7 +39,7 @@ export default function AccountsPage() {
 
     // ** useRef
     const InputEmailSearchRef = useRef<HTMLInputElement>(null);
-    
+
     // ** User Selector
     const { userPermissions } = useAppSelector(selectUser);
     // Use Row Selection
@@ -48,9 +48,9 @@ export default function AccountsPage() {
     const { limit, onPaginationChange, skip, pagination, page } = usePagination();
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
-    
+
     // ** State
-    const [roles, setRoles] = useState<RoleFilter[]>([{label: 'All', value: 0}]);
+    const [roles, setRoles] = useState<RoleFilter[]>([{ label: "All", value: 0 }]);
     const [openModal, setOpenModal] = useState(false);
     const [rowSelected, setRowSelected] = useState<AccountColumn | null>(null);
     const [paramsSearch, setParamsSearch] = useState({
@@ -83,7 +83,6 @@ export default function AccountsPage() {
         setRowSelected({
             ...data,
             name: data.name ?? "",
-            username: data.username ?? "",
             email: data.email ?? "",
             password: "",
             company_id: data?.company?.id ?? -1,
@@ -187,7 +186,7 @@ export default function AccountsPage() {
             label: role.name,
             value: role.id,
         }));
-        setRoles(prev => [...prev,...rolesFormatted]);
+        setRoles((prev) => [...prev, ...rolesFormatted]);
     }, [dataRole]);
 
     return (
@@ -241,7 +240,7 @@ export default function AccountsPage() {
                         <Select
                             disabled={Boolean(loading)}
                             onValueChange={(value) => handleSearchRole(+value)}
-                            defaultValue={'0'}
+                            defaultValue={"0"}
                         >
                             <SelectTrigger className="h-10">
                                 <SelectValue placeholder={translation("placeholder.status")} />
