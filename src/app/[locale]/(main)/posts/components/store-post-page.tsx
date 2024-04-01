@@ -65,7 +65,10 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
     // useForm
     const formSchema = z.object({
         id: z.number().optional(),
-        company_id: z.number().min(1, { message: translation("error.requiredCompany") }).optional(),
+        company_id: z
+            .number()
+            .min(1, { message: translation("error.requiredCompany") })
+            .optional(),
         event_id: z.number().min(1, { message: translation("error.requiredSelectEvent") }),
         name: z.string().min(1, { message: translation("error.requiredNamePost") }),
         slug: z.string(),
@@ -77,6 +80,7 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
             ? z
                   .any()
                   .superRefine((val, ctx) => {
+                      console.log(val);
                       if (!val) {
                           ctx.addIssue({
                               code: z.ZodIssueCode.custom,
@@ -110,7 +114,7 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
                       }
                   }
               }),
-        form_enable: z.number().default(PostPageEnable.On),
+        form_enable: z.boolean().default(true),
         form_title: z.string(),
         form_content: z.string(),
         form_input: z.string().array(),
@@ -126,7 +130,7 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
         content: "",
         status: EStatus.ACTIVE,
         background_img: "",
-        form_enable: PostPageEnable.On,
+        form_enable: true,
         form_title: "",
         form_content: "",
         form_input: formInput,
@@ -145,7 +149,7 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
                   content: defaultData?.content ?? "",
                   status: defaultData?.status ?? "",
                   background_img: "",
-                  form_enable: defaultData?.form_enable ?? PostPageEnable.On,
+                  form_enable: defaultData?.form_enable ? true : false,
                   form_title: defaultData?.form_title ?? "",
                   form_content: defaultData?.form_content ?? "",
                   form_input: defaultData?.form_input ?? formInput,
@@ -162,17 +166,17 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
             Object.entries(data).forEach((entry) => {
                 const [key, value] = entry;
                 if (key == "form_input" && value instanceof Array) {
-                    // formData.append(`form_input`, JSON.stringify(value));
                     Array.from(value).forEach((input, index) => {
-                        formData.append(`form_input`, input);
+                        formData.append(`form_input[]`, input);
                     });
                 } else {
                     formData.append(key, value);
                 }
             });
             console.log(formData);
+            return;
             const response = await postApi.storePost(formData);
-             if (response.data.status == APIStatus.SUCCESS) {
+            if (response.data.status == APIStatus.SUCCESS) {
                 toastSuccess(messageSuccess);
                 router.push(ROUTES.POSTS);
             }
@@ -298,14 +302,14 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
                                                     <SpanRequired />
                                                 </FormLabel>
                                                 <ComboboxSearchCompany
-                                                    disabled={loading}
+                                                    disabled={loading || (defaultData != null && true)}
                                                     onSelectCompany={(id) => {
                                                         setEventReset({ ...eventReset });
                                                         setCompanyId(id);
                                                         form.setValue("event_id", -1);
                                                         field.onChange(id);
                                                     }}
-                                                    defaultName={""}
+                                                    defaultName={defaultData?.company?.name ?? ""}
                                                 />
                                                 <FormMessage />
                                             </FormItem>
@@ -322,9 +326,13 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
                                                 <SpanRequired />
                                             </FormLabel>
                                             <ComboboxSearchEvent
-                                                disabled={loading}
+                                                disabled={loading || (defaultData != null && true)}
                                                 onSelect={field.onChange}
-                                                dataSelected={eventReset}
+                                                dataSelected={
+                                                    defaultData?.event
+                                                        ? { id: defaultData?.event_id, label: defaultData?.event?.name }
+                                                        : eventReset
+                                                }
                                                 filterCompanyId={isSysAdmin() ? companyId.toString() : ""}
                                             />
                                             <FormMessage />
@@ -551,20 +559,16 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
                                             <FormControl>
                                                 <Switch
                                                     className="!mt-0"
-                                                    checked={field.value == PostPageEnable.On ? true : false}
-                                                    onCheckedChange={(event) => {
-                                                        field.onChange(
-                                                            event ? PostPageEnable.On : PostPageEnable.Off,
-                                                        );
-                                                    }}
-                                                    defaultChecked={field.value == PostPageEnable.On ? true : false}
+                                                    checked={field.value}
+                                                    onCheckedChange={field.onChange}
+                                                    defaultChecked={field.value}
                                                 />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
-                                {form.getValues("form_enable") == PostPageEnable.On && (
+                                {form.getValues("form_enable") == true && (
                                     <>
                                         <Separator className="my-1 col-span-2 hidden sm:block" />
                                         <FormField

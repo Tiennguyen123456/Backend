@@ -30,7 +30,7 @@ export enum EStatus {
     RUNNING = "RUNNING",
     STOPPED = "STOPPED",
     SUCCESS = "SUCCESS",
-    FINISHED  = "FINISHED",
+    FINISHED = "FINISHED",
     PROCESSING = "PROCESSING",
     PENDING = "PENDING",
     ERROR = "ERROR",
@@ -55,10 +55,10 @@ export enum RoleGuard {
 
 export enum ScanQRCamera {
     DEFAULT = "environment",
-    USER = "user"
+    USER = "user",
 }
 
 export enum PostPageEnable {
     On = 1,
-    Off = 0
+    Off = 0,
 }

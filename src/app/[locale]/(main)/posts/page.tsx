@@ -83,7 +83,7 @@ export default function LandingPagePage() {
         setOpenModal(false);
     };
     const canCreatePost = isActionsPermissions(userPermissions, ActionPermissions.CREATE_POST);
-    const canUpdatePost = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_POST);
+    const canUpdatePost = isActionsPermissions(userPermissions, ActionPermissions.CREATE_POST);
     const canDeletePost = isActionsPermissions(userPermissions, ActionPermissions.DELETE_POST);
     const handleSearchEmail = (event: any) => {
         setParamsSearch({ ...paramsSearch, search: { ...paramsSearch.search, email: event.target.value } });
@@ -133,12 +133,20 @@ export default function LandingPagePage() {
             ),
         },
         {
-            accessorKey: "fullname",
+            accessorKey: "title",
             header: () => <div className="text-black font-bold">{translation("postPage.table.title")}</div>,
         },
         {
-            accessorKey: "phone",
+            accessorKey: "subtitle",
             header: () => <div className="text-black font-bold">{translation("postPage.table.subtitle")}</div>,
+        },
+        {
+            accessorKey: "company.name",
+            header: () => <div className="text-black font-bold">{translation("postPage.table.company")}</div>,
+        },
+        {
+            accessorKey: "event.name",
+            header: () => <div className="text-black font-bold">{translation("postPage.table.event")}</div>,
         },
         {
             accessorKey: "status",
