@@ -248,7 +248,8 @@
         "stop": "Stop",
         "logEmail": "Log email",
         "scanQr": "Scan QR Code",
-        "stopScan": "Stop Scan"
+        "stopScan": "Stop Scan",
+        "backHome": "Back Home"
     },
     "label": {
         "search": "Search",

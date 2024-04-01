@@ -248,7 +248,8 @@
         "stop": "Dừng",
         "logEmail": "Lịch sử email",
         "scanQr": "Quét mã QR",
-        "stopScan": "Hủy Quét"
+        "stopScan": "Hủy Quét",
+        "backHome": "Quay lại trang chủ"
     },
     "label": {
         "search": "Tìm kiếm",

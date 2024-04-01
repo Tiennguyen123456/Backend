@@ -20,9 +20,9 @@ export default function CatchAllPage() {
             </div>
             <Button
                 variant={"destructive"}
-                onClick={() => router.back()}
+                onClick={() => router.push(ROUTES.DASHBOARD)}
             >
-                {translation("action.back")}
+                {translation("action.backHome")}
             </Button>
         </div>
     );
