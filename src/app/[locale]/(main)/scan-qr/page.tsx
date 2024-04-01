@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/ui/breadcrumb";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Scan } from "lucide-react";
-import QRScanner from "@/components/ui/qr-scanner";
+import QRScannerComponent from "@/components/ui/qr-scanner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SCAN_QR_CODE_CAMERA } from "@/constants/variables";
 import { ScanQRCamera } from "@/constants/enum";
@@ -19,7 +19,7 @@ export default function EventsPage() {
     // ** Use State
     const [startScan, setStartScan] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [cameraId, setCameraId] = useState<string>(ScanQRCamera.USER);
+    const [cameraId, setCameraId] = useState<string>(ScanQRCamera.DEFAULT);
     const [listCamera, setListCamera] = useState<QrScanner.Camera[]>(SCAN_QR_CODE_CAMERA);
 
     const toggleLoading = (value: boolean) => {
@@ -115,7 +115,8 @@ export default function EventsPage() {
                                 <DialogHeader>
                                     <DialogTitle className="flex items-center">
                                         <Select
-                                            defaultValue={ScanQRCamera.USER}
+                                            disabled={loading}
+                                            defaultValue={ScanQRCamera.DEFAULT}
                                             onValueChange={handleSwitchCamera}
                                         >
                                             <SelectTrigger className="w-[150px]">
@@ -136,7 +137,7 @@ export default function EventsPage() {
                                 </DialogHeader>
                                 <div className="grid gap-2 py-2">
                                     {startScan && (
-                                        <QRScanner
+                                        <QRScannerComponent
                                             handleLoadingModal={toggleLoading}
                                             handleSetListCamera={handleSetListCamera}
                                             cameraId={cameraId}

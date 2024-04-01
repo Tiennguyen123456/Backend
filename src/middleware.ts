@@ -54,5 +54,5 @@ export default async function middleware(request: NextRequest) {
 
 export const config = {
     // Match only internationalized pathnames
-    matcher: "/((?!api|_next/static|_next/image|images|favicon.ico).*)",
+    matcher: "/((?!api|_next/static|_next/image|images|favicon.ico|third-party/).*)",
 };
