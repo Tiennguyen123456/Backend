@@ -46,13 +46,19 @@ const ApiRoutes = {
     checkInClient: baseURL + "/event",
     downloadSampleExcel: baseURL + "/event/client/import-sample",
     generateQrCode: baseURL + "/generate-client-qrcode",
-
+    
     // ** Campaign Routes
     getCampaigns: baseURL + "/campaigns",
     storeCampaign: baseURL + "/campaign/store",
     deleteCampaign: baseURL + "/campaign/",
     getCampaignById: baseURL + "/campaign/",
     handleAction: baseURL + "/campaign/$id/action",
+
+    // ** Post Routes
+    getPosts: baseURL + "/posts",
+    getPostById: baseURL + "/post/$id",
+    storePost: baseURL + "/post/store",
+    deletePost: baseURL + "/post/$id",
 
     // ** Campaign Routes
     getLogSendEmailByCampaignId: baseURL + "/campaign/$campaignId/log-send-email",

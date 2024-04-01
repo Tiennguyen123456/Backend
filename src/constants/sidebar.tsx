@@ -1,4 +1,4 @@
-import { Building2, CalendarClock, LayoutDashboard, LockKeyhole, Megaphone, QrCode, UserRoundCog, Users } from "lucide-react";
+import { Building2, CalendarClock, LayoutDashboard, LockKeyhole, Megaphone, QrCode, UserRoundCog, Users, Wallpaper } from "lucide-react";
 import { SideBarItemType } from "../models/SideBar";
 import { ROUTES } from "./routes";
 
@@ -44,6 +44,15 @@ export const AppRoutes: SideBarItemType[] = [
                         icon: <QrCode />,
                     },
                     permissions: ['client:scan-qr']
+                },
+                {
+                    path: ROUTES.POSTS,
+                    key: "activity.posts",
+                    sideBarProps: {
+                        displayText: "sidebar.items.posts",
+                        icon: <Wallpaper />,
+                    },
+                    permissions: ['post:view']
                 },
                 // {
                 //     path: ROUTES.DATA,

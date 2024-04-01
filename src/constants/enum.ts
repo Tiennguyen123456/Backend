@@ -58,7 +58,7 @@ export enum ScanQRCamera {
     USER = "user"
 }
 
-export enum LandingPageEnable {
+export enum PostPageEnable {
     On = 1,
     Off = 0
 }

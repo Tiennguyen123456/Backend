@@ -102,18 +102,18 @@
             "title": "Cập nhật khách hàng"
         }
     },
-    "landingPage": {
-        "title": "Landing page",
+    "postPage": {
+        "title": "Bài viết",
         "table": {
             "title": "Tiêu đề",
             "subtitle": "Tiêu đề phụ",
             "status": "Trạng thái"
         },
         "create": {
-            "title": "Tạo Landing Page"
+            "title": "Tạo bài viết"
         },
         "edit": {
-            "title": "Cập nhật Landing Page"
+            "title": "Cập nhật bài viết"
         }
     },
     "logSendEmailPage": {
@@ -246,7 +246,6 @@
         "updateEvent": "Cập nhật sự kiện",
         "edit": "Cập nhật",
         "approve": "Xác nhận",
-        "landingPage": "Landing page",
         "listCard": "Danh sách thiệp mời",
         "importExcel": "Tải lên dữ liệu excel",
         "exportExcel": "Tải xuống dữ liệu excel",
@@ -426,11 +425,11 @@
         "requiredCustomFieldName": "Vui lòng nhập tên trường ít nhất 5 ký tự.",
         "invalidCustomFieldName": "Tên trường là ký tự in hoa, không khoảng trắng và ký tự đặc biệt",
         "requiredCustomFieldValue": "Vui lòng nhập giá trị của trường.",
-        "requiredTitleLP": "Vui lòng nhập tiều đề landing page.",
-        "requiredSubtitleLP": "Vui lòng nhập tiều đề phụ landing page.",
-        "requiredNameLP": "Vui lòng nhập tên landing page.",
-        "requiredBgImgLP": "Vui lòng chọn ảnh nền landing page.",
-        "invalidBgImgLP": "Những file ảnh cho phép là .jpg, .jpeg, .png"
+        "requiredTitlePost": "Vui lòng nhập tiều đề bài viết.",
+        "requiredSubtitlePost": "Vui lòng nhập tiều đề phụ bài viết.",
+        "requiredNamePost": "Vui lòng nhập tên bài viết.",
+        "requiredBgImgPost": "Vui lòng chọn ảnh nền bài viết.",
+        "invalidBgImgPost": "Những file ảnh cho phép là .jpg, .jpeg, .png"
     },
     "errorApi": {
         "RESOURCES_NOT_FOUND": "Không tìm thấy tài nguyên.",
@@ -492,8 +491,8 @@
         "CAMPAIGN_NOT_FOUND": "Không tìm thấy chiến dịch.",
         "FAILED_ACTION": "Hành động thất bại.",
         "SCAN_QR_CODE_FAILED": "Quét mã QR thất bại.",
-        "CREATE_LANDING_PAGE_FAILED": "Tạo mới landing page thất bại.",
-        "UPDATE_LANDING_PAGE_FAILED": "Cập nhật landing page thất bại."
+        "CREATE_POST_FAILED": "Tạo mới bài viết thất bại.",
+        "UPDATE_POST_FAILED": "Cập nhật bài viết thất bại."
     },
     "successApi": {
         "SUCCESS": "Thành công",
@@ -527,8 +526,8 @@
         "DELETE_CAMPAIGN_SUCCESS": "Xóa chiến dịch thành công.",
         "SCAN_QR_CODE_SUCCESS": "Quét mã QR thành công.",
         "CLIENT_HAVE_ALDREADY_CHECKIN": "Khách hàng đã được kiểm tra trước đó.",
-        "CREATE_LANDING_PAGE_SUCCESS": "Tạo mới landing page thành công.",
-        "UPDATE_LANDING_PAGE_SUCCESS": "Cập nhật landing page thành công."
+        "CREATE_POST_SUCCESS": "Tạo mới bài viết thành công.",
+        "UPDATE_POST_SUCCESS": "Cập nhật bài viết thành công."
     },
     "localeSwitcher": {
         "en": "Tiếng Anh",
@@ -555,7 +554,8 @@
             "permissions": "Phân quyền",
             "languages": "Ngôn ngữ",
             "configurations": "Cấu hình",
-            "scanQr": "Quét QR"
+            "scanQr": "Quét QR",
+            "posts": "Bài viết"
         }
     },
     "topbar": {
@@ -618,7 +618,8 @@
         "roles": "Vai trò",
         "permissions": "Phân quyền",
         "accounts": "Tài khoản",
-        "scanQr": "Quét QR"
+        "scanQr": "Quét QR",
+        "posts": "Bài viết"
     },
     "status": {
         "ALL": "Tất cả",

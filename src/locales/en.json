@@ -102,18 +102,18 @@
             "title": "Edit Client"
         }
     },
-    "landingPage": {
-        "title": "Landing page",
+    "postPage": {
+        "title": "Posts",
         "table": {
             "title": "Title",
             "subtitle": "Subtitle",
             "status": "Status"
         },
         "create": {
-            "title": "Create Landing Page"
+            "title": "Create Post"
         },
         "edit": {
-            "title": "Edit Landing Page"
+            "title": "Edit Post"
         }
     },
     "logSendEmailPage": {
@@ -246,7 +246,6 @@
         "updateEvent": "Update event",
         "edit": "Edit",
         "approve": "Approve",
-        "landingPage": "Landing page",
         "listCard": "List card",
         "importExcel": "Import excel",
         "exportExcel": "Export excel",
@@ -424,11 +423,11 @@
         "requiredCustomFieldName": "Please enter custom field name at least 5 characters.",
         "invalidCustomFieldName": "Please enter the field value without spaces and special characters",
         "requiredCustomFieldValue": "Please enter custom field value.",
-        "requiredTitleLP": "Please enter title landing page.",
-        "requiredSubtitleLP": "Please enter subtitle landing page.",
-        "requiredNameLP": "Please enter name landing page.",
-        "requiredBgImgLP": "Please select background image landing page.",
-        "invalidBgImgLP": "Only these types are allowed .jpg, .jpeg, .png"
+        "requiredTitlePost": "Please enter title post.",
+        "requiredSubtitlePost": "Please enter subtitle post.",
+        "requiredNamePost": "Please enter name post.",
+        "requiredBgImgPost": "Please select background image post.",
+        "invalidBgImgPost": "Only these types are allowed .jpg, .jpeg, .png"
     },
     "errorApi": {
         "RESOURCES_NOT_FOUND": "Resources not found.",
@@ -493,8 +492,8 @@
         "CAMPAIGN_NOT_FOUND": "Campaign not found.",
         "FAILED_ACTION": "Failed action.",
         "SCAN_QR_CODE_FAILED": "Scan QR code failed.",
-        "CREATE_LANDING_PAGE_FAILED": "Create landing page failed.",
-        "UPDATE_LANDING_PAGE_FAILED": "Update landing page failed."
+        "CREATE_POST_FAILED": "Create post failed.",
+        "UPDATE_POST_FAILED": "Update post failed."
     },
     "successApi": {
         "SUCCESS": "Success",
@@ -528,8 +527,8 @@
         "DELETE_CAMPAIGN_SUCCESS": "Delete campaign successfully.",
         "SCAN_QR_CODE_SUCCESS": "Scan QR code successfully.",
         "CLIENT_HAVE_ALDREADY_CHECKIN": "The client has been checked in.",
-        "CREATE_LANDING_PAGE_SUCCESS": "Create landing page successfully.",
-        "UPDATE_LANDING_PAGE_SUCCESS": "Update landing page successfully."
+        "CREATE_POST_SUCCESS": "Create post successfully.",
+        "UPDATE_POST_SUCCESS": "Update post successfully."
     },
     "localeSwitcher": {
         "en": "English",
@@ -556,7 +555,8 @@
             "permissions": "Permissions",
             "languages": "Languages",
             "configurations": "Configurations",
-            "scanQr": "Scan QR Code"
+            "scanQr": "Scan QR Code",
+            "posts": "Posts"
         }
     },
     "topbar": {
@@ -617,7 +617,8 @@
         "roles": "Roles",
         "permissions": "Permissions",
         "accounts": "Accounts",
-        "scanQr": "Scan QR Code"
+        "scanQr": "Scan QR Code",
+        "posts": "Posts"
     },
     "status": {
         "ALL": "All status",

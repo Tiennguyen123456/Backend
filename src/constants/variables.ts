@@ -81,3 +81,5 @@ export const SCAN_QR_CODE_CAMERA = [
 ];
 export const STATUS_FILTER_CAMPAIGN = [{ label: "All status", value: "ALL" }, ...CAMPAIGN_STATUS];
 export const STATUS_FILTER_CLIENT_CHECK_IN = [{ label: "All", value: "ALL" }, ...CLIENT_CHECK_IN_STATUS];
+
+export const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
