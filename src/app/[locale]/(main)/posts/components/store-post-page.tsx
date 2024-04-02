@@ -12,7 +12,7 @@ import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { EStatus, PostPageEnable, MessageCode, APIStatus } from "@/constants/enum";
+import { EStatus, MessageCode, APIStatus } from "@/constants/enum";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { useRouter } from "next/navigation";
@@ -29,6 +29,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ComboboxSearchCompany } from "../../accounts/components/combobox-search-company";
 import { ComboboxSearchEvent } from "../../accounts/components/combobox-search-event";
 import postApi from "@/services/post-api";
+import { AlertModal } from "@/components/modals/alert-modal";
 
 interface StorePostPageComponentProps {
     defaultData: IPostRes | undefined;
@@ -45,6 +46,7 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
 
     // ** Use State
     const BgImgRef = useRef<HTMLInputElement>(null);
+    const [openConfirm, setOpenConfirm] = useState(false);
     const [loading, setLoading] = useState(false);
     const [bgImg, setBgImg] = useState<string>(defaultData?.background_img ?? "");
     const [formInput, setFormInput] = useState<string[]>(
@@ -76,8 +78,7 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
         subtitle: z.string().min(1, { message: translation("error.requiredSubtitlePost") }),
         status: z.string(),
         content: z.string(),
-        background_img: defaultData
-            ? z
+        background_img: z
                   .any()
                   .superRefine((val, ctx) => {
                       console.log(val);
@@ -97,23 +98,7 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
                       }
                   })
                   .optional()
-                  .or(z.literal(""))
-            : z.any().superRefine((val, ctx) => {
-                  if (!val) {
-                      ctx.addIssue({
-                          code: z.ZodIssueCode.custom,
-                          message: translation("error.requiredBgImgPost"),
-                      });
-                  } else {
-                      if (!ACCEPTED_IMAGE_TYPES.includes(val.type)) {
-                          console.log("error file");
-                          ctx.addIssue({
-                              code: z.ZodIssueCode.custom,
-                              message: translation("error.invalidBgImgPost"),
-                          });
-                      }
-                  }
-              }),
+                  .or(z.literal("")),
         form_enable: z.boolean().default(true),
         form_title: z.string(),
         form_content: z.string(),
@@ -173,8 +158,6 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
                     formData.append(key, value);
                 }
             });
-            console.log(formData);
-            return;
             const response = await postApi.storePost(formData);
             if (response.data.status == APIStatus.SUCCESS) {
                 toastSuccess(messageSuccess);
@@ -197,6 +180,30 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
         }
     };
 
+    const handleDeleteBgImg = async () => {
+        if(defaultData) {
+            try {
+                const response = await postApi.deleteBgImgPost(defaultData?.id);
+                if (response.data.status == APIStatus.SUCCESS) {
+                    toastSuccess('Delete background image successfully.');
+                    setBgImg("");
+                    form.setValue("background_img", "");
+                    form.trigger("background_img", { shouldFocus: true });
+                }
+            } catch (error) {
+                toastError('Delete background image failed.');
+                console.log(error);
+            } finally {
+                setOpenConfirm(false);
+            }
+        } else {
+            setBgImg("");
+            form.setValue("background_img", "");
+            form.trigger("background_img", { shouldFocus: true });
+            setOpenConfirm(false);
+        }
+    }
+
     const handleFormInputChange = (key: string) => {
         let formInputChange = form.getValues("form_input");
         let index = formInputChange.indexOf(key);
@@ -213,6 +220,12 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
 
     return (
         <>
+            <AlertModal
+                isOpen={openConfirm}
+                onClose={() => setOpenConfirm(false)}
+                onConfirm={handleDeleteBgImg}
+                loading={loading}
+            />
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
@@ -381,13 +394,10 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
                                                             />
                                                         </AspectRatio>
                                                         <Button
+                                                            type="button"
                                                             className="p-3 absolute right-1 bottom-1"
                                                             variant={"destructive"}
-                                                            onClick={() => {
-                                                                setBgImg("");
-                                                                form.setValue("background_img", "");
-                                                                form.trigger("background_img", { shouldFocus: true });
-                                                            }}
+                                                            onClick={() => setOpenConfirm(true)}
                                                         >
                                                             <Trash2 className="h-5 w-5" />
                                                         </Button>

@@ -14,5 +14,8 @@ const postApi = {
     deletePost: async (id: number) => {
         return await api.delete<IResponse<null>>(ApiRoutes.deletePost.replace("$id", id.toString()));
     },
+    deleteBgImgPost: async (id: number) => {
+        return await api.delete<IResponse<null>>(ApiRoutes.deleteBgImgPost.replace("$id", id.toString()));
+    },
 };
 export default postApi;
