@@ -59,7 +59,7 @@ const ApiRoutes = {
     getPostById: baseURL + "/post/$id",
     storePost: baseURL + "/post/store",
     deletePost: baseURL + "/post/$id",
-    deleteBgImgPost: baseURL + "/post/$id/delete-background_img",
+    deleteBgImgPost: baseURL + "/post/$id/delete-background-img",
 
     // ** Campaign Routes
     getLogSendEmailByCampaignId: baseURL + "/campaign/$campaignId/log-send-email",
