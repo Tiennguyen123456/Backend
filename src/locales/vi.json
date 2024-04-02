@@ -494,7 +494,8 @@
         "FAILED_ACTION": "Hành động thất bại.",
         "SCAN_QR_CODE_FAILED": "Quét mã QR thất bại.",
         "CREATE_POST_FAILED": "Tạo mới bài viết thất bại.",
-        "UPDATE_POST_FAILED": "Cập nhật bài viết thất bại."
+        "UPDATE_POST_FAILED": "Cập nhật bài viết thất bại.",
+        "DELETE_POST_FAILED": "Xóa bài viết thất bại."
     },
     "successApi": {
         "SUCCESS": "Thành công",
@@ -529,7 +530,8 @@
         "SCAN_QR_CODE_SUCCESS": "Quét mã QR thành công.",
         "CLIENT_HAVE_ALDREADY_CHECKIN": "Khách hàng đã được kiểm tra trước đó.",
         "CREATE_POST_SUCCESS": "Tạo mới bài viết thành công.",
-        "UPDATE_POST_SUCCESS": "Cập nhật bài viết thành công."
+        "UPDATE_POST_SUCCESS": "Cập nhật bài viết thành công.",
+        "DELETE_POST_SUCCESS": "Xóa bài viết thành công."
     },
     "localeSwitcher": {
         "en": "Tiếng Anh",

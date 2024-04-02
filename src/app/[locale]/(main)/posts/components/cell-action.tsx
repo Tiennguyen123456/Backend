@@ -15,6 +15,7 @@ import { useTranslations } from "next-intl";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { toastError, toastSuccess } from "@/utils/toast";
 import { APIStatus, MessageCode } from "@/constants/enum";
+import postApi from "@/services/post-api";
 
 interface CellActionProps {
     data: PostColumn;
@@ -43,15 +44,15 @@ export const CellAction: React.FC<CellActionProps> = ({
         try {
             setLoading(true);
 
-            // const response = await clientApi.deleteClient(eventId, data.id);
+            const response = await postApi.deletePost(data.id);
 
-            // if (response.data.status == APIStatus.SUCCESS) {
-            //     toastSuccess(translation("successApi.DELETE_CLIENT_SUCCESS"));
-            // }
-            // onRefetch();
+            if (response.data.status == APIStatus.SUCCESS) {
+                toastSuccess(translation("successApi.DELETE_POST_SUCCESS"));
+            }
+            onRefetch();
         } catch (error: any) {
             const data = error?.response?.data;
-            const messageError = translation("errorApi.DELETE_CLIENT_FAILED");
+            const messageError = translation("errorApi.DELETE_POST_FAILED");
             if (data?.data && data?.message_code == MessageCode.VALIDATION_ERROR) {
                 const [value] = Object.values(data.data);
                 const message = Array(value).toString() ?? messageError;

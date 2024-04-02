@@ -495,7 +495,8 @@
         "FAILED_ACTION": "Failed action.",
         "SCAN_QR_CODE_FAILED": "Scan QR code failed.",
         "CREATE_POST_FAILED": "Create post failed.",
-        "UPDATE_POST_FAILED": "Update post failed."
+        "UPDATE_POST_FAILED": "Update post failed.",
+        "DELETE_POST_FAILED": "Delete post failed."
     },
     "successApi": {
         "SUCCESS": "Success",
@@ -530,7 +531,8 @@
         "SCAN_QR_CODE_SUCCESS": "Scan QR code successfully.",
         "CLIENT_HAVE_ALDREADY_CHECKIN": "The client has been checked in.",
         "CREATE_POST_SUCCESS": "Create post successfully.",
-        "UPDATE_POST_SUCCESS": "Update post successfully."
+        "UPDATE_POST_SUCCESS": "Update post successfully.",
+        "DELETE_POST_SUCCESS": "Delete post successfully."
     },
     "localeSwitcher": {
         "en": "English",
