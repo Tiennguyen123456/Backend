@@ -70,7 +70,7 @@ export default function CreateEventPage() {
         company_id: z.number().min(1, { message: translation("error.requiredCompany") }),
         status: z.string(),
         description: z.string(),
-        email_content: z.string(),
+        email_content: z.string().min(1, { message: translation("error.requiredEmailContent") }),
         cards_content: z.string(),
         location: z.string(),
     });
@@ -103,7 +103,7 @@ export default function CreateEventPage() {
             let formattedData = {
                 ...data,
                 start_time: data.date.start_time,
-                end_time: data.date.end_time
+                end_time: data.date.end_time,
             };
 
             const response = await eventApi.storeEvent(formattedData);
@@ -134,13 +134,13 @@ export default function CreateEventPage() {
     // Use Fetch data Role
     const { data: dataFieldBasic } = useFetchDataFieldBasic({ pagination: { pageSize: 50 } });
     useEffect(() => {
-        if(dataFieldBasic) {
+        if (dataFieldBasic) {
             let fileBasicFormatted: ITagsList[] = [];
             for (const [key, value] of Object.entries(dataFieldBasic)) {
-                fileBasicFormatted.push({title: value, value: key});
+                fileBasicFormatted.push({ title: value, value: key });
             }
             setFieldBasic(fileBasicFormatted);
-            setComponentLoaded(true)
+            setComponentLoaded(true);
         }
     }, [dataFieldBasic]);
 
@@ -368,10 +368,19 @@ export default function CreateEventPage() {
                                                 {translation("label.emailContent")}
                                             </FormLabel>
                                             <FormControl>
-                                            {componentLoaded 
-                                                ? <HtmlEditor handleEditorChange={field.onChange} value={field.value} tagsList={fieldBasic}/> 
-                                                : <Textarea disabled={loading} placeholder={translation("placeholder.emailContent")} {...field} />
-                                            }
+                                                {componentLoaded ? (
+                                                    <HtmlEditor
+                                                        handleEditorChange={field.onChange}
+                                                        value={field.value}
+                                                        tagsList={fieldBasic}
+                                                    />
+                                                ) : (
+                                                    <Textarea
+                                                        disabled={loading}
+                                                        placeholder={translation("placeholder.emailContent")}
+                                                        {...field}
+                                                    />
+                                                )}
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -386,10 +395,19 @@ export default function CreateEventPage() {
                                                 {translation("label.cardsContent")}
                                             </FormLabel>
                                             <FormControl>
-                                            {componentLoaded 
-                                                ? <HtmlEditor handleEditorChange={field.onChange} value={field.value} tagsList={fieldBasic}/> 
-                                                : <Textarea disabled={loading} placeholder={translation("placeholder.cardsContent")} {...field} />
-                                            }
+                                                {componentLoaded ? (
+                                                    <HtmlEditor
+                                                        handleEditorChange={field.onChange}
+                                                        value={field.value}
+                                                        tagsList={fieldBasic}
+                                                    />
+                                                ) : (
+                                                    <Textarea
+                                                        disabled={loading}
+                                                        placeholder={translation("placeholder.cardsContent")}
+                                                        {...field}
+                                                    />
+                                                )}
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>

@@ -68,7 +68,7 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
         company_id: z.number().min(1, { message: translation("error.requiredCompany") }),
         status: z.string(),
         description: z.string(),
-        email_content: z.string(),
+        email_content: z.string().min(1, { message: translation("error.requiredEmailContent") }),
         cards_content: z.string(),
         location: z.string(),
     });
@@ -124,12 +124,15 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
 
     const canUpdateEvent = isActionsPermissions(userPermissions, ActionPermissions.UPDATE_EVENT);
     useEffect(() => {
-        if(data) {
+        if (data) {
             let dataMainField = data.main_fields ?? [];
             let dataCustomField = data.custom_fields ?? [];
-            let dataFormatField = [...dataMainField, ...dataCustomField].map(filed => ({ title: filed.description, value: filed.name}))
+            let dataFormatField = [...dataMainField, ...dataCustomField].map((filed) => ({
+                title: filed.description,
+                value: filed.name,
+            }));
             setFieldBasic(dataFormatField);
-            setComponentLoaded(true)
+            setComponentLoaded(true);
         }
     }, [data]);
     return (
@@ -324,11 +327,19 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                             <FormItem>
                                 <FormLabel className="text-base">{translation("label.emailContent")}</FormLabel>
                                 <FormControl>
-                                    {
-                                        componentLoaded
-                                        ? <HtmlEditor handleEditorChange={field.onChange} value={field.value} tagsList={fieldBasic}/> 
-                                        : <Textarea disabled={loading} placeholder={translation("placeholder.emailContent")} {...field} />
-                                    }
+                                    {componentLoaded ? (
+                                        <HtmlEditor
+                                            handleEditorChange={field.onChange}
+                                            value={field.value}
+                                            tagsList={fieldBasic}
+                                        />
+                                    ) : (
+                                        <Textarea
+                                            disabled={loading}
+                                            placeholder={translation("placeholder.emailContent")}
+                                            {...field}
+                                        />
+                                    )}
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -341,11 +352,19 @@ export default function InformationForm({ data, onRefresh }: InformationFormProp
                             <FormItem>
                                 <FormLabel className="text-base">{translation("label.cardsContent")}</FormLabel>
                                 <FormControl>
-                                    {
-                                        componentLoaded 
-                                        ? <HtmlEditor handleEditorChange={field.onChange} value={field.value} tagsList={fieldBasic}/> 
-                                        : <Textarea disabled={loading} placeholder={translation("placeholder.cardsContent")} {...field} />
-                                    }
+                                    {componentLoaded ? (
+                                        <HtmlEditor
+                                            handleEditorChange={field.onChange}
+                                            value={field.value}
+                                            tagsList={fieldBasic}
+                                        />
+                                    ) : (
+                                        <Textarea
+                                            disabled={loading}
+                                            placeholder={translation("placeholder.cardsContent")}
+                                            {...field}
+                                        />
+                                    )}
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

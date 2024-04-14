@@ -390,7 +390,8 @@
         "requiredClientFilterGroup": "Please input group to filter client.",
         "requiredCustomFieldName": "Please enter custom field name at least 5 characters.",
         "invalidCustomFieldName": "Please enter the field value without spaces and special characters",
-        "requiredCustomFieldValue": "Please enter custom field value."
+        "requiredCustomFieldValue": "Please enter custom field value.",
+        "requiredEmailContent": "Please enter email content."
     },
     "errorApi": {
         "RESOURCES_NOT_FOUND": "Resources not found.",

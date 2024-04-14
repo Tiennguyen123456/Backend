@@ -392,7 +392,8 @@
         "requiredClientFilterGroup": "Vui lòng nhập nhóm để lọc khách mời.",
         "requiredCustomFieldName": "Vui lòng nhập tên trường ít nhất 5 ký tự.",
         "invalidCustomFieldName": "Tên trường là ký tự in hoa, không khoảng trắng và ký tự đặc biệt",
-        "requiredCustomFieldValue": "Vui lòng nhập giá trị của trường."
+        "requiredCustomFieldValue": "Vui lòng nhập giá trị của trường.",
+        "requiredEmailContent": "Vui lòng nhập nội dụng email."
     },
     "errorApi": {
         "RESOURCES_NOT_FOUND": "Không tìm thấy tài nguyên.",
