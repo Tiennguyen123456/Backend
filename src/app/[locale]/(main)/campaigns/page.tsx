@@ -25,10 +25,15 @@ import { EStatus } from "@/constants/enum";
 import { CampaignColumn } from "./components/column";
 import { ICampaignRes } from "@/models/api/campaign-api";
 import { BadgeStatus } from "@/components/ui/badge-status";
+import { Input } from "@/components/ui/input";
+import { ComboboxSearchCompany } from "../accounts/components/combobox-search-company";
 
 export default function EventsPage() {
     // ** I18n
     const translation = useTranslations("");
+
+    // ** User Selector
+    const { userProfile } = useAppSelector(selectUser);
 
     // ** Router
     const router = useRouter();
@@ -73,7 +78,18 @@ export default function EventsPage() {
     const handleRefreshDataTable = () => {
         setRefresh(!refresh);
     };
-
+    const handleSearchCampaignName = (event: any) => {
+        setParamsSearch({
+            ...paramsSearch,
+            search: { ...paramsSearch.search, name: event.target.value },
+        });
+    };
+    const handleSearchCompany = (company_id: any) => {
+        setParamsSearch({
+            ...paramsSearch,
+            filters: { ...paramsSearch.filters, company_id: company_id != -1 ? company_id : "" },
+        });
+    };
     const handleSearchStatus = (statusName: any) => {
         setParamsSearch(
             statusName == EStatus.ALL
@@ -87,7 +103,7 @@ export default function EventsPage() {
     const handleClickSearch = () => {
         setParamsDataTable({ ...paramsDataTable, search: paramsSearch.search, filters: paramsSearch.filters });
     };
-
+    const isSysAdmin = () => userProfile?.is_admin == true;
     const columns: ColumnDef<CampaignColumn>[] = [
         {
             accessorKey: "name",
@@ -166,8 +182,13 @@ export default function EventsPage() {
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 justify-start items-end w-full md:w-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-1 gap-2 w-full md:w-auto">
-                    {/* <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div
+                    // className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full md:w-auto"
+                    className={`grid grid-cols-1 ${
+                        isSysAdmin() ? "sm:grid-cols-3" : "sm:grid-cols-2"
+                    } gap-2 w-full md:w-auto`}
+                >
+                    <div className="grid w-full max-w-sm items-center gap-1.5">
                         <Label
                             className="text-base"
                             htmlFor="code"
@@ -180,25 +201,24 @@ export default function EventsPage() {
                             type="text"
                             className="h-10 text"
                             placeholder={translation("placeholder.campaignName")}
-                            onChange={handleSearchCode}
+                            onChange={handleSearchCampaignName}
                         />
                     </div>
-                    <div className="grid w-full sm:max-w-xl items-center gap-1.5">
-                        <Label
-                            className="text-base"
-                            htmlFor="name"
-                        >
-                            {translation("label.eventName")}
-                        </Label>
-                        <Input
-                            disabled={Boolean(loading)}
-                            id="name"
-                            type="text"
-                            className="h-10"
-                            placeholder={translation("placeholder.eventName")}
-                            onChange={handleSearchName}
-                        />
-                    </div> */}
+                    {isSysAdmin() && (
+                        <div className="grid w-full max-w-sm items-center gap-1.5">
+                            <Label
+                                className="text-base"
+                                htmlFor="code"
+                            >
+                                {translation("label.company")}
+                            </Label>
+                            <ComboboxSearchCompany
+                                disabled={Boolean(loading)}
+                                onSelectCompany={handleSearchCompany}
+                                defaultName={""}
+                            />
+                        </div>
+                    )}
                     <div className="grid w-full sm:max-w-xl items-center gap-1.5">
                         <Label className="text-base">{translation("label.status")}</Label>
                         <Select

@@ -133,7 +133,7 @@ export function ComboboxSearchEvent({
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     ) : (
                         <X
-                            className="ml-2 h-4 w-4 shrink-0"
+                            className="ml-2 h-5 w-5 shrink-0"
                             onClick={handleOnUnSelected}
                         />
                     )}

@@ -26,10 +26,14 @@ import { DateTimeFormat, EVENT_STATUS } from "@/constants/variables";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { EStatus } from "@/constants/enum";
 import { BadgeStatus } from "@/components/ui/badge-status";
+import { ComboboxSearchCompany } from "../accounts/components/combobox-search-company";
 
 export default function EventsPage() {
     // ** I18n
     const translation = useTranslations("");
+
+    // ** User Selector
+    const { userProfile } = useAppSelector(selectUser);
 
     // ** Router
     const router = useRouter();
@@ -44,10 +48,7 @@ export default function EventsPage() {
     // Use Sorting
     const { sorting, onSortingChange, field, order } = useSorting();
 
-    const STATUS_FILTER_EVENT = [
-        { label: "All status", value: "ALL" },
-        ...EVENT_STATUS
-    ];
+    const STATUS_FILTER_EVENT = [{ label: "All status", value: "ALL" }, ...EVENT_STATUS];
 
     // ** State
     const [paramsSearch, setParamsSearch] = useState({
@@ -84,6 +85,12 @@ export default function EventsPage() {
             search: { ...paramsSearch.search, name: event.target.value },
         });
     };
+    const handleSearchCompany = (company_id: any) => {
+        setParamsSearch({
+            ...paramsSearch,
+            filters: { ...paramsSearch.filters, company_id: company_id != -1 ? company_id : "" },
+        });
+    };
     const handleSearchStatus = (statusName: any) => {
         setParamsSearch(
             statusName == EStatus.ALL
@@ -97,6 +104,7 @@ export default function EventsPage() {
     const handleClickSearch = () => {
         setParamsDataTable({ ...paramsDataTable, search: paramsSearch.search, filters: paramsSearch.filters });
     };
+    const isSysAdmin = () => userProfile?.is_admin == true;
     const columns: ColumnDef<IEventRes>[] = [
         {
             accessorKey: "code",
@@ -130,7 +138,16 @@ export default function EventsPage() {
         {
             id: "actions",
             header: () => <div className="text-black font-bold">{translation("datatable.action")}</div>,
-            cell: ({ row }) => (canUpdateEvent || canAssetClientEvent ? <CellAction data={row.original} canUpdate={canUpdateEvent} canAssetClient={canAssetClientEvent} /> : ""),
+            cell: ({ row }) =>
+                canUpdateEvent || canAssetClientEvent ? (
+                    <CellAction
+                        data={row.original}
+                        canUpdate={canUpdateEvent}
+                        canAssetClient={canAssetClientEvent}
+                    />
+                ) : (
+                    ""
+                ),
         },
     ];
 
@@ -155,7 +172,11 @@ export default function EventsPage() {
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 justify-start items-end w-full md:w-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full md:w-auto">
+                <div
+                    className={`grid grid-cols-1 ${
+                        isSysAdmin() ? "sm:grid-cols-4" : "sm:grid-cols-3"
+                    } gap-2 w-full md:w-auto`}
+                >
                     <div className="grid w-full max-w-sm items-center gap-1.5">
                         <Label
                             className="text-base"
@@ -188,6 +209,21 @@ export default function EventsPage() {
                             onChange={handleSearchName}
                         />
                     </div>
+                    {isSysAdmin() && (
+                        <div className="grid w-full max-w-sm items-center gap-1.5">
+                            <Label
+                                className="text-base"
+                                htmlFor="code"
+                            >
+                                {translation("label.company")}
+                            </Label>
+                            <ComboboxSearchCompany
+                                disabled={Boolean(loading)}
+                                onSelectCompany={handleSearchCompany}
+                                defaultName={""}
+                            />
+                        </div>
+                    )}
                     <div className="grid w-full sm:max-w-xl items-center gap-1.5">
                         <Label className="text-base">{translation("label.status")}</Label>
                         <Select

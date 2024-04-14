@@ -115,7 +115,7 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }
                     {selected ? selected?.label : defaultName ? defaultName : translation("placeholder.company")}
                     {selected ? (
                         <X
-                            className="ml-2 h-4 w-4 shrink-0"
+                            className="ml-2 h-5 w-5 shrink-0"
                             onClick={handleOnUnSelected}
                         />
                     ) : (
