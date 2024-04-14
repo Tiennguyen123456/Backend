@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Command, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Check, ChevronsUpDown, Search } from "lucide-react";
+import { Check, ChevronsUpDown, Search, X } from "lucide-react";
 import { debounceFunc } from "@/helpers/funcs";
 import { CommandLoading } from "cmdk";
 import { Loader } from "@/components/ui/loader";
@@ -35,7 +35,7 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }
     // ** State
     const [dataSearchCompany, setDataSearchCompany] = React.useState<IOptionCompany[]>([]);
     const [open, setOpen] = React.useState(false);
-    const [selectd, setSelectd] = React.useState<IOptionCompany | undefined>();
+    const [selected, setSelected] = React.useState<IOptionCompany | undefined>();
     const [loading, setLoading] = React.useState(false);
 
     // ** FUNC
@@ -81,9 +81,15 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }
     };
 
     const handleOnSelect = (company: IOptionCompany, currentValue: number) => {
-        setSelectd(selectd?.id == currentValue ? { ...selectd } : { id: company.id, label: company.label });
+        setSelected(selected?.id == currentValue ? { ...selected } : { id: company.id, label: company.label });
         onSelectCompany(currentValue);
         setOpen(false);
+    };
+
+    const handleOnUnSelected = (e: React.MouseEvent) => {
+        e.preventDefault();
+        setSelected(undefined);
+        onSelectCompany(-1);
     };
 
     const handleOnOpen = () => {
@@ -106,8 +112,15 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }
                     className="w-full justify-between"
                     disabled={disabled}
                 >
-                    {selectd ? selectd?.label : defaultName ? defaultName : translation("placeholder.company")}
-                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    {selected ? selected?.label : defaultName ? defaultName : translation("placeholder.company")}
+                    {selected ? (
+                        <X
+                            className="ml-2 h-4 w-4 shrink-0"
+                            onClick={handleOnUnSelected}
+                        />
+                    ) : (
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    )}
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="max-w-screen-sm p-0">
@@ -137,7 +150,7 @@ export function ComboboxSearchCompany({ disabled, onSelectCompany, defaultName }
                                     <Check
                                         className={cn(
                                             "ml-auto h-4 w-4",
-                                            selectd?.id === company.id ? "opacity-100" : "opacity-0",
+                                            selected?.id === company.id ? "opacity-100" : "opacity-0",
                                         )}
                                     />
                                 </CommandItem>

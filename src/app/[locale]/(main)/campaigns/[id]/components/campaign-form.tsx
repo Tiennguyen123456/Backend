@@ -186,7 +186,11 @@ export default function CampaignForm({ data }: CampaignFormProps) {
                                                 <ComboboxSearchEvent
                                                     disabled={true}
                                                     onSelect={field.onChange}
-                                                    dataSelected={data?.event ? {id: data?.event_id, label: data?.event?.name} : {id: null, label: null}}
+                                                    dataSelected={
+                                                        data?.event
+                                                            ? { id: data?.event_id, label: data?.event?.name }
+                                                            : { id: null, label: null }
+                                                    }
                                                 />
                                                 <FormMessage />
                                             </FormItem>

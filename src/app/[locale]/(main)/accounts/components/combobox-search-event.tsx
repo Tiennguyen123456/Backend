@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Command, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, X } from "lucide-react";
 import { debounceFunc } from "@/helpers/funcs";
 import { CommandLoading } from "cmdk";
 import { Loader } from "@/components/ui/loader";
@@ -96,6 +96,11 @@ export function ComboboxSearchEvent({
         onSelect(currentValue);
         setOpen(false);
     };
+    const handleOnUnSelected = (e: React.MouseEvent) => {
+        e.preventDefault();
+        setOnSelected({ id: null, label: null });
+        onSelect(-1);
+    };
 
     const handleOnOpen = () => {
         if (!open) {
@@ -124,7 +129,14 @@ export function ComboboxSearchEvent({
                     {!onSelected.hasOwnProperty("label") || onSelected?.label == null
                         ? translation("placeholder.selectEvent")
                         : onSelected?.label}
-                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    {!onSelected.hasOwnProperty("label") || onSelected?.label == null ? (
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    ) : (
+                        <X
+                            className="ml-2 h-4 w-4 shrink-0"
+                            onClick={handleOnUnSelected}
+                        />
+                    )}
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="max-w-screen-sm p-0">
