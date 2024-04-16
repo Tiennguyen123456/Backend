@@ -12,7 +12,7 @@ import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { EStatus, LandingPageEnable, MessageCode } from "@/constants/enum";
+import { EStatus, PostPageEnable, MessageCode } from "@/constants/enum";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import eventApi from "@/services/event-api";
 import { toastError, toastSuccess } from "@/utils/toast";
@@ -106,7 +106,7 @@ export default function StoreLandingPageComponent({ defaultData }: StoreLandingP
                       }
                   }
               }),
-        form_enable: z.number().default(LandingPageEnable.On),
+        form_enable: z.number().default(PostPageEnable.On),
         form_title: z.string(),
         form_description: z.string(),
         form_input: z.string().array(),
@@ -120,7 +120,7 @@ export default function StoreLandingPageComponent({ defaultData }: StoreLandingP
         content: "",
         status: EStatus.ACTIVE,
         background_img: "",
-        form_enable: LandingPageEnable.On,
+        form_enable: PostPageEnable.On,
         form_title: "",
         form_description: "",
         form_input: formInput,
@@ -137,7 +137,7 @@ export default function StoreLandingPageComponent({ defaultData }: StoreLandingP
                   content: defaultData?.content ?? "",
                   status: defaultData?.status ?? "",
                   background_img: "",
-                  form_enable: defaultData?.form_enable ?? LandingPageEnable.On,
+                  form_enable: defaultData?.form_enable ?? PostPageEnable.On,
                   form_title: defaultData?.form_title ?? "",
                   form_description: defaultData?.form_description ?? "",
                   form_input: defaultData?.form_input ?? formInput,
@@ -486,20 +486,20 @@ export default function StoreLandingPageComponent({ defaultData }: StoreLandingP
                                             <FormControl>
                                                 <Switch
                                                     className="!mt-0"
-                                                    checked={field.value == LandingPageEnable.On ? true : false}
+                                                    checked={field.value == PostPageEnable.On ? true : false}
                                                     onCheckedChange={(event) => {
                                                         field.onChange(
-                                                            event ? LandingPageEnable.On : LandingPageEnable.Off,
+                                                            event ? PostPageEnable.On : PostPageEnable.Off,
                                                         );
                                                     }}
-                                                    defaultChecked={field.value == LandingPageEnable.On ? true : false}
+                                                    defaultChecked={field.value == PostPageEnable.On ? true : false}
                                                 />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
-                                {form.getValues("form_enable") == LandingPageEnable.On && (
+                                {form.getValues("form_enable") == PostPageEnable.On && (
                                     <>
                                         <Separator className="my-1 col-span-2 hidden sm:block" />
                                         <FormField
