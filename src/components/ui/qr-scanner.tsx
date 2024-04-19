@@ -102,6 +102,7 @@ const QRScannerCompoment = ({
                 qrScanner.destroy();
             };
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -110,6 +111,7 @@ const QRScannerCompoment = ({
             scanner.setCamera(cameraId);
             console.log("camera after set: ", scanner);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cameraId]);
 
     return (

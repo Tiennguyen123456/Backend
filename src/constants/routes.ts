@@ -30,7 +30,7 @@ export const ROUTES = {
     // LANGUAGES: "/languages",
     // CONFIGURATIONS: "/configurations",
     FORBIDDEN: "/forbidden",
-    LANDING_PAGE: "/landingpage",
+    LANDING_PAGE: "/landing-page",
 };
 
 export const ROUTERS_BREADCRUMBS: IRouterBreadcrumbs[] = [
