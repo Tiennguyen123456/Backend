@@ -30,6 +30,7 @@ import { ComboboxSearchCompany } from "../../accounts/components/combobox-search
 import { ComboboxSearchEvent } from "../../accounts/components/combobox-search-event";
 import postApi from "@/services/post-api";
 import { AlertModal } from "@/components/modals/alert-modal";
+import { revalidatePathTestPage } from "@/app/actions";
 
 interface StorePostPageComponentProps {
     defaultData: IPostRes | undefined;
@@ -44,14 +45,15 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
     // ** User Selector
     const { userProfile } = useAppSelector(selectUser);
 
-    // ** Use State
+    // ** Use Ref
     const BgImgRef = useRef<HTMLInputElement>(null);
+    const BtnClickRef = useRef<HTMLButtonElement>(null);
+
+    // ** Use State
     const [openConfirm, setOpenConfirm] = useState(false);
     const [loading, setLoading] = useState(false);
     const [bgImg, setBgImg] = useState<string>(defaultData?.background_img ?? "");
-    const [formInput, setFormInput] = useState<string[]>(
-        defaultData?.form_input ?? ["name", "email", "phone", "address"],
-    );
+    const [formInput, setFormInput] = useState<string[]>(defaultData?.form_input ?? []);
     const [eventReset, setEventReset] = useState({ id: null, label: null });
     const [companyId, setCompanyId] = useState<Number>(-1);
 
@@ -79,26 +81,26 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
         status: z.string(),
         content: z.string(),
         background_img: z
-                  .any()
-                  .superRefine((val, ctx) => {
-                      console.log(val);
-                      if (!val) {
-                          ctx.addIssue({
-                              code: z.ZodIssueCode.custom,
-                              message: translation("error.requiredBgImgPost"),
-                          });
-                      } else {
-                          if (!ACCEPTED_IMAGE_TYPES.includes(val.type)) {
-                              console.log("error file");
-                              ctx.addIssue({
-                                  code: z.ZodIssueCode.custom,
-                                  message: translation("error.invalidBgImgPost"),
-                              });
-                          }
-                      }
-                  })
-                  .optional()
-                  .or(z.literal("")),
+            .any()
+            .superRefine((val, ctx) => {
+                console.log(val);
+                if (!val) {
+                    ctx.addIssue({
+                        code: z.ZodIssueCode.custom,
+                        message: translation("error.requiredBgImgPost"),
+                    });
+                } else {
+                    if (!ACCEPTED_IMAGE_TYPES.includes(val.type)) {
+                        console.log("error file");
+                        ctx.addIssue({
+                            code: z.ZodIssueCode.custom,
+                            message: translation("error.invalidBgImgPost"),
+                        });
+                    }
+                }
+            })
+            .optional()
+            .or(z.literal("")),
         form_enable: z.boolean().default(true),
         form_title: z.string(),
         form_content: z.string(),
@@ -160,6 +162,7 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
             });
             const response = await postApi.storePost(formData);
             if (response.data.status == APIStatus.SUCCESS) {
+                BtnClickRef.current?.click();
                 toastSuccess(messageSuccess);
                 router.push(ROUTES.POSTS);
             }
@@ -181,17 +184,17 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
     };
 
     const handleDeleteBgImg = async () => {
-        if(defaultData) {
+        if (defaultData) {
             try {
                 const response = await postApi.deleteBgImgPost(defaultData?.id);
                 if (response.data.status == APIStatus.SUCCESS) {
-                    toastSuccess('Delete background image successfully.');
+                    toastSuccess("Delete background image successfully.");
                     setBgImg("");
                     form.setValue("background_img", "");
                     form.trigger("background_img", { shouldFocus: true });
                 }
             } catch (error) {
-                toastError('Delete background image failed.');
+                toastError("Delete background image failed.");
                 console.log(error);
             } finally {
                 setOpenConfirm(false);
@@ -202,7 +205,9 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
             form.trigger("background_img", { shouldFocus: true });
             setOpenConfirm(false);
         }
-    }
+    };
+
+    const formActionRevalidatePath = revalidatePathTestPage.bind(null, defaultData?.slug ?? "");
 
     const handleFormInputChange = (key: string) => {
         let formInputChange = form.getValues("form_input");
@@ -220,6 +225,21 @@ export default function StorePostPageComponent({ defaultData }: StorePostPageCom
 
     return (
         <>
+            <form
+                action={formActionRevalidatePath}
+                className="hidden"
+            >
+                <input
+                    type="text"
+                    name="name"
+                />
+                <button
+                    type="submit"
+                    ref={BtnClickRef}
+                >
+                    Click button revalidate path
+                </button>
+            </form>
             <AlertModal
                 isOpen={openConfirm}
                 onClose={() => setOpenConfirm(false)}
